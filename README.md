@@ -4,7 +4,7 @@
 
 ## Download and open
 
-1. **[Download the complete project ZIP](https://github.com/modelcollapse/apg-wave/archive/refs/heads/main.zip)**, or choose **Code → Download ZIP** on this repository.
+1. **[Download the complete project ZIP](https://github.com/modelcollapse/CMPE-MAXMSP/archive/refs/heads/main.zip)**, or choose **Code → Download ZIP** on this repository.
 2. Extract the ZIP into a folder on your computer.
 3. Open **`CMPE_Variety_Pack.maxpat`** in Max.
 4. Choose your audio interface in the top audio controls, or open **AUDIO SETUP**. Use **TEST SOUND** to check the output.
