@@ -1,5 +1,16 @@
 # Changes
 
+## CMPE Variety Pack 1.2.0 — November 21, 2026
+
+- Reorganized the complete standalone interface into a compact audio strip, five colored instrument tabs, source/parameter cards, a distinct waveform area, and transport feedback. The presentation is 1100 × 788 with text at least 16 points.
+- Added state badges for loading, audio startup, silence analysis, render percentage, ready output, playback/looping, live fade-in, recording, cancellation, failed renders, changed settings, and completed drones.
+- Transport labels now distinguish GENERATE + PLAY, PLAY, START, PREPARING, PLAYING, and LIVE. NEW TAKE makes fresh finite output. Existing controller locks remain authoritative; unavailable controls are visually muted.
+- Source cards distinguish actual ready/loading/waiting/empty states, including native reads that outlive a timeout. Late completion clears stale notices. Recording failures remain visible through live activity updates.
+- Automatically scales the displayed finite waveform for visibility, with a bounded, labelled view scale shared by both channels. This changes no PCM samples, DSP voices, recording gain, or exported levels.
+- Added complete five-instrument and APG-state previews, a first-use guide, and one current playable package at `dist/CMPE_Max.zip`. The main file remains `CMPE_Variety_Pack.maxpat`.
+
+The Max for Live devices retain their previous preview release. Layout previews and simulated-controller tests do not establish native Max rendering or audio-device operation.
+
 ## CMPE Max for Live 0.1.0 preview — November 21, 2026
 
 Added five separate Max Instrument entry points in `max-for-live/`, with real unfrozen AMXD containers, adjacent dependencies, and editable `.maxpat` sources. The existing standalone Max collection is retained.

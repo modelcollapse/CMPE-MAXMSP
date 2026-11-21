@@ -36,7 +36,7 @@
         var text;
         if (changing) text = pending && pending.kind === "on" ? "Starting audio..." : "Applying audio settings...";
         else if (notice) text = notice;
-        else if (!switchKnown) text = "Audio status unavailable · use AUDIO SETUP";
+        else if (!switchKnown) text = "Audio status unavailable · AUDIO SETUP";
         else if (!audioOn) text = "Audio off · press PLAY / START";
         else text = "Audio on" + (sampleRate > 0 ? " · " + (sampleRate / 1000).toFixed(sampleRate % 1000 ? 1 : 0) + " kHz" : "");
         ui("audio_status", text);
@@ -70,7 +70,7 @@
         try {
             objectMessage(m.ui, ["clear"]);
             if (!m.items.length) {
-                objectMessage(m.ui, ["append", "Choose in Audio Setup"]);
+                objectMessage(m.ui, ["append", "Choose in Setup"]);
                 objectMessage(m.ui, ["set", 0]);
             } else {
                 for (j = 0; j < m.items.length; j++) objectMessage(m.ui, ["append", m.items[j]]);
@@ -114,7 +114,7 @@
             read("audio_ad_option1", "loadbang"); read("audio_ad_option2", "loadbang");
             read("audio_ad_switch", "bang");
         } finally { refreshing = false; }
-        if (refreshFault) notice = "Audio controls unavailable · use AUDIO SETUP";
+        if (refreshFault) notice = "Audio controls unavailable · AUDIO SETUP";
         locks(); display();
     }
     function queryCurrent() {
@@ -238,7 +238,7 @@
             } catch (e) {
                 if (disposed || token !== generation) return;
                 changing = false; pending = null;
-                notice = "Audio controls unavailable · use AUDIO SETUP";
+                notice = "Audio controls unavailable · AUDIO SETUP";
                 g.lockUI(!mutable()); display();
                 mainStatus("Audio settings could not be changed. Open Max's Options > Audio Status and choose your interface there.");
             }
@@ -287,7 +287,7 @@
         if (disposed || changing) return;
         queryCurrent();
         if (!switchKnown) {
-            notice = "Audio status unavailable · use AUDIO SETUP"; display();
+            notice = "Audio status unavailable · AUDIO SETUP"; display();
             mainStatus("Max has not reported its audio state. Open AUDIO SETUP, or press REFRESH to try again.");
             return;
         }

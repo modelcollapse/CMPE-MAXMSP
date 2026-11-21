@@ -42,13 +42,19 @@ ISJS, Many, and RMHS start their audio engines immediately after Max audio becom
 
 ## Transport and feedback
 
-**PLAY** appears for APG and SIOE. It generates a result when required, then plays the selected range. Subsequent presses replay the cached result. **NEW** generates a fresh randomized result and leaves it ready to play. Source or generation-setting changes make the next PLAY generate again.
+**GENERATE + PLAY** appears for APG and SIOE when a result is needed. It generates the audio, then plays the selected range. Once prepared, the button reads **PLAY** and reuses the cached result. **NEW TAKE** generates a fresh randomized result and leaves it ready to play. Source or generation-setting changes return the button to GENERATE + PLAY.
 
 **START** appears for the three live instruments. ISJS and Many continue until stopped. RMHS finishes automatically after its planned voices have faded out. **RESET** restores the ISJS or Many defaults while stopped. RMHS uses **RANDOMIZE** to choose another set of starting controls while stopped.
 
 **STOP** stops playback, cancels an in-progress render, or fades and clears the live voices. It also stops a live recording. Switching instruments stops the previous instrument, its scheduled events, and its recording before showing the next mode. No earlier instrument is left running behind the new one.
 
-The status area shows loading, audio startup, rendering progress, elapsed time, and relevant playback information. The live scopes show the current signal; they are not a stored recording or a selectable waveform. The meters and **Volume (dB)** control are shared by all instruments.
+The colored badge beside the transport distinguishes loading, audio startup, silence checking, rendering, readiness, playback, and looping. The progress bar follows the actual work for the labelled phase. During silence checking it shows the part of the opening examined; during rendering it shows completed frames; during playback it follows the playhead. Continuous ISJS/Many performances have no finite progress estimate.
+
+**CHANGES PENDING** means the displayed waveform was made with previous settings. **CANCELLED** or **RENDER ERROR** identifies incomplete output. Source cards independently show READY, LOADING, WAITING, or EMPTY. WAITING after a timeout means the native read has not completed; successful late completion clears the earlier notice. A failed recording notice stays visible across live activity updates until another action.
+
+The live scopes show the current signal; they are not a stored recording or a selectable waveform. The meters and **Volume (dB)** control are shared by all instruments. Live modes show FADING IN, LIVE, RECORD ARMED, RECORDING, or COMPLETE as appropriate. Controls that are currently unavailable are muted visually.
+
+Finite waveforms are automatically enlarged vertically according to the completed audio's peak, capped at 64×. **View x… · visual only** shows that display scale. This sends Max's [`waveform~` vertical display scaling](https://docs.cycling74.com/reference/waveform~/) attribute; it does not modify the audio buffer, listening gain, recording level, or export. Both channels use the same scale so their relative amplitude stays visible. Before a result is ready, the display explains whether it is waiting for generation, being prepared, or incomplete.
 
 ## APG: audio palindrome generator
 

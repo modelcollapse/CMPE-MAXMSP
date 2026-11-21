@@ -35,6 +35,9 @@ node developer/validation/test_wave_controller.js
 node developer/validation/test_cmpe_model.js
 node developer/validation/test_cmpe_controller.js
 node developer/validation/test_cmpe_controller.js --bundle
+node developer/validation/test_cmpe_ui.js
+python3 developer/build_cmpe_previews.py
+python3 developer/package_cmpe.py
 ```
 
 The first builder preserves the standalone APG patch/runtime. The voice builder writes the native instrument subpatches. The collection builder assembles the shared UI, audio connections, and combined legacy-JavaScript runtime. Edit the separate developer modules and rebuild rather than editing only a generated runtime file.
@@ -72,7 +75,13 @@ Audio-control regressions check that initialization, refresh, polling, feedback,
 
 The retained APG suites also passed: **710 plans / 500,424 assertions**, **25 renderer plans / 907,564 checks**, and **17 controller scenarios / 1,499,742 checks**. The CMPE controller additionally checks palindrome sample symmetry after switching back from another instrument.
 
-The main builder validates **233 objects and 220 patch cords**, including connection endpoints, port indices, duplicate cords, unique scripting names, and presentation bounds/overlap. The voice builders validate their message and signal connections: sample voice **40 objects / 55 cords**, Many voice **77 / 152**, and drone voice **45 / 60**. All five interface previews use the generated 960 × 844 presentation layout, its native color attributes, and the actual XY-pad drawing code. Text-fit and visible-overlap checks pass, and the images were reviewed for readability. They are labelled interface previews, not native Max screenshots; no attached hardware is claimed. Both shipped CMPE JavaScript files pass an ECMAScript 5 parser check.
+The 1.2.0 main builder validates **252 objects and 220 patch cords**, including connection endpoints, port indices, duplicate cords, unique scripting names, and presentation bounds/overlap. The voice builders validate their message and signal connections: sample voice **40 objects / 55 cords**, Many voice **77 / 152**, and drone voice **45 / 60**. All five interface previews use the generated **1100 × 788** presentation layout, its native color attributes, and the actual XY-pad drawing code. Text-fit and visible-overlap checks pass for all five instruments and seven captured APG states. The images were reviewed for readability. They are labelled interface previews, not native Max screenshots; no attached hardware is claimed. Both shipped CMPE JavaScript files pass an ECMAScript 5 parser check.
+
+The standalone feedback adapter is bundled after the audio-settings module and is excluded from the Max for Live runtime. `test_cmpe_ui.js` completed **8 scenarios and 51 checks** using the real controller with the existing simulated Max boundaries. Coverage includes loading, separate silence-scan/render fractions, readiness, playback/looping, changed settings, incomplete output, native-read timeout and late completion, live fade-ins, recording-failure notice persistence, optional widgets, and idempotent installation. The existing 45-scenario controller suite also passed against the updated source modules and distributed runtime with the same 5,182 compared PCM frames.
+
+Waveform fitting sends only the documented [`waveform~` `vzoom` display attribute](https://docs.cycling74.com/reference/waveform~/). Tests check identical scale messages on both channels, the bounded peak-derived factor, SIOE's existing post-normalization peak, and exact PCM preservation across display-only changes. The adapter does not read/write audio buffers, change gain, schedule audio, consume random values, or replace the engine's click permissions. Native Max must still confirm the exact visual scale, fonts, colors, widgets, and mouse behavior.
+
+`developer/package_cmpe.py` validates the curated `dist/CMPE_Max.zip` download: required dependencies, generated patch version, initial presentation mode, exact ZIP member list, CRC, manifest readback, and every SHA-256 digest. One stable `CMPE_Max` folder contains the main patch and its current supporting files. Legacy entry points, development sources, and Max for Live devices remain in the full source repository. Local documentation links to excluded files are converted to canonical repository links.
 
 These results establish modeled behavior and structural consistency. They do not execute the native MSP voices, draw Max's actual UI, or write audio through Max's native disk recorder.
 
@@ -118,7 +127,7 @@ The following should be checked in an actual Max 8/9 session before treating the
 2. Check the driver and dynamically labelled option menus against Max's Audio Status window. Confirm that opening the patch and REFRESH preserve hardware settings. Change an interface while playing, recording, rendering, and waiting for TEST SOUND; verify that the old work stops before the device change and does not resume. Check power readback, connect/disconnect an interface, and inspect drivers that expose fewer than two options. Then verify TEST SOUND and start each mode directly after launch. Confirm source requirements, scopes, slow fades, and RMHS completion.
 3. Move the ISJS pad and change its live rate/level controls. Change Many settings during playback and confirm that only new layers receive them.
 4. Stop and switch modes during active performances, audio startup, rendering, and an armed/running recording. Check that no old voice or callback resumes afterward.
-5. Render APG and SIOE; inspect both waveform channels, drag a selection, loop it, restore full range, and replay the cached result.
+5. Render APG and SIOE; inspect both waveform channels, drag a selection, loop it, restore full range, and replay the cached result. Confirm the new loading/scanning/rendering/playback badges, labelled display-only waveform scale, visible control availability, and native font fitting in all five modes. Check that changes flag the cached waveform and cancellation never appears ready. Compare perceived loudness and WAV data before/after display scaling; verify stereo view scale and the native `vzoom` direction.
 6. Save complete finite-mode WAV files and record a live performance. Open the files independently to confirm stereo channels, 24-bit format, duration, and actual audio. Verify that changing monitor volume does not alter captured/exported amplitude.
 7. Save and reload a JSON set, including source paths containing spaces. Move a referenced source to confirm that the missing-file path is understandable and recoverable.
 8. Run Many long enough to exercise voice reuse and tail retirement, then confirm that STOP clears all tails and closes recording.

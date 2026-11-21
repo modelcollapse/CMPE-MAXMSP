@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Start here · CMPE Variety Pack for Max</title>
+  <style>
+    :root { --ink:#203040; --muted:#526775; --paper:#edf2f6; --line:#cbd5dd; --teal:#087f83; --blue:#315fa6; --violet:#7257a6; --copper:#995e32; --ochre:#986b19; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; background:var(--paper); color:var(--ink); font:17px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif; }
+    main { max-width:1080px; margin:auto; padding:40px 24px 64px; }
+    header { margin:0 0 28px; }
+    .eyebrow { margin:0 0 12px; color:var(--teal); font-size:.85rem; font-weight:750; letter-spacing:.08em; text-transform:uppercase; }
+    h1 { margin:0; font-size:clamp(2rem,5vw,3.35rem); line-height:1.13; letter-spacing:-.035em; }
+    .intro { max-width:760px; margin:18px 0; color:var(--muted); font-size:1.1rem; }
+    a { color:var(--teal); text-underline-offset:.2em; }
+    a:focus-visible { outline:3px solid #db9d43; outline-offset:4px; border-radius:3px; }
+    nav { display:flex; flex-wrap:wrap; gap:8px 18px; margin-top:20px; font-size:.95rem; }
+    section { margin-top:24px; padding:26px 28px; background:white; border:1px solid var(--line); border-radius:14px; }
+    section.hero { border-top:5px solid var(--teal); }
+    h2 { margin:0 0 14px; font-size:1.45rem; line-height:1.25; letter-spacing:-.015em; }
+    h3 { margin:22px 0 6px; font-size:1.05rem; }
+    p { margin:12px 0; }
+    .filename { display:block; width:fit-content; max-width:100%; margin:18px 0; padding:14px 18px; background:#e2f4f1; border:1px solid #a6d4ce; border-radius:8px; color:#075f62; font:600 clamp(1rem,2.6vw,1.45rem)/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; overflow-wrap:anywhere; }
+    code { font:.91em ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; overflow-wrap:anywhere; }
+    ol,ul { padding-left:24px; margin:14px 0; }
+    li { padding-left:4px; margin:9px 0; }
+    .note { padding:14px 18px; border-left:4px solid var(--blue); background:#edf3fb; border-radius:0 8px 8px 0; }
+    .table-wrap { overflow-x:auto; }
+    table { width:100%; border-collapse:collapse; text-align:left; font-size:.96rem; }
+    th { color:var(--muted); font-size:.85rem; }
+    td,th { padding:13px 12px 13px 0; border-bottom:1px solid #e2e8ee; vertical-align:top; }
+    tbody tr:last-child td { border-bottom:0; }
+    .mode { display:inline-block; padding:2px 9px; border-radius:5px; color:white; font-size:.88rem; font-weight:700; white-space:nowrap; }
+    .apg{background:var(--teal)} .isjs{background:var(--blue)} .many{background:var(--violet)} .rmhs{background:var(--copper)} .sioe{background:var(--ochre)}
+    .states { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; margin:20px 0; }
+    .state { padding:16px; background:#f5f8fa; border:1px solid #dee7ee; border-radius:9px; }
+    .state strong { display:block; font-size:.83rem; letter-spacing:.025em; color:var(--teal); }
+    .state p { margin:7px 0 0; font-size:.95rem; }
+    .state.wait strong {color:#9a5a14} .state.error strong {color:#9c3343}
+    figure { margin:22px 0 0; }
+    figure img { display:block; width:100%; height:auto; border:1px solid var(--line); border-radius:8px; }
+    figcaption { margin-top:10px; color:var(--muted); font-size:.85rem; }
+    .muted { color:var(--muted); }
+    footer { padding:24px 4px 0; color:var(--muted); font-size:.9rem; }
+    @media(max-width:650px) { main{padding:24px 14px 40px} section{padding:22px 18px} .states{grid-template-columns:1fr} table{min-width:530px} .filename{padding:12px} }
+    @media print { body{background:white;font-size:11pt} main{max-width:none;padding:0} nav{display:none} section{break-inside:avoid;padding:16px;border-radius:0} a{color:inherit} figure{break-inside:avoid} }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="eyebrow">CMPE Variety Pack · Standalone Max · Version 1.2.0</p>
+    <h1>One folder. Five instruments.</h1>
+    <p class="intro">An audio palindrome, sample grains, ambient layers, harmonic drones, and audio supercuts. Start with the main patch below.</p>
+    <nav aria-label="Guide sections"><a href="#open">Open</a><a href="#instruments">Instruments</a><a href="#feedback">Feedback</a><a href="#audio">Audio</a><a href="#files">Files and credit</a></nav>
+  </header>
+
+  <section class="hero" id="open">
+    <h2>The main file to open</h2>
+    <code class="filename">CMPE_Variety_Pack.maxpat</code>
+    <ol>
+      <li>Extract the complete ZIP. Keep the entire <strong>CMPE_Max</strong> folder together.</li>
+      <li>In that folder, open <strong>CMPE_Variety_Pack.maxpat</strong> in Max. It contains all five instruments.</li>
+      <li>Choose your audio output in the top controls, or open <strong>AUDIO SETUP</strong>. Use <strong>TEST SOUND</strong> to check the output.</li>
+      <li>The three included demo samples load automatically. Choose an instrument, then press <strong>GENERATE + PLAY</strong> or <strong>START</strong>.</li>
+    </ol>
+    <p class="note">The <code>.js</code>, voice patches, and demo WAV files are required. Keep them beside the main patch. Close an older copy of the patch before opening this version.</p>
+    <p class="muted">Designed for Max 8 or Max 9 using stock Max/MSP objects. Python and Node.js are build tools; neither is required to play this folder.</p>
+  </section>
+
+  <section id="instruments">
+    <h2>Choose an instrument</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Instrument</th><th>What it does</th><th>Sources</th><th>Starting behavior</th></tr></thead>
+        <tbody>
+          <tr><td><span class="mode apg">APG</span></td><td>A mirrored audio palindrome</td><td>Three samples</td><td>Generates a waveform, then plays</td></tr>
+          <tr><td><span class="mode isjs">ISJS</span></td><td>Sample grains shaped with a position/density pad</td><td>Three samples</td><td>Starts live</td></tr>
+          <tr><td><span class="mode many">Many</span></td><td>Overlapping ambient sample layers</td><td>Sample 1</td><td>Layers fade in over 2–4 seconds</td></tr>
+          <tr><td><span class="mode rmhs">RMHS</span></td><td>An evolving harmonic drone</td><td>No samples</td><td>Partials enter over 3–20 seconds</td></tr>
+          <tr><td><span class="mode sioe">SIOE</span></td><td>A short or gradually developing audio supercut</td><td>Sample 1</td><td>Generates a waveform, then plays</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>The selected instrument has a distinct color and a visible name. Sample cards also use numbered labels and color. Use <strong>LOAD</strong> to choose mono or stereo WAV/AIFF files while stopped. <strong>DEMO</strong> reloads the included sounds.</p>
+    <p>Many and RMHS deliberately fade in. Their activity labels explain that wait. ISJS and Many continue until stopped; RMHS finishes after its planned voices have faded out.</p>
+  </section>
+
+  <section id="feedback">
+    <h2>Read what the patch is doing</h2>
+    <p>The status badge, progress, and message beside the transport describe the current operation. Color reinforces the text; the label tells you what is happening.</p>
+    <div class="states">
+      <div class="state wait"><strong>LOADING SAMPLES</strong><p>Source audio is being read. Each required sample card reports its own loading or ready state.</p></div>
+      <div class="state wait"><strong>CHECKING SILENCE</strong><p>APG is checking the quiet beginning and ending before building the trimmed result.</p></div>
+      <div class="state"><strong>RENDERING</strong><p>The finite waveform is being generated. Progress reports actual work completed; CANCEL stops generation.</p></div>
+      <div class="state"><strong>READY TO PLAY</strong><p>A complete waveform is available. PLAY reuses it without generating another take.</p></div>
+      <div class="state"><strong>PLAYING / LOOPING / LIVE</strong><p>The transport is running. Watch the moving playhead or live scopes, elapsed time, and output meters.</p></div>
+      <div class="state wait"><strong>CHANGES PENDING</strong><p>The displayed waveform belongs to the previous settings. GENERATE + PLAY creates the changed result.</p></div>
+      <div class="state error"><strong>CANCELLED / RENDER ERROR</strong><p>There is no complete new take. Read the message before generating again.</p></div>
+      <div class="state error"><strong>RECORD ARMED / RECORDING</strong><p>An armed live recorder begins with START. RECORDING confirms that capture is running.</p></div>
+    </div>
+    <h3>Waveform and loops</h3>
+    <p>APG and SIOE show the stored stereo result. The waveform is enlarged automatically for visibility; its <strong>view scale changes the drawing only</strong>. Playback and exported audio levels do not change.</p>
+    <p>Drag across either waveform channel to choose a range. Enable <strong>Loop selected range</strong> to repeat it, or use <strong>FULL RANGE</strong> to restore the complete piece. The playhead and time show playback position.</p>
+    <h3>Transport</h3>
+    <p><strong>GENERATE + PLAY</strong> makes the required result and then starts playback. <strong>NEW TAKE</strong> generates a fresh randomized result and leaves it ready. <strong>STOP / CANCEL</strong> stops playback or preparation. The live instruments use <strong>START</strong>, with RESET or RANDOMIZE for their stopped settings.</p>
+    <p class="muted">Live scopes show the current signal, not a saved recording. Unavailable controls are visibly muted. Changes to source files or generation settings can make an existing finite waveform out of date.</p>
+    <figure>
+      <img src="docs/images/apg-interface-preview.png" alt="CMPE APG interface preview showing sample cards, stereo waveform, transport, and activity feedback">
+      <figcaption>Generated from the patch layout and controller state. This is an interface preview, not a native Max screenshot.</figcaption>
+    </figure>
+  </section>
+
+  <section id="audio">
+    <h2>Audio output and saving</h2>
+    <p>The top <strong>Driver</strong> and two option menus use the labels and choices supplied by Max. Choose the interface in the menu bearing the appropriate device label. <strong>AUDIO SETUP</strong> opens the complete native settings for output routing, sample rate, and buffer size. <strong>REFRESH</strong> reads the current choices again.</p>
+    <p>Device changes and AUDIO SETUP stop this patch’s current performance and turn Max audio off. Press PLAY/START or the audio power button when the output is ready. The power status reflects Max’s reported state; it does not select hardware automatically.</p>
+    <p>If there is no sound, try TEST SOUND first, check the listening <strong>Volume (dB)</strong>, and confirm the output device and physical level. For a long start, check whether the patch is loading, rendering, or deliberately fading in.</p>
+    <h3>Save a result or performance</h3>
+    <p><strong>APG / SIOE:</strong> SAVE WAV exports the complete cached stereo result as a 24-bit WAV, including APG’s trimmed edges. A loop selection does not limit the export.</p>
+    <p><strong>ISJS / Many / RMHS:</strong> RECORD WAV selects a destination. While stopped it arms recording for START; during a performance it begins capture. STOP REC ends capture while the performance continues. STOP or changing instruments ends both.</p>
+    <p>Listening volume does not change a saved result or live recording. <strong>SAVE SET / LOAD SET</strong> store instrument settings and source paths; they do not embed your sample files or a rendered result.</p>
+  </section>
+
+  <section id="files">
+    <h2>Keep the project together</h2>
+    <p>Use one complete <strong>CMPE_Max</strong> folder in a location you choose. The main entry point is always <code>CMPE_Variety_Pack.maxpat</code>. The similarly named voice patches are supporting files, not separate apps.</p>
+    <p>This playable download contains the standalone Max collection. The source repository separately includes developer tools, the legacy APG patch, and the Max for Live preview edition.</p>
+    <p><a href="docs/CMPE_USAGE.md">Detailed usage guide</a> · <a href="README.md">Project README</a> · <a href="ATTRIBUTION.md">Full attribution</a> · <a href="https://github.com/modelcollapse/CMPE-MAXMSP">Source repository</a></p>
+    <h3>Original musical ideas</h3>
+    <p><strong>Computer Music Practice Examples and its instruments are by Joo Won Park.</strong> This Max adaptation follows his musical constructions and adds the interface, visualization, host controls, and file workflows described here.</p>
+    <p><a href="https://joowonpark.net/cmpe/">Original CMPE project</a> · <a href="https://joowonpark.net/apg/">Original Audio Palindrome Generator</a></p>
+    <p class="note"><strong>Verification:</strong> automated checks cover the models, controller behavior, rendered samples, layout, and patch connections. Native Max object loading, UI drawing, audible output, mouse interaction, and disk recording still require verification in Max.</p>
+  </section>
+  <footer>CMPE Variety Pack for Max · Version 1.2.0 · Main patch: <code>CMPE_Variety_Pack.maxpat</code></footer>
+</main>
+</body>
+</html>

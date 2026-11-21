@@ -4,13 +4,15 @@
 
 ## Download and open
 
-1. **[Download the complete project ZIP](https://github.com/modelcollapse/CMPE-MAXMSP/archive/refs/heads/main.zip)**, or choose **Code → Download ZIP** on this repository.
-2. Extract the ZIP into a folder on your computer.
+1. **[Download CMPE for Max](https://github.com/modelcollapse/CMPE-MAXMSP/raw/refs/heads/main/dist/CMPE_Max.zip)**. This is the complete playable **1.2.0** package.
+2. Extract the ZIP. Keep the resulting **`CMPE_Max`** folder together.
 3. Open **`CMPE_Variety_Pack.maxpat`** in Max.
 4. Choose your audio interface in the top audio controls, or open **AUDIO SETUP**. Use **TEST SOUND** to check the output.
-5. The three included demo samples load automatically. Choose an instrument and press **PLAY** or **START**.
+5. The three included demo samples load automatically. Choose an instrument and press **GENERATE + PLAY** or **START**. A prepared result shows **PLAY**.
 
 Keep all the files in the extracted folder together. The main patch needs its JavaScript files, voice patches, and demo audio beside it. Downloading only a `.maxpat` file is insufficient. Downloading the ZIP does not open it in Max; extract it first.
+
+The package includes **[START_HERE.html](START_HERE.html)**. The main file keeps the same name across updates: **`CMPE_Variety_Pack.maxpat`**. [Download the full source repository](https://github.com/modelcollapse/CMPE-MAXMSP/archive/refs/heads/main.zip) for developer tools, the retained standalone APG, and the separate Max for Live preview.
 
 The collection is designed for **Max 8 or Max 9**, using stock Max/MSP objects and the legacy `js` object. No third-party externals, Node.js, or Python are required to play it. Close older copies before opening this version. Use **TEST SOUND** to check Max’s selected audio output.
 
@@ -20,7 +22,7 @@ The collection is designed for **Max 8 or Max 9**, using stock Max/MSP objects a
 
 The **[Max for Live 0.1.0 preview](max-for-live/README.md)** contains five separate `.amxd` instruments for Ableton Live: APG, ISJS, Many, RMHS, and SIOE. Each has a compact horizontal interface, MIDI triggering, Live parameter integration, and stereo output through its track. APG and SIOE separate generation from playback and preserve the generation seed for reconstructing saved results.
 
-Download the complete repository ZIP, then keep the **entire `max-for-live` folder** together and drag an `.amxd` file onto an empty MIDI track. These are unfrozen devices with adjacent dependencies. **Native Live loading, audio, saved-Set recall, and offline rendering still require host testing.** The standalone Max collection above remains available.
+Download the [complete source repository ZIP](https://github.com/modelcollapse/CMPE-MAXMSP/archive/refs/heads/main.zip), then keep the **entire `max-for-live` folder** together and drag an `.amxd` file onto an empty MIDI track. These are unfrozen devices with adjacent dependencies. **Native Live loading, audio, saved-Set recall, and offline rendering still require host testing.** The standalone Max download above contains the five-instrument Max patch; the compact Max for Live devices are a separate edition.
 
 [Installation and operation](max-for-live/README.md) · [Native Live checks](max-for-live/NATIVE_LIVE_CHECKS.md)
 
@@ -34,7 +36,7 @@ The top row contains **Driver** and two option menus supplied by the selected Ma
 
 Changing a driver or device, or opening AUDIO SETUP, stops this patch's playback and recording first and turns Max audio off. Press PLAY/START or use the audio power button when the new interface is ready. Audio settings apply to Max and are not stored in the musical **SAVE SET** files.
 
-The interface uses a light background, dark text, a distinct selected color for each instrument, and tinted source labels. The instrument name remains visible alongside its color.
+The interface uses a light background, dark text, a distinct color for each instrument, and three tinted source cards. Dark waveform panels separate the audio display from the controls. Text labels carry the state information alongside color.
 
 ## Five instruments
 
@@ -53,6 +55,8 @@ ISJS and Many continue until stopped. RMHS finishes automatically after its plan
 ## Interface previews
 
 These images are rendered from the shipped Max patch layout and its controller state. APG and SIOE show output generated from the included demo sounds by the production renderer. They are **interface previews, not native Max screenshots**; live instruments are shown stopped. Device menus show fallback placeholders because no physical audio hardware was queried for these images.
+
+![All five complete CMPE interfaces, including the audio controls and feedback](docs/images/all-instruments-overview.png)
 
 ### APG: audio palindrome
 
@@ -81,11 +85,11 @@ These images are rendered from the shipped Max patch layout and its controller s
 | **Driver / device options** | Select an available Max audio driver and the options it exposes. |
 | **AUDIO SETUP / REFRESH** | Open Max's complete audio settings, or read the current device lists and state again. |
 | **Audio on/off** | Enable or disable Max audio; switching off also stops this patch's playback and recording. |
-| **PLAY / START** | Generates and plays APG/SIOE when needed, or starts a live instrument. Later PLAY presses reuse the cached finite result. |
+| **GENERATE + PLAY / PLAY / START** | Explains whether APG/SIOE needs generation, replays a prepared result, or starts a live instrument. The button shows PREPARING, PLAYING, or LIVE while active. |
 | **STOP / CANCEL** | Stops playback, cancels generation, clears live tails and scheduled events, and ends recording. |
-| **NEW** | Generates another APG/SIOE result and leaves it ready to play. |
+| **NEW TAKE** | Generates another APG/SIOE result and leaves it ready to play. |
 | **RESET / RANDOMIZE** | Restores ISJS/Many defaults, or chooses new RMHS starting controls, while stopped. |
-| **Waveform** | APG/SIOE: drag across either channel to select a playback range. |
+| **Waveform** | APG/SIOE: drag across either channel to select a playback range. Quiet waveforms are automatically enlarged for display; the labelled view scale never changes audio level. |
 | **Loop selected range / FULL RANGE** | Repeat the selected range, or restore the full finite result. |
 | **Live scopes** | Show the current signal in ISJS, Many, and RMHS. |
 | **Volume (dB)** | Changes listening volume. It does not change exported or recorded audio. |
@@ -93,7 +97,17 @@ These images are rendered from the shipped Max patch layout and its controller s
 
 Changing instruments stops the previous one and its recording. ISJS rates, levels, and position/density pad remain editable during playback. Many controls affect new layers. RMHS controls are locked until its performance stops.
 
-Finite generation shows progress and elapsed time. Playback shows a moving playhead and time. A remaining quiet opening in a rendered result is identified with a countdown to the first sound.
+### Read the activity state
+
+The badge beside the transport reports **LOADING SAMPLES**, **CHECKING SILENCE**, **RENDERING**, **READY TO PLAY**, **PLAYING**, or **LOOPING**. The progress bar uses actual scanned frames, rendered frames, or playback position. Each phase is labelled separately; no completion estimate is fabricated. The detail text includes elapsed time or the current task.
+
+**CHANGES PENDING** means the visible waveform belongs to the previous settings. **GENERATE + PLAY** creates the updated result. A cancelled or failed render is labelled **CANCELLED** or **RENDER ERROR**, and the partial waveform is not presented as a playable result.
+
+Live instruments report **FADING IN**, **LIVE**, **RECORD ARMED**, **RECORDING**, or **COMPLETE** as appropriate. Continuous performances have no invented completion percentage. Stalled sample reads and failed recording notices remain visible; successful late sample loading clears its earlier notice. Unavailable controls are visibly muted.
+
+![APG activity previews generated from real controller state transitions](docs/images/apg-feedback-states.png)
+
+Playback shows a moving playhead and time. A remaining quiet opening in a rendered result is identified with a countdown to the first sound. The automatic waveform view scale is capped at 64× and is a display setting only; playback, recording, and exported samples retain their actual levels.
 
 ## Save audio
 
@@ -132,6 +146,8 @@ Waveform, playback, loop selection, and export all use the trimmed result. SIOE 
 | `apgw_test1.wav`, `apgw_test2.wav`, `apgw_test3.wav` | Synthetic demonstration sounds |
 | `developer/` | Source modules, patch builders, and automated checks |
 | `docs/` | Operating instructions |
+| `START_HERE.html` | First-use guide with the exact main file and playback steps |
+| `dist/CMPE_Max.zip` | Complete current standalone Max package, with one clearly named root folder |
 
 ## Development
 
@@ -148,6 +164,9 @@ node developer/validation/test_wave_controller.js
 node developer/validation/test_cmpe_model.js
 node developer/validation/test_cmpe_controller.js
 node developer/validation/test_cmpe_controller.js --bundle
+node developer/validation/test_cmpe_ui.js
+python3 developer/build_cmpe_previews.py
+python3 developer/package_cmpe.py
 ```
 
 Edit the separate modules in `developer/`, then rebuild and reopen the patch. Editing only a generated runtime will lose the change on the next build. The controller tests simulate Max buffers, tasks, files, UI objects, and messages; they do not run the native audio engine.

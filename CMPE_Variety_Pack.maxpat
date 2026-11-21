@@ -12,26 +12,26 @@
     "rect": [
       80,
       80,
-      960,
-      844
+      1100,
+      788
     ],
     "openinpresentation": 1,
     "default_fontsize": 17.0,
     "default_fontface": 0,
     "default_fontname": "Arial",
     "bgcolor": [
-      0.9529411764705882,
+      0.9294117647058824,
+      0.9490196078431372,
       0.9647058823529412,
-      0.9725490196078431,
       1.0
     ],
     "bglockedcolor": [
-      0.9529411764705882,
+      0.9294117647058824,
+      0.9490196078431372,
       0.9647058823529412,
-      0.9725490196078431,
       1.0
     ],
-    "title": "CMPE Variety Pack 1.1.0 / APG \u00b7 ISJS \u00b7 Many \u00b7 RMHS \u00b7 SIOE",
+    "title": "CMPE Variety Pack 1.2.0 / APG \u00b7 ISJS \u00b7 Many \u00b7 RMHS \u00b7 SIOE",
     "boxes": [
       {
         "box": {
@@ -40,10 +40,10 @@
           "numinlets": 1,
           "numoutlets": 0,
           "patching_rect": [
-            24,
-            12,
-            470,
-            38
+            20,
+            14,
+            580,
+            36
           ],
           "fontname": "Arial",
           "fontsize": 30.0,
@@ -53,19 +53,19 @@
             0.21176470588235294,
             1.0
           ],
-          "text": "CMPE Variety Pack 1.1.0",
+          "text": "CMPE / Variety Pack",
           "presentation": 1,
           "presentation_rect": [
-            24,
-            12,
-            470,
-            38
+            20,
+            14,
+            580,
+            36
           ],
           "bgcolor": [
-            0.9529411764705882,
-            0.9647058823529412,
-            0.9725490196078431,
-            1.0
+            0,
+            0,
+            0,
+            0
           ],
           "fontface": 1,
           "varname": "title"
@@ -100,9 +100,9 @@
             25
           ],
           "bgcolor": [
-            0.9529411764705882,
+            0.9294117647058824,
+            0.9490196078431372,
             0.9647058823529412,
-            0.9725490196078431,
             1.0
           ],
           "hidden": 1
@@ -115,10 +115,10 @@
           "numinlets": 1,
           "numoutlets": 3,
           "patching_rect": [
-            512,
+            620,
             16,
-            88,
-            30
+            90,
+            32
           ],
           "fontname": "Arial",
           "fontsize": 16.0,
@@ -136,20 +136,20 @@
           ],
           "presentation": 1,
           "presentation_rect": [
-            512,
+            620,
             16,
-            88,
-            30
+            90,
+            32
           ],
           "varname": "demo_button",
           "mode": 0,
           "outputmode": 1,
           "usegradient": 0,
-          "rounded": 6,
+          "rounded": 8,
           "bgcolor": [
-            0.8980392156862745,
-            0.9254901960784314,
-            0.9411764705882353,
+            0.9098039215686274,
+            0.9333333333333333,
+            0.9568627450980393,
             1.0
           ],
           "bgoncolor": [
@@ -171,7 +171,15 @@
             1.0
           ],
           "parameter_enable": 0,
-          "hint": "Load the three included demo sounds."
+          "hint": "Load the three included demo sounds.",
+          "border": 1,
+          "bordercolor": [
+            0.796078431372549,
+            0.8352941176470589,
+            0.8666666666666667,
+            1.0
+          ],
+          "fontface": 0
         }
       },
       {
@@ -181,10 +189,10 @@
           "numinlets": 1,
           "numoutlets": 3,
           "patching_rect": [
-            608,
+            718,
             16,
-            120,
-            30
+            126,
+            32
           ],
           "fontname": "Arial",
           "fontsize": 16.0,
@@ -202,20 +210,20 @@
           ],
           "presentation": 1,
           "presentation_rect": [
-            608,
+            718,
             16,
-            120,
-            30
+            126,
+            32
           ],
           "varname": "test_audio",
           "mode": 0,
           "outputmode": 1,
           "usegradient": 0,
-          "rounded": 6,
+          "rounded": 8,
           "bgcolor": [
-            0.8980392156862745,
-            0.9254901960784314,
-            0.9411764705882353,
+            0.9098039215686274,
+            0.9333333333333333,
+            0.9568627450980393,
             1.0
           ],
           "bgoncolor": [
@@ -237,7 +245,15 @@
             1.0
           ],
           "parameter_enable": 0,
-          "hint": "Play a short independent tone through the selected audio output."
+          "hint": "Play a short independent tone through the selected audio output.",
+          "border": 1,
+          "bordercolor": [
+            0.796078431372549,
+            0.8352941176470589,
+            0.8666666666666667,
+            1.0
+          ],
+          "fontface": 0
         }
       },
       {
@@ -325,9 +341,9 @@
           "numinlets": 1,
           "numoutlets": 0,
           "patching_rect": [
-            24,
-            800,
-            912,
+            20,
+            758,
+            1060,
             1
           ],
           "fontname": "Arial",
@@ -340,9 +356,9 @@
           ],
           "presentation": 1,
           "presentation_rect": [
-            24,
-            800,
-            912,
+            20,
+            758,
+            1060,
             1
           ],
           "bgcolor": [
@@ -364,13 +380,13 @@
           "numinlets": 1,
           "numoutlets": 0,
           "patching_rect": [
-            24,
-            246,
-            154,
-            24
+            32,
+            228,
+            112,
+            22
           ],
           "fontname": "Arial",
-          "fontsize": 17.0,
+          "fontsize": 16.0,
           "textcolor": [
             0.03137254901960784,
             0.4980392156862745,
@@ -380,16 +396,16 @@
           "text": "SAMPLE 1",
           "presentation": 1,
           "presentation_rect": [
-            24,
-            246,
-            154,
-            24
+            32,
+            228,
+            112,
+            22
           ],
           "bgcolor": [
-            0.9529411764705882,
-            0.9647058823529412,
-            0.9725490196078431,
-            1.0
+            0,
+            0,
+            0,
+            0
           ],
           "fontface": 1,
           "varname": "source_label1",
@@ -403,13 +419,13 @@
           "numinlets": 1,
           "numoutlets": 3,
           "patching_rect": [
-            208,
-            240,
-            104,
-            32
+            260,
+            226,
+            92,
+            30
           ],
           "fontname": "Arial",
-          "fontsize": 17.0,
+          "fontsize": 16.0,
           "textcolor": [
             0.03137254901960784,
             0.4980392156862745,
@@ -424,16 +440,16 @@
           ],
           "presentation": 1,
           "presentation_rect": [
-            208,
-            240,
-            104,
-            32
+            260,
+            226,
+            92,
+            30
           ],
           "varname": "load1",
           "mode": 0,
           "outputmode": 1,
           "usegradient": 0,
-          "rounded": 6,
+          "rounded": 8,
           "bgcolor": [
             0.8823529411764706,
             0.9411764705882353,
@@ -460,7 +476,15 @@
           ],
           "parameter_enable": 0,
           "hint": "Choose a mono or stereo WAV/AIFF for sample 1.",
-          "hidden": 0
+          "hidden": 0,
+          "border": 1,
+          "bordercolor": [
+            0.796078431372549,
+            0.8352941176470589,
+            0.8666666666666667,
+            1.0
+          ],
+          "fontface": 0
         }
       },
       {
@@ -470,10 +494,10 @@
           "numinlets": 1,
           "numoutlets": 0,
           "patching_rect": [
-            24,
-            278,
-            288,
-            40
+            32,
+            262,
+            320,
+            36
           ],
           "fontname": "Arial",
           "fontsize": 16.0,
@@ -486,17 +510,17 @@
           "text": "Loading demo sound...",
           "presentation": 1,
           "presentation_rect": [
-            24,
-            278,
-            288,
-            40
+            32,
+            262,
+            320,
+            36
           ],
           "varname": "file1",
           "bgcolor": [
-            0.9529411764705882,
-            0.9647058823529412,
-            0.9725490196078431,
-            1.0
+            0,
+            0,
+            0,
+            0
           ],
           "linecount": 2,
           "hidden": 0
@@ -509,10 +533,10 @@
           "numinlets": 1,
           "numoutlets": 0,
           "patching_rect": [
-            24,
-            324,
-            138,
-            22
+            32,
+            304,
+            152,
+            20
           ],
           "fontname": "Arial",
           "fontsize": 16.0,
@@ -525,16 +549,16 @@
           "text": "Sample 1 repeats",
           "presentation": 1,
           "presentation_rect": [
-            24,
-            324,
-            138,
-            22
+            32,
+            304,
+            152,
+            20
           ],
           "bgcolor": [
-            0.9529411764705882,
-            0.9647058823529412,
-            0.9725490196078431,
-            1.0
+            0,
+            0,
+            0,
+            0
           ],
           "varname": "repeat_label1",
           "hidden": 0
@@ -547,10 +571,10 @@
           "numinlets": 1,
           "numoutlets": 2,
           "patching_rect": [
-            24,
-            350,
-            138,
-            30
+            32,
+            328,
+            152,
+            28
           ],
           "fontname": "Arial",
           "fontsize": 20.0,
@@ -566,22 +590,22 @@
           ],
           "presentation": 1,
           "presentation_rect": [
-            24,
-            350,
-            138,
-            30
+            32,
+            328,
+            152,
+            28
           ],
           "varname": "repeat1",
           "bgcolor": [
-            1.0,
-            1.0,
-            1.0,
+            0.9568627450980393,
+            0.9686274509803922,
+            0.9803921568627451,
             1.0
           ],
           "bgoncolor": [
-            0.8980392156862745,
-            0.9254901960784314,
-            0.9411764705882353,
+            0.9098039215686274,
+            0.9333333333333333,
+            0.9568627450980393,
             1.0
           ],
           "hbgcolor": [
@@ -606,7 +630,13 @@
           "parameter_enable": 0,
           "minimum": 1,
           "maximum": 20,
-          "hidden": 0
+          "hidden": 0,
+          "bordercolor": [
+            0.796078431372549,
+            0.8352941176470589,
+            0.8666666666666667,
+            1.0
+          ]
         }
       },
       {
@@ -616,13 +646,13 @@
           "numinlets": 1,
           "numoutlets": 0,
           "patching_rect": [
-            336,
-            246,
-            154,
-            24
+            390,
+            228,
+            112,
+            22
           ],
           "fontname": "Arial",
-          "fontsize": 17.0,
+          "fontsize": 16.0,
           "textcolor": [
             0.19215686274509805,
             0.37254901960784315,
@@ -632,16 +662,16 @@
           "text": "SAMPLE 2",
           "presentation": 1,
           "presentation_rect": [
-            336,
-            246,
-            154,
-            24
+            390,
+            228,
+            112,
+            22
           ],
           "bgcolor": [
-            0.9529411764705882,
-            0.9647058823529412,
-            0.9725490196078431,
-            1.0
+            0,
+            0,
+            0,
+            0
           ],
           "fontface": 1,
           "varname": "source_label2",
@@ -655,13 +685,13 @@
           "numinlets": 1,
           "numoutlets": 3,
           "patching_rect": [
-            520,
-            240,
-            104,
-            32
+            618,
+            226,
+            92,
+            30
           ],
           "fontname": "Arial",
-          "fontsize": 17.0,
+          "fontsize": 16.0,
           "textcolor": [
             0.19215686274509805,
             0.37254901960784315,
@@ -676,16 +706,16 @@
           ],
           "presentation": 1,
           "presentation_rect": [
-            520,
-            240,
-            104,
-            32
+            618,
+            226,
+            92,
+            30
           ],
           "varname": "load2",
           "mode": 0,
           "outputmode": 1,
           "usegradient": 0,
-          "rounded": 6,
+          "rounded": 8,
           "bgcolor": [
             0.9019607843137255,
             0.9294117647058824,
@@ -712,7 +742,15 @@
           ],
           "parameter_enable": 0,
           "hint": "Choose a mono or stereo WAV/AIFF for sample 2.",
-          "hidden": 0
+          "hidden": 0,
+          "border": 1,
+          "bordercolor": [
+            0.796078431372549,
+            0.8352941176470589,
+            0.8666666666666667,
+            1.0
+          ],
+          "fontface": 0
         }
       },
       {
@@ -722,10 +760,10 @@
           "numinlets": 1,
           "numoutlets": 0,
           "patching_rect": [
-            336,
-            278,
-            288,
-            40
+            390,
+            262,
+            320,
+            36
           ],
           "fontname": "Arial",
           "fontsize": 16.0,
@@ -738,17 +776,17 @@
           "text": "Loading demo sound...",
           "presentation": 1,
           "presentation_rect": [
-            336,
-            278,
-            288,
-            40
+            390,
+            262,
+            320,
+            36
           ],
           "varname": "file2",
           "bgcolor": [
-            0.9529411764705882,
-            0.9647058823529412,
-            0.9725490196078431,
-            1.0
+            0,
+            0,
+            0,
+            0
           ],
           "linecount": 2,
           "hidden": 0
@@ -761,10 +799,10 @@
           "numinlets": 1,
           "numoutlets": 0,
           "patching_rect": [
-            336,
-            324,
-            138,
-            22
+            390,
+            304,
+            152,
+            20
           ],
           "fontname": "Arial",
           "fontsize": 16.0,
@@ -777,16 +815,16 @@
           "text": "Sample 2 repeats",
           "presentation": 1,
           "presentation_rect": [
-            336,
-            324,
-            138,
-            22
+            390,
+            304,
+            152,
+            20
           ],
           "bgcolor": [
-            0.9529411764705882,
-            0.9647058823529412,
-            0.9725490196078431,
-            1.0
+            0,
+            0,
+            0,
+            0
           ],
           "varname": "repeat_label2",
           "hidden": 0
@@ -799,10 +837,10 @@
           "numinlets": 1,
           "numoutlets": 2,
           "patching_rect": [
-            336,
-            350,
-            138,
-            30
+            390,
+            328,
+            152,
+            28
           ],
           "fontname": "Arial",
           "fontsize": 20.0,
@@ -818,22 +856,22 @@
           ],
           "presentation": 1,
           "presentation_rect": [
-            336,
-            350,
-            138,
-            30
+            390,
+            328,
+            152,
+            28
           ],
           "varname": "repeat2",
           "bgcolor": [
-            1.0,
-            1.0,
-            1.0,
+            0.9568627450980393,
+            0.9686274509803922,
+            0.9803921568627451,
             1.0
           ],
           "bgoncolor": [
-            0.8980392156862745,
-            0.9254901960784314,
-            0.9411764705882353,
+            0.9098039215686274,
+            0.9333333333333333,
+            0.9568627450980393,
             1.0
           ],
           "hbgcolor": [
@@ -858,7 +896,13 @@
           "parameter_enable": 0,
           "minimum": 1,
           "maximum": 20,
-          "hidden": 0
+          "hidden": 0,
+          "bordercolor": [
+            0.796078431372549,
+            0.8352941176470589,
+            0.8666666666666667,
+            1.0
+          ]
         }
       },
       {
@@ -868,13 +912,13 @@
           "numinlets": 1,
           "numoutlets": 0,
           "patching_rect": [
-            648,
-            246,
-            154,
-            24
+            748,
+            228,
+            112,
+            22
           ],
           "fontname": "Arial",
-          "fontsize": 17.0,
+          "fontsize": 16.0,
           "textcolor": [
             0.4470588235294118,
             0.3411764705882353,
@@ -884,16 +928,16 @@
           "text": "SAMPLE 3",
           "presentation": 1,
           "presentation_rect": [
-            648,
-            246,
-            154,
-            24
+            748,
+            228,
+            112,
+            22
           ],
           "bgcolor": [
-            0.9529411764705882,
-            0.9647058823529412,
-            0.9725490196078431,
-            1.0
+            0,
+            0,
+            0,
+            0
           ],
           "fontface": 1,
           "varname": "source_label3",
@@ -907,13 +951,13 @@
           "numinlets": 1,
           "numoutlets": 3,
           "patching_rect": [
-            832,
-            240,
-            104,
-            32
+            976,
+            226,
+            92,
+            30
           ],
           "fontname": "Arial",
-          "fontsize": 17.0,
+          "fontsize": 16.0,
           "textcolor": [
             0.4470588235294118,
             0.3411764705882353,
@@ -928,16 +972,16 @@
           ],
           "presentation": 1,
           "presentation_rect": [
-            832,
-            240,
-            104,
-            32
+            976,
+            226,
+            92,
+            30
           ],
           "varname": "load3",
           "mode": 0,
           "outputmode": 1,
           "usegradient": 0,
-          "rounded": 6,
+          "rounded": 8,
           "bgcolor": [
             0.9294117647058824,
             0.9098039215686274,
@@ -964,7 +1008,15 @@
           ],
           "parameter_enable": 0,
           "hint": "Choose a mono or stereo WAV/AIFF for sample 3.",
-          "hidden": 0
+          "hidden": 0,
+          "border": 1,
+          "bordercolor": [
+            0.796078431372549,
+            0.8352941176470589,
+            0.8666666666666667,
+            1.0
+          ],
+          "fontface": 0
         }
       },
       {
@@ -974,10 +1026,10 @@
           "numinlets": 1,
           "numoutlets": 0,
           "patching_rect": [
-            648,
-            278,
-            288,
-            40
+            748,
+            262,
+            320,
+            36
           ],
           "fontname": "Arial",
           "fontsize": 16.0,
@@ -990,17 +1042,17 @@
           "text": "Loading demo sound...",
           "presentation": 1,
           "presentation_rect": [
-            648,
-            278,
-            288,
-            40
+            748,
+            262,
+            320,
+            36
           ],
           "varname": "file3",
           "bgcolor": [
-            0.9529411764705882,
-            0.9647058823529412,
-            0.9725490196078431,
-            1.0
+            0,
+            0,
+            0,
+            0
           ],
           "linecount": 2,
           "hidden": 0
@@ -1013,10 +1065,10 @@
           "numinlets": 1,
           "numoutlets": 0,
           "patching_rect": [
-            648,
-            324,
-            138,
-            22
+            748,
+            304,
+            152,
+            20
           ],
           "fontname": "Arial",
           "fontsize": 16.0,
@@ -1029,16 +1081,16 @@
           "text": "Sample 3 repeats",
           "presentation": 1,
           "presentation_rect": [
-            648,
-            324,
-            138,
-            22
+            748,
+            304,
+            152,
+            20
           ],
           "bgcolor": [
-            0.9529411764705882,
-            0.9647058823529412,
-            0.9725490196078431,
-            1.0
+            0,
+            0,
+            0,
+            0
           ],
           "varname": "repeat_label3",
           "hidden": 0
@@ -1051,10 +1103,10 @@
           "numinlets": 1,
           "numoutlets": 2,
           "patching_rect": [
-            648,
-            350,
-            138,
-            30
+            748,
+            328,
+            152,
+            28
           ],
           "fontname": "Arial",
           "fontsize": 20.0,
@@ -1070,22 +1122,22 @@
           ],
           "presentation": 1,
           "presentation_rect": [
-            648,
-            350,
-            138,
-            30
+            748,
+            328,
+            152,
+            28
           ],
           "varname": "repeat3",
           "bgcolor": [
-            1.0,
-            1.0,
-            1.0,
+            0.9568627450980393,
+            0.9686274509803922,
+            0.9803921568627451,
             1.0
           ],
           "bgoncolor": [
-            0.8980392156862745,
-            0.9254901960784314,
-            0.9411764705882353,
+            0.9098039215686274,
+            0.9333333333333333,
+            0.9568627450980393,
             1.0
           ],
           "hbgcolor": [
@@ -1110,7 +1162,13 @@
           "parameter_enable": 0,
           "minimum": 1,
           "maximum": 20,
-          "hidden": 0
+          "hidden": 0,
+          "bordercolor": [
+            0.796078431372549,
+            0.8352941176470589,
+            0.8666666666666667,
+            1.0
+          ]
         }
       },
       {
@@ -1120,10 +1178,10 @@
           "numinlets": 1,
           "numoutlets": 0,
           "patching_rect": [
-            174,
-            324,
-            138,
-            22
+            200,
+            304,
+            152,
+            20
           ],
           "fontname": "Arial",
           "fontsize": 16.0,
@@ -1136,16 +1194,16 @@
           "text": "Pitch range (all)",
           "presentation": 1,
           "presentation_rect": [
-            174,
-            324,
-            138,
-            22
+            200,
+            304,
+            152,
+            20
           ],
           "bgcolor": [
-            0.9529411764705882,
-            0.9647058823529412,
-            0.9725490196078431,
-            1.0
+            0,
+            0,
+            0,
+            0
           ],
           "varname": "pitch_label",
           "hidden": 0
@@ -1158,10 +1216,10 @@
           "numinlets": 1,
           "numoutlets": 2,
           "patching_rect": [
-            174,
-            350,
-            138,
-            30
+            200,
+            328,
+            152,
+            28
           ],
           "fontname": "Arial",
           "fontsize": 20.0,
@@ -1177,22 +1235,22 @@
           ],
           "presentation": 1,
           "presentation_rect": [
-            174,
-            350,
-            138,
-            30
+            200,
+            328,
+            152,
+            28
           ],
           "varname": "pitch",
           "bgcolor": [
-            1.0,
-            1.0,
-            1.0,
+            0.9568627450980393,
+            0.9686274509803922,
+            0.9803921568627451,
             1.0
           ],
           "bgoncolor": [
-            0.8980392156862745,
-            0.9254901960784314,
-            0.9411764705882353,
+            0.9098039215686274,
+            0.9333333333333333,
+            0.9568627450980393,
             1.0
           ],
           "hbgcolor": [
@@ -1218,7 +1276,13 @@
           "minimum": 0.0,
           "maximum": 1.0,
           "format": 6,
-          "hidden": 0
+          "hidden": 0,
+          "bordercolor": [
+            0.796078431372549,
+            0.8352941176470589,
+            0.8666666666666667,
+            1.0
+          ]
         }
       },
       {
@@ -1228,8 +1292,8 @@
           "numinlets": 1,
           "numoutlets": 0,
           "patching_rect": [
-            592,
-            394,
+            752,
+            380,
             116,
             24
           ],
@@ -1244,16 +1308,16 @@
           "text": "Volume (dB)",
           "presentation": 1,
           "presentation_rect": [
-            592,
-            394,
+            752,
+            380,
             116,
             24
           ],
           "bgcolor": [
-            0.9529411764705882,
-            0.9647058823529412,
-            0.9725490196078431,
-            1.0
+            0,
+            0,
+            0,
+            0
           ],
           "varname": "monitor_label"
         }
@@ -1265,10 +1329,10 @@
           "numinlets": 1,
           "numoutlets": 2,
           "patching_rect": [
-            712,
-            390,
-            96,
-            30
+            872,
+            378,
+            80,
+            28
           ],
           "fontname": "Arial",
           "fontsize": 20.0,
@@ -1284,22 +1348,22 @@
           ],
           "presentation": 1,
           "presentation_rect": [
-            712,
-            390,
-            96,
-            30
+            872,
+            378,
+            80,
+            28
           ],
           "varname": "monitor_level",
           "bgcolor": [
-            1.0,
-            1.0,
-            1.0,
+            0.9568627450980393,
+            0.9686274509803922,
+            0.9803921568627451,
             1.0
           ],
           "bgoncolor": [
-            0.8980392156862745,
-            0.9254901960784314,
-            0.9411764705882353,
+            0.9098039215686274,
+            0.9333333333333333,
+            0.9568627450980393,
             1.0
           ],
           "hbgcolor": [
@@ -1324,7 +1388,13 @@
           "parameter_enable": 0,
           "minimum": -60.0,
           "maximum": 0.0,
-          "format": 6
+          "format": 6,
+          "bordercolor": [
+            0.796078431372549,
+            0.8352941176470589,
+            0.8666666666666667,
+            1.0
+          ]
         }
       },
       {
@@ -1356,9 +1426,9 @@
             26
           ],
           "bgcolor": [
-            0.9529411764705882,
+            0.9294117647058824,
+            0.9490196078431372,
             0.9647058823529412,
-            0.9725490196078431,
             1.0
           ],
           "hidden": 1
@@ -1371,10 +1441,10 @@
           "numinlets": 1,
           "numoutlets": 1,
           "patching_rect": [
-            832,
-            390,
-            104,
-            12
+            980,
+            380,
+            88,
+            11
           ],
           "fontname": "Arial",
           "fontsize": 17.0,
@@ -1389,10 +1459,10 @@
           ],
           "presentation": 1,
           "presentation_rect": [
-            832,
-            390,
-            104,
-            12
+            980,
+            380,
+            88,
+            11
           ],
           "bgcolor": [
             0.8352941176470589,
@@ -1424,10 +1494,10 @@
           "numinlets": 1,
           "numoutlets": 1,
           "patching_rect": [
-            832,
-            408,
-            104,
-            12
+            980,
+            395,
+            88,
+            11
           ],
           "fontname": "Arial",
           "fontsize": 17.0,
@@ -1442,10 +1512,10 @@
           ],
           "presentation": 1,
           "presentation_rect": [
-            832,
-            408,
-            104,
-            12
+            980,
+            395,
+            88,
+            11
           ],
           "bgcolor": [
             0.8352941176470589,
@@ -1477,9 +1547,9 @@
           "numinlets": 1,
           "numoutlets": 0,
           "patching_rect": [
-            24,
-            394,
-            220,
+            32,
+            380,
+            204,
             24
           ],
           "fontname": "Arial",
@@ -1493,16 +1563,16 @@
           "text": "OUTPUT",
           "presentation": 1,
           "presentation_rect": [
-            24,
-            394,
-            220,
+            32,
+            380,
+            204,
             24
           ],
           "bgcolor": [
-            0.9529411764705882,
-            0.9647058823529412,
-            0.9725490196078431,
-            1.0
+            0,
+            0,
+            0,
+            0
           ],
           "fontface": 1,
           "varname": "output_label"
@@ -1515,9 +1585,9 @@
           "numinlets": 1,
           "numoutlets": 0,
           "patching_rect": [
-            260,
-            394,
-            260,
+            244,
+            380,
+            210,
             24
           ],
           "fontname": "Arial",
@@ -1531,17 +1601,17 @@
           "text": "Length: --",
           "presentation": 1,
           "presentation_rect": [
-            260,
-            394,
-            260,
+            244,
+            380,
+            210,
             24
           ],
           "varname": "duration",
           "bgcolor": [
-            0.9529411764705882,
-            0.9647058823529412,
-            0.9725490196078431,
-            1.0
+            0,
+            0,
+            0,
+            0
           ]
         }
       },
@@ -1552,10 +1622,10 @@
           "numinlets": 1,
           "numoutlets": 0,
           "patching_rect": [
-            704,
-            578,
-            232,
-            24
+            856,
+            558,
+            212,
+            22
           ],
           "fontname": "Arial",
           "fontsize": 16.0,
@@ -1568,17 +1638,17 @@
           "text": "0.0 s",
           "presentation": 1,
           "presentation_rect": [
-            704,
-            578,
-            232,
-            24
+            856,
+            558,
+            212,
+            22
           ],
           "varname": "time",
           "bgcolor": [
-            0.9529411764705882,
-            0.9647058823529412,
-            0.9725490196078431,
-            1.0
+            0,
+            0,
+            0,
+            0
           ],
           "textjustification": 2
         }
@@ -1590,10 +1660,10 @@
           "numinlets": 1,
           "numoutlets": 0,
           "patching_rect": [
-            24,
-            450,
-            28,
-            25
+            32,
+            432,
+            20,
+            24
           ],
           "fontname": "Arial",
           "fontsize": 17.0,
@@ -1606,16 +1676,16 @@
           "text": "L",
           "presentation": 1,
           "presentation_rect": [
-            24,
-            450,
-            28,
-            25
+            32,
+            432,
+            20,
+            24
           ],
           "bgcolor": [
-            0.9529411764705882,
-            0.9647058823529412,
-            0.9725490196078431,
-            1.0
+            0,
+            0,
+            0,
+            0
           ],
           "fontface": 1,
           "varname": "channel_l",
@@ -1630,9 +1700,9 @@
           "numoutlets": 6,
           "patching_rect": [
             56,
-            430,
-            880,
-            66
+            416,
+            1012,
+            62
           ],
           "fontname": "Arial",
           "fontsize": 17.0,
@@ -1653,9 +1723,9 @@
           "presentation": 1,
           "presentation_rect": [
             56,
-            430,
-            880,
-            66
+            416,
+            1012,
+            62
           ],
           "varname": "wave_l",
           "buffername": "apgw_out_init",
@@ -1667,33 +1737,45 @@
           "quiet": 0,
           "outmode": 4,
           "bgcolor": [
-            1.0,
-            1.0,
-            1.0,
+            0.08235294117647059,
+            0.17254901960784313,
+            0.24705882352941178,
             1.0
           ],
           "waveformcolor": [
-            0.03137254901960784,
-            0.4980392156862745,
-            0.5137254901960784,
+            0.4235294117647059,
+            0.8784313725490196,
+            0.807843137254902,
             1.0
           ],
           "gridcolor": [
-            0.8745098039215686,
-            0.9019607843137255,
-            0.9215686274509803,
+            0.17254901960784313,
+            0.27058823529411763,
+            0.34901960784313724,
             1.0
           ],
           "selectioncolor": [
-            0.03137254901960784,
-            0.4980392156862745,
-            0.5137254901960784,
-            0.18
+            0.788235294117647,
+            0.9450980392156862,
+            0.9686274509803922,
+            0.17
           ],
           "vzoom": 1.0,
           "voffset": 0.0,
           "hint": "Drag across the waveform to choose a playback or loop range.",
-          "hidden": 0
+          "hidden": 0,
+          "bordercolor": [
+            0.08235294117647059,
+            0.17254901960784313,
+            0.24705882352941178,
+            1.0
+          ],
+          "linecolor": [
+            1.0,
+            0.7490196078431373,
+            0.5019607843137255,
+            1.0
+          ]
         }
       },
       {
@@ -1703,10 +1785,10 @@
           "numinlets": 1,
           "numoutlets": 0,
           "patching_rect": [
-            24,
-            524,
-            28,
-            25
+            32,
+            504,
+            20,
+            24
           ],
           "fontname": "Arial",
           "fontsize": 17.0,
@@ -1719,16 +1801,16 @@
           "text": "R",
           "presentation": 1,
           "presentation_rect": [
-            24,
-            524,
-            28,
-            25
+            32,
+            504,
+            20,
+            24
           ],
           "bgcolor": [
-            0.9529411764705882,
-            0.9647058823529412,
-            0.9725490196078431,
-            1.0
+            0,
+            0,
+            0,
+            0
           ],
           "fontface": 1,
           "varname": "channel_r",
@@ -1743,9 +1825,9 @@
           "numoutlets": 6,
           "patching_rect": [
             56,
-            504,
-            880,
-            66
+            488,
+            1012,
+            62
           ],
           "fontname": "Arial",
           "fontsize": 17.0,
@@ -1766,9 +1848,9 @@
           "presentation": 1,
           "presentation_rect": [
             56,
-            504,
-            880,
-            66
+            488,
+            1012,
+            62
           ],
           "varname": "wave_r",
           "buffername": "apgw_out_init",
@@ -1780,33 +1862,45 @@
           "quiet": 0,
           "outmode": 4,
           "bgcolor": [
-            1.0,
-            1.0,
-            1.0,
+            0.08235294117647059,
+            0.17254901960784313,
+            0.24705882352941178,
             1.0
           ],
           "waveformcolor": [
-            0.19215686274509805,
-            0.37254901960784315,
-            0.6509803921568628,
+            0.5803921568627451,
+            0.7333333333333333,
+            1.0,
             1.0
           ],
           "gridcolor": [
-            0.8745098039215686,
-            0.9019607843137255,
-            0.9215686274509803,
+            0.17254901960784313,
+            0.27058823529411763,
+            0.34901960784313724,
             1.0
           ],
           "selectioncolor": [
-            0.03137254901960784,
-            0.4980392156862745,
-            0.5137254901960784,
-            0.18
+            0.788235294117647,
+            0.9450980392156862,
+            0.9686274509803922,
+            0.17
           ],
           "vzoom": 1.0,
           "voffset": 0.0,
           "hint": "Drag across the waveform to choose a playback or loop range.",
-          "hidden": 0
+          "hidden": 0,
+          "bordercolor": [
+            0.08235294117647059,
+            0.17254901960784313,
+            0.24705882352941178,
+            1.0
+          ],
+          "linecolor": [
+            1.0,
+            0.7490196078431373,
+            0.5019607843137255,
+            1.0
+          ]
         }
       },
       {
@@ -1816,10 +1910,10 @@
           "numinlets": 1,
           "numoutlets": 0,
           "patching_rect": [
-            24,
-            578,
-            660,
-            24
+            32,
+            558,
+            804,
+            22
           ],
           "fontname": "Arial",
           "fontsize": 16.0,
@@ -1832,17 +1926,17 @@
           "text": "Drag across the waveform to select a range.",
           "presentation": 1,
           "presentation_rect": [
-            24,
-            578,
-            660,
-            24
+            32,
+            558,
+            804,
+            22
           ],
           "varname": "selection_info",
           "bgcolor": [
-            0.9529411764705882,
-            0.9647058823529412,
-            0.9725490196078431,
-            1.0
+            0,
+            0,
+            0,
+            0
           ]
         }
       },
@@ -1853,10 +1947,10 @@
           "numinlets": 1,
           "numoutlets": 1,
           "patching_rect": [
-            24,
-            616,
-            24,
-            24
+            32,
+            589,
+            22,
+            22
           ],
           "fontname": "Arial",
           "fontsize": 17.0,
@@ -1871,10 +1965,10 @@
           ],
           "presentation": 1,
           "presentation_rect": [
-            24,
-            616,
-            24,
-            24
+            32,
+            589,
+            22,
+            22
           ],
           "varname": "loop_toggle",
           "bgcolor": [
@@ -1907,9 +2001,9 @@
           "numinlets": 1,
           "numoutlets": 0,
           "patching_rect": [
-            60,
-            614,
-            320,
+            64,
+            586,
+            400,
             28
           ],
           "fontname": "Arial",
@@ -1923,16 +2017,16 @@
           "text": "Loop selected range",
           "presentation": 1,
           "presentation_rect": [
-            60,
-            614,
-            320,
+            64,
+            586,
+            400,
             28
           ],
           "bgcolor": [
-            0.9529411764705882,
-            0.9647058823529412,
-            0.9725490196078431,
-            1.0
+            0,
+            0,
+            0,
+            0
           ],
           "varname": "loop_label",
           "hidden": 0
@@ -1945,10 +2039,10 @@
           "numinlets": 1,
           "numoutlets": 3,
           "patching_rect": [
-            520,
-            610,
-            194,
-            34
+            624,
+            584,
+            200,
+            32
           ],
           "fontname": "Arial",
           "fontsize": 18.0,
@@ -1966,20 +2060,20 @@
           ],
           "presentation": 1,
           "presentation_rect": [
-            520,
-            610,
-            194,
-            34
+            624,
+            584,
+            200,
+            32
           ],
           "varname": "clear_button",
           "mode": 0,
           "outputmode": 1,
           "usegradient": 0,
-          "rounded": 6,
+          "rounded": 8,
           "bgcolor": [
-            0.8980392156862745,
-            0.9254901960784314,
-            0.9411764705882353,
+            0.9098039215686274,
+            0.9333333333333333,
+            0.9568627450980393,
             1.0
           ],
           "bgoncolor": [
@@ -2002,7 +2096,15 @@
           ],
           "parameter_enable": 0,
           "hint": "Reset the selected range to the entire rendered piece.",
-          "hidden": 0
+          "hidden": 0,
+          "border": 1,
+          "bordercolor": [
+            0.796078431372549,
+            0.8352941176470589,
+            0.8666666666666667,
+            1.0
+          ],
+          "fontface": 0
         }
       },
       {
@@ -2012,10 +2114,10 @@
           "numinlets": 1,
           "numoutlets": 3,
           "patching_rect": [
-            730,
-            610,
-            206,
-            34
+            840,
+            584,
+            228,
+            32
           ],
           "fontname": "Arial",
           "fontsize": 18.0,
@@ -2033,20 +2135,20 @@
           ],
           "presentation": 1,
           "presentation_rect": [
-            730,
-            610,
-            206,
-            34
+            840,
+            584,
+            228,
+            32
           ],
           "varname": "save_button",
           "mode": 0,
           "outputmode": 1,
           "usegradient": 0,
-          "rounded": 6,
+          "rounded": 8,
           "bgcolor": [
-            0.8980392156862745,
-            0.9254901960784314,
-            0.9411764705882353,
+            0.9098039215686274,
+            0.9333333333333333,
+            0.9568627450980393,
             1.0
           ],
           "bgoncolor": [
@@ -2069,7 +2171,15 @@
           ],
           "parameter_enable": 0,
           "hint": "Save the complete rendered piece as a WAV file.",
-          "hidden": 0
+          "hidden": 0,
+          "border": 1,
+          "bordercolor": [
+            0.796078431372549,
+            0.8352941176470589,
+            0.8666666666666667,
+            1.0
+          ],
+          "fontface": 0
         }
       },
       {
@@ -2079,13 +2189,13 @@
           "numinlets": 1,
           "numoutlets": 3,
           "patching_rect": [
-            24,
-            654,
-            448,
-            48
+            20,
+            628,
+            520,
+            44
           ],
           "fontname": "Arial",
-          "fontsize": 26.0,
+          "fontsize": 22.0,
           "textcolor": [
             1.0,
             1.0,
@@ -2100,16 +2210,16 @@
           ],
           "presentation": 1,
           "presentation_rect": [
-            24,
-            654,
-            448,
-            48
+            20,
+            628,
+            520,
+            44
           ],
           "varname": "play_button",
           "mode": 0,
           "outputmode": 1,
           "usegradient": 0,
-          "rounded": 6,
+          "rounded": 8,
           "bgcolor": [
             0.03137254901960784,
             0.4980392156862745,
@@ -2136,7 +2246,14 @@
           ],
           "parameter_enable": 0,
           "fontface": 1,
-          "hint": "Start the selected instrument or play its rendered result."
+          "hint": "Start the selected instrument or play its rendered result.",
+          "border": 1,
+          "bordercolor": [
+            0.796078431372549,
+            0.8352941176470589,
+            0.8666666666666667,
+            1.0
+          ]
         }
       },
       {
@@ -2146,13 +2263,13 @@
           "numinlets": 1,
           "numoutlets": 3,
           "patching_rect": [
-            488,
-            654,
-            216,
-            48
+            552,
+            628,
+            258,
+            44
           ],
           "fontname": "Arial",
-          "fontsize": 24.0,
+          "fontsize": 20.0,
           "textcolor": [
             0.5450980392156862,
             0.2,
@@ -2167,16 +2284,16 @@
           ],
           "presentation": 1,
           "presentation_rect": [
-            488,
-            654,
-            216,
-            48
+            552,
+            628,
+            258,
+            44
           ],
           "varname": "stop_button",
           "mode": 0,
           "outputmode": 1,
           "usegradient": 0,
-          "rounded": 6,
+          "rounded": 8,
           "bgcolor": [
             0.9607843137254902,
             0.9019607843137255,
@@ -2203,7 +2320,15 @@
           ],
           "parameter_enable": 0,
           "active": 1,
-          "hint": "Stop audio or cancel preparation."
+          "hint": "Stop audio or cancel preparation.",
+          "border": 1,
+          "bordercolor": [
+            0.796078431372549,
+            0.8352941176470589,
+            0.8666666666666667,
+            1.0
+          ],
+          "fontface": 0
         }
       },
       {
@@ -2213,13 +2338,13 @@
           "numinlets": 1,
           "numoutlets": 3,
           "patching_rect": [
-            720,
-            654,
-            216,
-            48
+            822,
+            628,
+            258,
+            44
           ],
           "fontname": "Arial",
-          "fontsize": 24.0,
+          "fontsize": 20.0,
           "textcolor": [
             0.10588235294117647,
             0.1607843137254902,
@@ -2234,20 +2359,20 @@
           ],
           "presentation": 1,
           "presentation_rect": [
-            720,
-            654,
-            216,
-            48
+            822,
+            628,
+            258,
+            44
           ],
           "varname": "new_button",
           "mode": 0,
           "outputmode": 1,
           "usegradient": 0,
-          "rounded": 6,
+          "rounded": 8,
           "bgcolor": [
-            0.8980392156862745,
-            0.9254901960784314,
-            0.9411764705882353,
+            0.9098039215686274,
+            0.9333333333333333,
+            0.9568627450980393,
             1.0
           ],
           "bgoncolor": [
@@ -2269,7 +2394,15 @@
             1.0
           ],
           "parameter_enable": 0,
-          "hint": "Start a fresh result for the selected instrument."
+          "hint": "Start a fresh result for the selected instrument.",
+          "border": 1,
+          "bordercolor": [
+            0.796078431372549,
+            0.8352941176470589,
+            0.8666666666666667,
+            1.0
+          ],
+          "fontface": 0
         }
       },
       {
@@ -2279,10 +2412,10 @@
           "numinlets": 1,
           "numoutlets": 1,
           "patching_rect": [
-            24,
-            712,
-            912,
-            6
+            32,
+            736,
+            228,
+            10
           ],
           "fontname": "Arial",
           "fontsize": 17.0,
@@ -2297,10 +2430,10 @@
           ],
           "presentation": 1,
           "presentation_rect": [
-            24,
-            712,
-            912,
-            6
+            32,
+            736,
+            228,
+            10
           ],
           "varname": "progress",
           "floatoutput": 1,
@@ -2312,15 +2445,15 @@
           "ignoreclick": 1,
           "parameter_enable": 0,
           "bgcolor": [
-            0.8980392156862745,
-            0.9254901960784314,
-            0.9411764705882353,
+            0.9098039215686274,
+            0.9333333333333333,
+            0.9568627450980393,
             1.0
           ],
           "elementcolor": [
-            0.8980392156862745,
-            0.9254901960784314,
-            0.9411764705882353,
+            0.9098039215686274,
+            0.9333333333333333,
+            0.9568627450980393,
             1.0
           ],
           "knobcolor": [
@@ -2339,10 +2472,10 @@
           "numinlets": 1,
           "numoutlets": 0,
           "patching_rect": [
-            24,
-            724,
-            912,
-            24
+            276,
+            684,
+            792,
+            22
           ],
           "fontname": "Arial",
           "fontsize": 16.0,
@@ -2355,17 +2488,17 @@
           "text": "Starting...",
           "presentation": 1,
           "presentation_rect": [
-            24,
-            724,
-            912,
-            24
+            276,
+            684,
+            792,
+            22
           ],
           "varname": "render_info",
           "bgcolor": [
-            0.9529411764705882,
-            0.9647058823529412,
-            0.9725490196078431,
-            1.0
+            0,
+            0,
+            0,
+            0
           ]
         }
       },
@@ -2376,9 +2509,9 @@
           "numinlets": 1,
           "numoutlets": 0,
           "patching_rect": [
-            24,
-            752,
-            912,
+            276,
+            710,
+            792,
             38
           ],
           "fontname": "Arial",
@@ -2392,17 +2525,17 @@
           "text": "Loading the audio controller...",
           "presentation": 1,
           "presentation_rect": [
-            24,
-            752,
-            912,
+            276,
+            710,
+            792,
             38
           ],
           "varname": "status",
           "bgcolor": [
-            0.9529411764705882,
-            0.9647058823529412,
-            0.9725490196078431,
-            1.0
+            0,
+            0,
+            0,
+            0
           ],
           "linecount": 2
         }
@@ -2415,9 +2548,9 @@
           "numoutlets": 0,
           "patching_rect": [
             24,
-            810,
-            620,
-            24
+            764,
+            680,
+            22
           ],
           "fontname": "Arial",
           "fontsize": 16.0,
@@ -2427,19 +2560,19 @@
             0.4588235294117647,
             1.0
           ],
-          "text": "Original CMPE by Joo Won Park",
+          "text": "v1.2.0 / Original CMPE by Joo Won Park",
           "presentation": 1,
           "presentation_rect": [
             24,
-            810,
-            620,
-            24
+            764,
+            680,
+            22
           ],
           "bgcolor": [
-            0.9529411764705882,
-            0.9647058823529412,
-            0.9725490196078431,
-            1.0
+            0,
+            0,
+            0,
+            0
           ],
           "varname": "original_credit"
         }
@@ -2451,10 +2584,10 @@
           "numinlets": 1,
           "numoutlets": 3,
           "patching_rect": [
-            668,
-            806,
+            812,
+            762,
             268,
-            32
+            24
           ],
           "fontname": "Arial",
           "fontsize": 16.0,
@@ -2472,26 +2605,26 @@
           ],
           "presentation": 1,
           "presentation_rect": [
-            668,
-            806,
+            812,
+            762,
             268,
-            32
+            24
           ],
           "varname": "original_link",
           "mode": 0,
           "outputmode": 1,
           "usegradient": 0,
-          "rounded": 6,
+          "rounded": 8,
           "bgcolor": [
-            0.8980392156862745,
-            0.9254901960784314,
-            0.9411764705882353,
+            0.9294117647058824,
+            0.9490196078431372,
+            0.9647058823529412,
             1.0
           ],
           "bgoncolor": [
-            0.796078431372549,
-            0.8352941176470589,
-            0.8666666666666667,
+            0.9098039215686274,
+            0.9333333333333333,
+            0.9568627450980393,
             1.0
           ],
           "textoncolor": [
@@ -2507,7 +2640,15 @@
             1.0
           ],
           "parameter_enable": 0,
-          "hint": "Open Joo Won Park's original Computer Music Practice Examples."
+          "hint": "Open Joo Won Park's original Computer Music Practice Examples.",
+          "border": 0,
+          "bordercolor": [
+            0.796078431372549,
+            0.8352941176470589,
+            0.8666666666666667,
+            1.0
+          ],
+          "fontface": 0
         }
       },
       {
@@ -4845,10 +4986,10 @@
           "numinlets": 1,
           "numoutlets": 3,
           "patching_rect": [
-            736,
+            852,
             16,
-            96,
-            30
+            110,
+            32
           ],
           "fontname": "Arial",
           "fontsize": 16.0,
@@ -4867,20 +5008,20 @@
           "varname": "save_preset",
           "presentation": 1,
           "presentation_rect": [
-            736,
+            852,
             16,
-            96,
-            30
+            110,
+            32
           ],
           "hidden": 0,
           "mode": 0,
           "outputmode": 1,
           "usegradient": 0,
-          "rounded": 6,
+          "rounded": 8,
           "bgcolor": [
-            0.8980392156862745,
-            0.9254901960784314,
-            0.9411764705882353,
+            0.9098039215686274,
+            0.9333333333333333,
+            0.9568627450980393,
             1.0
           ],
           "bgoncolor": [
@@ -4901,7 +5042,15 @@
             0.21176470588235294,
             1.0
           ],
-          "parameter_enable": 0
+          "parameter_enable": 0,
+          "border": 1,
+          "bordercolor": [
+            0.796078431372549,
+            0.8352941176470589,
+            0.8666666666666667,
+            1.0
+          ],
+          "fontface": 0
         }
       },
       {
@@ -4911,10 +5060,10 @@
           "numinlets": 1,
           "numoutlets": 3,
           "patching_rect": [
-            840,
+            970,
             16,
-            96,
-            30
+            110,
+            32
           ],
           "fontname": "Arial",
           "fontsize": 16.0,
@@ -4933,20 +5082,20 @@
           "varname": "load_preset",
           "presentation": 1,
           "presentation_rect": [
-            840,
+            970,
             16,
-            96,
-            30
+            110,
+            32
           ],
           "hidden": 0,
           "mode": 0,
           "outputmode": 1,
           "usegradient": 0,
-          "rounded": 6,
+          "rounded": 8,
           "bgcolor": [
-            0.8980392156862745,
-            0.9254901960784314,
-            0.9411764705882353,
+            0.9098039215686274,
+            0.9333333333333333,
+            0.9568627450980393,
             1.0
           ],
           "bgoncolor": [
@@ -4967,7 +5116,15 @@
             0.21176470588235294,
             1.0
           ],
-          "parameter_enable": 0
+          "parameter_enable": 0,
+          "border": 1,
+          "bordercolor": [
+            0.796078431372549,
+            0.8352941176470589,
+            0.8666666666666667,
+            1.0
+          ],
+          "fontface": 0
         }
       },
       {
@@ -4977,10 +5134,10 @@
           "numinlets": 1,
           "numoutlets": 0,
           "patching_rect": [
-            24,
-            54,
-            470,
-            24
+            736,
+            64,
+            332,
+            20
           ],
           "fontname": "Arial",
           "fontsize": 16.0,
@@ -4994,17 +5151,17 @@
           "varname": "audio_status",
           "presentation": 1,
           "presentation_rect": [
-            24,
-            54,
-            470,
-            24
+            736,
+            64,
+            332,
+            20
           ],
           "hidden": 0,
           "bgcolor": [
-            0.9529411764705882,
-            0.9647058823529412,
-            0.9725490196078431,
-            1.0
+            0,
+            0,
+            0,
+            0
           ]
         }
       },
@@ -5015,10 +5172,10 @@
           "numinlets": 1,
           "numoutlets": 3,
           "patching_rect": [
-            512,
-            52,
-            136,
-            30
+            736,
+            88,
+            124,
+            28
           ],
           "fontname": "Arial",
           "fontsize": 16.0,
@@ -5037,20 +5194,20 @@
           "varname": "audio_setup",
           "presentation": 1,
           "presentation_rect": [
-            512,
-            52,
-            136,
-            30
+            736,
+            88,
+            124,
+            28
           ],
           "hidden": 0,
           "mode": 0,
           "outputmode": 1,
           "usegradient": 0,
-          "rounded": 6,
+          "rounded": 8,
           "bgcolor": [
-            0.8980392156862745,
-            0.9254901960784314,
-            0.9411764705882353,
+            0.9098039215686274,
+            0.9333333333333333,
+            0.9568627450980393,
             1.0
           ],
           "bgoncolor": [
@@ -5072,7 +5229,15 @@
             1.0
           ],
           "parameter_enable": 0,
-          "hint": "Open Max's native Audio Status or Audio Settings window."
+          "hint": "Open Max's native Audio Status or Audio Settings window.",
+          "border": 1,
+          "bordercolor": [
+            0.796078431372549,
+            0.8352941176470589,
+            0.8666666666666667,
+            1.0
+          ],
+          "fontface": 0
         }
       },
       {
@@ -5082,10 +5247,10 @@
           "numinlets": 1,
           "numoutlets": 3,
           "patching_rect": [
-            656,
-            52,
-            104,
-            30
+            868,
+            88,
+            92,
+            28
           ],
           "fontname": "Arial",
           "fontsize": 16.0,
@@ -5104,20 +5269,20 @@
           "varname": "audio_refresh",
           "presentation": 1,
           "presentation_rect": [
-            656,
-            52,
-            104,
-            30
+            868,
+            88,
+            92,
+            28
           ],
           "hidden": 0,
           "mode": 0,
           "outputmode": 1,
           "usegradient": 0,
-          "rounded": 6,
+          "rounded": 8,
           "bgcolor": [
-            0.8980392156862745,
-            0.9254901960784314,
-            0.9411764705882353,
+            0.9098039215686274,
+            0.9333333333333333,
+            0.9568627450980393,
             1.0
           ],
           "bgoncolor": [
@@ -5139,7 +5304,15 @@
             1.0
           ],
           "parameter_enable": 0,
-          "hint": "Read the current audio driver and available devices from Max."
+          "hint": "Read the current audio driver and available devices from Max.",
+          "border": 1,
+          "bordercolor": [
+            0.796078431372549,
+            0.8352941176470589,
+            0.8666666666666667,
+            1.0
+          ],
+          "fontface": 0
         }
       },
       {
@@ -5149,10 +5322,10 @@
           "numinlets": 1,
           "numoutlets": 3,
           "patching_rect": [
-            768,
-            52,
-            168,
-            30
+            968,
+            88,
+            100,
+            28
           ],
           "fontname": "Arial",
           "fontsize": 16.0,
@@ -5171,20 +5344,20 @@
           "varname": "audio_power",
           "presentation": 1,
           "presentation_rect": [
-            768,
-            52,
-            168,
-            30
+            968,
+            88,
+            100,
+            28
           ],
           "hidden": 0,
           "mode": 0,
           "outputmode": 1,
           "usegradient": 0,
-          "rounded": 6,
+          "rounded": 8,
           "bgcolor": [
-            0.8980392156862745,
-            0.9254901960784314,
-            0.9411764705882353,
+            0.9098039215686274,
+            0.9333333333333333,
+            0.9568627450980393,
             1.0
           ],
           "bgoncolor": [
@@ -5206,7 +5379,15 @@
             1.0
           ],
           "parameter_enable": 0,
-          "hint": "Turn Max audio on or off. This setting affects all Max patches."
+          "hint": "Turn Max audio on or off. This setting affects all Max patches.",
+          "border": 1,
+          "bordercolor": [
+            0.796078431372549,
+            0.8352941176470589,
+            0.8666666666666667,
+            1.0
+          ],
+          "fontface": 0
         }
       },
       {
@@ -5216,10 +5397,10 @@
           "numinlets": 1,
           "numoutlets": 0,
           "patching_rect": [
-            14,
-            86,
-            932,
-            68
+            20,
+            62,
+            1060,
+            66
           ],
           "fontname": "Arial",
           "fontsize": 17.0,
@@ -5232,10 +5413,10 @@
           "varname": "audio_panel",
           "presentation": 1,
           "presentation_rect": [
-            14,
-            86,
-            932,
-            68
+            20,
+            62,
+            1060,
+            66
           ],
           "hidden": 0,
           "bgcolor": [
@@ -5257,9 +5438,9 @@
           "numinlets": 1,
           "numoutlets": 0,
           "patching_rect": [
-            24,
-            90,
-            216,
+            32,
+            64,
+            182,
             20
           ],
           "fontname": "Arial",
@@ -5274,17 +5455,17 @@
           "varname": "audio_driver_label",
           "presentation": 1,
           "presentation_rect": [
-            24,
-            90,
-            216,
+            32,
+            64,
+            182,
             20
           ],
           "hidden": 0,
           "bgcolor": [
-            0.9098039215686274,
-            0.9372549019607843,
-            0.9529411764705882,
-            1.0
+            0,
+            0,
+            0,
+            0
           ]
         }
       },
@@ -5295,10 +5476,10 @@
           "numinlets": 1,
           "numoutlets": 3,
           "patching_rect": [
-            24,
-            114,
-            216,
-            30
+            32,
+            88,
+            182,
+            28
           ],
           "fontname": "Arial",
           "fontsize": 16.0,
@@ -5316,22 +5497,28 @@
           "varname": "audio_driver_menu",
           "presentation": 1,
           "presentation_rect": [
-            24,
-            114,
-            216,
-            30
+            32,
+            88,
+            182,
+            28
           ],
           "hidden": 0,
           "bgcolor": [
-            1.0,
-            1.0,
-            1.0,
+            0.9568627450980393,
+            0.9686274509803922,
+            0.9803921568627451,
             1.0
           ],
           "items": [
             "Waiting for Max..."
           ],
-          "parameter_enable": 0
+          "parameter_enable": 0,
+          "bordercolor": [
+            0.796078431372549,
+            0.8352941176470589,
+            0.8666666666666667,
+            1.0
+          ]
         }
       },
       {
@@ -5341,9 +5528,9 @@
           "numinlets": 1,
           "numoutlets": 0,
           "patching_rect": [
-            252,
-            90,
-            324,
+            226,
+            64,
+            242,
             20
           ],
           "fontname": "Arial",
@@ -5358,17 +5545,17 @@
           "varname": "audio_option1_label",
           "presentation": 1,
           "presentation_rect": [
-            252,
-            90,
-            324,
+            226,
+            64,
+            242,
             20
           ],
           "hidden": 0,
           "bgcolor": [
-            0.9098039215686274,
-            0.9372549019607843,
-            0.9529411764705882,
-            1.0
+            0,
+            0,
+            0,
+            0
           ]
         }
       },
@@ -5379,10 +5566,10 @@
           "numinlets": 1,
           "numoutlets": 3,
           "patching_rect": [
-            252,
-            114,
-            324,
-            30
+            226,
+            88,
+            242,
+            28
           ],
           "fontname": "Arial",
           "fontsize": 16.0,
@@ -5400,22 +5587,28 @@
           "varname": "audio_option1_menu",
           "presentation": 1,
           "presentation_rect": [
-            252,
-            114,
-            324,
-            30
+            226,
+            88,
+            242,
+            28
           ],
           "hidden": 0,
           "bgcolor": [
-            1.0,
-            1.0,
-            1.0,
+            0.9568627450980393,
+            0.9686274509803922,
+            0.9803921568627451,
             1.0
           ],
           "items": [
             "Waiting for Max..."
           ],
-          "parameter_enable": 0
+          "parameter_enable": 0,
+          "bordercolor": [
+            0.796078431372549,
+            0.8352941176470589,
+            0.8666666666666667,
+            1.0
+          ]
         }
       },
       {
@@ -5425,9 +5618,9 @@
           "numinlets": 1,
           "numoutlets": 0,
           "patching_rect": [
-            588,
-            90,
-            348,
+            480,
+            64,
+            242,
             20
           ],
           "fontname": "Arial",
@@ -5442,17 +5635,17 @@
           "varname": "audio_option2_label",
           "presentation": 1,
           "presentation_rect": [
-            588,
-            90,
-            348,
+            480,
+            64,
+            242,
             20
           ],
           "hidden": 0,
           "bgcolor": [
-            0.9098039215686274,
-            0.9372549019607843,
-            0.9529411764705882,
-            1.0
+            0,
+            0,
+            0,
+            0
           ]
         }
       },
@@ -5463,10 +5656,10 @@
           "numinlets": 1,
           "numoutlets": 3,
           "patching_rect": [
-            588,
-            114,
-            348,
-            30
+            480,
+            88,
+            242,
+            28
           ],
           "fontname": "Arial",
           "fontsize": 16.0,
@@ -5484,22 +5677,28 @@
           "varname": "audio_option2_menu",
           "presentation": 1,
           "presentation_rect": [
-            588,
-            114,
-            348,
-            30
+            480,
+            88,
+            242,
+            28
           ],
           "hidden": 0,
           "bgcolor": [
-            1.0,
-            1.0,
-            1.0,
+            0.9568627450980393,
+            0.9686274509803922,
+            0.9803921568627451,
             1.0
           ],
           "items": [
             "Waiting for Max..."
           ],
-          "parameter_enable": 0
+          "parameter_enable": 0,
+          "bordercolor": [
+            0.796078431372549,
+            0.8352941176470589,
+            0.8666666666666667,
+            1.0
+          ]
         }
       },
       {
@@ -5509,13 +5708,13 @@
           "numinlets": 1,
           "numoutlets": 3,
           "patching_rect": [
-            24,
-            164,
-            176,
-            36
+            20,
+            140,
+            200,
+            38
           ],
           "fontname": "Arial",
-          "fontsize": 21.0,
+          "fontsize": 20.0,
           "textcolor": [
             1.0,
             1.0,
@@ -5531,16 +5730,16 @@
           "varname": "mode0",
           "presentation": 1,
           "presentation_rect": [
-            24,
-            164,
-            176,
-            36
+            20,
+            140,
+            200,
+            38
           ],
           "hidden": 0,
           "mode": 0,
           "outputmode": 1,
           "usegradient": 0,
-          "rounded": 6,
+          "rounded": 8,
           "bgcolor": [
             0.03137254901960784,
             0.4980392156862745,
@@ -5566,7 +5765,15 @@
             1.0
           ],
           "parameter_enable": 0,
-          "hint": "Choose the APG instrument."
+          "hint": "Choose the APG instrument.",
+          "border": 1,
+          "bordercolor": [
+            0.796078431372549,
+            0.8352941176470589,
+            0.8666666666666667,
+            1.0
+          ],
+          "fontface": 0
         }
       },
       {
@@ -5609,13 +5816,13 @@
           "numinlets": 1,
           "numoutlets": 3,
           "patching_rect": [
-            208,
-            164,
-            176,
-            36
+            235,
+            140,
+            200,
+            38
           ],
           "fontname": "Arial",
-          "fontsize": 21.0,
+          "fontsize": 20.0,
           "textcolor": [
             0.10588235294117647,
             0.1607843137254902,
@@ -5631,20 +5838,20 @@
           "varname": "mode1",
           "presentation": 1,
           "presentation_rect": [
-            208,
-            164,
-            176,
-            36
+            235,
+            140,
+            200,
+            38
           ],
           "hidden": 0,
           "mode": 0,
           "outputmode": 1,
           "usegradient": 0,
-          "rounded": 6,
+          "rounded": 8,
           "bgcolor": [
-            0.8980392156862745,
-            0.9254901960784314,
-            0.9411764705882353,
+            0.9098039215686274,
+            0.9333333333333333,
+            0.9568627450980393,
             1.0
           ],
           "bgoncolor": [
@@ -5666,7 +5873,15 @@
             1.0
           ],
           "parameter_enable": 0,
-          "hint": "Choose the ISJS instrument."
+          "hint": "Choose the ISJS instrument.",
+          "border": 1,
+          "bordercolor": [
+            0.796078431372549,
+            0.8352941176470589,
+            0.8666666666666667,
+            1.0
+          ],
+          "fontface": 0
         }
       },
       {
@@ -5709,13 +5924,13 @@
           "numinlets": 1,
           "numoutlets": 3,
           "patching_rect": [
-            392,
-            164,
-            176,
-            36
+            450,
+            140,
+            200,
+            38
           ],
           "fontname": "Arial",
-          "fontsize": 21.0,
+          "fontsize": 20.0,
           "textcolor": [
             0.10588235294117647,
             0.1607843137254902,
@@ -5731,20 +5946,20 @@
           "varname": "mode2",
           "presentation": 1,
           "presentation_rect": [
-            392,
-            164,
-            176,
-            36
+            450,
+            140,
+            200,
+            38
           ],
           "hidden": 0,
           "mode": 0,
           "outputmode": 1,
           "usegradient": 0,
-          "rounded": 6,
+          "rounded": 8,
           "bgcolor": [
-            0.8980392156862745,
-            0.9254901960784314,
-            0.9411764705882353,
+            0.9098039215686274,
+            0.9333333333333333,
+            0.9568627450980393,
             1.0
           ],
           "bgoncolor": [
@@ -5766,7 +5981,15 @@
             1.0
           ],
           "parameter_enable": 0,
-          "hint": "Choose the Many instrument."
+          "hint": "Choose the Many instrument.",
+          "border": 1,
+          "bordercolor": [
+            0.796078431372549,
+            0.8352941176470589,
+            0.8666666666666667,
+            1.0
+          ],
+          "fontface": 0
         }
       },
       {
@@ -5809,13 +6032,13 @@
           "numinlets": 1,
           "numoutlets": 3,
           "patching_rect": [
-            576,
-            164,
-            176,
-            36
+            665,
+            140,
+            200,
+            38
           ],
           "fontname": "Arial",
-          "fontsize": 21.0,
+          "fontsize": 20.0,
           "textcolor": [
             0.10588235294117647,
             0.1607843137254902,
@@ -5831,20 +6054,20 @@
           "varname": "mode3",
           "presentation": 1,
           "presentation_rect": [
-            576,
-            164,
-            176,
-            36
+            665,
+            140,
+            200,
+            38
           ],
           "hidden": 0,
           "mode": 0,
           "outputmode": 1,
           "usegradient": 0,
-          "rounded": 6,
+          "rounded": 8,
           "bgcolor": [
-            0.8980392156862745,
-            0.9254901960784314,
-            0.9411764705882353,
+            0.9098039215686274,
+            0.9333333333333333,
+            0.9568627450980393,
             1.0
           ],
           "bgoncolor": [
@@ -5866,7 +6089,15 @@
             1.0
           ],
           "parameter_enable": 0,
-          "hint": "Choose the RMHS instrument."
+          "hint": "Choose the RMHS instrument.",
+          "border": 1,
+          "bordercolor": [
+            0.796078431372549,
+            0.8352941176470589,
+            0.8666666666666667,
+            1.0
+          ],
+          "fontface": 0
         }
       },
       {
@@ -5909,13 +6140,13 @@
           "numinlets": 1,
           "numoutlets": 3,
           "patching_rect": [
-            760,
-            164,
-            176,
-            36
+            880,
+            140,
+            200,
+            38
           ],
           "fontname": "Arial",
-          "fontsize": 21.0,
+          "fontsize": 20.0,
           "textcolor": [
             0.10588235294117647,
             0.1607843137254902,
@@ -5931,20 +6162,20 @@
           "varname": "mode4",
           "presentation": 1,
           "presentation_rect": [
-            760,
-            164,
-            176,
-            36
+            880,
+            140,
+            200,
+            38
           ],
           "hidden": 0,
           "mode": 0,
           "outputmode": 1,
           "usegradient": 0,
-          "rounded": 6,
+          "rounded": 8,
           "bgcolor": [
-            0.8980392156862745,
-            0.9254901960784314,
-            0.9411764705882353,
+            0.9098039215686274,
+            0.9333333333333333,
+            0.9568627450980393,
             1.0
           ],
           "bgoncolor": [
@@ -5966,7 +6197,15 @@
             1.0
           ],
           "parameter_enable": 0,
-          "hint": "Choose the SIOE instrument."
+          "hint": "Choose the SIOE instrument.",
+          "border": 1,
+          "bordercolor": [
+            0.796078431372549,
+            0.8352941176470589,
+            0.8666666666666667,
+            1.0
+          ],
+          "fontface": 0
         }
       },
       {
@@ -6010,9 +6249,9 @@
           "numoutlets": 0,
           "patching_rect": [
             24,
-            208,
-            912,
-            24
+            186,
+            1052,
+            22
           ],
           "fontname": "Arial",
           "fontsize": 17.0,
@@ -6027,16 +6266,16 @@
           "presentation": 1,
           "presentation_rect": [
             24,
-            208,
-            912,
-            24
+            186,
+            1052,
+            22
           ],
           "hidden": 0,
           "bgcolor": [
-            0.9529411764705882,
-            0.9647058823529412,
-            0.9725490196078431,
-            1.0
+            0,
+            0,
+            0,
+            0
           ]
         }
       },
@@ -6047,10 +6286,10 @@
           "numinlets": 1,
           "numoutlets": 0,
           "patching_rect": [
-            24,
-            256,
-            912,
-            48
+            32,
+            254,
+            1036,
+            40
           ],
           "fontname": "Arial",
           "fontsize": 18.0,
@@ -6062,19 +6301,19 @@
           ],
           "text": "RMHS creates its own sound. No samples are needed.",
           "varname": "no_samples",
-          "presentation": 1,
+          "presentation": 0,
           "presentation_rect": [
-            24,
-            256,
-            912,
-            48
+            32,
+            254,
+            1036,
+            40
           ],
           "hidden": 1,
           "linecount": 2,
           "bgcolor": [
-            0.9529411764705882,
+            0.9294117647058824,
+            0.9490196078431372,
             0.9647058823529412,
-            0.9725490196078431,
             1.0
           ]
         }
@@ -6086,10 +6325,10 @@
           "numinlets": 1,
           "numoutlets": 0,
           "patching_rect": [
-            24,
-            324,
-            138,
-            22
+            32,
+            304,
+            152,
+            20
           ],
           "fontname": "Arial",
           "fontsize": 16.0,
@@ -6103,17 +6342,17 @@
           "varname": "param_label0",
           "presentation": 1,
           "presentation_rect": [
-            24,
-            324,
-            138,
-            22
+            32,
+            304,
+            152,
+            20
           ],
           "hidden": 1,
           "bgcolor": [
-            0.9529411764705882,
-            0.9647058823529412,
-            0.9725490196078431,
-            1.0
+            0,
+            0,
+            0,
+            0
           ]
         }
       },
@@ -6124,10 +6363,10 @@
           "numinlets": 1,
           "numoutlets": 2,
           "patching_rect": [
-            24,
-            350,
-            138,
-            30
+            32,
+            328,
+            152,
+            28
           ],
           "fontname": "Arial",
           "fontsize": 20.0,
@@ -6144,22 +6383,22 @@
           "varname": "param0",
           "presentation": 1,
           "presentation_rect": [
-            24,
-            350,
-            138,
-            30
+            32,
+            328,
+            152,
+            28
           ],
           "hidden": 1,
           "bgcolor": [
-            1.0,
-            1.0,
-            1.0,
+            0.9568627450980393,
+            0.9686274509803922,
+            0.9803921568627451,
             1.0
           ],
           "bgoncolor": [
-            0.8980392156862745,
-            0.9254901960784314,
-            0.9411764705882353,
+            0.9098039215686274,
+            0.9333333333333333,
+            0.9568627450980393,
             1.0
           ],
           "hbgcolor": [
@@ -6182,7 +6421,13 @@
           ],
           "triangle": 0,
           "format": 6,
-          "parameter_enable": 0
+          "parameter_enable": 0,
+          "bordercolor": [
+            0.796078431372549,
+            0.8352941176470589,
+            0.8666666666666667,
+            1.0
+          ]
         }
       },
       {
@@ -6216,10 +6461,10 @@
           "numinlets": 1,
           "numoutlets": 0,
           "patching_rect": [
-            336,
-            324,
-            138,
-            22
+            390,
+            304,
+            152,
+            20
           ],
           "fontname": "Arial",
           "fontsize": 16.0,
@@ -6233,17 +6478,17 @@
           "varname": "param_label1",
           "presentation": 1,
           "presentation_rect": [
-            336,
-            324,
-            138,
-            22
+            390,
+            304,
+            152,
+            20
           ],
           "hidden": 1,
           "bgcolor": [
-            0.9529411764705882,
-            0.9647058823529412,
-            0.9725490196078431,
-            1.0
+            0,
+            0,
+            0,
+            0
           ]
         }
       },
@@ -6254,10 +6499,10 @@
           "numinlets": 1,
           "numoutlets": 2,
           "patching_rect": [
-            336,
-            350,
-            138,
-            30
+            390,
+            328,
+            152,
+            28
           ],
           "fontname": "Arial",
           "fontsize": 20.0,
@@ -6274,22 +6519,22 @@
           "varname": "param1",
           "presentation": 1,
           "presentation_rect": [
-            336,
-            350,
-            138,
-            30
+            390,
+            328,
+            152,
+            28
           ],
           "hidden": 1,
           "bgcolor": [
-            1.0,
-            1.0,
-            1.0,
+            0.9568627450980393,
+            0.9686274509803922,
+            0.9803921568627451,
             1.0
           ],
           "bgoncolor": [
-            0.8980392156862745,
-            0.9254901960784314,
-            0.9411764705882353,
+            0.9098039215686274,
+            0.9333333333333333,
+            0.9568627450980393,
             1.0
           ],
           "hbgcolor": [
@@ -6312,7 +6557,13 @@
           ],
           "triangle": 0,
           "format": 6,
-          "parameter_enable": 0
+          "parameter_enable": 0,
+          "bordercolor": [
+            0.796078431372549,
+            0.8352941176470589,
+            0.8666666666666667,
+            1.0
+          ]
         }
       },
       {
@@ -6346,10 +6597,10 @@
           "numinlets": 1,
           "numoutlets": 0,
           "patching_rect": [
-            648,
-            324,
-            138,
-            22
+            748,
+            304,
+            152,
+            20
           ],
           "fontname": "Arial",
           "fontsize": 16.0,
@@ -6363,17 +6614,17 @@
           "varname": "param_label2",
           "presentation": 1,
           "presentation_rect": [
-            648,
-            324,
-            138,
-            22
+            748,
+            304,
+            152,
+            20
           ],
           "hidden": 1,
           "bgcolor": [
-            0.9529411764705882,
-            0.9647058823529412,
-            0.9725490196078431,
-            1.0
+            0,
+            0,
+            0,
+            0
           ]
         }
       },
@@ -6384,10 +6635,10 @@
           "numinlets": 1,
           "numoutlets": 2,
           "patching_rect": [
-            648,
-            350,
-            138,
-            30
+            748,
+            328,
+            152,
+            28
           ],
           "fontname": "Arial",
           "fontsize": 20.0,
@@ -6404,22 +6655,22 @@
           "varname": "param2",
           "presentation": 1,
           "presentation_rect": [
-            648,
-            350,
-            138,
-            30
+            748,
+            328,
+            152,
+            28
           ],
           "hidden": 1,
           "bgcolor": [
-            1.0,
-            1.0,
-            1.0,
+            0.9568627450980393,
+            0.9686274509803922,
+            0.9803921568627451,
             1.0
           ],
           "bgoncolor": [
-            0.8980392156862745,
-            0.9254901960784314,
-            0.9411764705882353,
+            0.9098039215686274,
+            0.9333333333333333,
+            0.9568627450980393,
             1.0
           ],
           "hbgcolor": [
@@ -6442,7 +6693,13 @@
           ],
           "triangle": 0,
           "format": 6,
-          "parameter_enable": 0
+          "parameter_enable": 0,
+          "bordercolor": [
+            0.796078431372549,
+            0.8352941176470589,
+            0.8666666666666667,
+            1.0
+          ]
         }
       },
       {
@@ -6476,10 +6733,10 @@
           "numinlets": 1,
           "numoutlets": 0,
           "patching_rect": [
-            174,
-            324,
-            138,
-            22
+            200,
+            304,
+            152,
+            20
           ],
           "fontname": "Arial",
           "fontsize": 16.0,
@@ -6493,17 +6750,17 @@
           "varname": "param_label3",
           "presentation": 1,
           "presentation_rect": [
-            174,
-            324,
-            138,
-            22
+            200,
+            304,
+            152,
+            20
           ],
           "hidden": 1,
           "bgcolor": [
-            0.9529411764705882,
-            0.9647058823529412,
-            0.9725490196078431,
-            1.0
+            0,
+            0,
+            0,
+            0
           ]
         }
       },
@@ -6514,10 +6771,10 @@
           "numinlets": 1,
           "numoutlets": 2,
           "patching_rect": [
-            174,
-            350,
-            138,
-            30
+            200,
+            328,
+            152,
+            28
           ],
           "fontname": "Arial",
           "fontsize": 20.0,
@@ -6534,22 +6791,22 @@
           "varname": "param3",
           "presentation": 1,
           "presentation_rect": [
-            174,
-            350,
-            138,
-            30
+            200,
+            328,
+            152,
+            28
           ],
           "hidden": 1,
           "bgcolor": [
-            1.0,
-            1.0,
-            1.0,
+            0.9568627450980393,
+            0.9686274509803922,
+            0.9803921568627451,
             1.0
           ],
           "bgoncolor": [
-            0.8980392156862745,
-            0.9254901960784314,
-            0.9411764705882353,
+            0.9098039215686274,
+            0.9333333333333333,
+            0.9568627450980393,
             1.0
           ],
           "hbgcolor": [
@@ -6572,7 +6829,13 @@
           ],
           "triangle": 0,
           "format": 6,
-          "parameter_enable": 0
+          "parameter_enable": 0,
+          "bordercolor": [
+            0.796078431372549,
+            0.8352941176470589,
+            0.8666666666666667,
+            1.0
+          ]
         }
       },
       {
@@ -6606,10 +6869,10 @@
           "numinlets": 1,
           "numoutlets": 0,
           "patching_rect": [
-            486,
-            324,
-            138,
-            22
+            558,
+            304,
+            152,
+            20
           ],
           "fontname": "Arial",
           "fontsize": 16.0,
@@ -6623,17 +6886,17 @@
           "varname": "param_label4",
           "presentation": 1,
           "presentation_rect": [
-            486,
-            324,
-            138,
-            22
+            558,
+            304,
+            152,
+            20
           ],
           "hidden": 1,
           "bgcolor": [
-            0.9529411764705882,
-            0.9647058823529412,
-            0.9725490196078431,
-            1.0
+            0,
+            0,
+            0,
+            0
           ]
         }
       },
@@ -6644,10 +6907,10 @@
           "numinlets": 1,
           "numoutlets": 2,
           "patching_rect": [
-            486,
-            350,
-            138,
-            30
+            558,
+            328,
+            152,
+            28
           ],
           "fontname": "Arial",
           "fontsize": 20.0,
@@ -6664,22 +6927,22 @@
           "varname": "param4",
           "presentation": 1,
           "presentation_rect": [
-            486,
-            350,
-            138,
-            30
+            558,
+            328,
+            152,
+            28
           ],
           "hidden": 1,
           "bgcolor": [
-            1.0,
-            1.0,
-            1.0,
+            0.9568627450980393,
+            0.9686274509803922,
+            0.9803921568627451,
             1.0
           ],
           "bgoncolor": [
-            0.8980392156862745,
-            0.9254901960784314,
-            0.9411764705882353,
+            0.9098039215686274,
+            0.9333333333333333,
+            0.9568627450980393,
             1.0
           ],
           "hbgcolor": [
@@ -6702,7 +6965,13 @@
           ],
           "triangle": 0,
           "format": 6,
-          "parameter_enable": 0
+          "parameter_enable": 0,
+          "bordercolor": [
+            0.796078431372549,
+            0.8352941176470589,
+            0.8666666666666667,
+            1.0
+          ]
         }
       },
       {
@@ -6736,10 +7005,10 @@
           "numinlets": 1,
           "numoutlets": 0,
           "patching_rect": [
-            798,
-            324,
-            138,
-            22
+            916,
+            304,
+            152,
+            20
           ],
           "fontname": "Arial",
           "fontsize": 16.0,
@@ -6753,17 +7022,17 @@
           "varname": "param_label5",
           "presentation": 1,
           "presentation_rect": [
-            798,
-            324,
-            138,
-            22
+            916,
+            304,
+            152,
+            20
           ],
           "hidden": 1,
           "bgcolor": [
-            0.9529411764705882,
-            0.9647058823529412,
-            0.9725490196078431,
-            1.0
+            0,
+            0,
+            0,
+            0
           ]
         }
       },
@@ -6774,10 +7043,10 @@
           "numinlets": 1,
           "numoutlets": 2,
           "patching_rect": [
-            798,
-            350,
-            138,
-            30
+            916,
+            328,
+            152,
+            28
           ],
           "fontname": "Arial",
           "fontsize": 20.0,
@@ -6794,22 +7063,22 @@
           "varname": "param5",
           "presentation": 1,
           "presentation_rect": [
-            798,
-            350,
-            138,
-            30
+            916,
+            328,
+            152,
+            28
           ],
           "hidden": 1,
           "bgcolor": [
-            1.0,
-            1.0,
-            1.0,
+            0.9568627450980393,
+            0.9686274509803922,
+            0.9803921568627451,
             1.0
           ],
           "bgoncolor": [
-            0.8980392156862745,
-            0.9254901960784314,
-            0.9411764705882353,
+            0.9098039215686274,
+            0.9333333333333333,
+            0.9568627450980393,
             1.0
           ],
           "hbgcolor": [
@@ -6832,7 +7101,13 @@
           ],
           "triangle": 0,
           "format": 6,
-          "parameter_enable": 0
+          "parameter_enable": 0,
+          "bordercolor": [
+            0.796078431372549,
+            0.8352941176470589,
+            0.8666666666666667,
+            1.0
+          ]
         }
       },
       {
@@ -6866,10 +7141,10 @@
           "numinlets": 1,
           "numoutlets": 0,
           "patching_rect": [
-            798,
-            324,
-            138,
-            22
+            916,
+            304,
+            152,
+            20
           ],
           "fontname": "Arial",
           "fontsize": 16.0,
@@ -6883,17 +7158,17 @@
           "varname": "menu_label",
           "presentation": 1,
           "presentation_rect": [
-            798,
-            324,
-            138,
-            22
+            916,
+            304,
+            152,
+            20
           ],
           "hidden": 1,
           "bgcolor": [
-            0.9529411764705882,
-            0.9647058823529412,
-            0.9725490196078431,
-            1.0
+            0,
+            0,
+            0,
+            0
           ]
         }
       },
@@ -6904,10 +7179,10 @@
           "numinlets": 1,
           "numoutlets": 3,
           "patching_rect": [
-            798,
-            350,
-            138,
-            30
+            916,
+            328,
+            152,
+            28
           ],
           "fontname": "Arial",
           "fontsize": 16.0,
@@ -6925,16 +7200,16 @@
           "varname": "mode_menu",
           "presentation": 1,
           "presentation_rect": [
-            798,
-            350,
-            138,
-            30
+            916,
+            328,
+            152,
+            28
           ],
           "hidden": 1,
           "bgcolor": [
-            1.0,
-            1.0,
-            1.0,
+            0.9568627450980393,
+            0.9686274509803922,
+            0.9803921568627451,
             1.0
           ],
           "items": [
@@ -6948,7 +7223,13 @@
             ",",
             "Microtonal"
           ],
-          "parameter_enable": 0
+          "parameter_enable": 0,
+          "bordercolor": [
+            0.796078431372549,
+            0.8352941176470589,
+            0.8666666666666667,
+            1.0
+          ]
         }
       },
       {
@@ -6983,9 +7264,9 @@
           "numoutlets": 0,
           "patching_rect": [
             56,
-            430,
-            880,
-            66
+            416,
+            1012,
+            62
           ],
           "fontname": "Arial",
           "fontsize": 17.0,
@@ -6999,27 +7280,27 @@
           "presentation": 1,
           "presentation_rect": [
             56,
-            430,
-            880,
-            66
+            416,
+            1012,
+            62
           ],
           "hidden": 1,
           "bgcolor": [
-            1.0,
-            1.0,
-            1.0,
+            0.08235294117647059,
+            0.17254901960784313,
+            0.24705882352941178,
             1.0
           ],
           "fgcolor": [
-            0.03137254901960784,
-            0.4980392156862745,
-            0.5137254901960784,
+            0.4235294117647059,
+            0.8784313725490196,
+            0.807843137254902,
             1.0
           ],
           "gridcolor": [
-            0.8745098039215686,
-            0.9019607843137255,
-            0.9215686274509803,
+            0.17254901960784313,
+            0.27058823529411763,
+            0.34901960784313724,
             1.0
           ],
           "calccount": 128,
@@ -7040,9 +7321,9 @@
           "numoutlets": 0,
           "patching_rect": [
             56,
-            504,
-            880,
-            66
+            488,
+            1012,
+            62
           ],
           "fontname": "Arial",
           "fontsize": 17.0,
@@ -7056,27 +7337,27 @@
           "presentation": 1,
           "presentation_rect": [
             56,
-            504,
-            880,
-            66
+            488,
+            1012,
+            62
           ],
           "hidden": 1,
           "bgcolor": [
-            1.0,
-            1.0,
-            1.0,
+            0.08235294117647059,
+            0.17254901960784313,
+            0.24705882352941178,
             1.0
           ],
           "fgcolor": [
-            0.19215686274509805,
-            0.37254901960784315,
-            0.6509803921568628,
+            0.5803921568627451,
+            0.7333333333333333,
+            1.0,
             1.0
           ],
           "gridcolor": [
-            0.8745098039215686,
-            0.9019607843137255,
-            0.9215686274509803,
+            0.17254901960784313,
+            0.27058823529411763,
+            0.34901960784313724,
             1.0
           ],
           "calccount": 128,
@@ -7097,9 +7378,9 @@
           "numoutlets": 1,
           "patching_rect": [
             56,
-            430,
-            600,
-            140
+            416,
+            684,
+            134
           ],
           "fontname": "Arial",
           "fontsize": 17.0,
@@ -7116,9 +7397,9 @@
           "presentation": 1,
           "presentation_rect": [
             56,
-            430,
-            600,
-            140
+            416,
+            684,
+            134
           ],
           "hidden": 1,
           "filename": "cmpe_xy.js",
@@ -7140,10 +7421,10 @@
           "numinlets": 2,
           "numoutlets": 0,
           "patching_rect": [
-            672,
-            430,
-            264,
-            140
+            756,
+            416,
+            312,
+            134
           ],
           "fontname": "Arial",
           "fontsize": 17.0,
@@ -7156,28 +7437,28 @@
           "varname": "scope_xy",
           "presentation": 1,
           "presentation_rect": [
-            672,
-            430,
-            264,
-            140
+            756,
+            416,
+            312,
+            134
           ],
           "hidden": 1,
           "bgcolor": [
-            1.0,
-            1.0,
-            1.0,
+            0.08235294117647059,
+            0.17254901960784313,
+            0.24705882352941178,
             1.0
           ],
           "fgcolor": [
-            0.03137254901960784,
-            0.4980392156862745,
-            0.5137254901960784,
+            0.4235294117647059,
+            0.8784313725490196,
+            0.807843137254902,
             1.0
           ],
           "gridcolor": [
-            0.8745098039215686,
-            0.9019607843137255,
-            0.9215686274509803,
+            0.17254901960784313,
+            0.27058823529411763,
+            0.34901960784313724,
             1.0
           ],
           "calccount": 64,
@@ -7197,10 +7478,10 @@
           "numinlets": 1,
           "numoutlets": 3,
           "patching_rect": [
-            730,
-            610,
-            206,
-            34
+            840,
+            584,
+            228,
+            32
           ],
           "fontname": "Arial",
           "fontsize": 17.0,
@@ -7219,16 +7500,16 @@
           "varname": "record_button",
           "presentation": 1,
           "presentation_rect": [
-            730,
-            610,
-            206,
-            34
+            840,
+            584,
+            228,
+            32
           ],
           "hidden": 1,
           "mode": 0,
           "outputmode": 1,
           "usegradient": 0,
-          "rounded": 6,
+          "rounded": 8,
           "bgcolor": [
             0.9607843137254902,
             0.9019607843137255,
@@ -7254,7 +7535,15 @@
             1.0
           ],
           "parameter_enable": 0,
-          "hint": "Record the current live instrument to a stereo WAV file."
+          "hint": "Record the current live instrument to a stereo WAV file.",
+          "border": 1,
+          "bordercolor": [
+            0.796078431372549,
+            0.8352941176470589,
+            0.8666666666666667,
+            1.0
+          ],
+          "fontface": 0
         }
       },
       {
@@ -7287,6 +7576,817 @@
             1.0,
             1.0,
             1.0
+          ]
+        }
+      },
+      {
+        "box": {
+          "id": "source_card1",
+          "maxclass": "panel",
+          "numinlets": 1,
+          "numoutlets": 0,
+          "patching_rect": [
+            20,
+            218,
+            344,
+            144
+          ],
+          "fontname": "Arial",
+          "fontsize": 17.0,
+          "textcolor": [
+            0.10588235294117647,
+            0.1607843137254902,
+            0.21176470588235294,
+            1.0
+          ],
+          "varname": "source_card1",
+          "presentation": 1,
+          "presentation_rect": [
+            20,
+            218,
+            344,
+            144
+          ],
+          "hidden": 0,
+          "bgcolor": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "border": 1,
+          "bordercolor": [
+            0.796078431372549,
+            0.8352941176470589,
+            0.8666666666666667,
+            1.0
+          ],
+          "rounded": 10,
+          "background": 1,
+          "ignoreclick": 1
+        }
+      },
+      {
+        "box": {
+          "id": "source_accent1",
+          "maxclass": "panel",
+          "numinlets": 1,
+          "numoutlets": 0,
+          "patching_rect": [
+            21,
+            219,
+            342,
+            4
+          ],
+          "fontname": "Arial",
+          "fontsize": 17.0,
+          "textcolor": [
+            0.10588235294117647,
+            0.1607843137254902,
+            0.21176470588235294,
+            1.0
+          ],
+          "varname": "source_accent1",
+          "presentation": 1,
+          "presentation_rect": [
+            21,
+            219,
+            342,
+            4
+          ],
+          "hidden": 0,
+          "bgcolor": [
+            0.03137254901960784,
+            0.4980392156862745,
+            0.5137254901960784,
+            1.0
+          ],
+          "border": 0,
+          "rounded": 0,
+          "background": 1,
+          "ignoreclick": 1
+        }
+      },
+      {
+        "box": {
+          "id": "source_state1",
+          "maxclass": "comment",
+          "numinlets": 1,
+          "numoutlets": 0,
+          "patching_rect": [
+            150,
+            230,
+            100,
+            20
+          ],
+          "fontname": "Arial",
+          "fontsize": 16.0,
+          "textcolor": [
+            0.3215686274509804,
+            0.403921568627451,
+            0.4588235294117647,
+            1.0
+          ],
+          "text": "EMPTY",
+          "varname": "source_state1",
+          "presentation": 1,
+          "presentation_rect": [
+            150,
+            230,
+            100,
+            20
+          ],
+          "hidden": 0,
+          "bgcolor": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "box": {
+          "id": "group_label1",
+          "maxclass": "comment",
+          "numinlets": 1,
+          "numoutlets": 0,
+          "patching_rect": [
+            32,
+            228,
+            320,
+            22
+          ],
+          "fontname": "Arial",
+          "fontsize": 16.0,
+          "textcolor": [
+            0.3215686274509804,
+            0.403921568627451,
+            0.4588235294117647,
+            1.0
+          ],
+          "text": "",
+          "varname": "group_label1",
+          "presentation": 1,
+          "presentation_rect": [
+            32,
+            228,
+            320,
+            22
+          ],
+          "hidden": 1,
+          "fontface": 1,
+          "bgcolor": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "box": {
+          "id": "group_help1",
+          "maxclass": "comment",
+          "numinlets": 1,
+          "numoutlets": 0,
+          "patching_rect": [
+            32,
+            262,
+            320,
+            36
+          ],
+          "fontname": "Arial",
+          "fontsize": 16.0,
+          "textcolor": [
+            0.3215686274509804,
+            0.403921568627451,
+            0.4588235294117647,
+            1.0
+          ],
+          "text": "",
+          "varname": "group_help1",
+          "presentation": 1,
+          "presentation_rect": [
+            32,
+            262,
+            320,
+            36
+          ],
+          "hidden": 1,
+          "bgcolor": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "box": {
+          "id": "source_card2",
+          "maxclass": "panel",
+          "numinlets": 1,
+          "numoutlets": 0,
+          "patching_rect": [
+            378,
+            218,
+            344,
+            144
+          ],
+          "fontname": "Arial",
+          "fontsize": 17.0,
+          "textcolor": [
+            0.10588235294117647,
+            0.1607843137254902,
+            0.21176470588235294,
+            1.0
+          ],
+          "varname": "source_card2",
+          "presentation": 1,
+          "presentation_rect": [
+            378,
+            218,
+            344,
+            144
+          ],
+          "hidden": 0,
+          "bgcolor": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "border": 1,
+          "bordercolor": [
+            0.796078431372549,
+            0.8352941176470589,
+            0.8666666666666667,
+            1.0
+          ],
+          "rounded": 10,
+          "background": 1,
+          "ignoreclick": 1
+        }
+      },
+      {
+        "box": {
+          "id": "source_accent2",
+          "maxclass": "panel",
+          "numinlets": 1,
+          "numoutlets": 0,
+          "patching_rect": [
+            379,
+            219,
+            342,
+            4
+          ],
+          "fontname": "Arial",
+          "fontsize": 17.0,
+          "textcolor": [
+            0.10588235294117647,
+            0.1607843137254902,
+            0.21176470588235294,
+            1.0
+          ],
+          "varname": "source_accent2",
+          "presentation": 1,
+          "presentation_rect": [
+            379,
+            219,
+            342,
+            4
+          ],
+          "hidden": 0,
+          "bgcolor": [
+            0.19215686274509805,
+            0.37254901960784315,
+            0.6509803921568628,
+            1.0
+          ],
+          "border": 0,
+          "rounded": 0,
+          "background": 1,
+          "ignoreclick": 1
+        }
+      },
+      {
+        "box": {
+          "id": "source_state2",
+          "maxclass": "comment",
+          "numinlets": 1,
+          "numoutlets": 0,
+          "patching_rect": [
+            508,
+            230,
+            100,
+            20
+          ],
+          "fontname": "Arial",
+          "fontsize": 16.0,
+          "textcolor": [
+            0.3215686274509804,
+            0.403921568627451,
+            0.4588235294117647,
+            1.0
+          ],
+          "text": "EMPTY",
+          "varname": "source_state2",
+          "presentation": 1,
+          "presentation_rect": [
+            508,
+            230,
+            100,
+            20
+          ],
+          "hidden": 0,
+          "bgcolor": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "box": {
+          "id": "group_label2",
+          "maxclass": "comment",
+          "numinlets": 1,
+          "numoutlets": 0,
+          "patching_rect": [
+            390,
+            228,
+            320,
+            22
+          ],
+          "fontname": "Arial",
+          "fontsize": 16.0,
+          "textcolor": [
+            0.3215686274509804,
+            0.403921568627451,
+            0.4588235294117647,
+            1.0
+          ],
+          "text": "",
+          "varname": "group_label2",
+          "presentation": 1,
+          "presentation_rect": [
+            390,
+            228,
+            320,
+            22
+          ],
+          "hidden": 1,
+          "fontface": 1,
+          "bgcolor": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "box": {
+          "id": "group_help2",
+          "maxclass": "comment",
+          "numinlets": 1,
+          "numoutlets": 0,
+          "patching_rect": [
+            390,
+            262,
+            320,
+            36
+          ],
+          "fontname": "Arial",
+          "fontsize": 16.0,
+          "textcolor": [
+            0.3215686274509804,
+            0.403921568627451,
+            0.4588235294117647,
+            1.0
+          ],
+          "text": "",
+          "varname": "group_help2",
+          "presentation": 1,
+          "presentation_rect": [
+            390,
+            262,
+            320,
+            36
+          ],
+          "hidden": 1,
+          "bgcolor": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "box": {
+          "id": "source_card3",
+          "maxclass": "panel",
+          "numinlets": 1,
+          "numoutlets": 0,
+          "patching_rect": [
+            736,
+            218,
+            344,
+            144
+          ],
+          "fontname": "Arial",
+          "fontsize": 17.0,
+          "textcolor": [
+            0.10588235294117647,
+            0.1607843137254902,
+            0.21176470588235294,
+            1.0
+          ],
+          "varname": "source_card3",
+          "presentation": 1,
+          "presentation_rect": [
+            736,
+            218,
+            344,
+            144
+          ],
+          "hidden": 0,
+          "bgcolor": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "border": 1,
+          "bordercolor": [
+            0.796078431372549,
+            0.8352941176470589,
+            0.8666666666666667,
+            1.0
+          ],
+          "rounded": 10,
+          "background": 1,
+          "ignoreclick": 1
+        }
+      },
+      {
+        "box": {
+          "id": "source_accent3",
+          "maxclass": "panel",
+          "numinlets": 1,
+          "numoutlets": 0,
+          "patching_rect": [
+            737,
+            219,
+            342,
+            4
+          ],
+          "fontname": "Arial",
+          "fontsize": 17.0,
+          "textcolor": [
+            0.10588235294117647,
+            0.1607843137254902,
+            0.21176470588235294,
+            1.0
+          ],
+          "varname": "source_accent3",
+          "presentation": 1,
+          "presentation_rect": [
+            737,
+            219,
+            342,
+            4
+          ],
+          "hidden": 0,
+          "bgcolor": [
+            0.4470588235294118,
+            0.3411764705882353,
+            0.6509803921568628,
+            1.0
+          ],
+          "border": 0,
+          "rounded": 0,
+          "background": 1,
+          "ignoreclick": 1
+        }
+      },
+      {
+        "box": {
+          "id": "source_state3",
+          "maxclass": "comment",
+          "numinlets": 1,
+          "numoutlets": 0,
+          "patching_rect": [
+            866,
+            230,
+            100,
+            20
+          ],
+          "fontname": "Arial",
+          "fontsize": 16.0,
+          "textcolor": [
+            0.3215686274509804,
+            0.403921568627451,
+            0.4588235294117647,
+            1.0
+          ],
+          "text": "EMPTY",
+          "varname": "source_state3",
+          "presentation": 1,
+          "presentation_rect": [
+            866,
+            230,
+            100,
+            20
+          ],
+          "hidden": 0,
+          "bgcolor": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "box": {
+          "id": "group_label3",
+          "maxclass": "comment",
+          "numinlets": 1,
+          "numoutlets": 0,
+          "patching_rect": [
+            748,
+            228,
+            320,
+            22
+          ],
+          "fontname": "Arial",
+          "fontsize": 16.0,
+          "textcolor": [
+            0.3215686274509804,
+            0.403921568627451,
+            0.4588235294117647,
+            1.0
+          ],
+          "text": "",
+          "varname": "group_label3",
+          "presentation": 1,
+          "presentation_rect": [
+            748,
+            228,
+            320,
+            22
+          ],
+          "hidden": 1,
+          "fontface": 1,
+          "bgcolor": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "box": {
+          "id": "group_help3",
+          "maxclass": "comment",
+          "numinlets": 1,
+          "numoutlets": 0,
+          "patching_rect": [
+            748,
+            262,
+            320,
+            36
+          ],
+          "fontname": "Arial",
+          "fontsize": 16.0,
+          "textcolor": [
+            0.3215686274509804,
+            0.403921568627451,
+            0.4588235294117647,
+            1.0
+          ],
+          "text": "",
+          "varname": "group_help3",
+          "presentation": 1,
+          "presentation_rect": [
+            748,
+            262,
+            320,
+            36
+          ],
+          "hidden": 1,
+          "bgcolor": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "box": {
+          "id": "output_panel",
+          "maxclass": "panel",
+          "numinlets": 1,
+          "numoutlets": 0,
+          "patching_rect": [
+            20,
+            370,
+            1060,
+            252
+          ],
+          "fontname": "Arial",
+          "fontsize": 17.0,
+          "textcolor": [
+            0.10588235294117647,
+            0.1607843137254902,
+            0.21176470588235294,
+            1.0
+          ],
+          "varname": "output_panel",
+          "presentation": 1,
+          "presentation_rect": [
+            20,
+            370,
+            1060,
+            252
+          ],
+          "hidden": 0,
+          "bgcolor": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "border": 1,
+          "bordercolor": [
+            0.796078431372549,
+            0.8352941176470589,
+            0.8666666666666667,
+            1.0
+          ],
+          "rounded": 10,
+          "background": 1,
+          "ignoreclick": 1
+        }
+      },
+      {
+        "box": {
+          "id": "feedback_panel",
+          "maxclass": "panel",
+          "numinlets": 1,
+          "numoutlets": 0,
+          "patching_rect": [
+            20,
+            680,
+            1060,
+            72
+          ],
+          "fontname": "Arial",
+          "fontsize": 17.0,
+          "textcolor": [
+            0.10588235294117647,
+            0.1607843137254902,
+            0.21176470588235294,
+            1.0
+          ],
+          "varname": "feedback_panel",
+          "presentation": 1,
+          "presentation_rect": [
+            20,
+            680,
+            1060,
+            72
+          ],
+          "hidden": 0,
+          "bgcolor": [
+            0.8745098039215686,
+            0.9333333333333333,
+            0.9333333333333333,
+            1.0
+          ],
+          "border": 0,
+          "rounded": 10,
+          "background": 1,
+          "ignoreclick": 1
+        }
+      },
+      {
+        "box": {
+          "id": "state_badge",
+          "maxclass": "textbutton",
+          "numinlets": 1,
+          "numoutlets": 3,
+          "patching_rect": [
+            32,
+            696,
+            228,
+            28
+          ],
+          "fontname": "Arial",
+          "fontsize": 16.0,
+          "textcolor": [
+            0.10588235294117647,
+            0.1607843137254902,
+            0.21176470588235294,
+            1.0
+          ],
+          "text": "LOADING",
+          "outlettype": [
+            "",
+            "",
+            "int"
+          ],
+          "varname": "state_badge",
+          "presentation": 1,
+          "presentation_rect": [
+            32,
+            696,
+            228,
+            28
+          ],
+          "hidden": 0,
+          "mode": 0,
+          "outputmode": 1,
+          "usegradient": 0,
+          "rounded": 8,
+          "bgcolor": [
+            0.9098039215686274,
+            0.9333333333333333,
+            0.9568627450980393,
+            1.0
+          ],
+          "bgoncolor": [
+            0.796078431372549,
+            0.8352941176470589,
+            0.8666666666666667,
+            1.0
+          ],
+          "textoncolor": [
+            0.10588235294117647,
+            0.1607843137254902,
+            0.21176470588235294,
+            1.0
+          ],
+          "textovercolor": [
+            0.10588235294117647,
+            0.1607843137254902,
+            0.21176470588235294,
+            1.0
+          ],
+          "parameter_enable": 0,
+          "ignoreclick": 1,
+          "fontface": 1,
+          "border": 1,
+          "bordercolor": [
+            0.796078431372549,
+            0.8352941176470589,
+            0.8666666666666667,
+            1.0
+          ]
+        }
+      },
+      {
+        "box": {
+          "id": "wave_scale",
+          "maxclass": "comment",
+          "numinlets": 1,
+          "numoutlets": 0,
+          "patching_rect": [
+            468,
+            380,
+            272,
+            24
+          ],
+          "fontname": "Arial",
+          "fontsize": 16.0,
+          "textcolor": [
+            0.3215686274509804,
+            0.403921568627451,
+            0.4588235294117647,
+            1.0
+          ],
+          "text": "Wave view 1x",
+          "varname": "wave_scale",
+          "presentation": 1,
+          "presentation_rect": [
+            468,
+            380,
+            272,
+            24
+          ],
+          "hidden": 0,
+          "hint": "The waveform is enlarged for visibility only. Audio playback and export levels do not change.",
+          "bgcolor": [
+            0,
+            0,
+            0,
+            0
           ]
         }
       },

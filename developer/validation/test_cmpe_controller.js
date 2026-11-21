@@ -10,7 +10,7 @@ const bundle = process.argv.includes("--bundle");
 const root = path.resolve(process.argv.slice(2).find(arg => arg !== "--bundle") || path.join(__dirname, "../.."));
 const patch = JSON.parse(fs.readFileSync(path.join(root, "CMPE_Variety_Pack.maxpat"), "utf8")).patcher;
 const names = new Set(patch.boxes.map(x => x.box.varname).filter(Boolean));
-const modules = ["apg_wave_plan.js", "apg_render.js", "cmpe_model.js", "apg_wave_controller.js", "cmpe_extension.js", "cmpe_audio_settings.js"];
+const modules = ["apg_wave_plan.js", "apg_render.js", "cmpe_model.js", "apg_wave_controller.js", "cmpe_extension.js", "cmpe_audio_settings.js", "cmpe_ui_feedback.js"];
 const runtime = (bundle ? ["cmpe_variety.js"] : modules.map(file => "developer/" + file))
   .map(file => ({file, code: fs.readFileSync(path.join(root, file), "utf8")}));
 let scenarios = 0, checks = 0, framesChecked = 0;
@@ -653,7 +653,7 @@ test("invalid, unchanged, or unsupported audio choices cannot write hardware", (
   h.advance(200);
   check(audioWrites(h).length === 0, "only an explicit valid changed index can request a native write");
   equal(lastMessage(h, "audio_option2_menu", "ignoreclick").args, [1], "a driver option without reported choices is disabled");
-  equal(lastMessage(h, "audio_option2_menu", "append").args, ["Choose in Audio Setup"], "unsupported option exposes a usable fallback");
+  equal(lastMessage(h, "audio_option2_menu", "append").args, ["Choose in Setup"], "unsupported option exposes a usable fallback");
   equal(lastMessage(h, "audio_setup", "ignoreclick").args, [0], "native Audio Setup remains accessible");
 });
 
