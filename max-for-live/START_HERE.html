@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CMPE Max for Live · Start here</title>
+<style>
+:root{color-scheme:light;font-family:Arial,Helvetica,sans-serif;color:#1b2936;background:#f3f6f8;line-height:1.55}
+*{box-sizing:border-box}body{margin:0}main{max-width:1280px;margin:auto;padding:40px 28px 70px}
+h1{font-size:clamp(32px,5vw,54px);line-height:1.1;letter-spacing:-1.8px;margin:12px 0 22px}
+h2{font-size:25px;line-height:1.2;margin:0 0 15px}h3{margin:0;font-size:20px}p{max-width:880px}
+a{color:#087f83;text-underline-offset:3px}a:hover{color:#1b2936}.eyebrow{color:#526775;letter-spacing:1px;font-size:13px;font-weight:700;text-transform:uppercase}
+.lead{font-size:19px;margin:0 0 22px}.status{border-left:4px solid #986b19;background:#f7f0de;padding:13px 18px;max-width:1000px}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:26px 0 40px}.step{border:1px solid #cbd5dd;border-radius:10px;background:white;padding:20px}.step p{margin:10px 0 0}.n{color:#087f83;font-weight:bold;font-size:13px;margin-bottom:10px}
+section{margin:36px 0}.instrument{margin:26px 0 34px}.instrument header{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}.instrument header p{margin:0;color:#526775}.instrument img{display:block;width:100%;height:auto;border:1px solid #cbd5dd;border-radius:6px;margin-top:12px}
+.apg h3{color:#087f83}.isjs h3{color:#315fa6}.many h3{color:#7257a6}.rmhs h3{color:#995e32}.sioe h3{color:#986b19}
+.note{color:#526775;font-size:14px}.flow{padding:14px 18px;background:#e1f0ef;border-radius:8px;font-size:18px;max-width:900px}
+code{font-family:ui-monospace,monospace;background:#e5ecf0;padding:2px 5px;border-radius:3px;font-size:.9em}footer{border-top:1px solid #cbd5dd;margin-top:44px;padding-top:20px;color:#526775;font-size:14px}
+@media(max-width:720px){main{padding:25px 16px 50px}.steps{grid-template-columns:1fr}.step{padding:16px}h1{letter-spacing:-1px}.instrument header{gap:4px}.instrument header p{flex-basis:100%}}
+@media print{main{padding:0}body{background:white}.steps{margin-bottom:20px}.instrument{break-inside:avoid}.instrument img{border-radius:0}a{color:inherit}}
+</style>
+</head>
+<body><main>
+<div class="eyebrow">Five instruments · Version 0.1.0 preview</div>
+<h1>CMPE Max for Live</h1>
+<p class="lead">Audio palindromes, granular textures, ambient layers, harmonic drones, and supercuts. Adapted from <a href="https://joowonpark.net/cmpe/">Joo Won Park's Computer Music Practice Examples</a>.</p>
+<p class="status"><strong>Preview release.</strong> The device files and controller have automated checks. Opening, playback, and saved-Set recall still need verification in Ableton Live. These devices are supplied with their dependencies in this folder.</p>
+
+<div class="steps">
+<article class="step"><div class="n">01 · KEEP THE FOLDER</div><h2>Extract the ZIP</h2><p>Keep the five <code>.amxd</code> files, JavaScript, voice patches, and WAVs together. Move the whole folder somewhere permanent before saving a Live Set.</p></article>
+<article class="step"><div class="n">02 · OPEN IN LIVE</div><h2>Use a MIDI track</h2><p>Drag an <code>.amxd</code> file onto an empty MIDI track. You need Live with Max for Live enabled. Select your audio interface in Live's Audio settings.</p></article>
+<article class="step"><div class="n">03 · FIRST SOUND</div><h2>Start with RMHS</h2><p>Open <code>CMPE_RMHS.amxd</code> and press START. It needs no samples. Allow its 3–20 second fade-in. Use STOP to finish.</p></article>
+</div>
+
+<section><h2>For APG and SIOE</h2>
+<p class="flow"><strong>LOAD DEMO → GENERATE → wait for Ready → PLAY</strong></p>
+<p>Generation prepares the audio. Playback and MIDI notes trigger the prepared result. Notes sent during generation are ignored; trigger again after Ready. Drag the waveform to choose a loop, then enable Loop. SAVE WAV keeps the complete generated result.</p>
+</section>
+
+<section><h2>All five interfaces</h2><p class="note">These images show the generated device layouts. They are interface previews, not screenshots captured in Ableton Live. Waveforms and scopes are empty before audio is generated or played.</p>
+<article class="instrument apg"><header><h3>APG</h3><p>Three samples become a mirrored audio palindrome.</p></header><img src="previews/apg-interface-preview.png" alt="APG device interface with three sample loaders, repeats, pitch range, stereo waveform, loop selection, and transport."></article>
+<article class="instrument isjs"><header><h3>ISJS</h3><p>Three granular sample streams, with position and density control.</p></header><img src="previews/isjs-interface-preview.png" alt="ISJS interface with three samples, independent rates and levels, XY pad, position, density, and transport."></article>
+<article class="instrument many"><header><h3>Many</h3><p>A sample unfolds into overlapping ambient layers.</p></header><img src="previews/many-interface-preview.png" alt="Many interface with a sample loader, layer level, delay, interval, pitch set, scopes, and transport."></article>
+<article class="instrument rmhs"><header><h3>RMHS</h3><p>Slow harmonic drones. No samples required.</p></header><img src="previews/rmhs-interface-preview.png" alt="RMHS interface with drone level, fundamental frequency, interval, duration, harmonic count, scopes, and transport."></article>
+<article class="instrument sioe"><header><h3>SIOE</h3><p>A sample becomes a short or gradual supercut.</p></header><img src="previews/sioe-interface-preview.png" alt="SIOE interface with sample loader, slice count, tempo, hit duration, form, stereo waveform, loop selection, and transport."></article>
+</section>
+
+<section><h2>MIDI, saving, and recording</h2>
+<p>Arm your MIDI track or choose the appropriate monitoring mode to receive notes. With MIDI latch off, hold the note for the performance. With latch on, the sound continues after release; STOP ends it. RMHS follows note pitch. Velocity controls the output level.</p>
+<p>Save your Live Set to retain device settings and source references. APG and SIOE can rebuild a saved result from its seed and the same source audio, showing progress during restoration. Keep your custom samples in a stable location. They are referenced, not embedded. SAVE WAV preserves a finite result independently of the sources.</p>
+<p>For live ISJS, Many, and RMHS performances, record the track output in real time. Their original free-running timing is retained. Live tempo synchronization, offline export, and Freeze Track behavior are not verified in this preview.</p>
+</section>
+
+<section><h2>If you hear nothing</h2>
+<p>Look at the status line. APG and SIOE must finish generating. ISJS and Many need samples. Many fades in over 2–4 seconds; RMHS can take 3–20 seconds. A short MIDI note may end before a slow attack becomes audible. Try manual START or MIDI latch.</p>
+<p>Check the device and track are enabled, the output is routed correctly, and Live's audio engine is running. If the Max Console reports a missing file, restore the full extracted folder.</p>
+<p><a href="README.md">Complete operating guide</a> · <a href="VALIDATION.md">Automated verification</a> · <a href="NATIVE_LIVE_CHECKS.md">Native Live checks</a></p>
+</section>
+<footer>Original musical ideas and algorithms: <a href="https://joowonpark.net/cmpe/">Joo Won Park</a>. <a href="https://joowonpark.net/apg/">Original APG</a> · <a href="ATTRIBUTION.md">Attribution</a> · <a href="https://github.com/modelcollapse/CMPE-MAXMSP">Source repository</a></footer>
+</main></body></html>

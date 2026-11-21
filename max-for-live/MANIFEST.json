@@ -1,0 +1,154 @@
+{
+  "name": "CMPE Max for Live",
+  "version": "0.1.0-preview",
+  "native_live_verified": false,
+  "distribution": "unfrozen devices with adjacent dependencies",
+  "source_repository": "https://github.com/modelcollapse/CMPE-MAXMSP",
+  "files": [
+    {
+      "path": "ATTRIBUTION.md",
+      "bytes": 3960,
+      "sha256": "cab6d1a761e580f74d4adfedd6d4f9e817f49ee84a962830690569037ead8bd5"
+    },
+    {
+      "path": "CMPE_APG.amxd",
+      "bytes": 216982,
+      "sha256": "332dc95d362e84132335b6ab0c6596c84fce0b4d7c23f0afbb2afc484af26069"
+    },
+    {
+      "path": "CMPE_APG.maxpat",
+      "bytes": 216949,
+      "sha256": "78a856b133d6c097b88b5d5798f534bdff5a55ddcac18b2950a0a7dd8269cbe4"
+    },
+    {
+      "path": "CMPE_ISJS.amxd",
+      "bytes": 224336,
+      "sha256": "63aac04cf0cc28a9874150043079abf9782304b78d555be5760c2732707918ea"
+    },
+    {
+      "path": "CMPE_ISJS.maxpat",
+      "bytes": 224303,
+      "sha256": "0ea473a72c44be3439f1f8966117fbafdc73291615f8a24250ed6c070a6aa736"
+    },
+    {
+      "path": "CMPE_Many.amxd",
+      "bytes": 215762,
+      "sha256": "9a4ff697082faf2b5456bd0abed84cb1e17c7acab8c673d47a9e7c0bf6205c62"
+    },
+    {
+      "path": "CMPE_Many.maxpat",
+      "bytes": 215729,
+      "sha256": "1c264da07ae2816556c384a6c14719d0230e096433a17af6401715e9374bd320"
+    },
+    {
+      "path": "CMPE_RMHS.amxd",
+      "bytes": 216602,
+      "sha256": "6dd74a9a6eb682dcaf35d37bbd528f71f6ab2bfdf8f441477e55f3448442dee1"
+    },
+    {
+      "path": "CMPE_RMHS.maxpat",
+      "bytes": 216569,
+      "sha256": "ac75e4e774077b1f6640a19c58a06a12a89d26cd24298fe8c8a5a4cba293fa3b"
+    },
+    {
+      "path": "CMPE_SIOE.amxd",
+      "bytes": 216644,
+      "sha256": "b7dcb694dc315894bcdcfd6a28d20c4cc85caa4aa8b87ec813eaf5e0555c9e84"
+    },
+    {
+      "path": "CMPE_SIOE.maxpat",
+      "bytes": 216611,
+      "sha256": "7d0cc858283998d8b33e1742ec10632604782b2cd77cdd2b1b847213989f076f"
+    },
+    {
+      "path": "NATIVE_LIVE_CHECKS.md",
+      "bytes": 3952,
+      "sha256": "66e4108e5f16693d20529c14ab6355392051e8298a13b5345f9ff76cba9a5537"
+    },
+    {
+      "path": "README.md",
+      "bytes": 8869,
+      "sha256": "b9364d74d496006b5a7648b7b21482a4e6dfa82c13f62d1e1d40bcd7495d2aec"
+    },
+    {
+      "path": "START_HERE.html",
+      "bytes": 7618,
+      "sha256": "5c7636c03068e9eb3efe9a37edc77261cccd84fc0b2087a1c027defee6662fda"
+    },
+    {
+      "path": "VALIDATION.md",
+      "bytes": 5376,
+      "sha256": "07f00360e28f52dcb297e4765087884bf05573ca859229a1c6cf5aa28b9cf78a"
+    },
+    {
+      "path": "apgw_test1.wav",
+      "bytes": 105884,
+      "sha256": "c160a79c83048706e86ebd848d07d52148444cf351dd97eba199af11d9a65175"
+    },
+    {
+      "path": "apgw_test2.wav",
+      "bytes": 326444,
+      "sha256": "e2c57f0712e9e9eed43ccc38b68f0cc53e1232061760399ef7d85180d30e479f"
+    },
+    {
+      "path": "apgw_test3.wav",
+      "bytes": 153644,
+      "sha256": "786cf3f9b8ebc78026222e9c19e77fad81ef4df941850660b9938267eb1a9e23"
+    },
+    {
+      "path": "cmpe_drone_voice.maxpat",
+      "bytes": 31842,
+      "sha256": "b32edf16164841da92e7064b1005b81bc651e03b2adce90413fb03df48afd401"
+    },
+    {
+      "path": "cmpe_m4l.js",
+      "bytes": 124685,
+      "sha256": "5292479a29993c55a281c6a172a8c33e1fb647bebb708985524ba89c7757f029"
+    },
+    {
+      "path": "cmpe_many_voice.maxpat",
+      "bytes": 65339,
+      "sha256": "cb650c79d4d4e4d20cce8f23275b7c2ff587df9cba80001e88da53ae096fef6b"
+    },
+    {
+      "path": "cmpe_sample_voice.maxpat",
+      "bytes": 28680,
+      "sha256": "a21831a917f93acca75700d88e7a20a051f9c36a4a9100014230d4fc377bb282"
+    },
+    {
+      "path": "cmpe_xy.js",
+      "bytes": 2057,
+      "sha256": "4ba40bb691bd1d974c675418f5cd288ba3453332020949dab81be91ff7ed8587"
+    },
+    {
+      "path": "previews/all-devices-overview.png",
+      "bytes": 399276,
+      "sha256": "57dee97893ea468acbb03d03a7da81f89970d60710e02bf3142fe7fcbb984b60"
+    },
+    {
+      "path": "previews/apg-interface-preview.png",
+      "bytes": 85083,
+      "sha256": "f7b21ac8af78c9bc80f542c590f73dc1311c02946572318659a3676eb34cb3f3"
+    },
+    {
+      "path": "previews/isjs-interface-preview.png",
+      "bytes": 87712,
+      "sha256": "bbb46db64c1f72f164a354038cf0ca89b8d36c46c9b798948524c75147cab921"
+    },
+    {
+      "path": "previews/many-interface-preview.png",
+      "bytes": 73619,
+      "sha256": "2b5d968ae7308029340e286ce7b270009889e8b96d4c1941ce8eb00e4e5f1074"
+    },
+    {
+      "path": "previews/rmhs-interface-preview.png",
+      "bytes": 73010,
+      "sha256": "e18712a707de6912deb7ab17a15e938577040350a04dc7c78f8da6f34dfe059e"
+    },
+    {
+      "path": "previews/sioe-interface-preview.png",
+      "bytes": 80248,
+      "sha256": "aa22805e8e69c36e7325ebac73f5e177b4d027e4157c8bee64eb0fa84096d47a"
+    }
+  ]
+}

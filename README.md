@@ -16,6 +16,16 @@ The collection is designed for **Max 8 or Max 9**, using stock Max/MSP objects a
 
 **Native Max was unavailable during development.** The models, rendered samples, controller behavior, and patch connections have automated checks; actual Max object loading, audible output, mouse interaction, and disk recording still require verification in Max. See [validation details](developer/CMPE_VALIDATION.md).
 
+## Max for Live edition
+
+The **[Max for Live 0.1.0 preview](max-for-live/README.md)** contains five separate `.amxd` instruments for Ableton Live: APG, ISJS, Many, RMHS, and SIOE. Each has a compact horizontal interface, MIDI triggering, Live parameter integration, and stereo output through its track. APG and SIOE separate generation from playback and preserve the generation seed for reconstructing saved results.
+
+Download the complete repository ZIP, then keep the **entire `max-for-live` folder** together and drag an `.amxd` file onto an empty MIDI track. These are unfrozen devices with adjacent dependencies. **Native Live loading, audio, saved-Set recall, and offline rendering still require host testing.** The standalone Max collection above remains available.
+
+[Installation and operation](max-for-live/README.md) · [Native Live checks](max-for-live/NATIVE_LIVE_CHECKS.md)
+
+![All five compact Max for Live interface previews](max-for-live/previews/all-devices-overview.png)
+
 ## Choose your audio interface
 
 The top row contains **Driver** and two option menus supplied by the selected Max driver. Their labels come from Max: a driver may expose **Input Device** and **Output Device**, while another driver exposes different options. Choose the interface in the menu bearing the appropriate label. No particular hardware names or device numbers are built into the patch.

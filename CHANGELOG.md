@@ -1,5 +1,17 @@
 # Changes
 
+## CMPE Max for Live 0.1.0 preview — November 21, 2026
+
+Added five separate Max Instrument entry points in `max-for-live/`, with real unfrozen AMXD containers, adjacent dependencies, and editable `.maxpat` sources. The existing standalone Max collection is retained.
+
+- Compact 169-pixel-high interfaces retain source loading, waveform / XY / scope displays, status, progress, performance controls, and visible credit to Joo Won Park.
+- Live owns the audio engine. Each device routes stereo audio through `plugout~`; standalone interface selectors and the test tone are excluded.
+- MIDI triggers whole performances, velocity controls output level, and RMHS uses note pitch for its fundamental. A latch option supports long performances.
+- Fixed parameter names and stored device state integrate controls, sample references, loop settings, and finite-render seeds with Live. Prepared APG/SIOE results can be reconstructed from the same source audio after recall.
+- APG/SIOE generation is explicit. PLAY and MIDI trigger prepared audio without beginning a new render.
+
+The package includes automated verification and native acceptance instructions. Native Live execution and frozen single-file distribution have not been verified; this is labelled a preview throughout.
+
 ## CMPE Variety Pack 1.1.0 — November 21, 2026
 
 - Added a visible audio section with a driver selector, two dynamically labelled driver-option menus, an observed audio on/off state, REFRESH, and a shortcut to Max's full Audio Status window.

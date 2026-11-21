@@ -1723,6 +1723,14 @@ function notifydeleted() { shutdown(); }
         base.shutdown();
     };
     g.notifydeleted = function () { g.shutdown(); };
+    // Host integrations can preserve the same validated settings format without
+    // writing an intermediate JSON file. Returned state is a detached snapshot;
+    // restores still use the serialized native-buffer loading safeguards above.
+    g.CMPEHost = {
+        snapshot: function () { return JSON.parse(JSON.stringify(snapshot())); },
+        validate: validatePreset,
+        restore: restorePreset
+    };
     // Read-only state for the developer harness; this does not expose audio data.
     g.CMPEState = function () {
         return {mode: modeIndex, state: state, settings: snapshot(), recording: recording,

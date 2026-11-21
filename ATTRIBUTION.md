@@ -26,6 +26,12 @@ This repository contains Max/MSP implementations developed for Bryan Collins. AP
 
 The original SuperCollider patches, standalone applications, and bundled SuperCollider sound recordings are not included in this repository. The three `apgw_test*.wav` files are synthetic diagnostic sounds generated for this Max implementation.
 
+## Max for Live edition
+
+The `max-for-live/` folder adapts the same five musical engines into individual Max Instrument devices. It adds Live track routing, MIDI triggering, fixed parameter identities, stored device state, and deterministic reconstruction of finite results from their saved seeds and original samples. Its compact interfaces retain Park's name and a link to the original CMPE project. These host-integration changes do not transfer authorship of the original musical designs.
+
+The AMXD container implementation was checked against Ableton's public [maxdevtools parser](https://github.com/Ableton/maxdevtools/blob/5b39dec9a203d2747ff1d08e10c849742a4e654a/maxdiff/amxd_textconv.py) and official example files. Those example device files are not redistributed. Native Live/Max operation remains to be verified for this preview release.
+
 ## Terms and source material
 
 Credit is separate from licensing. The original APG page’s request for credit is recorded here without assigning a new license to Park’s work or inventing additional permissions. Refer to the original project and its supplied files for any applicable terms.
