@@ -10,7 +10,7 @@ const bundle = process.argv.includes("--bundle");
 const root = path.resolve(process.argv.slice(2).find(arg => arg !== "--bundle") || path.join(__dirname, "../.."));
 const patch = JSON.parse(fs.readFileSync(path.join(root, "CMPE_Variety_Pack.maxpat"), "utf8")).patcher;
 const names = new Set(patch.boxes.map(x => x.box.varname).filter(Boolean));
-const modules = ["apg_wave_plan.js", "apg_render.js", "cmpe_model.js", "apg_wave_controller.js", "cmpe_extension.js"];
+const modules = ["apg_wave_plan.js", "apg_render.js", "cmpe_model.js", "apg_wave_controller.js", "cmpe_extension.js", "cmpe_audio_settings.js"];
 const runtime = (bundle ? ["cmpe_variety.js"] : modules.map(file => "developer/" + file))
   .map(file => ({file, code: fs.readFileSync(path.join(root, file), "utf8")}));
 let scenarios = 0, checks = 0, framesChecked = 0;
@@ -25,6 +25,7 @@ function seeded(seed) { let n = seed >>> 0; return () => { n ^= n << 13; n ^= n 
 function makeHost(seed = 91) {
   const events = [], values = new Map(), renamed = new Map(), buffers = new Map(), tasks = [];
   const writes = [], pokes = [], files = new Map(), fileHandles = [], targets = new Map(), voiceEvents = [];
+  let messageHook = null;
   let now = 0, cpu = 0, context;
   const math = Object.create(Math); math.random = seeded(seed);
   const clock = () => now + cpu;
@@ -61,6 +62,7 @@ function makeHost(seed = 91) {
         if (selector === "writewave") writes.push({path: args[0], frames: b.frames, sr: b.sr, channels: b.channels,
           format: b.format, filetype: b.filetype, data: b.data.map(ch => ch.slice())});
       }
+      if (messageHook) messageHook(name, selector, args);
     }
   }]));
   function Buffer(name) {
@@ -140,13 +142,111 @@ function makeHost(seed = 91) {
   function savePreset(filePath = "/tmp/fixture.json") { context.presetwrite(filePath); return JSON.parse(files.get(filePath)); }
   function restore(preset, filePath = "/tmp/restore.json") { files.set(filePath, JSON.stringify(preset)); context.presetread(filePath); }
   return {c: context, events, values, objects, renamed, buffers, tasks, writes, pokes, files, fileHandles, voiceEvents,
-    step, advance, until, source, ready, startLive, renderOnly, output, savePreset, restore, time: clock};
+    step, advance, until, source, ready, startLive, renderOnly, output, savePreset, restore, time: clock,
+    onMessage(fn) { messageHook = fn; }};
 }
 function messages(h, name, selector) { return h.events.filter(e => e.type === "message" && e.name === name && e.selector === selector); }
 function lastMessage(h, name, selector) { return messages(h, name, selector).at(-1); }
 function voices(h, engine, selector, voice) { return h.voiceEvents.filter(e => e.engine === engine && e.selector === selector && (voice === undefined || e.voice === voice)); }
 function outs(h, index, selector) { return h.events.filter(e => e.type === "outlet" && e.index === index && e.args[0] === selector); }
 function pendingLive(h) { return h.tasks.filter(t => t.active && t.createdState === "live"); }
+function audioWrites(h) {
+  return h.events.filter(e => e.type === "message" && /^audio_ad_/.test(e.name)
+    && ["int", "float"].includes(e.selector));
+}
+// Native boundary fixture, never a claim about available or connected devices.
+// Menu responses match adstatus's documented clear/append/set + value protocol.
+function nativeAudio(h, options = {}) {
+  const hardware = {driver: 0, option1: 0, option2: 0, on: options.on === false ? 0 : 1,
+    applyWrites: true, reentrantCallbacks: 0};
+  const drivers = ["Fixture driver A", "Fixture driver B"];
+  const layouts = [
+    {labels: ["Input device", "Output device"], option1: ["Fixture input A", "Fixture input B"], option2: ["Fixture output A", "Fixture output B"]},
+    {labels: ["Audio device", "Driver option 2"], option1: ["Fixture duplex A", "Fixture duplex B"], option2: []}
+  ];
+  hardware.catalogs = layouts; hardware.drivers = drivers;
+  const choices = kind => kind === "driver" ? drivers : layouts[hardware.driver][kind];
+  function menu(kind, full) {
+    const items = choices(kind), index = items.length ? hardware[kind] : -1;
+    if (full) {
+      h.c.audiomenu(kind, "clear");
+      for (const item of items) h.c.audiomenu(kind, "append", item);
+    }
+    h.c.audiomenu(kind, "set", index); h.c.audiovalue(kind, index);
+  }
+  h.onMessage((name, selector, args) => {
+    const ui = /^audio_(driver|option1|option2)_menu$/.exec(name);
+    if (ui && selector === "set" && options.reentrant) {
+      hardware.reentrantCallbacks++;
+      h.c.audiochoose(ui[1], args[0]);
+    }
+    const setting = /^audio_ad_(driver|option1|option2|switch)$/.exec(name);
+    if (setting) {
+      const kind = setting[1];
+      if (["int", "float"].includes(selector)) {
+        if (hardware.applyWrites) {
+          if (kind === "switch") hardware.on = Number(args[0]);
+          else {
+            hardware[kind] = Number(args[0]);
+            if (kind === "driver") hardware.option1 = hardware.option2 = 0;
+          }
+        }
+        if (options.writeFeedback !== false) {
+          if (kind === "switch") h.c.audioswitch(hardware.on); else menu(kind, false);
+        }
+        if (hardware.afterWrite) hardware.afterWrite(kind, Number(args[0]));
+      } else if (["loadbang", "bang"].includes(selector)) {
+        if (kind === "switch") h.c.audioswitch(hardware.on); else menu(kind, selector === "loadbang");
+      }
+    }
+    const label = /^audio_name_option([12])$/.exec(name);
+    if (label && selector === "loadbang") {
+      const number = Number(label[1]);
+      h.c.audioname(number, "clear");
+      h.c.audioname(number, "append", layouts[hardware.driver].labels[number - 1]);
+      h.c.audioname(number, "set", 0);
+    }
+  });
+  return hardware;
+}
+function readyAudio(h, options = {}) {
+  const hardware = nativeAudio(h, options); h.ready([0, 1, 2], options.on !== false, options.sr || 2000);
+  h.advance(40); return hardware;
+}
+
+test("native audio controls route feedback and requests through the guarded controller", () => {
+  const boxes = new Map(patch.boxes.map(({box}) => [box.id, box]));
+  const lines = patch.lines.map(({patchline}) => patchline);
+  const edge = (from, outlet, to, inlet = 0) => lines.some(line =>
+    line.source[0] === from && line.source[1] === outlet
+    && line.destination[0] === to && line.destination[1] === inlet);
+  for (const [kind, native] of [["driver", "adstatus driver"], ["option1", "adstatus option 1"], ["option2", "adstatus option 2"]]) {
+    check(boxes.get("audio_ad_" + kind).text === native, "driver options use native one-based adstatus option numbers");
+    check(edge("audio_ad_" + kind, 0, "audio_menu_" + kind)
+      && edge("audio_menu_" + kind, 0, "controller"), "menu clear/append/set feedback reaches the controller");
+    check(edge("audio_ad_" + kind, 1, "audio_value_" + kind)
+      && edge("audio_value_" + kind, 0, "controller"), "current native index reaches the controller");
+    check(boxes.get("audio_choose_" + kind).text === "prepend audiochoose " + kind
+      && edge("audio_" + kind + "_menu", 0, "audio_choose_" + kind)
+      && edge("audio_choose_" + kind, 0, "controller"), "user menu selection reaches the guarded change handler");
+    check(!lines.some(line => line.destination[0] === "audio_ad_" + kind), "no unguarded native setting writes are connected by patch cords");
+  }
+  for (const number of [1, 2]) {
+    check(boxes.get("audio_name_option" + number).text === "adstatus optionname " + number,
+      "driver-specific option labels use matching native option numbers");
+    check(edge("audio_name_option" + number, 0, "audio_name_msg" + number)
+      && edge("audio_name_msg" + number, 0, "controller"), "driver-specific option names reach the controller");
+  }
+  check(edge("audio_ad_switch", 1, "audio_switch_msg") && edge("audio_switch_msg", 0, "controller"),
+    "confirmed DSP switch state is read from the value outlet");
+  check(boxes.get("audio_setup_native").text === "; dsp open", "Audio Setup uses the native DSP settings shortcut");
+  const cancel = [...boxes.values()].find(box => box.varname === "audio_test_stop");
+  const fade = [...boxes.values()].find(box => box.varname === "live_stop");
+  check(cancel && cancel.text === "stop" && edge(cancel.id, 0, "test_delay"),
+    "audio changes can cancel a native test-tone start still waiting in delay");
+  check(fade && fade.text === "0. 10" && ["test_envelope", "run_gate", "live_gate"].every(id => edge(fade.id, 0, id)),
+    "audio changes can fade test tone, finite playback, and live mix before touching hardware");
+});
 
 test("initialization and all five mode views use the built patch names", () => {
   const h = makeHost(), c = h.c; h.ready();
@@ -528,6 +628,218 @@ test("shutdown cancels live, recording, source, and render tasks", () => {
     for (const task of stale) task.fn.call(task.self); h.advance(1000);
     check(h.voiceEvents.length === commands && h.pokes.length === writes, "stale jobs cannot produce work after shutdown");
   }
+});
+
+test("audio initialization, refresh, polling, and reentrant readback never write settings", () => {
+  const h = makeHost(), c = h.c, hardware = readyAudio(h, {reentrant: true});
+  equal(c.CMPEAudioState().menus.driver, {items: ["Fixture driver A", "Fixture driver B"], index: 0}, "native driver menu is enumerated without assumptions");
+  equal(c.CMPEAudioState().labels, ["Input device", "Output device"], "native driver labels survive numerical set feedback");
+  check(hardware.reentrantCallbacks > 0, "the fixture exercises feedback through menu set messages");
+  c.audiorefresh(); h.advance(4050); c.loadbang();
+  check(audioWrites(h).length === 0, "initial and repeated read requests do not change global hardware settings");
+  for (const name of ["audio_ad_driver", "audio_ad_option1", "audio_ad_option2", "audio_name_option1", "audio_name_option2"])
+    check(messages(h, name, "loadbang").length >= 2, "refresh asks native Max to rebuild its own device lists");
+  h.startLive(1); const token = c.CMPEState().liveToken;
+  c.audiorefresh(); h.advance(2050);
+  check(c.state === "live" && c.CMPEState().liveToken === token, "read-only refresh and unchanged polling do not interrupt performance");
+  check(audioWrites(h).length === 0 && !c.CMPEAudioState().changing, "menu feedback does not leak into a user change"); c.stop();
+});
+
+test("invalid, unchanged, or unsupported audio choices cannot write hardware", () => {
+  const h = makeHost(), c = h.c, hardware = readyAudio(h);
+  for (const value of [-1, 2, .5, NaN, Infinity]) c.audiochoose("driver", value);
+  c.audiochoose("missing", 1); c.audiochoose("driver", 0);
+  hardware.catalogs[0].option2 = []; hardware.option2 = -1; c.audiorefresh(); c.audiochoose("option2", 0);
+  h.advance(200);
+  check(audioWrites(h).length === 0, "only an explicit valid changed index can request a native write");
+  equal(lastMessage(h, "audio_option2_menu", "ignoreclick").args, [1], "a driver option without reported choices is disabled");
+  equal(lastMessage(h, "audio_option2_menu", "append").args, ["Choose in Audio Setup"], "unsupported option exposes a usable fallback");
+  equal(lastMessage(h, "audio_setup", "ignoreclick").args, [0], "native Audio Setup remains accessible");
+});
+
+test("driver changes fade first, retain rendered audio, and rebuild driver-specific choices", () => {
+  const h = makeHost(), c = h.c, hardware = readyAudio(h, {reentrant: true}); h.renderOnly();
+  const result = h.output(), nativeStarts = messages(h, "audio_driver", "startwindow").length, requested = h.time();
+  c.audiochoose("driver", 1);
+  check(c.CMPEAudioState().changing && c.CMPEAudioState().pending.phase === "fade", "explicit change waits in the fade phase");
+  check(messages(h, "audio_test_stop", "bang").length > 0 && messages(h, "live_stop", "bang").length > 0, "pending test tone and all output gates stop immediately");
+  h.advance(29); check(audioWrites(h).length === 0, "hardware remains untouched for the fade interval"); h.advance(1);
+  equal(audioWrites(h).map(e => [e.name, e.args[0]]), [["audio_ad_switch", 0], ["audio_ad_driver", 1]], "DSP is disabled before changing the selected native driver index");
+  near(audioWrites(h)[0].now - requested, 30, 1e-9, "hardware changes occur after the full 30 ms fade");
+  for (const name of ["audio_test_stop", "live_stop"])
+    check(lastMessage(h, name, "bang").now < audioWrites(h)[0].now, "native stop precedes global audio changes");
+  h.advance(150);
+  check(!c.CMPEAudioState().changing && !c.CMPEAudioState().audioOn && hardware.on === 0, "confirmed driver change leaves audio off for an explicit restart");
+  equal(c.CMPEAudioState().labels, ["Audio device", "Driver option 2"], "new driver's actual option names replace old labels");
+  equal(c.CMPEAudioState().menus.option1.items, ["Fixture duplex A", "Fixture duplex B"], "new driver's actual device choices replace the previous list");
+  check(c.CMPEAudioState().menus.option2.items.length === 0, "unused second option stays empty");
+  equal(lastMessage(h, "audio_option2_menu", "ignoreclick").args, [1], "unused second option remains disabled");
+  check(c.outputReady && h.output() === result && c.state === "ready", "device selection preserves the cached completed render");
+  check(messages(h, "audio_driver", "startwindow").length === nativeStarts, "device selection does not start another performance");
+});
+
+test("device selection cancels finite audio waits, rendering, and playback", () => {
+  for (const stage of ["waiting", "rendering", "playing"]) {
+    const h = makeHost(), c = h.c; readyAudio(h, {on: stage !== "waiting"});
+    if (stage === "playing") { h.renderOnly(); c.play(); h.until(() => c.state === "playing"); }
+    else { c.play(); if (stage === "rendering") h.until(() => c.state === "rendering"); }
+    check(c.state === stage, "fixture enters the relevant finite state before changing devices");
+    const staleRender = c.renderTask, written = h.pokes.length, starts = outs(h, 3, "bang").length;
+    c.audiochoose("option2", 1);
+    if (staleRender) staleRender.fn.call(staleRender.self);
+    h.advance(180);
+    check(["idle", "ready"].includes(c.state) && !c.CMPEAudioState().changing, "device change completes with the transport stopped");
+    check(h.pokes.length === written && outs(h, 3, "bang").length === starts, "cancelled render/wait cannot write or autoplay later");
+    check(!c.audioTask || !c.audioTask.active, "audio startup polling is cancelled before changing devices");
+    if (stage === "playing") check(c.outputReady, "completed audio stays available after playback is stopped");
+  }
+});
+
+test("every live mode closes recording and cancels voices before a hardware change", () => {
+  for (const mode of [1, 2, 3]) {
+    const h = makeHost(), c = h.c; readyAudio(h, {sr: mode === 3 ? 48000 : 2000}); h.startLive(mode);
+    c.recordpath("/tmp/audio-device-change.wav");
+    check(c.CMPEState().recording, "fixture has an open native recording before changing hardware");
+    const stale = pendingLive(h); c.audiochoose("option1", 1);
+    check(!c.CMPEState().recording && !c.CMPEState().recordArmed && c.CMPEState().activeTasks === 0,
+      "live performance scheduling and recording stop immediately");
+    const commands = h.voiceEvents.length;
+    for (const task of stale) task.fn.call(task.self);
+    h.advance(180);
+    check(h.voiceEvents.length === commands && c.state === "idle", "stale live callbacks cannot restart audio during a hardware change");
+    const firstWrite = audioWrites(h)[0];
+    check(lastMessage(h, "recorder", "int").args[0] === 0 && lastMessage(h, "recorder", "int").now < firstWrite.now,
+      "recording is closed before the first global DSP write");
+    check(lastMessage(h, "audio_test_stop", "bang").now < firstWrite.now
+      && lastMessage(h, "live_stop", "bang").now < firstWrite.now, "native test-tone cancellation and mix fade precede hardware changes");
+  }
+});
+
+test("audio power follows confirmed readback without automatically starting a performance", () => {
+  const h = makeHost(), c = h.c; readyAudio(h, {on: false, writeFeedback: false});
+  c.audiopower(); h.advance(30);
+  equal(audioWrites(h).map(e => [e.name, e.args[0]]), [["audio_ad_switch", 1]], "power ON requests only the native DSP switch");
+  check(lastMessage(h, "audio_power", "text").args[0] === "AUDIO OFF", "button does not report success before native readback");
+  h.advance(150);
+  check(c.CMPEAudioState().audioOn && lastMessage(h, "audio_power", "text").args[0] === "AUDIO ON", "confirmed native state updates the power display");
+  check(c.state === "idle" && h.voiceEvents.length === 0 && outs(h, 3, "bang").length === 0, "power ON does not start playback or a live instrument");
+  c.audiopower(); h.advance(180);
+  check(!c.CMPEAudioState().audioOn && lastMessage(h, "audio_power", "text").args[0] === "AUDIO OFF", "power OFF is confirmed and displayed");
+});
+
+test("unknown or rejected native power state stays explicit and recoverable", () => {
+  const unknown = makeHost(); unknown.c.loadbang(); unknown.advance(100); unknown.c.audiopower();
+  check(audioWrites(unknown).length === 0 && !unknown.c.CMPEAudioState().changing, "unknown DSP state cannot be guessed into a power change");
+  check(lastMessage(unknown, "audio_power", "text").args[0] === "AUDIO ?", "unknown native state is labelled honestly");
+  const h = makeHost(), c = h.c, hardware = readyAudio(h, {on: false}); hardware.applyWrites = false;
+  c.audiopower(); h.advance(180);
+  check(!c.CMPEAudioState().changing && !c.CMPEAudioState().audioOn, "a rejected request does not become a false on state");
+  check(/unconfirmed/.test(h.values.get("audio_status")) && /AUDIO SETUP/.test(h.values.get("status")), "failed confirmation explains the native settings recovery path");
+});
+
+test("Audio Setup stops running audio before opening native settings", () => {
+  const h = makeHost(), c = h.c; readyAudio(h); h.startLive(1); c.recordpath("/tmp/audio-setup.wav");
+  c.audiosetup(); h.advance(29);
+  check(messages(h, "audio_setup_native", "bang").length === 0 && audioWrites(h).length === 0, "settings shortcut waits for the mix fade");
+  check(c.state === "idle" && !c.CMPEState().recording, "settings shortcut closes the live performance and its recording immediately");
+  h.advance(1);
+  check(messages(h, "audio_setup_native", "bang").length === 1, "native settings open once after fading");
+  check(h.events.indexOf(audioWrites(h)[0]) < h.events.indexOf(lastMessage(h, "audio_setup_native", "bang")), "global audio stops before the settings window opens");
+  h.advance(150); check(!c.CMPEAudioState().audioOn && !c.CMPEAudioState().changing, "opening settings leaves audio stopped until explicitly restarted");
+});
+
+test("STOP and shutdown cancel pending audio changes and reject stale callbacks", () => {
+  for (const action of ["stop", "shutdown"]) {
+    const h = makeHost(), c = h.c; readyAudio(h); c.audiochoose("driver", 1);
+    const stale = h.tasks.filter(t => t.active); h.advance(10); c[action]();
+    for (const task of stale) task.fn.call(task.self);
+    h.advance(300);
+    check(audioWrites(h).length === 0 && !c.CMPEAudioState().changing, "cancelled fade never applies its pending hardware request");
+    if (action === "shutdown") check(h.tasks.every(t => !t.active) && c.CMPEAudioState().disposed, "shutdown removes polling as well as change tasks");
+  }
+  const h = makeHost(), c = h.c; readyAudio(h); c.audiochoose("driver", 1); h.advance(30);
+  const stale = h.tasks.filter(t => t.active); c.shutdown(); const count = audioWrites(h).length;
+  for (const task of stale) task.fn.call(task.self); h.advance(300);
+  check(audioWrites(h).length === count && h.tasks.every(t => !t.active), "shutdown after applying a setting cannot run a stale confirmation or poll");
+});
+
+test("synchronous STOP or shutdown during DSP feedback prevents the following device write", () => {
+  for (const action of ["stop", "shutdown"]) {
+    const h = makeHost(), c = h.c, hardware = readyAudio(h);
+    hardware.afterWrite = kind => { if (kind === "switch") { hardware.afterWrite = null; c[action](); } };
+    c.audiochoose("driver", 1); h.advance(300);
+    equal(audioWrites(h).map(e => [e.name, e.args[0]]), [["audio_ad_switch", 0]], "cancellation inside native DSP feedback fences the subsequent driver selection");
+    check(!c.CMPEAudioState().changing && c.CMPEAudioState().pending === null, "reentrant cancellation clears the pending transaction");
+    if (action === "shutdown") check(h.tasks.every(t => !t.active), "reentrant shutdown leaves no polling or confirmation tasks");
+  }
+});
+
+test("changed device catalogs during the fade cannot select a different physical choice", () => {
+  for (const change of ["driver-reorder", "option-reorder", "replacement", "disappearance", "driver-changed"]) {
+    const h = makeHost(), c = h.c, hardware = readyAudio(h);
+    const kind = change === "driver-reorder" ? "driver" : "option2";
+    c.audiochoose(kind, 1); h.advance(10);
+    if (change === "driver-reorder") hardware.drivers.reverse();
+    else if (change === "option-reorder") hardware.catalogs[0].option2.reverse();
+    else if (change === "replacement") hardware.catalogs[0].option2[1] = "Fixture replacement output";
+    else if (change === "disappearance") hardware.catalogs[0].option2.pop();
+    else hardware.driver = 1;
+    h.advance(170);
+    equal(audioWrites(h).map(e => [e.name, e.args[0]]), [["audio_ad_switch", 0]], "obsolete indices cannot write a driver or device after enumeration changes");
+    check(!c.CMPEAudioState().changing && !c.CMPEAudioState().audioOn, "invalidated selection ends with audio safely stopped");
+    check(/choices changed/.test(h.values.get("audio_status")), "changed choice identity is reported for a fresh user selection");
+  }
+});
+
+test("final device confirmation checks the selected identity, not only its old numeric index", () => {
+  const h = makeHost(), c = h.c, hardware = readyAudio(h);
+  c.audiochoose("option2", 1); h.advance(30);
+  check(audioWrites(h).some(e => e.name === "audio_ad_option2" && e.args[0] === 1), "fixture applies the originally selected option before it changes");
+  hardware.catalogs[0].option2[1] = "Fixture newly enumerated output"; h.advance(150);
+  check(!c.CMPEAudioState().changing && /unconfirmed/.test(h.values.get("audio_status")), "same index with a new identity cannot be reported as confirmed");
+});
+
+test("Audio Setup retains a native recovery path when adstatus controls are missing", () => {
+  const h = makeHost(), c = h.c; readyAudio(h);
+  h.objects.delete("audio_ad_switch"); h.objects.delete("audio_setup_native");
+  c.audiosetup(); h.advance(30);
+  check(messages(h, "audio_driver", "stop").length === 1 && messages(h, "audio_driver", "open").length === 1,
+    "existing native dac~ stops audio and opens settings as the fallback");
+  check(h.events.indexOf(lastMessage(h, "audio_driver", "stop")) < h.events.indexOf(lastMessage(h, "audio_driver", "open")),
+    "fallback stop still precedes opening native settings");
+  h.advance(150); check(!c.CMPEAudioState().changing, "missing control objects do not leave a permanent settings lock");
+});
+
+test("external native settings changes stop a live performance without writing preferences", () => {
+  const h = makeHost(), c = h.c, hardware = readyAudio(h); h.startLive(1); c.recordpath("/tmp/external-change.wav");
+  hardware.driver = 1; h.advance(2050);
+  check(c.state === "idle" && !c.CMPEState().recording && c.CMPEState().activeTasks === 0, "polling a real external driver change closes performance and recording");
+  check(audioWrites(h).length === 0, "observing a change from Max does not overwrite global hardware choices");
+  equal(c.CMPEAudioState().menus.option1.items, ["Fixture duplex A", "Fixture duplex B"], "external driver selection rebuilds the dependent device list");
+});
+
+test("native menu rebuilds retain identity long enough to stop a changed device once", () => {
+  const h = makeHost(), c = h.c, hardware = readyAudio(h); h.startLive(1);
+  hardware.catalogs[0].option2[0] = "Fixture replacement at the same index";
+  function notify() {
+    c.audiomenu("option2", "clear");
+    for (const item of hardware.catalogs[0].option2) c.audiomenu("option2", "append", item);
+    c.audiomenu("option2", "set", 0); c.audiovalue("option2", 0);
+  }
+  notify(); h.advance(10);
+  check(c.state === "idle" && c.CMPEState().activeTasks === 0, "changed item identity survives clear/append/set and stops the live mode");
+  const stops = messages(h, "audio_test_stop", "bang").length;
+  notify(); h.advance(10);
+  check(messages(h, "audio_test_stop", "bang").length === stops, "repeating unchanged native feedback does not stop again");
+  check(audioWrites(h).length === 0, "native change notifications never select hardware themselves");
+});
+
+test("instrument presets do not save or restore global audio-device settings", () => {
+  const h = makeHost(), c = h.c; readyAudio(h); c.mode(1);
+  const preset = h.savePreset();
+  check(!Object.keys(preset).some(key => /audio|driver|device/i.test(key)), "saved instrument settings exclude global hardware preferences");
+  h.restore(preset); for (let i = 0; i < 3; i++) h.source(i); h.advance(200);
+  check(audioWrites(h).length === 0, "restoring instrument settings cannot select a device or toggle audio");
 });
 
 console.log(JSON.stringify({runtime: bundle ? "bundle" : "modules", scenarios, checks, framesChecked, failures}, null, 2));

@@ -12,6 +12,14 @@ ISJS, Many, and RMHS use native `poly~` audio voices and scheduled control messa
 
 The controller owns tasks, voice lifetimes, mode changes, and recording state. STOP and mode changes cancel the instrument's pending work, fade and clear its live voices, and stop its recorder. They do not perform SuperCollider-style server-wide cleanup.
 
+### Native audio settings
+
+The last bundled module, `developer/cmpe_audio_settings.js`, manages the audio controls. The native graph uses `adstatus driver`, `adstatus option 1/2`, and `adstatus optionname 1/2` to obtain the available choices and their labels. Option indices are driver-specific; they are not assumed to mean input or output device. `adstatus output` describes channel mapping rather than hardware selection, so the patch leaves full channel mapping to Max's Audio Status window. See the official [adstatus reference](https://docs.cycling74.com/reference/adstatus/).
+
+Menu population and current-value feedback are read-only. Only a deliberate user selection issues a setting command. A change first stops the instrument and recorder, cancels a pending test tone, and waits 30 ms for the stop fade before turning DSP off and applying the choice. The available choices are read again before the device write; a changed or missing selection is rejected rather than reusing an obsolete index. The resulting device identity and DSP state are read back. Audio remains off until the user enables it or starts an instrument. AUDIO SETUP follows the same stop path and opens the native window with `; dsp open`, as documented in [Controlling Max with Messages](https://docs.cycling74.com/userguide/controlling_max_with_messages/).
+
+Driver, device, and DSP state are Max-wide settings. They are intentionally excluded from musical presets. A periodic read checks current state; REFRESH rebuilds the available lists after hardware changes. The native Audio Status window remains available when a driver does not expose usable option menus.
+
 ## Build and available automated checks
 
 Run commands from the project root:
@@ -56,13 +64,15 @@ The SIOE source cache requests contiguous pages of at most 2,048 frames and reta
 
 ## Completed controller and distribution validation
 
-`test_cmpe_controller.js` completed **28 scenarios, 7,267 checks, and 5,182 rendered audio frames checked**, with no failures. The same suite passed against both the separate source modules and the generated `cmpe_variety.js` distribution. It executes the actual controller and models with simulated Max tasks, buffers, UI objects, files, and native-message boundaries.
+`test_cmpe_controller.js` completed **45 scenarios, 7,398 checks, and 5,182 rendered audio frames checked**, with no failures. The same suite passed against both the separate source modules and the generated `cmpe_variety.js` distribution. It executes the actual controller and models with simulated Max tasks, buffers, UI objects, files, and native-message boundaries.
 
 The scenarios cover all five modes, required source counts, hidden unused source controls, audio startup and cancellation, DSP shutdown and sample-rate changes, live parameter changes, Many voice reuse and retirement, stale-task cancellation, RMHS automatic completion, complete SIOE rendering and normalization, cached replay, export commands, recording state and stalled-recorder detection, settings round trips, invalid settings, and shutdown. Preset regressions check serialized native reads, late completion after a timeout, cleared empty slots, newest-preset selection, queued-restore cancellation, and startup DEMO cancellation.
 
+Audio-control regressions check that initialization, refresh, polling, feedback, and preset restoration do not write hardware settings. They cover the stop fade and delayed test-tone cancellation, driver/device identity changes during that fade, unsupported or unconfirmed choices, external native changes, power readback, native Audio Setup recovery, and stale callbacks after STOP or shutdown. The native graph checks require every menu selection to pass through the controller before reaching an audio setting.
+
 The retained APG suites also passed: **710 plans / 500,424 assertions**, **25 renderer plans / 907,564 checks**, and **17 controller scenarios / 1,499,742 checks**. The CMPE controller additionally checks palindrome sample symmetry after switching back from another instrument.
 
-The main builder validates **200 objects and 190 patch cords**, including connection endpoints, port indices, duplicate cords, unique scripting names, and presentation bounds/overlap. The voice builders validate their message and signal connections: sample voice **40 objects / 55 cords**, Many voice **77 / 152**, and drone voice **45 / 60**. Internal layout previews were reviewed for readability; they are layout approximations, not native Max screenshots. Both shipped CMPE JavaScript files pass an ECMAScript 5 parser check.
+The main builder validates **233 objects and 220 patch cords**, including connection endpoints, port indices, duplicate cords, unique scripting names, and presentation bounds/overlap. The voice builders validate their message and signal connections: sample voice **40 objects / 55 cords**, Many voice **77 / 152**, and drone voice **45 / 60**. All five interface previews use the generated 960 × 844 presentation layout, its native color attributes, and the actual XY-pad drawing code. Text-fit and visible-overlap checks pass, and the images were reviewed for readability. They are labelled interface previews, not native Max screenshots; no attached hardware is claimed. Both shipped CMPE JavaScript files pass an ECMAScript 5 parser check.
 
 These results establish modeled behavior and structural consistency. They do not execute the native MSP voices, draw Max's actual UI, or write audio through Max's native disk recorder.
 
@@ -98,14 +108,14 @@ SAVE SET / LOAD SET use JSON files rather than the source's single temporary in-
 
 Preset restoration waits for existing native source reads to finish before issuing replacement reads. Native busy flags are cleared by completion bangs, not by JavaScript timeouts: a timeout cannot cancel a `buffer~` read. Empty saved slots clear their old paths, metadata, and samples. A new valid preset replaces a queued one; STOP or changing modes cancels the queued restore. A native file error that never produces completion requires reopening the patch before retrying that slot. See Cycling '74's [asynchronous object lifecycle](https://docs.cycling74.com/userguide/patcher_lifecycle/) and [buffer~ reference](https://docs.cycling74.com/reference/buffer~/).
 
-Live recording is 24-bit stereo WAV before monitor gain. Source/layer/drone levels affect the capture; Vol (dB) and the independent test tone do not. APG/SIOE export the complete cached result, regardless of the selected loop. Recording and finite-buffer export are distinct signal paths.
+Live recording is 24-bit stereo WAV before monitor gain. Source/layer/drone levels affect the capture; Volume (dB) and the independent test tone do not. APG/SIOE export the complete cached result, regardless of the selected loop. Recording and finite-buffer export are distinct signal paths.
 
 ## Native Max acceptance work still required
 
 The following should be checked in an actual Max 8/9 session before treating the collection as native-verified:
 
 1. Open the complete folder and confirm that the main patch, runtime, XY interface, and every voice subpatch load without Max Console errors.
-2. Verify TEST SOUND and the selected device, then start each mode directly after launch. Confirm that source requirements, scopes, slow fades, and RMHS completion behave as described.
+2. Check the driver and dynamically labelled option menus against Max's Audio Status window. Confirm that opening the patch and REFRESH preserve hardware settings. Change an interface while playing, recording, rendering, and waiting for TEST SOUND; verify that the old work stops before the device change and does not resume. Check power readback, connect/disconnect an interface, and inspect drivers that expose fewer than two options. Then verify TEST SOUND and start each mode directly after launch. Confirm source requirements, scopes, slow fades, and RMHS completion.
 3. Move the ISJS pad and change its live rate/level controls. Change Many settings during playback and confirm that only new layers receive them.
 4. Stop and switch modes during active performances, audio startup, rendering, and an armed/running recording. Check that no old voice or callback resumes afterward.
 5. Render APG and SIOE; inspect both waveform channels, drag a selection, loop it, restore full range, and replay the cached result.

@@ -11,6 +11,13 @@
     var i;
     for (i = 0; i < names.length; i++) base[names[i]] = g[names[i]];
     var modeIndex = 0, modeNames = ["APG", "ISJS", "Many", "RMHS", "SIOE"];
+    var modeColors = [
+        [0.031373, 0.498039, 0.513725, 1], // APG: teal
+        [0.192157, 0.372549, 0.650980, 1], // ISJS: blue
+        [0.447059, 0.341176, 0.650980, 1], // Many: violet
+        [0.600000, 0.368627, 0.196078, 1], // RMHS: copper
+        [0.596078, 0.419608, 0.098039, 1]  // SIOE: ochre
+    ];
     var grain = CMPEModel.defaultSettings("isjs"), many = CMPEModel.defaultSettings("many");
     var drone = CMPEModel.defaultSettings("rmhs"), cut = CMPEModel.defaultSettings("sioe");
     var liveToken = 0, taskSerial = 0, tasks = {}, grainTasks = [null, null, null];
@@ -126,9 +133,9 @@
         var j, apg = modeIndex === 0, rendered = apg || modeIndex === 4;
         var sourceCount = modeIndex === 3 ? 0 : ((modeIndex === 2 || modeIndex === 4) ? 1 : 3);
         for (j = 0; j < 5; j++) {
-            objectMessage("mode" + j, ["bgcolor"].concat(j === modeIndex ? [0.04, 0.04, 0.04, 1] : [0.92, 0.92, 0.92, 1]));
-            objectMessage("mode" + j, ["bgoncolor"].concat(j === modeIndex ? [0.24, 0.24, 0.24, 1] : [0.76, 0.76, 0.76, 1]));
-            var foreground = j === modeIndex ? [1, 1, 1, 1] : [0.04, 0.04, 0.04, 1];
+            objectMessage("mode" + j, ["bgcolor"].concat(j === modeIndex ? modeColors[j] : [0.898039, 0.925490, 0.941176, 1]));
+            objectMessage("mode" + j, ["bgoncolor"].concat(j === modeIndex ? modeColors[j] : [0.839216, 0.882353, 0.909804, 1]));
+            var foreground = j === modeIndex ? [1, 1, 1, 1] : [0.105882, 0.160784, 0.211765, 1];
             objectMessage("mode" + j, ["textcolor"].concat(foreground));
             objectMessage("mode" + j, ["textoncolor"].concat(foreground));
             objectMessage("mode" + j, ["textovercolor"].concat(foreground));
@@ -162,14 +169,14 @@
             objectMessage("xy_pad", ["set", grain.position, grain.densityY]);
         } else if (modeIndex === 2) {
             setParam(0, "Layer level", many.level, 0, 2);
-            setParam(1, "Max delay (seconds)", many.delayMaxMs / 1000, 0.1, 0.5);
-            setParam(2, "Max interval (seconds)", many.intervalMaxMs / 1000, 5, 20);
+            setParam(1, "Max delay (s)", many.delayMaxMs / 1000, 0.1, 0.5);
+            setParam(2, "Max interval (s)", many.intervalMaxMs / 1000, 5, 20);
             menu("Pitch set", ["Major", "Minor", "Pentatonic", "Atonal", "Microtonal"], many.pitchSet);
         } else if (modeIndex === 3) {
             setParam(0, "Drone level", drone.level, 0, 1);
             setParam(1, "Fundamental (Hz)", drone.fundamentalHz, 20, 20000);
-            setParam(2, "Interval (semitones)", drone.intervalSemitones, 0, 24);
-            setParam(3, "Duration setting (s)", drone.durationSeconds, 1, 600);
+            setParam(2, "Interval (st)", drone.intervalSemitones, 0, 24);
+            setParam(3, "Duration (s)", drone.durationSeconds, 1, 600);
             setParam(4, "Harmonics", drone.harmonics, 3, 20);
         } else if (modeIndex === 4) {
             setParam(0, "Slices", cut.count, 1, 100);

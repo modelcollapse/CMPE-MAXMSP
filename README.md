@@ -7,13 +7,24 @@
 1. **[Download the complete project ZIP](https://github.com/modelcollapse/apg-wave/archive/refs/heads/main.zip)**, or choose **Code → Download ZIP** on this repository.
 2. Extract the ZIP into a folder on your computer.
 3. Open **`CMPE_Variety_Pack.maxpat`** in Max.
-4. The three included demo samples load automatically. Choose an instrument and press **PLAY** or **START**.
+4. Choose your audio interface in the top audio controls, or open **AUDIO SETUP**. Use **TEST SOUND** to check the output.
+5. The three included demo samples load automatically. Choose an instrument and press **PLAY** or **START**.
 
 Keep all the files in the extracted folder together. The main patch needs its JavaScript files, voice patches, and demo audio beside it. Downloading only a `.maxpat` file is insufficient. Downloading the ZIP does not open it in Max; extract it first.
 
 The collection is designed for **Max 8 or Max 9**, using stock Max/MSP objects and the legacy `js` object. No third-party externals, Node.js, or Python are required to play it. Close older copies before opening this version. Use **TEST SOUND** to check Max’s selected audio output.
 
 **Native Max was unavailable during development.** The models, rendered samples, controller behavior, and patch connections have automated checks; actual Max object loading, audible output, mouse interaction, and disk recording still require verification in Max. See [validation details](developer/CMPE_VALIDATION.md).
+
+## Choose your audio interface
+
+The top row contains **Driver** and two option menus supplied by the selected Max driver. Their labels come from Max: a driver may expose **Input Device** and **Output Device**, while another driver exposes different options. Choose the interface in the menu bearing the appropriate label. No particular hardware names or device numbers are built into the patch.
+
+**AUDIO SETUP** opens Max's full Audio Status window for device settings, sample rate, buffer size, and output-channel mapping. Use **REFRESH** after connecting an interface or changing settings in that window. The audio button and status text show Max's reported on/off state.
+
+Changing a driver or device, or opening AUDIO SETUP, stops this patch's playback and recording first and turns Max audio off. Press PLAY/START or use the audio power button when the new interface is ready. Audio settings apply to Max and are not stored in the musical **SAVE SET** files.
+
+The interface uses a light background, dark text, a distinct selected color for each instrument, and tinted source labels. The instrument name remains visible alongside its color.
 
 ## Five instruments
 
@@ -31,7 +42,7 @@ ISJS and Many continue until stopped. RMHS finishes automatically after its plan
 
 ## Interface previews
 
-These images are rendered from the shipped Max patch layout and its controller state. APG and SIOE show output generated from the included demo sounds by the production renderer. They are **interface previews, not native Max screenshots**; live instruments are shown stopped.
+These images are rendered from the shipped Max patch layout and its controller state. APG and SIOE show output generated from the included demo sounds by the production renderer. They are **interface previews, not native Max screenshots**; live instruments are shown stopped. Device menus show fallback placeholders because no physical audio hardware was queried for these images.
 
 ### APG
 
@@ -69,6 +80,9 @@ These images are rendered from the shipped Max patch layout and its controller s
 
 | Control | Behavior |
 | --- | --- |
+| **Driver / device options** | Select an available Max audio driver and the options it exposes. |
+| **AUDIO SETUP / REFRESH** | Open Max's complete audio settings, or read the current device lists and state again. |
+| **Audio on/off** | Enable or disable Max audio; switching off also stops this patch's playback and recording. |
 | **PLAY / START** | Generates and plays APG/SIOE when needed, or starts a live instrument. Later PLAY presses reuse the cached finite result. |
 | **STOP / CANCEL** | Stops playback, cancels generation, clears live tails and scheduled events, and ends recording. |
 | **NEW** | Generates another APG/SIOE result and leaves it ready to play. |
@@ -76,7 +90,7 @@ These images are rendered from the shipped Max patch layout and its controller s
 | **Waveform** | APG/SIOE: drag across either channel to select a playback range. |
 | **Loop selected range / FULL RANGE** | Repeat the selected range, or restore the full finite result. |
 | **Live scopes** | Show the current signal in ISJS, Many, and RMHS. |
-| **Vol (dB)** | Changes listening volume. It does not change exported or recorded audio. |
+| **Volume (dB)** | Changes listening volume. It does not change exported or recorded audio. |
 | **SAVE SET / LOAD SET** | Save or restore instrument settings and source paths in a JSON file. |
 
 Changing instruments stops the previous one and its recording. ISJS rates, levels, and position/density pad remain editable during playback. Many controls affect new layers. RMHS controls are locked until its performance stops.

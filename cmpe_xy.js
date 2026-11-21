@@ -14,15 +14,18 @@ function set(x, y) {
 function paint() {
     var w = box.rect[2] - box.rect[0], h = box.rect[3] - box.rect[1];
     var x = 18 + position * (w - 36), y = 18 + (1 - density) * (h - 36);
-    mgraphics.set_source_rgba(0.95, 0.95, 0.95, 1);
+    mgraphics.set_source_rgba(232 / 255, 243 / 255, 244 / 255, 1);
     mgraphics.rectangle(0, 0, w, h); mgraphics.fill();
-    mgraphics.set_source_rgba(0.55, 0.55, 0.55, 1); mgraphics.set_line_width(1);
+    mgraphics.set_source_rgba(181 / 255, 204 / 255, 210 / 255, 1); mgraphics.set_line_width(1);
     mgraphics.rectangle(1, 1, w - 2, h - 2); mgraphics.stroke();
-    mgraphics.set_source_rgba(0.75, 0.75, 0.75, 1);
+    mgraphics.set_source_rgba(183 / 255, 216 / 255, 218 / 255, 1);
     mgraphics.move_to(x, 1); mgraphics.line_to(x, h - 1); mgraphics.stroke();
     mgraphics.move_to(1, y); mgraphics.line_to(w - 1, y); mgraphics.stroke();
-    mgraphics.set_source_rgba(0.06, 0.06, 0.06, 1);
+    mgraphics.set_source_rgba(8 / 255, 127 / 255, 131 / 255, 0.14);
+    mgraphics.ellipse(x - 13, y - 13, 26, 26); mgraphics.fill();
+    mgraphics.set_source_rgba(8 / 255, 127 / 255, 131 / 255, 1);
     mgraphics.ellipse(x - 7, y - 7, 14, 14); mgraphics.fill();
+    mgraphics.set_source_rgba(27 / 255, 41 / 255, 54 / 255, 1);
     mgraphics.select_font_face("Arial"); mgraphics.set_font_size(17);
     mgraphics.move_to(10, h - 10); mgraphics.show_text("POSITION  " + Math.round(position * 100) + "%");
     mgraphics.move_to(10, 23); mgraphics.show_text("DENSITY  " + Math.round(density * 100) + "%");

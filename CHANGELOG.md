@@ -1,5 +1,12 @@
 # Changes
 
+## CMPE Variety Pack 1.1.0 — November 21, 2026
+
+- Added a visible audio section with a driver selector, two dynamically labelled driver-option menus, an observed audio on/off state, REFRESH, and a shortcut to Max's full Audio Status window.
+- Device changes stop the current performance, recording, and pending test tone before changing hardware. Opening or refreshing the menus does not overwrite the existing audio-interface settings. Musical presets do not store hardware choices.
+- Reworked the presentation with a light slate background, dark text, teal primary controls, a distinct selected color for each instrument, and tinted sample groups. Larger fields, shorter parameter labels, and a single parameter row improve readability.
+- Updated all five interface previews and the setup guide. The previews remain explicitly labelled; native Max audio-device operation still needs verification in Max.
+
 ## Documentation update — November 21, 2026
 
 Named the README **CMPE Variety Pack for Max** and added five reproducible interface previews. The APG and SIOE images show output generated from the included demo audio; live instruments are shown stopped. Each image is explicitly labelled as a preview rather than a native Max screenshot.

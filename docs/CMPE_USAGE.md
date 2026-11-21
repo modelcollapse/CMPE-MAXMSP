@@ -12,6 +12,20 @@ The patch is designed for Max 8 or Max 9, using stock Max/MSP objects. Python an
 
 The three included synthetic demo sounds load automatically. **DEMO** reloads them. **TEST SOUND** produces a short independent tone to check the current Max audio output. Choose an instrument using the five buttons across the top.
 
+## Choose an audio interface
+
+Use the audio controls at the top before starting an instrument:
+
+1. Choose a **Driver** from Max's available drivers.
+2. Choose the interface in the driver's device menu. Max supplies the two option labels and their choices. Depending on the driver, these may be **Input Device** and **Output Device**, or other driver-specific settings. An unavailable option is left inactive.
+3. Open **AUDIO SETUP** for the complete native settings, including sample rate, buffer size, and mapping the patch's stereo output to physical channels.
+4. Use **REFRESH** after connecting or disconnecting hardware, or after making changes in Audio Setup. It reads the current settings without selecting a different interface.
+5. Check the reported audio state and press **TEST SOUND**. Then use PLAY or START for the chosen instrument.
+
+The audio power button shows the state reported by Max. Driver and device changes stop the current performance, recording, and pending test tone before applying the change. Max audio is left off; press PLAY/START or use the power button when the interface is ready. Turning audio on by itself does not start an instrument. AUDIO SETUP also stops this patch's current performance and turns Max audio off before opening the native window.
+
+The driver, device, and DSP on/off settings apply to Max as a whole. They are not saved in the instrument's JSON settings files. Opening the patch and refreshing the menus do not replace your current hardware choices.
+
 ## Choose an instrument
 
 | Instrument | Audio sources | Start behavior | Output display |
@@ -34,7 +48,7 @@ ISJS, Many, and RMHS start their audio engines immediately after Max audio becom
 
 **STOP** stops playback, cancels an in-progress render, or fades and clears the live voices. It also stops a live recording. Switching instruments stops the previous instrument, its scheduled events, and its recording before showing the next mode. No earlier instrument is left running behind the new one.
 
-The status area shows loading, audio startup, rendering progress, elapsed time, and relevant playback information. The live scopes show the current signal; they are not a stored recording or a selectable waveform. The meters and **Vol (dB)** control are shared by all instruments.
+The status area shows loading, audio startup, rendering progress, elapsed time, and relevant playback information. The live scopes show the current signal; they are not a stored recording or a selectable waveform. The meters and **Volume (dB)** control are shared by all instruments.
 
 ## APG: audio palindrome generator
 
@@ -59,8 +73,8 @@ Many starts overlapping, pitched layers from the beginning of sample 1. Each lay
 | Control | Range and meaning |
 | --- | --- |
 | **Layer level** | 0–2; level of subsequently created layers |
-| **Max delay (seconds)** | 0.1–0.5; sets the range from which each layer's delays are chosen |
-| **Max interval (seconds)** | 5–20; actual time between layers is randomly half to all of this value |
+| **Max delay (s)** | 0.1–0.5 seconds; sets the range from which each layer's delays are chosen |
+| **Max interval (s)** | 5–20 seconds; actual time between layers is randomly half to all of this value |
 | **Pitch set** | Major, Minor, Pentatonic, Atonal, or Microtonal |
 
 Defaults are level 1, maximum delay 0.2 seconds, maximum interval 10 seconds, and Minor. Minor uses the original harmonic-minor collection. Microtonal uses a small stored collection within ±0.15 semitones, or ±15 cents.
@@ -77,8 +91,8 @@ RMHS needs no audio files. It combines a centered harmonic bank with two panned 
 | --- | --- |
 | **Drone level** | 0–1 |
 | **Fundamental (Hz)** | 20–20,000 Hz; base frequency for the harmonic banks |
-| **Interval (semitones)** | 0–24; transposition of the two side banks |
-| **Duration setting (s)** | 1–600; a parameter used to construct the envelopes |
+| **Interval (st)** | 0–24 semitones; transposition of the two side banks |
+| **Duration (s)** | 1–600 seconds; a parameter used to construct the envelopes |
 | **Harmonics** | 3–20; count for each side bank, with a smaller centered bank |
 
 The duration setting is **not the exact final length**. Each voice adds a random 3–20 second attack, a sustain of half the setting, and a release between half and all of the setting. The displayed length and progress use the actual longest planned voice. Controls are locked during the performance; STOP makes them editable again.
@@ -103,7 +117,7 @@ For **APG and SIOE**, use **SAVE WAV** after generation. It saves the **complete
 
 For **ISJS, Many, and RMHS**, use **RECORD WAV** and choose a destination. If the instrument is stopped, the recorder is armed and START begins the capture. If it is already playing, recording starts after the destination is chosen. **STOP REC** ends recording while allowing the performance to continue; STOP or a mode change ends both.
 
-Live recordings are 24-bit stereo WAV files taken **before the listening-volume control**. Vol (dB) changes what you hear but does not change a live recording or finite-mode export. Source levels, Many's layer level, and RMHS's drone level do affect their recorded signal. TEST SOUND is excluded from live recording.
+Live recordings are 24-bit stereo WAV files taken **before the listening-volume control**. Volume (dB) changes what you hear but does not change a live recording or finite-mode export. Source levels, Many's layer level, and RMHS's drone level do affect their recorded signal. TEST SOUND is excluded from live recording.
 
 ## Save and load settings
 
@@ -111,11 +125,11 @@ Live recordings are 24-bit stereo WAV files taken **before the listening-volume 
 
 If a source is already loading, the settings wait for that read to finish before loading the saved files. The status shows that wait. STOP or choosing another instrument cancels the queued settings change. Empty source slots in a saved set clear the corresponding current samples.
 
-The file stores the selected instrument, instrument controls, listening volume, loop-enabled state, and source-file paths. It does **not** embed the sample audio, a rendered composition, a performance, or random seeds. Keep the referenced audio files available at their saved locations; use LOAD to relink a moved file. Regenerating a composition or restarting a performance can produce a different randomized result.
+The file stores the selected instrument, instrument controls, listening volume, loop-enabled state, and source-file paths. It does **not** embed the sample audio, a rendered composition, a performance, random seeds, or audio-interface settings. Keep the referenced audio files available at their saved locations; use LOAD to relink a moved file. Regenerating a composition or restarting a performance can produce a different randomized result.
 
 ## If you hear nothing
 
-Use TEST SOUND first. If it is silent, check the selected output device and audio state in Max's Audio Status window, along with Vol (dB) and the device's physical level. Confirm that the source slots required by the selected mode have finished loading. RMHS does not require sources.
+Use TEST SOUND first. If it is silent, check the device menus and reported audio state at the top, then open AUDIO SETUP to confirm the output device and channel mapping. Check Volume (dB) and the device's physical level. If a menu is unavailable or an interface has just been connected, use REFRESH or choose it in AUDIO SETUP. Confirm that the source slots required by the selected mode have finished loading. RMHS does not require sources.
 
 If a source load has not finished after 30 seconds, the status reports it. Check Max Console for a file error. A late successful load still completes normally. If Max cannot read the file and the load never completes, close and reopen the patch, then choose a readable WAV/AIFF. The patch does not start a second read into the same buffer while the first is pending.
 

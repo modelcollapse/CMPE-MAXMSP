@@ -23,7 +23,9 @@ ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "docs" / "images"
 OUT.mkdir(parents=True, exist_ok=True)
 SCALE = 2
-WIDTH, HEIGHT, FOOTER = 840, 866, 40
+PATCH = json.loads((ROOT / "CMPE_Variety_Pack.maxpat").read_text())["patcher"]
+WIDTH, HEIGHT = [round(n) for n in PATCH["rect"][2:]]
+FOOTER = 40
 
 NODE = r'''
 const fs=require('node:fs'), path=require('node:path'), vm=require('node:vm');
@@ -58,6 +60,7 @@ for(let mode=0;mode<5;mode++){
         box.message=function(selector,...args){
             if(selector==='set'){
                 if(this.maxclass==='comment')this.text=String(args[0]);else this.value=args[0];
+                if(this.maxclass==='jsui')this.xy=args.slice(0,2);
             }else if(selector==='text')this.text=String(args[0]);
             else if(['bgcolor','bgoncolor','textcolor','textoncolor','textovercolor','ignoreclick'].includes(selector))this[selector]=args.length>1?args:args[0];
             else if(selector==='clear'&&this.maxclass==='umenu')this.items=[];
@@ -96,7 +99,9 @@ for(let mode=0;mode<5;mode++){
         if(!t)throw Error('No task; status: '+objects.get('status').text);
         now=Math.max(clock(),t.due);cpu=0;t.active=false;t.fn.call(t.self);now+=cpu;cpu=0;
     }}
-    context.loadbang();until(()=>context.sources.every(Boolean));context.samplerate(48000);context.dspstate(1);context.mode(mode);
+    context.loadbang();until(()=>context.sources.every(Boolean));
+    if(typeof context.CMPEAudioState==='function')until(()=>!context.CMPEAudioState().tasks.boot);
+    context.samplerate(48000);context.dspstate(1);context.mode(mode);
     let waveform=null;
     if(mode===0||mode===4){
         context.newpiece();until(()=>context.state==='ready'&&context.outputReady);
@@ -107,8 +112,20 @@ for(let mode=0;mode<5;mode++){
             return[min,max];
         }));
     }
-    reports.push({mode,boxes:boxes.filter(b=>b.presentation&&!b.hidden),waveform,
-        provenance:mode===0||mode===4?'Production finite renderer, included demo WAVs, 48000 Hz, seeded random 91':'Stopped live mode; no native DSP executed'});
+    // DSP is simulated only to exercise the production finite renderer. The
+    // published still shows audio off and never supplies invented device names.
+    context.dspstate(0);
+    const visible=boxes.filter(b=>b.presentation&&!b.hidden).sort((a,b)=>(b.background||0)-(a.background||0));
+    for(const box of visible.filter(b=>b.maxclass==='jsui'&&b.filename==='cmpe_xy.js')){
+        const calls=[],graphics={init(){},redraw(){}};
+        for(const method of ['set_source_rgba','set_line_width','rectangle','rounded_rectangle','ellipse','fill','stroke','move_to','line_to','select_font_face','set_font_size','show_text'])
+            graphics[method]=(...args)=>calls.push({method,args});
+        const xy=vm.createContext({box:{rect:[0,0,box.presentation_rect[2],box.presentation_rect[3]]},mgraphics:graphics,outlet(){}});
+        vm.runInContext(fs.readFileSync(path.join(root,'cmpe_xy.js'),'utf8'),xy,{filename:'cmpe_xy.js'});
+        if(box.xy)xy.set(...box.xy);xy.paint();box.paintCalls=calls;
+    }
+    reports.push({mode,boxes:visible,waveform,
+        provenance:(mode===0||mode===4?'Production finite renderer, included demo WAVs, 48000 Hz, seeded random 91':'Stopped live mode; no native DSP executed')+'; no audio hardware queried'});
 }
 process.stdout.write(JSON.stringify(reports));
 '''
@@ -136,6 +153,42 @@ def color(value):
     return tuple(round(255 * n) for n in value[:3])
 
 
+def paint_xy(draw, box, x, y):
+    """Replay the real jsui paint routine without running a native Max UI."""
+    ink, thickness, text_size = (0, 0, 0), SCALE, 17
+    shapes, lines, cursor = [], [], (0, 0)
+    for call in box.get("paintCalls", []):
+        method, args = call["method"], call["args"]
+        if method == "set_source_rgba":
+            ink = color(args) + (round(args[3] * 255),)
+        elif method == "set_line_width":
+            thickness = max(1, round(args[0] * SCALE))
+        elif method in ("rectangle", "rounded_rectangle", "ellipse"):
+            a, b, w, h = args[:4]
+            shapes.append((method, (x + a * SCALE, y + b * SCALE,
+                                    x + (a + w) * SCALE, y + (b + h) * SCALE),
+                           round(args[4] * SCALE) if len(args) > 4 else 0))
+        elif method == "move_to":
+            cursor = (x + args[0] * SCALE, y + args[1] * SCALE)
+        elif method == "line_to":
+            end = (x + args[0] * SCALE, y + args[1] * SCALE)
+            lines.append((cursor, end)); cursor = end
+        elif method in ("fill", "stroke"):
+            style = {"fill": ink} if method == "fill" else {"outline": ink, "width": thickness}
+            for shape, bounds, radius in shapes:
+                if shape == "ellipse": draw.ellipse(bounds, **style)
+                elif shape == "rounded_rectangle": draw.rounded_rectangle(bounds, radius=radius, **style)
+                else: draw.rectangle(bounds, **style)
+            for start, end in lines: draw.line((*start, *end), fill=ink, width=thickness)
+            shapes, lines = [], []
+        elif method == "set_font_size":
+            text_size = args[0]
+        elif method == "show_text":
+            draw.text(cursor, str(args[0]), font=font(text_size), fill=ink, anchor="ls")
+        elif method != "select_font_face":
+            raise RuntimeError("Unsupported XY painting method: " + method)
+
+
 def wrap(text, draw, typeface, width):
     lines = []
     for paragraph in str(text).split("\n"):
@@ -155,8 +208,8 @@ issues, outputs = [], []
 for state in states:
     mode = state["mode"]
     name = ["APG", "ISJS", "Many", "RMHS", "SIOE"][mode]
-    canvas = Image.new("RGB", (WIDTH * SCALE, (HEIGHT + FOOTER) * SCALE), "white")
-    draw = ImageDraw.Draw(canvas)
+    canvas = Image.new("RGB", (WIDTH * SCALE, (HEIGHT + FOOTER) * SCALE), color(PATCH.get("bglockedcolor", PATCH.get("bgcolor", [1, 1, 1, 1]))))
+    draw = ImageDraw.Draw(canvas, "RGBA")
     for box in state["boxes"]:
         x, y, w, h = [round(n * SCALE) for n in box["presentation_rect"]]
         kind = box["maxclass"]
@@ -164,8 +217,10 @@ for state in states:
         f = font(fs, box.get("fontface") == 1)
         fg = color(box.get("textcolor", [.04, .04, .04, 1]))
         bg = color(box.get("bgcolor", [1, 1, 1, 1]))
+        border = color(box.get("bordercolor", [.796, .835, .867, 1]))
         if kind in ["textbutton", "number", "flonum", "umenu", "toggle"]:
-            draw.rectangle((x, y, x + w - 1, y + h - 1), fill=bg, outline=(150, 150, 150), width=SCALE)
+            radius = round(box.get("rounded", 0) * SCALE)
+            draw.rounded_rectangle((x, y, x + w - 1, y + h - 1), radius=radius, fill=bg, outline=border, width=SCALE)
         if kind == "textbutton":
             label = box.get("text", "")
             if draw.textlength(label, font=f) > w - 12 * SCALE:
@@ -185,37 +240,33 @@ for state in states:
         elif kind == "umenu":
             items = [item for item in box.get("items", []) if item != ","]
             selected = int(box.get("value", 0))
-            draw.text((x + 7 * SCALE, y + h / 2), str(items[selected]) if selected < len(items) else "", font=f, fill=fg, anchor="lm")
+            draw.text((x + 7 * SCALE, y + h / 2), str(items[selected]) if 0 <= selected < len(items) else "", font=f, fill=fg, anchor="lm")
             draw.polygon([(x + w - 18 * SCALE, y + h / 2 - 3 * SCALE), (x + w - 8 * SCALE, y + h / 2 - 3 * SCALE), (x + w - 13 * SCALE, y + h / 2 + 4 * SCALE)], fill=fg)
         elif kind in ["waveform~", "scope~"]:
-            draw.rectangle((x, y, x + w - 1, y + h - 1), fill=bg, outline=(150, 150, 150), width=SCALE)
+            draw.rectangle((x, y, x + w - 1, y + h - 1), fill=bg, outline=border, width=SCALE)
+            grid = color(box.get("gridcolor", [.875, .902, .922, 1]))
             for i in range(1, 4):
-                draw.line((x + i * w / 4, y, x + i * w / 4, y + h - 1), fill=(210, 210, 210), width=SCALE)
-            draw.line((x, y + h / 2, x + w - 1, y + h / 2), fill=(140, 140, 140), width=SCALE)
+                draw.line((x + i * w / 4, y, x + i * w / 4, y + h - 1), fill=grid, width=SCALE)
+            draw.line((x, y + h / 2, x + w - 1, y + h / 2), fill=grid, width=SCALE)
             if kind == "waveform~" and state["waveform"]:
                 channel = 1 if box.get("varname") == "wave_r" else 0
                 bins = state["waveform"][channel]
                 for i, (low, high) in enumerate(bins):
                     xpos = x + 2 * SCALE + i * (w - 4 * SCALE) / len(bins)
-                    draw.line((xpos, y + h / 2 - high * (h / 2 - 3 * SCALE), xpos, y + h / 2 - low * (h / 2 - 3 * SCALE)), fill=fg, width=SCALE)
+                    draw.line((xpos, y + h / 2 - high * (h / 2 - 3 * SCALE), xpos, y + h / 2 - low * (h / 2 - 3 * SCALE)), fill=color(box.get("waveformcolor", box.get("fgcolor", box.get("textcolor", [0,0,0,1])))), width=SCALE)
         elif kind == "jsui":
-            draw.rectangle((x, y, x + w - 1, y + h - 1), fill=(242, 242, 242), outline=(150, 150, 150), width=SCALE)
-            draw.line((x + w / 2, y, x + w / 2, y + h - 1), fill=(190, 190, 190), width=SCALE)
-            draw.line((x, y + h / 2, x + w - 1, y + h / 2), fill=(190, 190, 190), width=SCALE)
-            draw.ellipse((x + w / 2 - 7 * SCALE, y + h / 2 - 7 * SCALE, x + w / 2 + 7 * SCALE, y + h / 2 + 7 * SCALE), fill=(15, 15, 15))
-            draw.text((x + 10 * SCALE, y + 8 * SCALE), "DENSITY 50%", font=font(17), fill=fg)
-            draw.text((x + 10 * SCALE, y + h - 28 * SCALE), "POSITION 50%", font=font(17), fill=fg)
+            paint_xy(draw, box, x, y)
         elif kind == "meter~":
-            draw.rectangle((x, y, x + w - 1, y + h - 1), fill=(40, 40, 40), outline=(150, 150, 150), width=SCALE)
+            draw.rectangle((x, y, x + w - 1, y + h - 1), fill=bg, outline=border, width=SCALE)
         elif kind == "slider":
-            draw.rectangle((x, y, x + w - 1, y + h - 1), fill=(235, 235, 235))
+            draw.rectangle((x, y, x + w - 1, y + h - 1), fill=bg)
             progress = max(0, min(1, float(box.get("value", 0))))
             if progress:
-                draw.rectangle((x, y, x + w * progress - 1, y + h - 1), fill=(20, 20, 20))
+                draw.rectangle((x, y, x + w * progress - 1, y + h - 1), fill=color(box.get("knobcolor", box.get("fgcolor", [0,0,0,1]))))
         elif kind == "panel":
-            draw.rectangle((x, y, x + w - 1, y + h - 1), fill=bg)
+            draw.rounded_rectangle((x, y, x + w - 1, y + h - 1), radius=round(box.get("rounded", 0) * SCALE), fill=bg)
     draw.rectangle((0, HEIGHT * SCALE, WIDTH * SCALE, (HEIGHT + FOOTER) * SCALE), fill=(235, 235, 235))
-    draw.text((12 * SCALE, (HEIGHT + 11) * SCALE), name + " interface preview from patch data; not a native Max screenshot.", font=font(14), fill=(50, 50, 50))
+    draw.text((12 * SCALE, (HEIGHT + 11) * SCALE), name + " interface preview; not a native Max screenshot. Audio hardware was not queried.", font=font(14), fill=(50, 50, 50))
     png = PngImagePlugin.PngInfo()
     png.add_text("Title", "CMPE Variety Pack: " + name + " interface preview")
     png.add_text("Description", "Layout and widget rendering approximation; not a native Max screenshot. " + state["provenance"])
@@ -229,6 +280,8 @@ for state in states:
         ax, ay, aw, ah = a["presentation_rect"]
         assert 0 <= ax and 0 <= ay and ax + aw <= WIDTH and ay + ah <= HEIGHT, a["id"]
         for b in visible[i + 1:]:
+            if (a["maxclass"] == "panel" and a.get("background")) or (b["maxclass"] == "panel" and b.get("background")):
+                continue
             bx, by, bw, bh = b["presentation_rect"]
             assert not (ax < bx + bw and bx < ax + aw and ay < by + bh and by < ay + ah), (state["mode"], a["id"], b["id"])
 if issues:
