@@ -1,6 +1,16 @@
 # Attribution
 
-## Original idea and algorithm
+## Original CMPE instruments
+
+**Computer Music Practice Examples (CMPE)** and its Variety Pack are projects by **Joo Won Park**.
+
+Original collection: **https://joowonpark.net/cmpe/**
+
+The supplied `CMPE_VarietyPack_ForSC.scd` identifies Park as its author and contains APG, ISJS, Many, RMHS, and SIOE. This Max collection follows those five musical designs: an audio palindrome, mouse-controlled sample granulation, reverb-based ambient layers, additive drones, and audio supercuts. The original CMPE page links the individual instruments, educational material, SuperCollider code, and the all-in-one Variety Pack.
+
+`CMPE_Variety_Pack.maxpat` and the runtime source include this credit. Its visible project link opens Park's CMPE page. The adaptation uses native Max voices for the live instruments and the APG Wave buffer-rendering interface for APG and SIOE. Precise mappings and intentional implementation differences are documented in [CMPE validation](developer/CMPE_VALIDATION.md).
+
+## Original APG idea and algorithm
 
 **Audio Palindrome Generator (APG)** is a project by **Joo Won Park**.
 
@@ -12,12 +22,12 @@ APG Wave credits Park for the musical construction: mirrored pairs of sample eve
 
 ## This Max adaptation
 
-This repository contains a Max/MSP implementation developed for Bryan Collins. It adds a rendered stereo output, visible generation and playback status, loop selection, automatic silence trimming, and 24-bit WAV export. It is an adaptation of Park’s APG, not a claim to the original idea or algorithm.
+This repository contains Max/MSP implementations developed for Bryan Collins. APG Wave adds a rendered stereo output, visible generation and playback status, loop selection, automatic silence trimming, and 24-bit WAV export. The CMPE extension adds the other four instruments, live scopes, a local position/density pad, live recording, and JSON settings files. These are adaptations of Park's work; the original musical ideas and algorithms are his.
 
-The original SuperCollider patch, standalone application, and bundled SuperCollider sound recordings are not included in this repository. The three `apgw_test*.wav` files are synthetic diagnostic sounds generated for this Max implementation.
+The original SuperCollider patches, standalone applications, and bundled SuperCollider sound recordings are not included in this repository. The three `apgw_test*.wav` files are synthetic diagnostic sounds generated for this Max implementation.
 
 ## Terms and source material
 
 Credit is separate from licensing. The original APG page’s request for credit is recorded here without assigning a new license to Park’s work or inventing additional permissions. Refer to the original project and its supplied files for any applicable terms.
 
-The original project page was checked on November 20, 2026. The non-`www` address above was accessible at that time.
+The original APG page was checked on November 20, 2026; the CMPE page was checked on November 21, 2026. The non-`www` addresses above were used.
