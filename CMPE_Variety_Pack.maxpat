@@ -31,7 +31,7 @@
       0.9647058823529412,
       1.0
     ],
-    "title": "CMPE Variety Pack 1.2.0 / APG \u00b7 ISJS \u00b7 Many \u00b7 RMHS \u00b7 SIOE",
+    "title": "CMPE Variety Pack 1.2.1 / APG \u00b7 ISJS \u00b7 Many \u00b7 RMHS \u00b7 SIOE",
     "boxes": [
       {
         "box": {
@@ -41,7 +41,7 @@
           "numoutlets": 0,
           "patching_rect": [
             20,
-            14,
+            10,
             580,
             36
           ],
@@ -57,7 +57,7 @@
           "presentation": 1,
           "presentation_rect": [
             20,
-            14,
+            10,
             580,
             36
           ],
@@ -116,7 +116,7 @@
           "numoutlets": 3,
           "patching_rect": [
             620,
-            16,
+            12,
             90,
             32
           ],
@@ -137,7 +137,7 @@
           "presentation": 1,
           "presentation_rect": [
             620,
-            16,
+            12,
             90,
             32
           ],
@@ -190,7 +190,7 @@
           "numoutlets": 3,
           "patching_rect": [
             718,
-            16,
+            12,
             126,
             32
           ],
@@ -211,7 +211,7 @@
           "presentation": 1,
           "presentation_rect": [
             718,
-            16,
+            12,
             126,
             32
           ],
@@ -342,7 +342,7 @@
           "numoutlets": 0,
           "patching_rect": [
             20,
-            758,
+            760,
             1060,
             1
           ],
@@ -357,7 +357,7 @@
           "presentation": 1,
           "presentation_rect": [
             20,
-            758,
+            760,
             1060,
             1
           ],
@@ -381,7 +381,7 @@
           "numoutlets": 0,
           "patching_rect": [
             32,
-            228,
+            208,
             112,
             22
           ],
@@ -397,7 +397,7 @@
           "presentation": 1,
           "presentation_rect": [
             32,
-            228,
+            208,
             112,
             22
           ],
@@ -420,7 +420,7 @@
           "numoutlets": 3,
           "patching_rect": [
             260,
-            226,
+            206,
             92,
             30
           ],
@@ -441,7 +441,7 @@
           "presentation": 1,
           "presentation_rect": [
             260,
-            226,
+            206,
             92,
             30
           ],
@@ -495,7 +495,7 @@
           "numoutlets": 0,
           "patching_rect": [
             32,
-            262,
+            240,
             320,
             36
           ],
@@ -511,7 +511,7 @@
           "presentation": 1,
           "presentation_rect": [
             32,
-            262,
+            240,
             320,
             36
           ],
@@ -534,7 +534,7 @@
           "numoutlets": 0,
           "patching_rect": [
             32,
-            304,
+            280,
             152,
             20
           ],
@@ -550,7 +550,7 @@
           "presentation": 1,
           "presentation_rect": [
             32,
-            304,
+            280,
             152,
             20
           ],
@@ -572,7 +572,7 @@
           "numoutlets": 2,
           "patching_rect": [
             32,
-            328,
+            302,
             152,
             28
           ],
@@ -591,7 +591,7 @@
           "presentation": 1,
           "presentation_rect": [
             32,
-            328,
+            302,
             152,
             28
           ],
@@ -647,7 +647,7 @@
           "numoutlets": 0,
           "patching_rect": [
             390,
-            228,
+            208,
             112,
             22
           ],
@@ -663,7 +663,7 @@
           "presentation": 1,
           "presentation_rect": [
             390,
-            228,
+            208,
             112,
             22
           ],
@@ -686,7 +686,7 @@
           "numoutlets": 3,
           "patching_rect": [
             618,
-            226,
+            206,
             92,
             30
           ],
@@ -707,7 +707,7 @@
           "presentation": 1,
           "presentation_rect": [
             618,
-            226,
+            206,
             92,
             30
           ],
@@ -761,7 +761,7 @@
           "numoutlets": 0,
           "patching_rect": [
             390,
-            262,
+            240,
             320,
             36
           ],
@@ -777,7 +777,7 @@
           "presentation": 1,
           "presentation_rect": [
             390,
-            262,
+            240,
             320,
             36
           ],
@@ -800,7 +800,7 @@
           "numoutlets": 0,
           "patching_rect": [
             390,
-            304,
+            280,
             152,
             20
           ],
@@ -816,7 +816,7 @@
           "presentation": 1,
           "presentation_rect": [
             390,
-            304,
+            280,
             152,
             20
           ],
@@ -838,7 +838,7 @@
           "numoutlets": 2,
           "patching_rect": [
             390,
-            328,
+            302,
             152,
             28
           ],
@@ -857,7 +857,7 @@
           "presentation": 1,
           "presentation_rect": [
             390,
-            328,
+            302,
             152,
             28
           ],
@@ -913,7 +913,7 @@
           "numoutlets": 0,
           "patching_rect": [
             748,
-            228,
+            208,
             112,
             22
           ],
@@ -929,7 +929,7 @@
           "presentation": 1,
           "presentation_rect": [
             748,
-            228,
+            208,
             112,
             22
           ],
@@ -952,7 +952,7 @@
           "numoutlets": 3,
           "patching_rect": [
             976,
-            226,
+            206,
             92,
             30
           ],
@@ -973,7 +973,7 @@
           "presentation": 1,
           "presentation_rect": [
             976,
-            226,
+            206,
             92,
             30
           ],
@@ -1027,7 +1027,7 @@
           "numoutlets": 0,
           "patching_rect": [
             748,
-            262,
+            240,
             320,
             36
           ],
@@ -1043,7 +1043,7 @@
           "presentation": 1,
           "presentation_rect": [
             748,
-            262,
+            240,
             320,
             36
           ],
@@ -1066,7 +1066,7 @@
           "numoutlets": 0,
           "patching_rect": [
             748,
-            304,
+            280,
             152,
             20
           ],
@@ -1082,7 +1082,7 @@
           "presentation": 1,
           "presentation_rect": [
             748,
-            304,
+            280,
             152,
             20
           ],
@@ -1104,7 +1104,7 @@
           "numoutlets": 2,
           "patching_rect": [
             748,
-            328,
+            302,
             152,
             28
           ],
@@ -1123,7 +1123,7 @@
           "presentation": 1,
           "presentation_rect": [
             748,
-            328,
+            302,
             152,
             28
           ],
@@ -1179,7 +1179,7 @@
           "numoutlets": 0,
           "patching_rect": [
             200,
-            304,
+            280,
             152,
             20
           ],
@@ -1195,7 +1195,7 @@
           "presentation": 1,
           "presentation_rect": [
             200,
-            304,
+            280,
             152,
             20
           ],
@@ -1217,7 +1217,7 @@
           "numoutlets": 2,
           "patching_rect": [
             200,
-            328,
+            302,
             152,
             28
           ],
@@ -1236,7 +1236,7 @@
           "presentation": 1,
           "presentation_rect": [
             200,
-            328,
+            302,
             152,
             28
           ],
@@ -1293,7 +1293,7 @@
           "numoutlets": 0,
           "patching_rect": [
             752,
-            380,
+            354,
             116,
             24
           ],
@@ -1309,7 +1309,7 @@
           "presentation": 1,
           "presentation_rect": [
             752,
-            380,
+            354,
             116,
             24
           ],
@@ -1330,7 +1330,7 @@
           "numoutlets": 2,
           "patching_rect": [
             872,
-            378,
+            352,
             80,
             28
           ],
@@ -1349,7 +1349,7 @@
           "presentation": 1,
           "presentation_rect": [
             872,
-            378,
+            352,
             80,
             28
           ],
@@ -1442,7 +1442,7 @@
           "numoutlets": 1,
           "patching_rect": [
             980,
-            380,
+            354,
             88,
             11
           ],
@@ -1460,7 +1460,7 @@
           "presentation": 1,
           "presentation_rect": [
             980,
-            380,
+            354,
             88,
             11
           ],
@@ -1495,7 +1495,7 @@
           "numoutlets": 1,
           "patching_rect": [
             980,
-            395,
+            369,
             88,
             11
           ],
@@ -1513,7 +1513,7 @@
           "presentation": 1,
           "presentation_rect": [
             980,
-            395,
+            369,
             88,
             11
           ],
@@ -1548,7 +1548,7 @@
           "numoutlets": 0,
           "patching_rect": [
             32,
-            380,
+            354,
             204,
             24
           ],
@@ -1564,7 +1564,7 @@
           "presentation": 1,
           "presentation_rect": [
             32,
-            380,
+            354,
             204,
             24
           ],
@@ -1586,7 +1586,7 @@
           "numoutlets": 0,
           "patching_rect": [
             244,
-            380,
+            354,
             210,
             24
           ],
@@ -1602,7 +1602,7 @@
           "presentation": 1,
           "presentation_rect": [
             244,
-            380,
+            354,
             210,
             24
           ],
@@ -1623,7 +1623,7 @@
           "numoutlets": 0,
           "patching_rect": [
             856,
-            558,
+            600,
             212,
             22
           ],
@@ -1639,7 +1639,7 @@
           "presentation": 1,
           "presentation_rect": [
             856,
-            558,
+            600,
             212,
             22
           ],
@@ -1661,7 +1661,7 @@
           "numoutlets": 0,
           "patching_rect": [
             32,
-            432,
+            426,
             20,
             24
           ],
@@ -1677,7 +1677,7 @@
           "presentation": 1,
           "presentation_rect": [
             32,
-            432,
+            426,
             20,
             24
           ],
@@ -1700,9 +1700,9 @@
           "numoutlets": 6,
           "patching_rect": [
             56,
-            416,
+            390,
             1012,
-            62
+            96
           ],
           "fontname": "Arial",
           "fontsize": 17.0,
@@ -1723,9 +1723,9 @@
           "presentation": 1,
           "presentation_rect": [
             56,
-            416,
+            390,
             1012,
-            62
+            96
           ],
           "varname": "wave_l",
           "buffername": "apgw_out_init",
@@ -1786,7 +1786,7 @@
           "numoutlets": 0,
           "patching_rect": [
             32,
-            504,
+            532,
             20,
             24
           ],
@@ -1802,7 +1802,7 @@
           "presentation": 1,
           "presentation_rect": [
             32,
-            504,
+            532,
             20,
             24
           ],
@@ -1825,9 +1825,9 @@
           "numoutlets": 6,
           "patching_rect": [
             56,
-            488,
+            496,
             1012,
-            62
+            96
           ],
           "fontname": "Arial",
           "fontsize": 17.0,
@@ -1848,9 +1848,9 @@
           "presentation": 1,
           "presentation_rect": [
             56,
-            488,
+            496,
             1012,
-            62
+            96
           ],
           "varname": "wave_r",
           "buffername": "apgw_out_init",
@@ -1911,8 +1911,8 @@
           "numoutlets": 0,
           "patching_rect": [
             32,
-            558,
-            804,
+            600,
+            580,
             22
           ],
           "fontname": "Arial",
@@ -1927,8 +1927,8 @@
           "presentation": 1,
           "presentation_rect": [
             32,
-            558,
-            804,
+            600,
+            580,
             22
           ],
           "varname": "selection_info",
@@ -1947,8 +1947,8 @@
           "numinlets": 1,
           "numoutlets": 1,
           "patching_rect": [
-            32,
-            589,
+            632,
+            600,
             22,
             22
           ],
@@ -1965,8 +1965,8 @@
           ],
           "presentation": 1,
           "presentation_rect": [
-            32,
-            589,
+            632,
+            600,
             22,
             22
           ],
@@ -2001,9 +2001,9 @@
           "numinlets": 1,
           "numoutlets": 0,
           "patching_rect": [
-            64,
-            586,
-            400,
+            664,
+            598,
+            180,
             28
           ],
           "fontname": "Arial",
@@ -2017,9 +2017,9 @@
           "text": "Loop selected range",
           "presentation": 1,
           "presentation_rect": [
-            64,
-            586,
-            400,
+            664,
+            598,
+            180,
             28
           ],
           "bgcolor": [
@@ -2039,10 +2039,10 @@
           "numinlets": 1,
           "numoutlets": 3,
           "patching_rect": [
-            624,
-            584,
-            200,
-            32
+            720,
+            634,
+            172,
+            44
           ],
           "fontname": "Arial",
           "fontsize": 18.0,
@@ -2060,10 +2060,10 @@
           ],
           "presentation": 1,
           "presentation_rect": [
-            624,
-            584,
-            200,
-            32
+            720,
+            634,
+            172,
+            44
           ],
           "varname": "clear_button",
           "mode": 0,
@@ -2114,10 +2114,10 @@
           "numinlets": 1,
           "numoutlets": 3,
           "patching_rect": [
-            840,
-            584,
-            228,
-            32
+            904,
+            634,
+            176,
+            44
           ],
           "fontname": "Arial",
           "fontsize": 18.0,
@@ -2135,10 +2135,10 @@
           ],
           "presentation": 1,
           "presentation_rect": [
-            840,
-            584,
-            228,
-            32
+            904,
+            634,
+            176,
+            44
           ],
           "varname": "save_button",
           "mode": 0,
@@ -2190,8 +2190,8 @@
           "numoutlets": 3,
           "patching_rect": [
             20,
-            628,
-            520,
+            634,
+            328,
             44
           ],
           "fontname": "Arial",
@@ -2211,8 +2211,8 @@
           "presentation": 1,
           "presentation_rect": [
             20,
-            628,
-            520,
+            634,
+            328,
             44
           ],
           "varname": "play_button",
@@ -2263,9 +2263,9 @@
           "numinlets": 1,
           "numoutlets": 3,
           "patching_rect": [
-            552,
-            628,
-            258,
+            360,
+            634,
+            148,
             44
           ],
           "fontname": "Arial",
@@ -2284,9 +2284,9 @@
           ],
           "presentation": 1,
           "presentation_rect": [
-            552,
-            628,
-            258,
+            360,
+            634,
+            148,
             44
           ],
           "varname": "stop_button",
@@ -2338,9 +2338,9 @@
           "numinlets": 1,
           "numoutlets": 3,
           "patching_rect": [
-            822,
-            628,
-            258,
+            520,
+            634,
+            188,
             44
           ],
           "fontname": "Arial",
@@ -2359,9 +2359,9 @@
           ],
           "presentation": 1,
           "presentation_rect": [
-            822,
-            628,
-            258,
+            520,
+            634,
+            188,
             44
           ],
           "varname": "new_button",
@@ -2413,7 +2413,7 @@
           "numoutlets": 1,
           "patching_rect": [
             32,
-            736,
+            740,
             228,
             10
           ],
@@ -2431,7 +2431,7 @@
           "presentation": 1,
           "presentation_rect": [
             32,
-            736,
+            740,
             228,
             10
           ],
@@ -2473,7 +2473,7 @@
           "numoutlets": 0,
           "patching_rect": [
             276,
-            684,
+            688,
             792,
             22
           ],
@@ -2489,7 +2489,7 @@
           "presentation": 1,
           "presentation_rect": [
             276,
-            684,
+            688,
             792,
             22
           ],
@@ -2510,7 +2510,7 @@
           "numoutlets": 0,
           "patching_rect": [
             276,
-            710,
+            714,
             792,
             38
           ],
@@ -2526,7 +2526,7 @@
           "presentation": 1,
           "presentation_rect": [
             276,
-            710,
+            714,
             792,
             38
           ],
@@ -2548,9 +2548,9 @@
           "numoutlets": 0,
           "patching_rect": [
             24,
-            764,
+            766,
             680,
-            22
+            20
           ],
           "fontname": "Arial",
           "fontsize": 16.0,
@@ -2560,13 +2560,13 @@
             0.4588235294117647,
             1.0
           ],
-          "text": "v1.2.0 / Original CMPE by Joo Won Park",
+          "text": "v1.2.1 / Original CMPE by Joo Won Park",
           "presentation": 1,
           "presentation_rect": [
             24,
-            764,
+            766,
             680,
-            22
+            20
           ],
           "bgcolor": [
             0,
@@ -2585,9 +2585,9 @@
           "numoutlets": 3,
           "patching_rect": [
             812,
-            762,
+            764,
             268,
-            24
+            22
           ],
           "fontname": "Arial",
           "fontsize": 16.0,
@@ -2606,9 +2606,9 @@
           "presentation": 1,
           "presentation_rect": [
             812,
-            762,
+            764,
             268,
-            24
+            22
           ],
           "varname": "original_link",
           "mode": 0,
@@ -4987,7 +4987,7 @@
           "numoutlets": 3,
           "patching_rect": [
             852,
-            16,
+            12,
             110,
             32
           ],
@@ -5009,7 +5009,7 @@
           "presentation": 1,
           "presentation_rect": [
             852,
-            16,
+            12,
             110,
             32
           ],
@@ -5061,7 +5061,7 @@
           "numoutlets": 3,
           "patching_rect": [
             970,
-            16,
+            12,
             110,
             32
           ],
@@ -5083,7 +5083,7 @@
           "presentation": 1,
           "presentation_rect": [
             970,
-            16,
+            12,
             110,
             32
           ],
@@ -5135,7 +5135,7 @@
           "numoutlets": 0,
           "patching_rect": [
             736,
-            64,
+            54,
             332,
             20
           ],
@@ -5152,7 +5152,7 @@
           "presentation": 1,
           "presentation_rect": [
             736,
-            64,
+            54,
             332,
             20
           ],
@@ -5173,7 +5173,7 @@
           "numoutlets": 3,
           "patching_rect": [
             736,
-            88,
+            78,
             124,
             28
           ],
@@ -5195,7 +5195,7 @@
           "presentation": 1,
           "presentation_rect": [
             736,
-            88,
+            78,
             124,
             28
           ],
@@ -5248,7 +5248,7 @@
           "numoutlets": 3,
           "patching_rect": [
             868,
-            88,
+            78,
             92,
             28
           ],
@@ -5270,7 +5270,7 @@
           "presentation": 1,
           "presentation_rect": [
             868,
-            88,
+            78,
             92,
             28
           ],
@@ -5323,7 +5323,7 @@
           "numoutlets": 3,
           "patching_rect": [
             968,
-            88,
+            78,
             100,
             28
           ],
@@ -5345,7 +5345,7 @@
           "presentation": 1,
           "presentation_rect": [
             968,
-            88,
+            78,
             100,
             28
           ],
@@ -5398,9 +5398,9 @@
           "numoutlets": 0,
           "patching_rect": [
             20,
-            62,
+            52,
             1060,
-            66
+            64
           ],
           "fontname": "Arial",
           "fontsize": 17.0,
@@ -5414,9 +5414,9 @@
           "presentation": 1,
           "presentation_rect": [
             20,
-            62,
+            52,
             1060,
-            66
+            64
           ],
           "hidden": 0,
           "bgcolor": [
@@ -5439,7 +5439,7 @@
           "numoutlets": 0,
           "patching_rect": [
             32,
-            64,
+            54,
             182,
             20
           ],
@@ -5456,7 +5456,7 @@
           "presentation": 1,
           "presentation_rect": [
             32,
-            64,
+            54,
             182,
             20
           ],
@@ -5477,7 +5477,7 @@
           "numoutlets": 3,
           "patching_rect": [
             32,
-            88,
+            78,
             182,
             28
           ],
@@ -5498,7 +5498,7 @@
           "presentation": 1,
           "presentation_rect": [
             32,
-            88,
+            78,
             182,
             28
           ],
@@ -5529,7 +5529,7 @@
           "numoutlets": 0,
           "patching_rect": [
             226,
-            64,
+            54,
             242,
             20
           ],
@@ -5546,7 +5546,7 @@
           "presentation": 1,
           "presentation_rect": [
             226,
-            64,
+            54,
             242,
             20
           ],
@@ -5567,7 +5567,7 @@
           "numoutlets": 3,
           "patching_rect": [
             226,
-            88,
+            78,
             242,
             28
           ],
@@ -5588,7 +5588,7 @@
           "presentation": 1,
           "presentation_rect": [
             226,
-            88,
+            78,
             242,
             28
           ],
@@ -5619,7 +5619,7 @@
           "numoutlets": 0,
           "patching_rect": [
             480,
-            64,
+            54,
             242,
             20
           ],
@@ -5636,7 +5636,7 @@
           "presentation": 1,
           "presentation_rect": [
             480,
-            64,
+            54,
             242,
             20
           ],
@@ -5657,7 +5657,7 @@
           "numoutlets": 3,
           "patching_rect": [
             480,
-            88,
+            78,
             242,
             28
           ],
@@ -5678,7 +5678,7 @@
           "presentation": 1,
           "presentation_rect": [
             480,
-            88,
+            78,
             242,
             28
           ],
@@ -5709,9 +5709,9 @@
           "numoutlets": 3,
           "patching_rect": [
             20,
-            140,
+            124,
             200,
-            38
+            36
           ],
           "fontname": "Arial",
           "fontsize": 20.0,
@@ -5731,9 +5731,9 @@
           "presentation": 1,
           "presentation_rect": [
             20,
-            140,
+            124,
             200,
-            38
+            36
           ],
           "hidden": 0,
           "mode": 0,
@@ -5817,9 +5817,9 @@
           "numoutlets": 3,
           "patching_rect": [
             235,
-            140,
+            124,
             200,
-            38
+            36
           ],
           "fontname": "Arial",
           "fontsize": 20.0,
@@ -5839,9 +5839,9 @@
           "presentation": 1,
           "presentation_rect": [
             235,
-            140,
+            124,
             200,
-            38
+            36
           ],
           "hidden": 0,
           "mode": 0,
@@ -5925,9 +5925,9 @@
           "numoutlets": 3,
           "patching_rect": [
             450,
-            140,
+            124,
             200,
-            38
+            36
           ],
           "fontname": "Arial",
           "fontsize": 20.0,
@@ -5947,9 +5947,9 @@
           "presentation": 1,
           "presentation_rect": [
             450,
-            140,
+            124,
             200,
-            38
+            36
           ],
           "hidden": 0,
           "mode": 0,
@@ -6033,9 +6033,9 @@
           "numoutlets": 3,
           "patching_rect": [
             665,
-            140,
+            124,
             200,
-            38
+            36
           ],
           "fontname": "Arial",
           "fontsize": 20.0,
@@ -6055,9 +6055,9 @@
           "presentation": 1,
           "presentation_rect": [
             665,
-            140,
+            124,
             200,
-            38
+            36
           ],
           "hidden": 0,
           "mode": 0,
@@ -6141,9 +6141,9 @@
           "numoutlets": 3,
           "patching_rect": [
             880,
-            140,
+            124,
             200,
-            38
+            36
           ],
           "fontname": "Arial",
           "fontsize": 20.0,
@@ -6163,9 +6163,9 @@
           "presentation": 1,
           "presentation_rect": [
             880,
-            140,
+            124,
             200,
-            38
+            36
           ],
           "hidden": 0,
           "mode": 0,
@@ -6249,7 +6249,7 @@
           "numoutlets": 0,
           "patching_rect": [
             24,
-            186,
+            168,
             1052,
             22
           ],
@@ -6266,7 +6266,7 @@
           "presentation": 1,
           "presentation_rect": [
             24,
-            186,
+            168,
             1052,
             22
           ],
@@ -6326,7 +6326,7 @@
           "numoutlets": 0,
           "patching_rect": [
             32,
-            304,
+            280,
             152,
             20
           ],
@@ -6343,7 +6343,7 @@
           "presentation": 1,
           "presentation_rect": [
             32,
-            304,
+            280,
             152,
             20
           ],
@@ -6364,7 +6364,7 @@
           "numoutlets": 2,
           "patching_rect": [
             32,
-            328,
+            302,
             152,
             28
           ],
@@ -6384,7 +6384,7 @@
           "presentation": 1,
           "presentation_rect": [
             32,
-            328,
+            302,
             152,
             28
           ],
@@ -6462,7 +6462,7 @@
           "numoutlets": 0,
           "patching_rect": [
             390,
-            304,
+            280,
             152,
             20
           ],
@@ -6479,7 +6479,7 @@
           "presentation": 1,
           "presentation_rect": [
             390,
-            304,
+            280,
             152,
             20
           ],
@@ -6500,7 +6500,7 @@
           "numoutlets": 2,
           "patching_rect": [
             390,
-            328,
+            302,
             152,
             28
           ],
@@ -6520,7 +6520,7 @@
           "presentation": 1,
           "presentation_rect": [
             390,
-            328,
+            302,
             152,
             28
           ],
@@ -6598,7 +6598,7 @@
           "numoutlets": 0,
           "patching_rect": [
             748,
-            304,
+            280,
             152,
             20
           ],
@@ -6615,7 +6615,7 @@
           "presentation": 1,
           "presentation_rect": [
             748,
-            304,
+            280,
             152,
             20
           ],
@@ -6636,7 +6636,7 @@
           "numoutlets": 2,
           "patching_rect": [
             748,
-            328,
+            302,
             152,
             28
           ],
@@ -6656,7 +6656,7 @@
           "presentation": 1,
           "presentation_rect": [
             748,
-            328,
+            302,
             152,
             28
           ],
@@ -6734,7 +6734,7 @@
           "numoutlets": 0,
           "patching_rect": [
             200,
-            304,
+            280,
             152,
             20
           ],
@@ -6751,7 +6751,7 @@
           "presentation": 1,
           "presentation_rect": [
             200,
-            304,
+            280,
             152,
             20
           ],
@@ -6772,7 +6772,7 @@
           "numoutlets": 2,
           "patching_rect": [
             200,
-            328,
+            302,
             152,
             28
           ],
@@ -6792,7 +6792,7 @@
           "presentation": 1,
           "presentation_rect": [
             200,
-            328,
+            302,
             152,
             28
           ],
@@ -6870,7 +6870,7 @@
           "numoutlets": 0,
           "patching_rect": [
             558,
-            304,
+            280,
             152,
             20
           ],
@@ -6887,7 +6887,7 @@
           "presentation": 1,
           "presentation_rect": [
             558,
-            304,
+            280,
             152,
             20
           ],
@@ -6908,7 +6908,7 @@
           "numoutlets": 2,
           "patching_rect": [
             558,
-            328,
+            302,
             152,
             28
           ],
@@ -6928,7 +6928,7 @@
           "presentation": 1,
           "presentation_rect": [
             558,
-            328,
+            302,
             152,
             28
           ],
@@ -7006,7 +7006,7 @@
           "numoutlets": 0,
           "patching_rect": [
             916,
-            304,
+            280,
             152,
             20
           ],
@@ -7023,7 +7023,7 @@
           "presentation": 1,
           "presentation_rect": [
             916,
-            304,
+            280,
             152,
             20
           ],
@@ -7044,7 +7044,7 @@
           "numoutlets": 2,
           "patching_rect": [
             916,
-            328,
+            302,
             152,
             28
           ],
@@ -7064,7 +7064,7 @@
           "presentation": 1,
           "presentation_rect": [
             916,
-            328,
+            302,
             152,
             28
           ],
@@ -7142,7 +7142,7 @@
           "numoutlets": 0,
           "patching_rect": [
             916,
-            304,
+            280,
             152,
             20
           ],
@@ -7159,7 +7159,7 @@
           "presentation": 1,
           "presentation_rect": [
             916,
-            304,
+            280,
             152,
             20
           ],
@@ -7180,7 +7180,7 @@
           "numoutlets": 3,
           "patching_rect": [
             916,
-            328,
+            302,
             152,
             28
           ],
@@ -7201,7 +7201,7 @@
           "presentation": 1,
           "presentation_rect": [
             916,
-            328,
+            302,
             152,
             28
           ],
@@ -7264,9 +7264,9 @@
           "numoutlets": 0,
           "patching_rect": [
             56,
-            416,
+            390,
             1012,
-            62
+            96
           ],
           "fontname": "Arial",
           "fontsize": 17.0,
@@ -7280,9 +7280,9 @@
           "presentation": 1,
           "presentation_rect": [
             56,
-            416,
+            390,
             1012,
-            62
+            96
           ],
           "hidden": 1,
           "bgcolor": [
@@ -7321,9 +7321,9 @@
           "numoutlets": 0,
           "patching_rect": [
             56,
-            488,
+            496,
             1012,
-            62
+            96
           ],
           "fontname": "Arial",
           "fontsize": 17.0,
@@ -7337,9 +7337,9 @@
           "presentation": 1,
           "presentation_rect": [
             56,
-            488,
+            496,
             1012,
-            62
+            96
           ],
           "hidden": 1,
           "bgcolor": [
@@ -7378,9 +7378,9 @@
           "numoutlets": 1,
           "patching_rect": [
             56,
-            416,
+            390,
             684,
-            134
+            202
           ],
           "fontname": "Arial",
           "fontsize": 17.0,
@@ -7397,9 +7397,9 @@
           "presentation": 1,
           "presentation_rect": [
             56,
-            416,
+            390,
             684,
-            134
+            202
           ],
           "hidden": 1,
           "filename": "cmpe_xy.js",
@@ -7422,9 +7422,9 @@
           "numoutlets": 0,
           "patching_rect": [
             756,
-            416,
+            390,
             312,
-            134
+            202
           ],
           "fontname": "Arial",
           "fontsize": 17.0,
@@ -7438,9 +7438,9 @@
           "presentation": 1,
           "presentation_rect": [
             756,
-            416,
+            390,
             312,
-            134
+            202
           ],
           "hidden": 1,
           "bgcolor": [
@@ -7478,10 +7478,10 @@
           "numinlets": 1,
           "numoutlets": 3,
           "patching_rect": [
-            840,
-            584,
-            228,
-            32
+            720,
+            634,
+            360,
+            44
           ],
           "fontname": "Arial",
           "fontsize": 17.0,
@@ -7500,10 +7500,10 @@
           "varname": "record_button",
           "presentation": 1,
           "presentation_rect": [
-            840,
-            584,
-            228,
-            32
+            720,
+            634,
+            360,
+            44
           ],
           "hidden": 1,
           "mode": 0,
@@ -7587,9 +7587,9 @@
           "numoutlets": 0,
           "patching_rect": [
             20,
-            218,
+            198,
             344,
-            144
+            138
           ],
           "fontname": "Arial",
           "fontsize": 17.0,
@@ -7603,9 +7603,9 @@
           "presentation": 1,
           "presentation_rect": [
             20,
-            218,
+            198,
             344,
-            144
+            138
           ],
           "hidden": 0,
           "bgcolor": [
@@ -7634,7 +7634,7 @@
           "numoutlets": 0,
           "patching_rect": [
             21,
-            219,
+            199,
             342,
             4
           ],
@@ -7650,7 +7650,7 @@
           "presentation": 1,
           "presentation_rect": [
             21,
-            219,
+            199,
             342,
             4
           ],
@@ -7675,7 +7675,7 @@
           "numoutlets": 0,
           "patching_rect": [
             150,
-            230,
+            210,
             100,
             20
           ],
@@ -7692,7 +7692,7 @@
           "presentation": 1,
           "presentation_rect": [
             150,
-            230,
+            210,
             100,
             20
           ],
@@ -7713,7 +7713,7 @@
           "numoutlets": 0,
           "patching_rect": [
             32,
-            228,
+            208,
             320,
             22
           ],
@@ -7730,7 +7730,7 @@
           "presentation": 1,
           "presentation_rect": [
             32,
-            228,
+            208,
             320,
             22
           ],
@@ -7752,7 +7752,7 @@
           "numoutlets": 0,
           "patching_rect": [
             32,
-            262,
+            240,
             320,
             36
           ],
@@ -7769,7 +7769,7 @@
           "presentation": 1,
           "presentation_rect": [
             32,
-            262,
+            240,
             320,
             36
           ],
@@ -7790,9 +7790,9 @@
           "numoutlets": 0,
           "patching_rect": [
             378,
-            218,
+            198,
             344,
-            144
+            138
           ],
           "fontname": "Arial",
           "fontsize": 17.0,
@@ -7806,9 +7806,9 @@
           "presentation": 1,
           "presentation_rect": [
             378,
-            218,
+            198,
             344,
-            144
+            138
           ],
           "hidden": 0,
           "bgcolor": [
@@ -7837,7 +7837,7 @@
           "numoutlets": 0,
           "patching_rect": [
             379,
-            219,
+            199,
             342,
             4
           ],
@@ -7853,7 +7853,7 @@
           "presentation": 1,
           "presentation_rect": [
             379,
-            219,
+            199,
             342,
             4
           ],
@@ -7878,7 +7878,7 @@
           "numoutlets": 0,
           "patching_rect": [
             508,
-            230,
+            210,
             100,
             20
           ],
@@ -7895,7 +7895,7 @@
           "presentation": 1,
           "presentation_rect": [
             508,
-            230,
+            210,
             100,
             20
           ],
@@ -7916,7 +7916,7 @@
           "numoutlets": 0,
           "patching_rect": [
             390,
-            228,
+            208,
             320,
             22
           ],
@@ -7933,7 +7933,7 @@
           "presentation": 1,
           "presentation_rect": [
             390,
-            228,
+            208,
             320,
             22
           ],
@@ -7955,7 +7955,7 @@
           "numoutlets": 0,
           "patching_rect": [
             390,
-            262,
+            240,
             320,
             36
           ],
@@ -7972,7 +7972,7 @@
           "presentation": 1,
           "presentation_rect": [
             390,
-            262,
+            240,
             320,
             36
           ],
@@ -7993,9 +7993,9 @@
           "numoutlets": 0,
           "patching_rect": [
             736,
-            218,
+            198,
             344,
-            144
+            138
           ],
           "fontname": "Arial",
           "fontsize": 17.0,
@@ -8009,9 +8009,9 @@
           "presentation": 1,
           "presentation_rect": [
             736,
-            218,
+            198,
             344,
-            144
+            138
           ],
           "hidden": 0,
           "bgcolor": [
@@ -8040,7 +8040,7 @@
           "numoutlets": 0,
           "patching_rect": [
             737,
-            219,
+            199,
             342,
             4
           ],
@@ -8056,7 +8056,7 @@
           "presentation": 1,
           "presentation_rect": [
             737,
-            219,
+            199,
             342,
             4
           ],
@@ -8081,7 +8081,7 @@
           "numoutlets": 0,
           "patching_rect": [
             866,
-            230,
+            210,
             100,
             20
           ],
@@ -8098,7 +8098,7 @@
           "presentation": 1,
           "presentation_rect": [
             866,
-            230,
+            210,
             100,
             20
           ],
@@ -8119,7 +8119,7 @@
           "numoutlets": 0,
           "patching_rect": [
             748,
-            228,
+            208,
             320,
             22
           ],
@@ -8136,7 +8136,7 @@
           "presentation": 1,
           "presentation_rect": [
             748,
-            228,
+            208,
             320,
             22
           ],
@@ -8158,7 +8158,7 @@
           "numoutlets": 0,
           "patching_rect": [
             748,
-            262,
+            240,
             320,
             36
           ],
@@ -8175,7 +8175,7 @@
           "presentation": 1,
           "presentation_rect": [
             748,
-            262,
+            240,
             320,
             36
           ],
@@ -8196,9 +8196,9 @@
           "numoutlets": 0,
           "patching_rect": [
             20,
-            370,
+            344,
             1060,
-            252
+            282
           ],
           "fontname": "Arial",
           "fontsize": 17.0,
@@ -8212,9 +8212,9 @@
           "presentation": 1,
           "presentation_rect": [
             20,
-            370,
+            344,
             1060,
-            252
+            282
           ],
           "hidden": 0,
           "bgcolor": [
@@ -8243,7 +8243,7 @@
           "numoutlets": 0,
           "patching_rect": [
             20,
-            680,
+            684,
             1060,
             72
           ],
@@ -8259,7 +8259,7 @@
           "presentation": 1,
           "presentation_rect": [
             20,
-            680,
+            684,
             1060,
             72
           ],
@@ -8284,7 +8284,7 @@
           "numoutlets": 3,
           "patching_rect": [
             32,
-            696,
+            698,
             228,
             28
           ],
@@ -8306,7 +8306,7 @@
           "presentation": 1,
           "presentation_rect": [
             32,
-            696,
+            698,
             228,
             28
           ],
@@ -8359,7 +8359,7 @@
           "numoutlets": 0,
           "patching_rect": [
             468,
-            380,
+            354,
             272,
             24
           ],
@@ -8376,7 +8376,7 @@
           "presentation": 1,
           "presentation_rect": [
             468,
-            380,
+            354,
             272,
             24
           ],

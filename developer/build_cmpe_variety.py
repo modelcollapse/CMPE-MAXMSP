@@ -37,7 +37,7 @@ ALL_MODES = set(range(5))
 
 patch = copy.deepcopy(json.loads(SOURCE.read_text())["patcher"])
 patch["rect"] = [80, 80, WIDTH, HEIGHT]
-patch["title"] = "CMPE Variety Pack 1.2.0 / APG · ISJS · Many · RMHS · SIOE"
+patch["title"] = "CMPE Variety Pack 1.2.1 / APG · ISJS · Many · RMHS · SIOE"
 patch["openinpresentation"] = 1
 patch["bgcolor"] = CANVAS
 patch["bglockedcolor"] = CANVAS
@@ -317,100 +317,100 @@ boxes["controller"]["text"] = "js cmpe_variety.js"
 # Keep the full collection visible in one window, with sources, the output,
 # transport, and actual engine feedback in distinct visual groups.
 layout = {
-    "title": [20, 14, 580, 36],
-    "demo_button": [620, 16, 90, 32],
-    "test_audio": [718, 16, 126, 32],
-    "save_preset": [852, 16, 110, 32],
-    "load_preset": [970, 16, 110, 32],
-    "audio_panel": [20, 62, 1060, 66],
-    "audio_driver_label": [32, 64, 182, 20],
-    "audio_driver_menu": [32, 88, 182, 28],
-    "audio_option1_label": [226, 64, 242, 20],
-    "audio_option1_menu": [226, 88, 242, 28],
-    "audio_option2_label": [480, 64, 242, 20],
-    "audio_option2_menu": [480, 88, 242, 28],
-    "audio_status": [736, 64, 332, 20],
-    "audio_setup": [736, 88, 124, 28],
-    "audio_refresh": [868, 88, 92, 28],
-    "audio_power": [968, 88, 100, 28],
-    "mode_info": [24, 186, 1052, 22],
+    "title": [20, 10, 580, 36],
+    "demo_button": [620, 12, 90, 32],
+    "test_audio": [718, 12, 126, 32],
+    "save_preset": [852, 12, 110, 32],
+    "load_preset": [970, 12, 110, 32],
+    "audio_panel": [20, 52, 1060, 64],
+    "audio_driver_label": [32, 54, 182, 20],
+    "audio_driver_menu": [32, 78, 182, 28],
+    "audio_option1_label": [226, 54, 242, 20],
+    "audio_option1_menu": [226, 78, 242, 28],
+    "audio_option2_label": [480, 54, 242, 20],
+    "audio_option2_menu": [480, 78, 242, 28],
+    "audio_status": [736, 54, 332, 20],
+    "audio_setup": [736, 78, 124, 28],
+    "audio_refresh": [868, 78, 92, 28],
+    "audio_power": [968, 78, 100, 28],
+    "mode_info": [24, 168, 1052, 22],
     "no_samples": [32, 254, 1036, 40],
-    "output_label": [32, 380, 204, 24],
-    "duration": [244, 380, 210, 24],
-    "monitor_label": [752, 380, 116, 24],
-    "monitor_level": [872, 378, 80, 28],
-    "meter_L": [980, 380, 88, 11],
-    "meter_R": [980, 395, 88, 11],
-    "channel_l": [32, 432, 20, 24],
-    "channel_r": [32, 504, 20, 24],
-    "wave_l": [56, 416, 1012, 62],
-    "wave_r": [56, 488, 1012, 62],
-    "scope_l": [56, 416, 1012, 62],
-    "scope_r": [56, 488, 1012, 62],
-    "xy_pad": [56, 416, 684, 134],
-    "scope_xy": [756, 416, 312, 134],
-    "selection_info": [32, 558, 804, 22],
-    "time": [856, 558, 212, 22],
-    "loop_toggle": [32, 589, 22, 22],
-    "loop_label": [64, 586, 400, 28],
-    "clear_button": [624, 584, 200, 32],
-    "save_button": [840, 584, 228, 32],
-    "record_button": [840, 584, 228, 32],
-    "play_button": [20, 628, 520, 44],
-    "stop_button": [552, 628, 258, 44],
-    "new_button": [822, 628, 258, 44],
-    "render_info": [276, 684, 792, 22],
-    "status": [276, 710, 792, 38],
-    "progress": [32, 736, 228, 10],
-    "credit_rule": [20, 758, 1060, 1],
-    "original_credit": [24, 764, 680, 22],
-    "original_link": [812, 762, 268, 24],
+    "output_label": [32, 354, 204, 24],
+    "duration": [244, 354, 210, 24],
+    "monitor_label": [752, 354, 116, 24],
+    "monitor_level": [872, 352, 80, 28],
+    "meter_L": [980, 354, 88, 11],
+    "meter_R": [980, 369, 88, 11],
+    "channel_l": [32, 426, 20, 24],
+    "channel_r": [32, 532, 20, 24],
+    "wave_l": [56, 390, 1012, 96],
+    "wave_r": [56, 496, 1012, 96],
+    "scope_l": [56, 390, 1012, 96],
+    "scope_r": [56, 496, 1012, 96],
+    "xy_pad": [56, 390, 684, 202],
+    "scope_xy": [756, 390, 312, 202],
+    "selection_info": [32, 600, 580, 22],
+    "time": [856, 600, 212, 22],
+    "loop_toggle": [632, 600, 22, 22],
+    "loop_label": [664, 598, 180, 28],
+    "clear_button": [720, 634, 172, 44],
+    "save_button": [904, 634, 176, 44],
+    "record_button": [720, 634, 360, 44],
+    "play_button": [20, 634, 328, 44],
+    "stop_button": [360, 634, 148, 44],
+    "new_button": [520, 634, 188, 44],
+    "render_info": [276, 688, 792, 22],
+    "status": [276, 714, 792, 38],
+    "progress": [32, 740, 228, 10],
+    "credit_rule": [20, 760, 1060, 1],
+    "original_credit": [24, 766, 680, 20],
+    "original_link": [812, 764, 268, 22],
 }
 for id, rect in layout.items():
     position(id, rect)
 position("title", layout["title"], text="CMPE / Variety Pack", fontsize=30.0, fontface=1)
 for i in range(5):
-    position("mode" + str(i), [20 + i * 215, 140, 200, 38], fontsize=20.0)
+    position("mode" + str(i), [20 + i * 215, 124, 200, 36], fontsize=20.0)
 
 for i, x in enumerate([20, 378, 736], 1):
-    add("source_card" + str(i), "panel", [x, 218, 344, 144],
+    add("source_card" + str(i), "panel", [x, 198, 344, 138],
         ins=1, outs=0, present=True, bgcolor=WHITE,
         border=1, bordercolor=BORDER, rounded=10, background=1, ignoreclick=1)
-    add("source_accent" + str(i), "panel", [x + 1, 219, 342, 4],
+    add("source_accent" + str(i), "panel", [x + 1, 199, 342, 4],
         ins=1, outs=0, present=True, bgcolor=[TEAL, BLUE, VIOLET][i - 1],
         border=0, rounded=0, background=1, ignoreclick=1)
-    position("source_label" + str(i), [x + 12, 228, 112, 22],
+    position("source_label" + str(i), [x + 12, 208, 112, 22],
              fontsize=16.0, fontface=1)
-    comment("source_state" + str(i), "EMPTY", [x + 130, 230, 100, 20],
+    comment("source_state" + str(i), "EMPTY", [x + 130, 210, 100, 20],
             size=16, textcolor=MUTED, modes=({0, 1, 2, 4} if i == 1 else {0, 1}))
-    position("load" + str(i), [x + 240, 226, 92, 30], fontsize=16.0)
-    position("file" + str(i), [x + 12, 262, 320, 36], fontsize=16.0)
-    position("repeat_label" + str(i), [x + 12, 304, 152, 20], fontsize=16.0)
-    position("repeat" + str(i), [x + 12, 328, 152, 28], fontsize=20.0)
+    position("load" + str(i), [x + 240, 206, 92, 30], fontsize=16.0)
+    position("file" + str(i), [x + 12, 240, 320, 36], fontsize=16.0)
+    position("repeat_label" + str(i), [x + 12, 280, 152, 20], fontsize=16.0)
+    position("repeat" + str(i), [x + 12, 302, 152, 28], fontsize=20.0)
     group_modes = {3} if i == 1 else {2, 3, 4}
-    comment("group_label" + str(i), "", [x + 12, 228, 320, 22],
+    comment("group_label" + str(i), "", [x + 12, 208, 320, 22],
             modes=group_modes, size=16, fontface=1, textcolor=MUTED)
-    comment("group_help" + str(i), "", [x + 12, 262, 320, 36],
+    comment("group_help" + str(i), "", [x + 12, 240, 320, 36],
             modes=group_modes, size=16, textcolor=MUTED)
 hide_original("no_samples")
 for i in range(6):
     x = [32, 390, 748][i % 3] + (168 if i >= 3 else 0)
-    position("param_label" + str(i), [x, 304, 152, 20], fontsize=16.0)
-    position("param" + str(i), [x, 328, 152, 28], fontsize=20.0)
-position("pitch_label", [200, 304, 152, 20], fontsize=16.0)
-position("pitch", [200, 328, 152, 28], fontsize=20.0)
-position("menu_label", [916, 304, 152, 20], fontsize=16.0)
-position("mode_menu", [916, 328, 152, 28], fontsize=16.0)
+    position("param_label" + str(i), [x, 280, 152, 20], fontsize=16.0)
+    position("param" + str(i), [x, 302, 152, 28], fontsize=20.0)
+position("pitch_label", [200, 280, 152, 20], fontsize=16.0)
+position("pitch", [200, 302, 152, 28], fontsize=20.0)
+position("menu_label", [916, 280, 152, 20], fontsize=16.0)
+position("mode_menu", [916, 302, 152, 28], fontsize=16.0)
 
-add("output_panel", "panel", [20, 370, 1060, 252], ins=1, outs=0,
+add("output_panel", "panel", [20, 344, 1060, 282], ins=1, outs=0,
     present=True, bgcolor=WHITE, border=1, bordercolor=BORDER,
     rounded=10, background=1, ignoreclick=1)
-add("feedback_panel", "panel", [20, 680, 1060, 72], ins=1, outs=0,
+add("feedback_panel", "panel", [20, 684, 1060, 72], ins=1, outs=0,
     present=True, bgcolor=rgba("#DFEEEE"), border=0, rounded=10,
     background=1, ignoreclick=1)
-button("state_badge", "LOADING", [32, 696, 228, 28], size=16,
+button("state_badge", "LOADING", [32, 698, 228, 28], size=16,
        ignoreclick=1, fontface=1)
-comment("wave_scale", "Wave view 1x", [468, 380, 272, 24], size=16,
+comment("wave_scale", "Wave view 1x", [468, 354, 272, 24], size=16,
         textcolor=MUTED, hint="The waveform is enlarged for visibility only. Audio playback and export levels do not change.")
 
 # Display chrome is intentionally quieter than the current action. Native
@@ -429,7 +429,7 @@ position("play_button", layout["play_button"], fontsize=22.0, fontface=1)
 position("stop_button", layout["stop_button"], fontsize=20.0)
 position("new_button", layout["new_button"], fontsize=20.0)
 position("original_credit", layout["original_credit"],
-         text="v1.2.0 / Original CMPE by Joo Won Park", fontsize=16.0)
+         text="v1.2.1 / Original CMPE by Joo Won Park", fontsize=16.0)
 position("original_link", layout["original_link"], bgcolor=CANVAS,
          bgoncolor=LIGHT, border=0, fontsize=16.0)
 for side in ("l", "r"):

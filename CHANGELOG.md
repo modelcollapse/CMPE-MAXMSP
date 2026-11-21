@@ -1,5 +1,12 @@
 # Changes
 
+## CMPE Variety Pack 1.2.1 — November 21, 2026
+
+- Increased each stereo waveform and live scope from 62 to 96 pixels high, about 55% taller, while retaining the complete 1100 × 788 presentation and text at least 16 points.
+- Increased the ISJS position/density pad and its adjacent scope from 134 to 202 pixels high.
+- Tightened header and source-card spacing. Loop selection remains directly below the waveform; FULL RANGE and SAVE WAV now sit beside the main transport. Live recording uses the same right-hand transport area.
+- Updated all interface previews and the complete `CMPE_Max.zip` download. This update changes layout only; the existing colors and audio behavior are retained.
+
 ## CMPE Variety Pack 1.2.0 — November 21, 2026
 
 - Reorganized the complete standalone interface into a compact audio strip, five colored instrument tabs, source/parameter cards, a distinct waveform area, and transport feedback. The presentation is 1100 × 788 with text at least 16 points.

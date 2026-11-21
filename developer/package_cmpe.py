@@ -22,7 +22,7 @@ import zipfile
 
 
 ROOT = Path(__file__).resolve().parent.parent
-VERSION = "1.2.0"
+VERSION = "1.2.1"
 FOLDER = "CMPE_Max"
 MAIN = "CMPE_Variety_Pack.maxpat"
 REPOSITORY = "https://github.com/modelcollapse/CMPE-MAXMSP"
@@ -47,7 +47,7 @@ OPTIONAL = [
     "docs/images/apg-feedback-states.png",
 ]
 
-PLAYABLE_README = """# CMPE Variety Pack for Max — 1.2.0
+PLAYABLE_README = """# CMPE Variety Pack for Max — 1.2.1
 
 **Open `CMPE_Variety_Pack.maxpat` in Max.** It contains all five instruments.
 
