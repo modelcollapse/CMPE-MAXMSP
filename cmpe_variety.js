@@ -1782,10 +1782,10 @@ function notifydeleted() { shutdown(); }
         else text = "Audio on" + (sampleRate > 0 ? " · " + (sampleRate / 1000).toFixed(sampleRate % 1000 ? 1 : 0) + " kHz" : "");
         ui("audio_status", text);
         objectMessage("audio_power", ["text", switchKnown ? (audioOn ? "AUDIO ON" : "AUDIO OFF") : "AUDIO ?"]);
-        var bg = switchKnown && audioOn ? [0.031373, 0.498039, 0.513725, 1] : [0.898039, 0.925490, 0.941176, 1];
-        var fg = switchKnown && audioOn ? [1, 1, 1, 1] : [0.105882, 0.160784, 0.211765, 1];
+        var bg = switchKnown && audioOn ? [0.090196, 0.415686, 0.396078, 1] : [0.909804, 0.898039, 0.878431, 1];
+        var fg = switchKnown && audioOn ? [1, 0.992157, 0.988235, 1] : [0.141176, 0.156863, 0.196078, 1];
         objectMessage("audio_power", ["bgcolor"].concat(bg));
-        objectMessage("audio_power", ["bgoncolor"].concat(switchKnown && audioOn ? [0.023529, 0.392157, 0.403922, 1] : [0.839216, 0.882353, 0.909804, 1]));
+        objectMessage("audio_power", ["bgoncolor"].concat(switchKnown && audioOn ? [0.066667, 0.317647, 0.305882, 1] : [0.847059, 0.831373, 0.803922, 1]));
         objectMessage("audio_power", ["textcolor"].concat(fg));
         objectMessage("audio_power", ["textoncolor"].concat(fg));
         objectMessage("audio_power", ["textovercolor"].concat(fg));
@@ -2126,12 +2126,12 @@ function notifydeleted() { shutdown(); }
             parseInt(hex.substr(3, 2), 16) / 255,
             parseInt(hex.substr(5, 2), 16) / 255, 1];
     }
-    var white = rgba("#FFFFFF"), ink = rgba("#203040"), muted = rgba("#647687");
-    var inactive = rgba("#E8EEF4"), disabled = rgba("#EDF1F4"), disabledInk = rgba("#718091");
-    var accents = [rgba("#087F83"), rgba("#315FA6"), rgba("#7257A6"), rgba("#995E32"), rgba("#986B19")];
-    var tints = [rgba("#E2F4F1"), rgba("#E7EFFB"), rgba("#EFE9FA"), rgba("#F7EDE2"), rgba("#F8F0DB")];
-    var amber = rgba("#9A5A14"), amberTint = rgba("#FFF1D7");
-    var red = rgba("#9C3343"), redTint = rgba("#FCE8EC");
+    var white = rgba("#FFFDFC"), ink = rgba("#242832"), muted = rgba("#5E626D");
+    var inactive = rgba("#E8E5E0"), disabled = rgba("#E9E6E1"), disabledInk = rgba("#696765");
+    var accents = [rgba("#176A65"), rgba("#67428C"), rgba("#8B4A30"), rgba("#62651D"), rgba("#325952")];
+    var tints = [rgba("#E0F1EC"), rgba("#EEE4F6"), rgba("#F5E7DF"), rgba("#F1F1D8"), rgba("#E2EBE5")];
+    var amber = rgba("#865A16"), amberTint = rgba("#FFF0CE");
+    var red = rgba("#9C3343"), redTint = rgba("#F8E2E4");
 
     function object(name) { return g.named(name); }
     function send(name, selector, values) {

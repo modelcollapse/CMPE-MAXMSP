@@ -4,7 +4,7 @@
 
 ## Download and open
 
-1. **[Download CMPE for Max](https://github.com/modelcollapse/CMPE-MAXMSP/raw/refs/heads/main/dist/CMPE_Max.zip)**. This is the complete playable **1.2.1** package.
+1. **[Download CMPE for Max](https://github.com/modelcollapse/CMPE-MAXMSP/raw/refs/heads/main/dist/CMPE_Max.zip)**. This is the complete playable **1.2.2** package.
 2. Extract the ZIP. Keep the resulting **`CMPE_Max`** folder together.
 3. Open **`CMPE_Variety_Pack.maxpat`** in Max.
 4. Choose your audio interface in the top audio controls, or open **AUDIO SETUP**. Use **TEST SOUND** to check the output.
@@ -53,6 +53,8 @@ Only the source controls needed by the selected instrument are shown. Use **LOAD
 ISJS and Many continue until stopped. RMHS finishes automatically after its planned voices fade out. Its displayed duration includes the slow attacks and releases, so it can exceed the duration setting. Many and RMHS identify their fade-ins in the status area.
 
 ## Interface previews
+
+The colors adapt **Retro calm** from [Figma's color combinations reference](https://www.figma.com/resource-library/color-combinations/). The original swatches are teal **`#81D8D0`**, clay **`#D99E82`**, yellow-green **`#D7D982`**, and lavender **`#AE82D9`**. These appear in the waveform traces, playhead, and selection overlay. Button and label colors use darker related shades; panels use light tints and warm neutrals. Text labels identify instruments and activity states as well as color. This UI reference is separate from Joo Won Park's original musical work, credited below.
 
 The stereo waveform and live-scope areas are now **96 pixels high per channel**, about 55% taller, within the same complete **1100 × 788** interface. ISJS's position/density pad and adjacent scope are 202 pixels high. Loop selection stays below the waveform; playback, FULL RANGE, and SAVE WAV share the transport row.
 

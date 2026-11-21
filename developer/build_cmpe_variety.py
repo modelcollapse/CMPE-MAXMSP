@@ -21,23 +21,25 @@ def rgba(hex_color, alpha=1.0):
             for index in (1, 3, 5)] + [alpha]
 
 
-BLACK = rgba("#1B2936")
-WHITE = rgba("#FFFFFF")
-CANVAS = rgba("#EDF2F6")
-LIGHT = rgba("#E8EEF4")
-BORDER = rgba("#CBD5DD")
-MUTED = rgba("#526775")
-TEAL = rgba("#087F83")
-BLUE = rgba("#315FA6")
-VIOLET = rgba("#7257A6")
-ROSE = rgba("#8B3338")
-ROSE_TINT = rgba("#F5E6E5")
-MODE_COLORS = [TEAL, BLUE, VIOLET, rgba("#995E32"), rgba("#986B19")]
+# UI color reference: Figma Retro calm. Source swatches are #81D8D0,
+# #D99E82, #D7D982, #AE82D9; control accents are darkened for legibility.
+BLACK = rgba("#242832")
+WHITE = rgba("#FFFDFC")
+CANVAS = rgba("#F4F1EB")
+LIGHT = rgba("#E8E5E0")
+BORDER = rgba("#CAC7C1")
+MUTED = rgba("#5E626D")
+TEAL = rgba("#176A65")
+LAVENDER = rgba("#67428C")
+CLAY = rgba("#8B4A30")
+ROSE = rgba("#9C3343")
+ROSE_TINT = rgba("#F8E2E4")
+MODE_COLORS = [TEAL, LAVENDER, CLAY, rgba("#62651D"), rgba("#325952")]
 ALL_MODES = set(range(5))
 
 patch = copy.deepcopy(json.loads(SOURCE.read_text())["patcher"])
 patch["rect"] = [80, 80, WIDTH, HEIGHT]
-patch["title"] = "CMPE Variety Pack 1.2.1 / APG · ISJS · Many · RMHS · SIOE"
+patch["title"] = "CMPE Variety Pack 1.2.2 / APG · ISJS · Many · RMHS · SIOE"
 patch["openinpresentation"] = 1
 patch["bgcolor"] = CANVAS
 patch["bglockedcolor"] = CANVAS
@@ -163,7 +165,7 @@ button("audio_refresh", "REFRESH", [656, 52, 104, 30], size=16,
 button("audio_power", "AUDIO OFF", [768, 52, 168, 30], size=16,
        hint="Turn Max audio on or off. This setting affects all Max patches.")
 add("audio_panel", "panel", [14, 86, 932, 68], ins=1, outs=0,
-    present=True, bgcolor=rgba("#E8EFF3"), border=0, rounded=6,
+    present=True, bgcolor=rgba("#E8E5E0"), border=0, rounded=6,
     background=1, ignoreclick=1)
 for key, text, x, width in [
     ("driver", "Audio driver", 24, 216),
@@ -171,7 +173,7 @@ for key, text, x, width in [
     ("option2", "Driver option 2", 588, 348),
 ]:
     comment("audio_" + key + "_label", text, [x, 90, width, 20],
-            size=16, textcolor=MUTED, bgcolor=rgba("#E8EFF3"))
+            size=16, textcolor=MUTED, bgcolor=rgba("#E8E5E0"))
     add("audio_" + key + "_menu", "umenu", [x, 114, width, 30],
         ins=1, outs=3, types=["int", "", ""], present=True,
         bgcolor=WHITE, textcolor=BLACK, fontsize=16.0,
@@ -195,8 +197,8 @@ comment("mode_info", "APG / Audio Palindrome Generator", [24, 208, 912, 24],
 # Three common audio slots. RMHS uses its own synthesis instead.
 for i, x in enumerate([24, 336, 648], 1):
     source_modes = {0, 1, 2, 4} if i == 1 else {0, 1}
-    accent = [TEAL, BLUE, VIOLET][i - 1]
-    tint = [rgba("#E1F0EF"), rgba("#E6EDF7"), rgba("#EDE8F5")][i - 1]
+    accent = [TEAL, LAVENDER, CLAY][i - 1]
+    tint = [rgba("#E0F1EC"), rgba("#EEE4F6"), rgba("#F5E7DF")][i - 1]
     position("source_label" + str(i), [x, 246, 154, 24], modes=source_modes,
              textcolor=accent)
     position("load" + str(i), [x + 184, 240, 104, 32], modes=source_modes,
@@ -252,18 +254,18 @@ position("monitor_label", [592, 394, 116, 24], text="Volume (dB)",
          fontsize=16.0, textcolor=MUTED)
 position("monitor_level", [712, 390, 96, 30])
 for side, y in [("L", 390), ("R", 408)]:
-    position("meter_" + side, [832, y, 104, 12], bgcolor=rgba("#D5DFE5"),
-             offcolor=rgba("#CBD5DD"), oncolor=TEAL)
+    position("meter_" + side, [832, y, 104, 12], bgcolor=rgba("#D8D4CD"),
+             offcolor=rgba("#CAC7C1"), oncolor=TEAL)
 for side, y in [("l", 430), ("r", 504)]:
-    accent = TEAL if side == "l" else BLUE
+    accent = TEAL if side == "l" else LAVENDER
     position("channel_" + side, [24, y + 20, 28, 25], modes={0, 2, 3, 4})
     position("wave_" + side, [56, y, 880, 66], modes={0, 4},
-             bgcolor=WHITE, waveformcolor=accent, gridcolor=rgba("#DFE6EB"),
-             selectioncolor=rgba("#087F83", 0.18))
+             bgcolor=WHITE, waveformcolor=accent, gridcolor=rgba("#E4E0D9"),
+             selectioncolor=rgba("#176A65", 0.18))
     add("scope_" + side, "scope~", [56, y, 880, 66],
         ins=2, outs=0, present=True, modes={2, 3},
         bgcolor=WHITE, fgcolor=accent,
-        gridcolor=rgba("#DFE6EB"), calccount=128, bufsize=256,
+        gridcolor=rgba("#E4E0D9"), calccount=128, bufsize=256,
         range=[-1.0, 1.0], delay=50, trigger=0)
 add("xy_pad", "jsui", [56, 430, 600, 140],
     ins=1, outs=1, types=[""], present=True, modes={1},
@@ -272,7 +274,7 @@ add("xy_pad", "jsui", [56, 430, 600, 140],
 add("scope_xy", "scope~", [672, 430, 264, 140],
     ins=2, outs=0, present=True, modes={1},
     bgcolor=WHITE, fgcolor=TEAL,
-    gridcolor=rgba("#DFE6EB"), calccount=64, bufsize=256,
+    gridcolor=rgba("#E4E0D9"), calccount=64, bufsize=256,
     range=[-1.0, 1.0], delay=50, trigger=0)
 wire("xy_pad", 0, "controller")
 
@@ -290,17 +292,17 @@ wire("record_button", 0, "recordtoggle_msg")
 wire("recordtoggle_msg", 0, "controller")
 
 position("play_button", [24, 654, 448, 48],
-         bgcolor=TEAL, bgoncolor=rgba("#066B6E"),
+         bgcolor=TEAL, bgoncolor=rgba("#11514E"),
          textcolor=WHITE, textoncolor=WHITE, textovercolor=WHITE,
          hint="Start the selected instrument or play its rendered result.")
 position("stop_button", [488, 654, 216, 48],
-         bgcolor=ROSE_TINT, bgoncolor=rgba("#EED4D4"),
+         bgcolor=ROSE_TINT, bgoncolor=rgba("#EECAD0"),
          textcolor=ROSE, textoncolor=ROSE, textovercolor=ROSE,
          hint="Stop audio or cancel preparation.")
 position("new_button", [720, 654, 216, 48],
          hint="Start a fresh result for the selected instrument.")
 position("record_button", [730, 610, 206, 34],
-         bgcolor=ROSE_TINT, bgoncolor=rgba("#EED4D4"),
+         bgcolor=ROSE_TINT, bgoncolor=rgba("#EECAD0"),
          textcolor=ROSE, textoncolor=ROSE, textovercolor=ROSE)
 position("progress", [24, 712, 912, 6], bgcolor=LIGHT, elementcolor=LIGHT, knobcolor=TEAL)
 position("render_info", [24, 724, 912, 24], fontsize=16.0, textcolor=MUTED)
@@ -377,7 +379,7 @@ for i, x in enumerate([20, 378, 736], 1):
         ins=1, outs=0, present=True, bgcolor=WHITE,
         border=1, bordercolor=BORDER, rounded=10, background=1, ignoreclick=1)
     add("source_accent" + str(i), "panel", [x + 1, 199, 342, 4],
-        ins=1, outs=0, present=True, bgcolor=[TEAL, BLUE, VIOLET][i - 1],
+        ins=1, outs=0, present=True, bgcolor=[TEAL, LAVENDER, CLAY][i - 1],
         border=0, rounded=0, background=1, ignoreclick=1)
     position("source_label" + str(i), [x + 12, 208, 112, 22],
              fontsize=16.0, fontface=1)
@@ -406,7 +408,7 @@ add("output_panel", "panel", [20, 344, 1060, 282], ins=1, outs=0,
     present=True, bgcolor=WHITE, border=1, bordercolor=BORDER,
     rounded=10, background=1, ignoreclick=1)
 add("feedback_panel", "panel", [20, 684, 1060, 72], ins=1, outs=0,
-    present=True, bgcolor=rgba("#DFEEEE"), border=0, rounded=10,
+    present=True, bgcolor=rgba("#E0F1EC"), border=0, rounded=10,
     background=1, ignoreclick=1)
 button("state_badge", "LOADING", [32, 698, 228, 28], size=16,
        ignoreclick=1, fontface=1)
@@ -424,25 +426,25 @@ for b in boxes.values():
         b.update(rounded=8, border=1, bordercolor=BORDER, usegradient=0)
         b.setdefault("fontface", 0)
     if b["maxclass"] in ("number", "flonum", "umenu"):
-        b.update(bgcolor=rgba("#F4F7FA"), bordercolor=BORDER)
+        b.update(bgcolor=rgba("#FAF8F4"), bordercolor=BORDER)
 position("play_button", layout["play_button"], fontsize=22.0, fontface=1)
 position("stop_button", layout["stop_button"], fontsize=20.0)
 position("new_button", layout["new_button"], fontsize=20.0)
 position("original_credit", layout["original_credit"],
-         text="v1.2.1 / Original CMPE by Joo Won Park", fontsize=16.0)
+         text="v1.2.2 / Original CMPE by Joo Won Park", fontsize=16.0)
 position("original_link", layout["original_link"], bgcolor=CANVAS,
          bgoncolor=LIGHT, border=0, fontsize=16.0)
 for side in ("l", "r"):
     position("wave_" + side, layout["wave_" + side],
-             bgcolor=rgba("#152C3F"), gridcolor=rgba("#2C4559"),
-             waveformcolor=rgba("#6CE0CE" if side == "l" else "#94BBFF"),
-             bordercolor=rgba("#152C3F"), linecolor=rgba("#FFBF80"),
-             selectioncolor=rgba("#C9F1F7", 0.17))
+             bgcolor=rgba("#252A35"), gridcolor=rgba("#414754"),
+             waveformcolor=rgba("#81D8D0" if side == "l" else "#AE82D9"),
+             bordercolor=rgba("#252A35"), linecolor=rgba("#D99E82"),
+             selectioncolor=rgba("#D7D982", 0.17))
     position("scope_" + side, layout["scope_" + side],
-             bgcolor=rgba("#152C3F"), gridcolor=rgba("#2C4559"),
-             fgcolor=rgba("#6CE0CE" if side == "l" else "#94BBFF"))
-position("scope_xy", layout["scope_xy"], bgcolor=rgba("#152C3F"),
-         fgcolor=rgba("#6CE0CE"), gridcolor=rgba("#2C4559"))
+             bgcolor=rgba("#252A35"), gridcolor=rgba("#414754"),
+             fgcolor=rgba("#81D8D0" if side == "l" else "#AE82D9"))
+position("scope_xy", layout["scope_xy"], bgcolor=rgba("#252A35"),
+         fgcolor=rgba("#81D8D0"), gridcolor=rgba("#414754"))
 
 # Audio controls only request changes through the controller. The controller
 # stops voices/recording and fades before applying global device changes.

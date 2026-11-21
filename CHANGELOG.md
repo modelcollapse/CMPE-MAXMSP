@@ -1,5 +1,12 @@
 # Changes
 
+## CMPE Variety Pack 1.2.2 — November 21, 2026
+
+- Adapted Figma's **Retro calm** color combination: teal, clay, yellow-green, and lavender. The exact source swatches appear in the waveform traces, playhead, and selection; darker control colors and pale panel tints retain readable labels.
+- Applied the palette consistently to instrument tabs, sample cards, transport and activity feedback, audio-power states, the ISJS pad, and the first-use guide. The README links to the color reference and identifies the original swatches separately from the UI adaptations.
+- Retained the complete 1100 × 788 layout and taller waveforms from 1.2.1. Audio generation, playback, recording, and mouse interactions are unchanged. The separate Max for Live preview retains its existing files.
+- Updated all interface previews and the complete `CMPE_Max.zip` download.
+
 ## CMPE Variety Pack 1.2.1 — November 21, 2026
 
 - Increased each stereo waveform and live scope from 62 to 96 pixels high, about 55% taller, while retaining the complete 1100 × 788 presentation and text at least 16 points.

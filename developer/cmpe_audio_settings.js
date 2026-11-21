@@ -41,10 +41,10 @@
         else text = "Audio on" + (sampleRate > 0 ? " · " + (sampleRate / 1000).toFixed(sampleRate % 1000 ? 1 : 0) + " kHz" : "");
         ui("audio_status", text);
         objectMessage("audio_power", ["text", switchKnown ? (audioOn ? "AUDIO ON" : "AUDIO OFF") : "AUDIO ?"]);
-        var bg = switchKnown && audioOn ? [0.031373, 0.498039, 0.513725, 1] : [0.898039, 0.925490, 0.941176, 1];
-        var fg = switchKnown && audioOn ? [1, 1, 1, 1] : [0.105882, 0.160784, 0.211765, 1];
+        var bg = switchKnown && audioOn ? [0.090196, 0.415686, 0.396078, 1] : [0.909804, 0.898039, 0.878431, 1];
+        var fg = switchKnown && audioOn ? [1, 0.992157, 0.988235, 1] : [0.141176, 0.156863, 0.196078, 1];
         objectMessage("audio_power", ["bgcolor"].concat(bg));
-        objectMessage("audio_power", ["bgoncolor"].concat(switchKnown && audioOn ? [0.023529, 0.392157, 0.403922, 1] : [0.839216, 0.882353, 0.909804, 1]));
+        objectMessage("audio_power", ["bgoncolor"].concat(switchKnown && audioOn ? [0.066667, 0.317647, 0.305882, 1] : [0.847059, 0.831373, 0.803922, 1]));
         objectMessage("audio_power", ["textcolor"].concat(fg));
         objectMessage("audio_power", ["textoncolor"].concat(fg));
         objectMessage("audio_power", ["textovercolor"].concat(fg));
