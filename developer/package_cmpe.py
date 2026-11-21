@@ -22,7 +22,7 @@ import zipfile
 
 
 ROOT = Path(__file__).resolve().parent.parent
-VERSION = "1.2.2"
+VERSION = "1.2.5"
 FOLDER = "CMPE_Max"
 MAIN = "CMPE_Variety_Pack.maxpat"
 REPOSITORY = "https://github.com/modelcollapse/CMPE-MAXMSP"
@@ -47,7 +47,7 @@ OPTIONAL = [
     "docs/images/apg-feedback-states.png",
 ]
 
-PLAYABLE_README = """# CMPE Variety Pack for Max — 1.2.2
+PLAYABLE_README = """# CMPE Variety Pack for Max — 1.2.5
 
 **Open `CMPE_Variety_Pack.maxpat` in Max.** It contains all five instruments.
 
@@ -77,6 +77,9 @@ No third-party externals, Python, or Node.js are needed to play this folder.
 | SIOE | Sample 1 | A rendered short or gradually developing supercut |
 
 ## Controls and feedback
+
+LOAD buttons have solid charcoal backgrounds with bold white labels. The
+neutral interface uses blue for the selected instrument and primary action.
 
 GENERATE + PLAY builds the finite result and plays it. PLAY reuses the prepared
 result. NEW TAKE generates another randomized result and leaves it ready.

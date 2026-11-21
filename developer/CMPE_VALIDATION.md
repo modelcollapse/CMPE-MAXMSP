@@ -14,7 +14,7 @@ The controller owns tasks, voice lifetimes, mode changes, and recording state. S
 
 ### Native audio settings
 
-The last bundled module, `developer/cmpe_audio_settings.js`, manages the audio controls. The native graph uses `adstatus driver`, `adstatus option 1/2`, and `adstatus optionname 1/2` to obtain the available choices and their labels. Option indices are driver-specific; they are not assumed to mean input or output device. `adstatus output` describes channel mapping rather than hardware selection, so the patch leaves full channel mapping to Max's Audio Status window. See the official [adstatus reference](https://docs.cycling74.com/reference/adstatus/).
+The audio-settings module, `developer/cmpe_audio_settings.js`, manages the audio controls. The native graph uses `adstatus driver`, `adstatus option 1/2`, and `adstatus optionname 1/2` to obtain the available choices and their labels. Its menu outlets connect directly to the visible `umenu` objects before the controller receives the same telemetry. Option indices are driver-specific; they are not assumed to mean input or output device. `adstatus output` describes channel mapping rather than hardware selection, so the patch leaves full channel mapping to Max's Audio Status window. See the official [adstatus reference](https://docs.cycling74.com/reference/adstatus/).
 
 Menu population and current-value feedback are read-only. Only a deliberate user selection issues a setting command. A change first stops the instrument and recorder, cancels a pending test tone, and waits 30 ms for the stop fade before turning DSP off and applying the choice. The available choices are read again before the device write; a changed or missing selection is rejected rather than reusing an obsolete index. The resulting device identity and DSP state are read back. Audio remains off until the user enables it or starts an instrument. AUDIO SETUP follows the same stop path and opens the native window with `; dsp open`, as documented in [Controlling Max with Messages](https://docs.cycling74.com/userguide/controlling_max_with_messages/).
 
@@ -44,6 +44,32 @@ The first builder preserves the standalone APG patch/runtime. The voice builder 
 
 The retained APG checks and their scope are documented in [VALIDATION.md](VALIDATION.md). New collection-controller verification is separate from the pure-model results below; no native execution is implied by controller mocks.
 
+## Version 1.2.5: larger waveform display
+
+The user reported 1.2.4 working and requested a larger waveform. This update increases each waveform and stereo live-scope channel from 96 to 144 pixels high at the same 1012-pixel width. ISJS's pad and adjacent scope grow from 202 to 298 pixels. Compact surrounding spacing and header attribution keep the complete window at 1100 × 836, 48 pixels taller than before.
+
+Only presentation geometry, the window title/version, and the attribution placement change in the main patch. The runtime scripts and native audio-control arguments—including the corrected zero-based driver option numbers—remain the working 1.2.4 implementation. Verification is limited to the layout and distribution changes; native Max is not available in this workspace. The builder validates all 252 objects and 223 connections. The five instrument previews and seven APG state previews pass text-fit, bounds, and overlap checks; visual inspection found no clipping. A structural comparison against 1.2.4 confirms identical patch connections, native audio-control arguments, visible color styles, controller scripts, and DSP voice files.
+
+## Version 1.2.4: native option-address correction
+
+The generated native objects now address driver options 0 and 1, with matching optionname arguments. The logical UI identifiers remain option1 and option2. The former 1/2 mapping skipped native option 0. The [official Cycling ’74 guitar-processor tutorial](https://cycling74.com/articles/max-8-guitar-processor-part-1) states that its input-handler controls were copied from adstatus.maxhelp; its [downloadable patch](https://usercontent.cdn.cycling74.com/57ec430afd747b8a71b4f1ab/2021-01-29T02:51:17Z/Max8-GtrProc-1.maxpat) uses `adstatus option 0`. A [mirror of the Max 9 help patch](https://github.com/markusepperer/Maxmsp_Knowledgebase/blob/27e04dd49232367e06848a361c26bf3ef75a63d5/help_maxhelp/msp/adstatus.maxhelp) corroborates both `option 0` and `optionname 0` with an explicit zero-based numbering comment. This differs from the current reference page’s starting-at-1 prose.
+
+A new generated-object regression failed against the old patch and passes after rebuilding. The rebuilt distribution passes **54 controller scenarios, 7,429 checks, and 5,182 rendered-frame comparisons**, with no failures. The controller, musical algorithms, and DSP graphs are unchanged; the native argument mapping is the behavior change.
+
+A separate read-only audit found no missing packaged dependencies or confirmed fatal JavaScript startup defect. TEST SOUND is a native path independent of the controller, so it can succeed without proving controller startup. The user’s exact failure is still unidentified without a symptom or the first Max Console error. Native audio-device operation remains unverified.
+
+## Version 1.2.3 verification
+
+The production controller and rebuilt bundle each pass **53 scenarios, 7,429 checks, and 5,182 rendered-frame comparisons**, with no failures. The eight new audio-control cases cover delayed native replies, driver state from the left menu outlet alone, a stale poll crossing a reordered device catalog, partial enumeration, missing current selections, delayed hardware application, timeout/cancellation, and native setup/power with unavailable menu replies. Completed enumeration is tracked separately from ordinary current-index feedback. A refresh retains known choices until a native replacement arrives and does not issue hardware-setting writes.
+
+The presentation suite passes **10 scenarios and 268 checks**. It checks LOAD text and control-boundary contrast, loading/playback/mode transitions, preserved click locks, native fill settings, and the existing activity feedback. LOAD text contrast is **13.16:1** normally, **9.26:1** on hover, and **10.03:1** when pressed; unavailable labels are **5.06:1**. The white primary-action label on blue is **6.96:1**. These are calculated sRGB ratios for the specified colors, not measurements of native Max rendering.
+
+Panels and menus bind explicit solid `bgfillcolor` styles, and runtime color updates use the documented four-float message. Menus enable `applycolors`; text buttons enable their pressed/hover color attributes. The preview renderer resolves those native styles and does not invent text-button outlines. References: [panel](https://docs.cycling74.com/reference/panel/), [umenu](https://docs.cycling74.com/reference/umenu/), [textbutton](https://docs.cycling74.com/reference/textbutton/), and [Cycling '74's serialized solid-fill example](https://github.com/Cycling74/n4m-core-examples/blob/master/02-message-handlers/message-handlers.maxpat).
+
+The generated patch has **252 objects and 223 connections**. All existing connections and presentation rectangles are preserved; the only three added connections forward native driver/option menu data directly to the corresponding menus. The sound models, renderer, instrument controller, voice patches, standalone APG, and Max for Live files are byte-identical to 1.2.2. Both distributed JavaScript files pass Node syntax checks. The five complete interface previews and seven APG state previews pass text-fit, bounds, and overlap checks. They remain explicitly labelled as generated interface previews.
+
+Native Max, its audio hardware, and the user's running instance were unavailable. This update repairs demonstrated controller weaknesses and native-attribute mismatches; it does not claim that the exact failure on the user's machine was reproduced or that actual device switching has been verified.
+
 ## Completed pure-model validation
 
 `test_cmpe_model.js` completed **15 test cases and 9,229 checks**. It exercises the production `CMPEModel` module with deterministic random sources.
@@ -65,7 +91,7 @@ The audio oracle does not use the production envelope evaluator, cache, active-e
 
 The SIOE source cache requests contiguous pages of at most 2,048 frames and retains at most 256 pages; it does not load a complete source into a JavaScript array. The active-event list avoids traversing every historical event for each sequential render chunk. The plan recommends a chunk size based on concurrent voices to bound work between controller yields.
 
-## Completed controller and distribution validation
+## Earlier controller and distribution validation (through 1.2.2)
 
 `test_cmpe_controller.js` completed **45 scenarios, 7,398 checks, and 5,182 rendered audio frames checked**, with no failures. The same suite passed against both the separate source modules and the generated `cmpe_variety.js` distribution. It executes the actual controller and models with simulated Max tasks, buffers, UI objects, files, and native-message boundaries.
 

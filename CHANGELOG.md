@@ -1,5 +1,31 @@
 # Changes
 
+## CMPE Variety Pack 1.2.5 — November 21, 2026
+
+- Increased both stereo waveform and live-scope channels from 96 to 144 pixels high, a 50% increase, at the existing 1012-pixel width.
+- Enlarged the ISJS position/density pad and its adjacent scope from 202 to 298 pixels high.
+- Tightened the surrounding layout and moved the original-author credit beside the title. The complete window grows from 1100 × 788 to 1100 × 836; all labels remain at least 16 points.
+- This is a presentation-only update to the 1.2.4 package the user reported working. Audio settings, controller scripts, and DSP connections retain the working implementation.
+
+
+## CMPE Variety Pack 1.2.4 — November 21, 2026
+
+- Corrected native driver-option addressing: the first visible device menu now uses `adstatus option 0` and `adstatus optionname 0`; the second uses option 1 and optionname 1. The previous mapping used 1 and 2, omitting the first native driver option.
+- Added a regression that inspects the actual generated Max object arguments. The prior mocked controller tests did not catch the incorrect native option numbers.
+- Rebuilt the complete download with the existing higher-contrast interface. Native Max operation and the user's reported failure still need direct verification; this correction does not claim that the full reported failure was reproduced.
+
+The mapping follows Cycling ’74’s [Max 8 Guitar Processor example](https://cycling74.com/articles/max-8-guitar-processor-part-1), which copies its audio controls from `adstatus.maxhelp`. The current reference prose says options start at 1, but the actual help patch and official example use zero-based option arguments.
+
+## CMPE Variety Pack 1.2.3 — November 21, 2026
+
+- Replaced the pastel palette with white source cards, a neutral gray canvas, dark text, and a single blue accent for the selected instrument and primary action. LOAD is now solid charcoal with bold white text and distinct pressed/hover states. Temporarily unavailable controls stay readable.
+- Corrected the native menu/panel fill settings and enabled the documented textbutton pressed/hover color attributes. The preview renderer follows those native settings.
+- Connected native audio-driver and device-list output directly to the visible menus. The controller observes the list and still guards explicit device changes, without clearing and rebuilding the visible list for every reported item.
+- Retained known menu data until a native replacement arrives and added bounded waits for enumeration and DSP confirmation. A driver can be selected from a reported list even when Max has not reported a current selection. Refresh and polling do not select hardware.
+- Kept the 1100 × 788 presentation and larger waveform areas. Musical source modules and DSP voice patches are unchanged. Rebuilt the complete playable download and interface previews.
+
+Automated controller, presentation, and package checks cover this update. Native Max rendering, mouse interaction, and actual device switching still require verification in Max.
+
 ## CMPE Variety Pack 1.2.2 — November 21, 2026
 
 - Adapted Figma's **Retro calm** color combination: teal, clay, yellow-green, and lavender. The exact source swatches appear in the waveform traces, playhead, and selection; darker control colors and pale panel tints retain readable labels.

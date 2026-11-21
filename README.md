@@ -4,7 +4,7 @@
 
 ## Download and open
 
-1. **[Download CMPE for Max](https://github.com/modelcollapse/CMPE-MAXMSP/raw/refs/heads/main/dist/CMPE_Max.zip)**. This is the complete playable **1.2.2** package.
+1. **[Download CMPE for Max](https://github.com/modelcollapse/CMPE-MAXMSP/raw/refs/heads/main/dist/CMPE_Max.zip)**. This is the complete playable **1.2.5** package.
 2. Extract the ZIP. Keep the resulting **`CMPE_Max`** folder together.
 3. Open **`CMPE_Variety_Pack.maxpat`** in Max.
 4. Choose your audio interface in the top audio controls, or open **AUDIO SETUP**. Use **TEST SOUND** to check the output.
@@ -36,7 +36,7 @@ The top row contains **Driver** and two option menus supplied by the selected Ma
 
 Changing a driver or device, or opening AUDIO SETUP, stops this patch's playback and recording first and turns Max audio off. Press PLAY/START or use the audio power button when the new interface is ready. Audio settings apply to Max and are not stored in the musical **SAVE SET** files.
 
-The interface uses a light background, dark text, a distinct color for each instrument, and three tinted source cards. Dark waveform panels separate the audio display from the controls. Text labels carry the state information alongside color.
+The interface uses a neutral light background, white source cards, dark text, and a blue selected instrument and primary action. **LOAD** buttons have solid charcoal backgrounds and bold white labels. Dark waveform panels separate the audio display from the controls. Text labels carry the state information alongside color.
 
 ## Five instruments
 
@@ -54,9 +54,9 @@ ISJS and Many continue until stopped. RMHS finishes automatically after its plan
 
 ## Interface previews
 
-The colors adapt **Retro calm** from [Figma's color combinations reference](https://www.figma.com/resource-library/color-combinations/). The original swatches are teal **`#81D8D0`**, clay **`#D99E82`**, yellow-green **`#D7D982`**, and lavender **`#AE82D9`**. These appear in the waveform traces, playhead, and selection overlay. Button and label colors use darker related shades; panels use light tints and warm neutrals. Text labels identify instruments and activity states as well as color. This UI reference is separate from Joo Won Park's original musical work, credited below.
+Version **1.2.3** replaces the previous pastel palette with a restrained neutral and blue palette. White source cards and dark text keep parameters readable; solid charcoal **LOAD** buttons remain distinct from their cards. Blue identifies the selected instrument and primary action. Stereo waveform channels use bright traces on charcoal, with explicit L/R labels. Recording, stopped controls, waiting, and error states retain text labels and distinct emphasis.
 
-The stereo waveform and live-scope areas are now **96 pixels high per channel**, about 55% taller, within the same complete **1100 × 788** interface. ISJS's position/density pad and adjacent scope are 202 pixels high. Loop selection stays below the waveform; playback, FULL RANGE, and SAVE WAV share the transport row.
+The stereo waveform and live-scope areas are now **144 pixels high per channel**, **50% taller than 1.2.4**. The complete interface is **1100 × 836**, only 48 pixels taller overall after tightening the surrounding spacing. ISJS's position/density pad and adjacent scope are 298 pixels high. Loop selection stays below the waveform; playback, FULL RANGE, and SAVE WAV share the transport row.
 
 These images are rendered from the shipped Max patch layout and its controller state. APG and SIOE show output generated from the included demo sounds by the production renderer. They are **interface previews, not native Max screenshots**; live instruments are shown stopped. Device menus show fallback placeholders because no physical audio hardware was queried for these images.
 

@@ -13,7 +13,7 @@ import json
 ROOT = Path(__file__).resolve().parent.parent
 SOURCE = ROOT / "APG_Wave.maxpat"
 TARGET = ROOT / "CMPE_Variety_Pack.maxpat"
-WIDTH, HEIGHT = 1100, 788
+WIDTH, HEIGHT = 1100, 836
 
 
 def rgba(hex_color, alpha=1.0):
@@ -21,25 +21,23 @@ def rgba(hex_color, alpha=1.0):
             for index in (1, 3, 5)] + [alpha]
 
 
-# UI color reference: Figma Retro calm. Source swatches are #81D8D0,
-# #D99E82, #D7D982, #AE82D9; control accents are darkened for legibility.
-BLACK = rgba("#242832")
-WHITE = rgba("#FFFDFC")
-CANVAS = rgba("#F4F1EB")
-LIGHT = rgba("#E8E5E0")
-BORDER = rgba("#CAC7C1")
-MUTED = rgba("#5E626D")
-TEAL = rgba("#176A65")
-LAVENDER = rgba("#67428C")
-CLAY = rgba("#8B4A30")
-ROSE = rgba("#9C3343")
-ROSE_TINT = rgba("#F8E2E4")
-MODE_COLORS = [TEAL, LAVENDER, CLAY, rgba("#62651D"), rgba("#325952")]
+# Neutral surfaces keep the blue current action and dark LOAD buttons distinct.
+BLACK = rgba("#17202B")
+WHITE = rgba("#FFFFFF")
+CANVAS = rgba("#EFF1F4")
+LIGHT = rgba("#E0E5EB")
+BORDER = rgba("#7B8694")
+MUTED = rgba("#465365")
+BLUE = rgba("#174FCB")
+CHARCOAL = rgba("#263140")
+ROSE = rgba("#A82132")
+ROSE_TINT = rgba("#FFF1F2")
+MODE_COLORS = [BLUE] * 5
 ALL_MODES = set(range(5))
 
 patch = copy.deepcopy(json.loads(SOURCE.read_text())["patcher"])
 patch["rect"] = [80, 80, WIDTH, HEIGHT]
-patch["title"] = "CMPE Variety Pack 1.2.2 / APG · ISJS · Many · RMHS · SIOE"
+patch["title"] = "CMPE Variety Pack 1.2.5 / APG · ISJS · Many · RMHS · SIOE"
 patch["openinpresentation"] = 1
 patch["bgcolor"] = CANVAS
 patch["bglockedcolor"] = CANVAS
@@ -58,7 +56,7 @@ for b in boxes.values():
         b.update(bgcolor=LIGHT, bgoncolor=BORDER, textcolor=BLACK,
                  textoncolor=BLACK, textovercolor=BLACK, rounded=6)
     elif b["maxclass"] in ("number", "flonum"):
-        b.update(bgcolor=WHITE, bgoncolor=LIGHT, hbgcolor=TEAL,
+        b.update(bgcolor=WHITE, bgoncolor=LIGHT, hbgcolor=BLUE,
                  htextcolor=WHITE, tricolor=BLACK)
 
 
@@ -121,8 +119,8 @@ def button(id, text, rect, modes=None, selected=False, size=17, **attrs):
     return add(id, "textbutton", rect, text, 1, 3, ["", "", "int"],
                present=True, modes=modes, fontsize=float(size), mode=0,
                outputmode=1, usegradient=0, rounded=6,
-               bgcolor=TEAL if selected else LIGHT,
-               bgoncolor=TEAL if selected else BORDER,
+               bgcolor=BLUE if selected else LIGHT,
+               bgoncolor=BLUE if selected else BORDER,
                textcolor=WHITE if selected else BLACK,
                textoncolor=WHITE if selected else BLACK,
                textovercolor=WHITE if selected else BLACK,
@@ -165,7 +163,7 @@ button("audio_refresh", "REFRESH", [656, 52, 104, 30], size=16,
 button("audio_power", "AUDIO OFF", [768, 52, 168, 30], size=16,
        hint="Turn Max audio on or off. This setting affects all Max patches.")
 add("audio_panel", "panel", [14, 86, 932, 68], ins=1, outs=0,
-    present=True, bgcolor=rgba("#E8E5E0"), border=0, rounded=6,
+    present=True, bgcolor=LIGHT, border=0, rounded=6,
     background=1, ignoreclick=1)
 for key, text, x, width in [
     ("driver", "Audio driver", 24, 216),
@@ -173,7 +171,7 @@ for key, text, x, width in [
     ("option2", "Driver option 2", 588, 348),
 ]:
     comment("audio_" + key + "_label", text, [x, 90, width, 20],
-            size=16, textcolor=MUTED, bgcolor=rgba("#E8E5E0"))
+            size=16, textcolor=MUTED, bgcolor=LIGHT)
     add("audio_" + key + "_menu", "umenu", [x, 114, width, 30],
         ins=1, outs=3, types=["int", "", ""], present=True,
         bgcolor=WHITE, textcolor=BLACK, fontsize=16.0,
@@ -197,13 +195,12 @@ comment("mode_info", "APG / Audio Palindrome Generator", [24, 208, 912, 24],
 # Three common audio slots. RMHS uses its own synthesis instead.
 for i, x in enumerate([24, 336, 648], 1):
     source_modes = {0, 1, 2, 4} if i == 1 else {0, 1}
-    accent = [TEAL, LAVENDER, CLAY][i - 1]
-    tint = [rgba("#E0F1EC"), rgba("#EEE4F6"), rgba("#F5E7DF")][i - 1]
     position("source_label" + str(i), [x, 246, 154, 24], modes=source_modes,
-             textcolor=accent)
+             textcolor=BLACK)
     position("load" + str(i), [x + 184, 240, 104, 32], modes=source_modes,
-             bgcolor=tint, bgoncolor=tint, textcolor=accent,
-             textoncolor=accent, textovercolor=accent)
+             bgcolor=CHARCOAL, bgoncolor=rgba("#103A9A"), textcolor=WHITE,
+             textoncolor=WHITE, textovercolor=rgba("#BFDBFE"),
+             active=1, usebgoncolor=1, usetextovercolor=1, fontface=1)
     position("file" + str(i), [x, 278, 288, 40], modes=source_modes,
              fontsize=16.0)
 comment("no_samples", "RMHS creates its own sound. No samples are needed.",
@@ -219,7 +216,7 @@ for i in range(6):
     add("param" + str(i), "flonum", [x, 350, 138, 30],
         ins=1, outs=2, types=["", "bang"], present=True, modes=modes,
         fontsize=20.0, bgcolor=WHITE, bgoncolor=LIGHT,
-        hbgcolor=TEAL, htextcolor=WHITE,
+        hbgcolor=BLUE, htextcolor=WHITE,
         tricolor=BLACK, triangle=0, format=6, parameter_enable=0)
     obj("param_msg" + str(i), "prepend param " + str(i),
         1460 + (i % 3) * 230, 1450 + (i // 3) * 40, 215)
@@ -254,18 +251,18 @@ position("monitor_label", [592, 394, 116, 24], text="Volume (dB)",
          fontsize=16.0, textcolor=MUTED)
 position("monitor_level", [712, 390, 96, 30])
 for side, y in [("L", 390), ("R", 408)]:
-    position("meter_" + side, [832, y, 104, 12], bgcolor=rgba("#D8D4CD"),
-             offcolor=rgba("#CAC7C1"), oncolor=TEAL)
+    position("meter_" + side, [832, y, 104, 12], bgcolor=LIGHT,
+             offcolor=BORDER, oncolor=BLUE)
 for side, y in [("l", 430), ("r", 504)]:
-    accent = TEAL if side == "l" else LAVENDER
+    accent = BLUE if side == "l" else CHARCOAL
     position("channel_" + side, [24, y + 20, 28, 25], modes={0, 2, 3, 4})
     position("wave_" + side, [56, y, 880, 66], modes={0, 4},
-             bgcolor=WHITE, waveformcolor=accent, gridcolor=rgba("#E4E0D9"),
-             selectioncolor=rgba("#176A65", 0.18))
+             bgcolor=WHITE, waveformcolor=accent, gridcolor=LIGHT,
+             selectioncolor=rgba("#174FCB", 0.18))
     add("scope_" + side, "scope~", [56, y, 880, 66],
         ins=2, outs=0, present=True, modes={2, 3},
         bgcolor=WHITE, fgcolor=accent,
-        gridcolor=rgba("#E4E0D9"), calccount=128, bufsize=256,
+        gridcolor=LIGHT, calccount=128, bufsize=256,
         range=[-1.0, 1.0], delay=50, trigger=0)
 add("xy_pad", "jsui", [56, 430, 600, 140],
     ins=1, outs=1, types=[""], present=True, modes={1},
@@ -273,15 +270,15 @@ add("xy_pad", "jsui", [56, 430, 600, 140],
     parameter_enable=0, bgcolor=WHITE)
 add("scope_xy", "scope~", [672, 430, 264, 140],
     ins=2, outs=0, present=True, modes={1},
-    bgcolor=WHITE, fgcolor=TEAL,
-    gridcolor=rgba("#E4E0D9"), calccount=64, bufsize=256,
+    bgcolor=WHITE, fgcolor=BLUE,
+    gridcolor=LIGHT, calccount=64, bufsize=256,
     range=[-1.0, 1.0], delay=50, trigger=0)
 wire("xy_pad", 0, "controller")
 
 position("selection_info", [24, 578, 660, 24], fontsize=16.0, textcolor=MUTED)
 position("time", [704, 578, 232, 24], fontsize=16.0, textcolor=MUTED)
 position("loop_toggle", [24, 616, 24, 24], modes={0, 4},
-         bgcolor=WHITE, checkedcolor=TEAL, uncheckedcolor=MUTED)
+         bgcolor=WHITE, checkedcolor=BLUE, uncheckedcolor=MUTED)
 position("loop_label", [60, 614, 320, 28], modes={0, 4})
 position("clear_button", [520, 610, 194, 34], modes={0, 4})
 position("save_button", [730, 610, 206, 34], modes={0, 4})
@@ -292,25 +289,25 @@ wire("record_button", 0, "recordtoggle_msg")
 wire("recordtoggle_msg", 0, "controller")
 
 position("play_button", [24, 654, 448, 48],
-         bgcolor=TEAL, bgoncolor=rgba("#11514E"),
+         bgcolor=BLUE, bgoncolor=rgba("#103A9A"),
          textcolor=WHITE, textoncolor=WHITE, textovercolor=WHITE,
          hint="Start the selected instrument or play its rendered result.")
 position("stop_button", [488, 654, 216, 48],
-         bgcolor=ROSE_TINT, bgoncolor=rgba("#EECAD0"),
+         bgcolor=ROSE_TINT, bgoncolor=rgba("#F4C6CC"),
          textcolor=ROSE, textoncolor=ROSE, textovercolor=ROSE,
          hint="Stop audio or cancel preparation.")
 position("new_button", [720, 654, 216, 48],
          hint="Start a fresh result for the selected instrument.")
 position("record_button", [730, 610, 206, 34],
-         bgcolor=ROSE_TINT, bgoncolor=rgba("#EECAD0"),
+         bgcolor=ROSE_TINT, bgoncolor=rgba("#F4C6CC"),
          textcolor=ROSE, textoncolor=ROSE, textovercolor=ROSE)
-position("progress", [24, 712, 912, 6], bgcolor=LIGHT, elementcolor=LIGHT, knobcolor=TEAL)
+position("progress", [24, 712, 912, 6], bgcolor=LIGHT, elementcolor=LIGHT, knobcolor=BLUE)
 position("render_info", [24, 724, 912, 24], fontsize=16.0, textcolor=MUTED)
 position("status", [24, 752, 912, 38], fontsize=16.0)
 position("original_credit", [24, 810, 620, 24], text="Original CMPE by Joo Won Park",
          fontsize=16.0, textcolor=MUTED)
 position("original_link", [668, 806, 268, 32], text="joowonpark.net/cmpe",
-         fontsize=16.0, textcolor=TEAL, textoncolor=TEAL, textovercolor=TEAL,
+         fontsize=16.0, textcolor=BLUE, textoncolor=BLUE, textovercolor=BLUE,
          hint="Open Joo Won Park's original Computer Music Practice Examples.")
 boxes["original_url"]["text"] = "; max launchbrowser https://joowonpark.net/cmpe/"
 boxes["controller"]["text"] = "js cmpe_variety.js"
@@ -319,100 +316,101 @@ boxes["controller"]["text"] = "js cmpe_variety.js"
 # Keep the full collection visible in one window, with sources, the output,
 # transport, and actual engine feedback in distinct visual groups.
 layout = {
-    "title": [20, 10, 580, 36],
+    "title": [20, 10, 384, 36],
     "demo_button": [620, 12, 90, 32],
     "test_audio": [718, 12, 126, 32],
     "save_preset": [852, 12, 110, 32],
     "load_preset": [970, 12, 110, 32],
-    "audio_panel": [20, 52, 1060, 64],
-    "audio_driver_label": [32, 54, 182, 20],
-    "audio_driver_menu": [32, 78, 182, 28],
-    "audio_option1_label": [226, 54, 242, 20],
-    "audio_option1_menu": [226, 78, 242, 28],
-    "audio_option2_label": [480, 54, 242, 20],
-    "audio_option2_menu": [480, 78, 242, 28],
-    "audio_status": [736, 54, 332, 20],
-    "audio_setup": [736, 78, 124, 28],
-    "audio_refresh": [868, 78, 92, 28],
-    "audio_power": [968, 78, 100, 28],
-    "mode_info": [24, 168, 1052, 22],
+    "audio_panel": [20, 50, 1060, 60],
+    "audio_driver_label": [32, 52, 182, 20],
+    "audio_driver_menu": [32, 74, 182, 28],
+    "audio_option1_label": [226, 52, 242, 20],
+    "audio_option1_menu": [226, 74, 242, 28],
+    "audio_option2_label": [480, 52, 242, 20],
+    "audio_option2_menu": [480, 74, 242, 28],
+    "audio_status": [736, 52, 332, 20],
+    "audio_setup": [736, 74, 124, 28],
+    "audio_refresh": [868, 74, 92, 28],
+    "audio_power": [968, 74, 100, 28],
+    "mode_info": [24, 154, 1052, 22],
     "no_samples": [32, 254, 1036, 40],
-    "output_label": [32, 354, 204, 24],
-    "duration": [244, 354, 210, 24],
-    "monitor_label": [752, 354, 116, 24],
-    "monitor_level": [872, 352, 80, 28],
-    "meter_L": [980, 354, 88, 11],
-    "meter_R": [980, 369, 88, 11],
-    "channel_l": [32, 426, 20, 24],
-    "channel_r": [32, 532, 20, 24],
-    "wave_l": [56, 390, 1012, 96],
-    "wave_r": [56, 496, 1012, 96],
-    "scope_l": [56, 390, 1012, 96],
-    "scope_r": [56, 496, 1012, 96],
-    "xy_pad": [56, 390, 684, 202],
-    "scope_xy": [756, 390, 312, 202],
-    "selection_info": [32, 600, 580, 22],
-    "time": [856, 600, 212, 22],
-    "loop_toggle": [632, 600, 22, 22],
-    "loop_label": [664, 598, 180, 28],
-    "clear_button": [720, 634, 172, 44],
-    "save_button": [904, 634, 176, 44],
-    "record_button": [720, 634, 360, 44],
-    "play_button": [20, 634, 328, 44],
-    "stop_button": [360, 634, 148, 44],
-    "new_button": [520, 634, 188, 44],
-    "render_info": [276, 688, 792, 22],
-    "status": [276, 714, 792, 38],
-    "progress": [32, 740, 228, 10],
+    "output_label": [32, 334, 204, 24],
+    "duration": [244, 334, 210, 24],
+    "monitor_label": [752, 334, 116, 24],
+    "monitor_level": [872, 332, 80, 28],
+    "meter_L": [980, 334, 88, 11],
+    "meter_R": [980, 349, 88, 11],
+    "channel_l": [32, 430, 20, 24],
+    "channel_r": [32, 584, 20, 24],
+    "wave_l": [56, 370, 1012, 144],
+    "wave_r": [56, 524, 1012, 144],
+    "scope_l": [56, 370, 1012, 144],
+    "scope_r": [56, 524, 1012, 144],
+    "xy_pad": [56, 370, 684, 298],
+    "scope_xy": [756, 370, 312, 298],
+    "selection_info": [32, 676, 580, 22],
+    "time": [856, 676, 212, 22],
+    "loop_toggle": [632, 676, 22, 22],
+    "loop_label": [664, 674, 180, 28],
+    "clear_button": [720, 710, 172, 44],
+    "save_button": [904, 710, 176, 44],
+    "record_button": [720, 710, 360, 44],
+    "play_button": [20, 710, 328, 44],
+    "stop_button": [360, 710, 148, 44],
+    "new_button": [520, 710, 188, 44],
+    "render_info": [276, 764, 792, 22],
+    "status": [276, 790, 792, 38],
+    "progress": [32, 816, 228, 10],
     "credit_rule": [20, 760, 1060, 1],
-    "original_credit": [24, 766, 680, 20],
-    "original_link": [812, 764, 268, 22],
+    "original_credit": [420, 6, 190, 20],
+    "original_link": [420, 26, 190, 20],
 }
 for id, rect in layout.items():
     position(id, rect)
 position("title", layout["title"], text="CMPE / Variety Pack", fontsize=30.0, fontface=1)
 for i in range(5):
-    position("mode" + str(i), [20 + i * 215, 124, 200, 36], fontsize=20.0)
+    position("mode" + str(i), [20 + i * 215, 116, 200, 34], fontsize=20.0)
 
 for i, x in enumerate([20, 378, 736], 1):
-    add("source_card" + str(i), "panel", [x, 198, 344, 138],
+    add("source_card" + str(i), "panel", [x, 180, 344, 136],
         ins=1, outs=0, present=True, bgcolor=WHITE,
         border=1, bordercolor=BORDER, rounded=10, background=1, ignoreclick=1)
-    add("source_accent" + str(i), "panel", [x + 1, 199, 342, 4],
-        ins=1, outs=0, present=True, bgcolor=[TEAL, LAVENDER, CLAY][i - 1],
+    add("source_accent" + str(i), "panel", [x + 1, 181, 342, 4],
+        ins=1, outs=0, present=True, bgcolor=CHARCOAL,
         border=0, rounded=0, background=1, ignoreclick=1)
-    position("source_label" + str(i), [x + 12, 208, 112, 22],
+    position("source_label" + str(i), [x + 12, 190, 112, 22],
              fontsize=16.0, fontface=1)
-    comment("source_state" + str(i), "EMPTY", [x + 130, 210, 100, 20],
+    comment("source_state" + str(i), "EMPTY", [x + 130, 192, 100, 20],
             size=16, textcolor=MUTED, modes=({0, 1, 2, 4} if i == 1 else {0, 1}))
-    position("load" + str(i), [x + 240, 206, 92, 30], fontsize=16.0)
-    position("file" + str(i), [x + 12, 240, 320, 36], fontsize=16.0)
-    position("repeat_label" + str(i), [x + 12, 280, 152, 20], fontsize=16.0)
-    position("repeat" + str(i), [x + 12, 302, 152, 28], fontsize=20.0)
+    position("load" + str(i), [x + 240, 188, 92, 30], fontsize=16.0)
+    position("file" + str(i), [x + 12, 222, 320, 36], fontsize=16.0)
+    position("repeat_label" + str(i), [x + 12, 262, 152, 20], fontsize=16.0)
+    position("repeat" + str(i), [x + 12, 284, 152, 28], fontsize=20.0)
     group_modes = {3} if i == 1 else {2, 3, 4}
-    comment("group_label" + str(i), "", [x + 12, 208, 320, 22],
+    comment("group_label" + str(i), "", [x + 12, 190, 320, 22],
             modes=group_modes, size=16, fontface=1, textcolor=MUTED)
-    comment("group_help" + str(i), "", [x + 12, 240, 320, 36],
+    comment("group_help" + str(i), "", [x + 12, 222, 320, 36],
             modes=group_modes, size=16, textcolor=MUTED)
 hide_original("no_samples")
+hide_original("credit_rule")
 for i in range(6):
     x = [32, 390, 748][i % 3] + (168 if i >= 3 else 0)
-    position("param_label" + str(i), [x, 280, 152, 20], fontsize=16.0)
-    position("param" + str(i), [x, 302, 152, 28], fontsize=20.0)
-position("pitch_label", [200, 280, 152, 20], fontsize=16.0)
-position("pitch", [200, 302, 152, 28], fontsize=20.0)
-position("menu_label", [916, 280, 152, 20], fontsize=16.0)
-position("mode_menu", [916, 302, 152, 28], fontsize=16.0)
+    position("param_label" + str(i), [x, 262, 152, 20], fontsize=16.0)
+    position("param" + str(i), [x, 284, 152, 28], fontsize=20.0)
+position("pitch_label", [200, 262, 152, 20], fontsize=16.0)
+position("pitch", [200, 284, 152, 28], fontsize=20.0)
+position("menu_label", [916, 262, 152, 20], fontsize=16.0)
+position("mode_menu", [916, 284, 152, 28], fontsize=16.0)
 
-add("output_panel", "panel", [20, 344, 1060, 282], ins=1, outs=0,
+add("output_panel", "panel", [20, 324, 1060, 378], ins=1, outs=0,
     present=True, bgcolor=WHITE, border=1, bordercolor=BORDER,
     rounded=10, background=1, ignoreclick=1)
-add("feedback_panel", "panel", [20, 684, 1060, 72], ins=1, outs=0,
-    present=True, bgcolor=rgba("#E0F1EC"), border=0, rounded=10,
+add("feedback_panel", "panel", [20, 760, 1060, 72], ins=1, outs=0,
+    present=True, bgcolor=WHITE, border=1, bordercolor=BORDER, rounded=10,
     background=1, ignoreclick=1)
-button("state_badge", "LOADING", [32, 698, 228, 28], size=16,
+button("state_badge", "LOADING", [32, 774, 228, 28], size=16,
        ignoreclick=1, fontface=1)
-comment("wave_scale", "Wave view 1x", [468, 354, 272, 24], size=16,
+comment("wave_scale", "Wave view 1x", [468, 334, 272, 24], size=16,
         textcolor=MUTED, hint="The waveform is enlarged for visibility only. Audio playback and export levels do not change.")
 
 # Display chrome is intentionally quieter than the current action. Native
@@ -423,41 +421,77 @@ for b in boxes.values():
     if b["maxclass"] == "comment":
         b["bgcolor"] = [0, 0, 0, 0]
     if b["maxclass"] == "textbutton":
-        b.update(rounded=8, border=1, bordercolor=BORDER, usegradient=0)
+        b.update(rounded=6, usegradient=0,
+                 usebgoncolor=1, usetextovercolor=1)
+        b.pop("border", None)
+        b.pop("bordercolor", None)
         b.setdefault("fontface", 0)
     if b["maxclass"] in ("number", "flonum", "umenu"):
-        b.update(bgcolor=rgba("#FAF8F4"), bordercolor=BORDER)
+        b.update(bgcolor=WHITE, bordercolor=BORDER)
 position("play_button", layout["play_button"], fontsize=22.0, fontface=1)
 position("stop_button", layout["stop_button"], fontsize=20.0)
 position("new_button", layout["new_button"], fontsize=20.0)
 position("original_credit", layout["original_credit"],
-         text="v1.2.2 / Original CMPE by Joo Won Park", fontsize=16.0)
+         text="Original: Joo Won Park", fontsize=16.0)
 position("original_link", layout["original_link"], bgcolor=CANVAS,
-         bgoncolor=LIGHT, border=0, fontsize=16.0)
+         bgoncolor=LIGHT, fontsize=16.0)
+for id in ("audio_setup", "audio_refresh", "audio_power"):
+    position(id, layout[id], bgcolor=CHARCOAL, bgoncolor=BLACK,
+             textcolor=WHITE, textoncolor=WHITE,
+             textovercolor=rgba("#BFDBFE"))
 for side in ("l", "r"):
     position("wave_" + side, layout["wave_" + side],
-             bgcolor=rgba("#252A35"), gridcolor=rgba("#414754"),
-             waveformcolor=rgba("#81D8D0" if side == "l" else "#AE82D9"),
-             bordercolor=rgba("#252A35"), linecolor=rgba("#D99E82"),
-             selectioncolor=rgba("#D7D982", 0.17))
+             bgcolor=BLACK, gridcolor=rgba("#465365"),
+             waveformcolor=rgba("#78B7FF" if side == "l" else "#D6E6FA"),
+             bordercolor=BLACK, linecolor=WHITE,
+             selectioncolor=rgba("#FFFFFF", 0.18))
     position("scope_" + side, layout["scope_" + side],
-             bgcolor=rgba("#252A35"), gridcolor=rgba("#414754"),
-             fgcolor=rgba("#81D8D0" if side == "l" else "#AE82D9"))
-position("scope_xy", layout["scope_xy"], bgcolor=rgba("#252A35"),
-         fgcolor=rgba("#81D8D0"), gridcolor=rgba("#414754"))
+             bgcolor=BLACK, gridcolor=rgba("#465365"),
+             fgcolor=rgba("#78B7FF" if side == "l" else "#D6E6FA"))
+position("scope_xy", layout["scope_xy"], bgcolor=BLACK,
+         fgcolor=rgba("#78B7FF"), gridcolor=rgba("#465365"))
+
+# panel and umenu use bgfillcolor, not the bgcolor attribute of textbutton and
+# number. Max serializes a solid fill in a style dictionary. This follows the
+# format in Cycling74/n4m-core-examples/02-message-handlers/message-handlers.maxpat.
+# Runtime changes use the documented bgfillcolor message with four RGBA floats.
+fill_styles = {}
+for b in boxes.values():
+    if not b.get("presentation") or b["maxclass"] not in ("panel", "umenu"):
+        continue
+    fill = b.pop("bgcolor", WHITE)
+    name = "CMPE_Solid_" + "_".join(str(round(c * 255)) for c in fill)
+    b["style"] = name
+    if b["maxclass"] == "umenu":
+        b["applycolors"] = 1
+        b.pop("bordercolor", None)
+    fill_styles[name] = {"name": name, "default": {"bgfillcolor": {
+        "type": "color", "color": fill, "color1": fill, "color2": fill,
+        "angle": 270.0, "proportion": 0.5, "autogradient": 0.0,
+    }}, "parentstyle": "", "multi": 0}
+patch["styles"] = [s for s in patch.get("styles", [])
+                   if s.get("name") not in fill_styles] + list(fill_styles.values())
 
 # Audio controls only request changes through the controller. The controller
 # stops voices/recording and fades before applying global device changes.
+# Native driver option IDs are zero-based; option1/option2 remain UI identifiers.
+# adstatus.maxhelp's "driver options" example explicitly starts at 0. Cycling
+# '74's tutorial copies that help example and uses `adstatus option 0`:
+# https://cycling74.com/articles/max-8-guitar-processor-part-1
 for key, native, x in [
     ("driver", "adstatus driver", 1460),
-    ("option1", "adstatus option 1", 1760),
-    ("option2", "adstatus option 2", 2060),
+    ("option1", "adstatus option 0", 1760),
+    ("option2", "adstatus option 1", 2060),
 ]:
     obj("audio_ad_" + key, native, x, 2300, 235,
         ins=2, outs=2, types=["", "int"])
     obj("audio_menu_" + key, "prepend audiomenu " + key, x, 2340, 235)
     obj("audio_value_" + key, "prepend audiovalue " + key, x, 2380, 235)
     obj("audio_choose_" + key, "prepend audiochoose " + key, x, 2420, 235)
+    # Native clear/append/set messages populate the visible menu directly.
+    # The controller observes the same stream for guarded user changes; it
+    # must not reconstruct the visible list while native items are arriving.
+    wire("audio_ad_" + key, 0, "audio_" + key + "_menu")
     wire("audio_ad_" + key, 0, "audio_menu_" + key)
     wire("audio_ad_" + key, 1, "audio_value_" + key)
     wire("audio_menu_" + key, 0, "controller")
@@ -465,7 +499,7 @@ for key, native, x in [
     wire("audio_" + key + "_menu", 0, "audio_choose_" + key)
     wire("audio_choose_" + key, 0, "controller")
 for i, x in [(1, 1760), (2, 2060)]:
-    obj("audio_name_option" + str(i), "adstatus optionname " + str(i),
+    obj("audio_name_option" + str(i), "adstatus optionname " + str(i - 1),
         x, 2480, 235, ins=2, outs=2, types=["", ""])
     obj("audio_name_msg" + str(i), "prepend audioname " + str(i), x, 2520, 235)
     wire("audio_name_option" + str(i), 0, "audio_name_msg" + str(i))

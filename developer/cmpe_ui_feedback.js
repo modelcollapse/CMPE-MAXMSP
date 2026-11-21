@@ -15,12 +15,14 @@
             parseInt(hex.substr(3, 2), 16) / 255,
             parseInt(hex.substr(5, 2), 16) / 255, 1];
     }
-    var white = rgba("#FFFDFC"), ink = rgba("#242832"), muted = rgba("#5E626D");
-    var inactive = rgba("#E8E5E0"), disabled = rgba("#E9E6E1"), disabledInk = rgba("#696765");
-    var accents = [rgba("#176A65"), rgba("#67428C"), rgba("#8B4A30"), rgba("#62651D"), rgba("#325952")];
-    var tints = [rgba("#E0F1EC"), rgba("#EEE4F6"), rgba("#F5E7DF"), rgba("#F1F1D8"), rgba("#E2EBE5")];
-    var amber = rgba("#865A16"), amberTint = rgba("#FFF0CE");
-    var red = rgba("#9C3343"), redTint = rgba("#F8E2E4");
+    var white = rgba("#FFFFFF"), ink = rgba("#17202B"), muted = rgba("#465365");
+    var inactive = rgba("#E0E5EB"), disabled = rgba("#D9DFE7"), disabledInk = rgba("#525C69");
+    var blue = rgba("#174FCB"), charcoal = rgba("#263140"), pressed = rgba("#CDD4DD");
+    var hover = rgba("#BFDBFE"), bluePressed = rgba("#103A9A");
+    var accents = [blue, blue, blue, blue, blue];
+    var tints = [white, white, white, white, white];
+    var amber = ink, amberTint = inactive;
+    var red = rgba("#A82132"), redTint = rgba("#FFF1F2");
 
     function object(name) { return g.named(name); }
     function send(name, selector, values) {
@@ -39,17 +41,31 @@
         // active=0 makes native textbutton substitute an illegible gray. Keep
         // its presentation active; the original lockUI owns click permissions.
         send(name, "active", [1]);
+        send(name, "usebgoncolor", [1]);
+        send(name, "usetextovercolor", [1]);
         var bg = enabled || emphasized ? (emphasized ? accent : tint) : disabled;
         var fg = enabled || emphasized ? (emphasized ? white : accent) : disabledInk;
-        color(name, "bgcolor", bg); color(name, "bgoncolor", bg);
+        color(name, "bgcolor", bg);
+        color(name, "bgoncolor", enabled || emphasized ? (emphasized ? ink : pressed) : disabled);
         color(name, "textcolor", fg); color(name, "textoncolor", fg); color(name, "textovercolor", fg);
     }
     function styleControl(name, enabled, accent, tint) {
-        color(name, "bgcolor", enabled ? (tint || white) : disabled);
-        color(name, "textcolor", enabled ? (accent || ink) : disabledInk);
-        if (/^(?:load[123]|demo_button|save_button|clear_button)$/.test(name)) {
-            color(name, "textoncolor", enabled ? (accent || ink) : disabledInk);
-            color(name, "textovercolor", enabled ? (accent || ink) : disabledInk);
+        var load = /^load[123]$/.test(name);
+        var button = load || /^(?:demo_button|save_button|clear_button)$/.test(name);
+        var bg = enabled ? (load ? charcoal : (tint || white)) : disabled;
+        var fg = enabled ? (load ? white : (accent || ink)) : disabledInk;
+        color(name, name === "mode_menu" ? "bgfillcolor" : "bgcolor", bg);
+        color(name, "textcolor", fg);
+        if (name === "mode_menu") send(name, "applycolors", [1]);
+        if (button) {
+            // Preserve readable custom disabled colors without changing the
+            // controller's ignoreclick lock or enabling a source during reads.
+            send(name, "active", [1]);
+            send(name, "usebgoncolor", [1]);
+            send(name, "usetextovercolor", [1]);
+            color(name, "bgoncolor", enabled ? (load ? bluePressed : pressed) : disabled);
+            color(name, "textoncolor", fg);
+            color(name, "textovercolor", enabled && load ? hover : fg);
         }
     }
     function diagnostic(text) {
@@ -78,10 +94,10 @@
                 hide("source_state" + (i + 1), i >= required);
                 set("source_state" + (i + 1), sourceState);
                 color("source_state" + (i + 1), "textcolor", sourceState === "WAITING" ? red :
-                    (sourceState === "LOADING" ? amber : (available ? accents[i] : muted)));
-                color("source_card" + (i + 1), "bgcolor", i >= required ? white : (sourceState === "WAITING" ? redTint :
-                    (sourceState === "LOADING" ? amberTint : (available ? tints[i] : inactive))));
-                color("source_accent" + (i + 1), "bgcolor", i >= required ? accent : accents[i]);
+                    (sourceState === "LOADING" ? amber : (available ? ink : muted)));
+                color("source_card" + (i + 1), "bgfillcolor", i >= required ? white : (sourceState === "WAITING" ? redTint :
+                    (sourceState === "LOADING" ? amberTint : white)));
+                color("source_accent" + (i + 1), "bgfillcolor", charcoal);
                 if (i < required) {
                     loading = loading || nativeBusy || reading;
                     stalled = stalled || (nativeBusy && !reading);
@@ -98,7 +114,7 @@
                 hide("group_label" + i, !grouped); hide("group_help" + i, !grouped);
                 if (grouped) {
                     set("group_label" + i, groupLabels[i - 1]); set("group_help" + i, groupHelp[i - 1]);
-                    color("group_label" + i, "textcolor", accent); color("group_help" + i, "textcolor", muted);
+                    color("group_label" + i, "textcolor", ink); color("group_help" + i, "textcolor", muted);
                 }
             }
             var label, heading, badgeColor = accent, panelColor = tint, fraction = 0;
@@ -177,7 +193,7 @@
             send("state_badge", "text", [label]);
             color("state_badge", "bgcolor", badgeColor); color("state_badge", "bgoncolor", badgeColor);
             color("state_badge", "textcolor", white); color("state_badge", "textoncolor", white); color("state_badge", "textovercolor", white);
-            color("feedback_panel", "bgcolor", panelColor);
+            color("feedback_panel", "bgfillcolor", panelColor);
             set("activity_heading", heading); color("activity_heading", "textcolor", ink);
             color("status", "textcolor", heldNotice ? red : ink);
             color("progress", "knobcolor", badgeColor);
@@ -189,11 +205,11 @@
             send("wave_l", "vzoom", [waveZoom]); send("wave_r", "vzoom", [waveZoom]);
 
             for (i = 0; i < 5; i++) {
-                color("mode" + i, "bgcolor", i === mode ? accents[i] : tints[i]);
-                color("mode" + i, "bgoncolor", i === mode ? accents[i] : tints[i]);
-                color("mode" + i, "textcolor", i === mode ? white : accents[i]);
-                color("mode" + i, "textoncolor", i === mode ? white : accents[i]);
-                color("mode" + i, "textovercolor", i === mode ? white : accents[i]);
+                color("mode" + i, "bgcolor", i === mode ? blue : inactive);
+                color("mode" + i, "bgoncolor", i === mode ? bluePressed : pressed);
+                color("mode" + i, "textcolor", i === mode ? white : ink);
+                color("mode" + i, "textoncolor", i === mode ? white : ink);
+                color("mode" + i, "textovercolor", i === mode ? white : ink);
             }
             var readySources = !missing && !loading && !(bootPending && required > 0);
             var playLabel = busy ? "PREPARING..." : (state === "playing" ? "PLAYING" :
@@ -202,12 +218,12 @@
             transport("play_button", playLabel, canEdit && !busy && readySources, accent, tint,
                 state === "playing" || state === "live" || (canEdit && readySources && !busy));
             transport("new_button", rendered ? "NEW TAKE" : (mode === 3 ? "RANDOMIZE" : "RESET"),
-                canEdit && !busy && !g.savePending && (rendered ? readySources : true), accent, tint, false);
+                canEdit && !busy && !g.savePending && (rendered ? readySources : true), ink, inactive, false);
             transport("stop_button", state === "rendering" || state === "waiting" ? "CANCEL" : "STOP",
                 state !== "idle" || loading || audio.changing || cmpe.recordArmed || cmpe.recording, red, redTint, false);
             transport("record_button", cmpe.recording ? "STOP REC" : (cmpe.recordArmed ? "ARMED" : "RECORD WAV"),
                 !rendered && state !== "waiting" && !audio.changing, red, redTint, cmpe.recording);
-            for (i = 1; i <= 3; i++) styleControl("load" + i, canEdit && !busy && !(cmpe.nativeBusy && cmpe.nativeBusy[i - 1]), accents[i - 1], tints[i - 1]);
+            for (i = 1; i <= 3; i++) styleControl("load" + i, canEdit && !busy && !(cmpe.nativeBusy && cmpe.nativeBusy[i - 1]));
             var paramsEditable = canEdit || (state === "live" && (mode === 1 || mode === 2));
             for (i = 0; i < 6; i++) {
                 var activeParam = paramsEditable && !audio.changing;
@@ -216,9 +232,9 @@
             }
             for (i = 1; i <= 3; i++) styleControl("repeat" + i, canEdit && !busy);
             styleControl("pitch", canEdit && !busy); styleControl("mode_menu", paramsEditable && !audio.changing);
-            styleControl("demo_button", canEdit && !busy && required > 0, accent, tint);
-            styleControl("save_button", !busy && !!g.outputReady, accent, tint);
-            styleControl("clear_button", !busy && !!g.outputReady, accent, tint);
+            styleControl("demo_button", canEdit && !busy && required > 0, ink, inactive);
+            styleControl("save_button", !busy && !!g.outputReady, ink, inactive);
+            styleControl("clear_button", !busy && !!g.outputReady, ink, inactive);
             lastView = {mode: mode, state: state, badge: label, heading: heading,
                 phase: state === "rendering" ? (checkingSilence && mode === 0 ? "scan" : "render") : state,
                 progress: fraction, notice: heldNotice, sourceLoading: loading, sourceStalled: stalled,

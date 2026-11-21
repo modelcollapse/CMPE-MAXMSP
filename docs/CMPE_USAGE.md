@@ -12,6 +12,8 @@ The patch is designed for Max 8 or Max 9, using stock Max/MSP objects. Python an
 
 The three included synthetic demo sounds load automatically. **DEMO** reloads them. **TEST SOUND** produces a short independent tone to check the current Max audio output. Choose an instrument using the five buttons across the top.
 
+**LOAD** uses a solid charcoal button with bold white text on each white source card. The selected instrument and main action are blue. Temporarily unavailable controls remain readable in gray; wait until the source finishes loading or stop the performance before replacing a sample.
+
 ## Choose an audio interface
 
 Use the audio controls at the top before starting an instrument:

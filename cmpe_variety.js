@@ -1750,14 +1750,15 @@ function notifydeleted() { shutdown(); }
     var k;
     for (k = 0; k < wrapped.length; k++) base[wrapped[k]] = g[wrapped[k]];
     var menus = {
-        driver: {native: "audio_ad_driver", ui: "audio_driver_menu", items: [], index: -1, seen: -1, seenName: ""},
-        option1: {native: "audio_ad_option1", ui: "audio_option1_menu", items: [], index: -1, seen: -1, seenName: ""},
-        option2: {native: "audio_ad_option2", ui: "audio_option2_menu", items: [], index: -1, seen: -1, seenName: ""}
+        driver: {native: "audio_ad_driver", ui: "audio_driver_menu", items: [], index: -1, seen: -1, seenName: "", version: 0, catalogVersion: 0, completedCatalog: 0, changedAt: 0},
+        option1: {native: "audio_ad_option1", ui: "audio_option1_menu", items: [], index: -1, seen: -1, seenName: "", version: 0, catalogVersion: 0, completedCatalog: 0, changedAt: 0},
+        option2: {native: "audio_ad_option2", ui: "audio_option2_menu", items: [], index: -1, seen: -1, seenName: "", version: 0, catalogVersion: 0, completedCatalog: 0, changedAt: 0}
     };
     var labels = ["Driver option 1", "Driver option 2"];
     var disposed = false, started = false, updating = false, refreshing = false;
     var switchKnown = false, changing = false, pending = null, generation = 0;
     var bootTask = null, changeTask = null, settleTask = null, pollTask = null, externalTask = null;
+    var refreshTask = null, refreshRequest = null, refreshGeneration = 0, switchVersion = 0;
     var refreshFault = false, notice = "", fadeMs = 30;
 
     function objectMessage(name, args) {
@@ -1782,10 +1783,10 @@ function notifydeleted() { shutdown(); }
         else text = "Audio on" + (sampleRate > 0 ? " · " + (sampleRate / 1000).toFixed(sampleRate % 1000 ? 1 : 0) + " kHz" : "");
         ui("audio_status", text);
         objectMessage("audio_power", ["text", switchKnown ? (audioOn ? "AUDIO ON" : "AUDIO OFF") : "AUDIO ?"]);
-        var bg = switchKnown && audioOn ? [0.090196, 0.415686, 0.396078, 1] : [0.909804, 0.898039, 0.878431, 1];
-        var fg = switchKnown && audioOn ? [1, 0.992157, 0.988235, 1] : [0.141176, 0.156863, 0.196078, 1];
+        var bg = switchKnown && audioOn ? [23 / 255, 79 / 255, 203 / 255, 1] : [38 / 255, 49 / 255, 64 / 255, 1];
+        var fg = [1, 1, 1, 1];
         objectMessage("audio_power", ["bgcolor"].concat(bg));
-        objectMessage("audio_power", ["bgoncolor"].concat(switchKnown && audioOn ? [0.066667, 0.317647, 0.305882, 1] : [0.847059, 0.831373, 0.803922, 1]));
+        objectMessage("audio_power", ["bgoncolor"].concat(switchKnown && audioOn ? [16 / 255, 58 / 255, 154 / 255, 1] : [23 / 255, 32 / 255, 43 / 255, 1]));
         objectMessage("audio_power", ["textcolor"].concat(fg));
         objectMessage("audio_power", ["textoncolor"].concat(fg));
         objectMessage("audio_power", ["textovercolor"].concat(fg));
@@ -1794,7 +1795,7 @@ function notifydeleted() { shutdown(); }
         var name, m;
         for (name in menus) if (menus.hasOwnProperty(name)) {
             m = menus[name];
-            clickable(m.ui, !changing && !refreshing && !externalTask && !disposed && validIndex(m, m.index) &&
+            clickable(m.ui, !changing && !refreshing && !externalTask && !disposed && m.items.length > 0 &&
                 (name === "driver" || validIndex(menus.driver, menus.driver.index)));
         }
         clickable("audio_power", !changing && !disposed);
@@ -1806,24 +1807,15 @@ function notifydeleted() { shutdown(); }
         } else if (!disposed) clickable("test_audio", true);
     }
     function drawMenu(m) {
-        var previous = updating, j;
-        updating = true;
-        try {
-            objectMessage(m.ui, ["clear"]);
-            if (!m.items.length) {
-                objectMessage(m.ui, ["append", "Choose in Setup"]);
-                objectMessage(m.ui, ["set", 0]);
-            } else {
-                for (j = 0; j < m.items.length; j++) objectMessage(m.ui, ["append", m.items[j]]);
-                objectMessage(m.ui, ["set", validIndex(m, m.index) ? m.index : -1]);
-            }
-        } finally { updating = previous; }
-        locks();
+        // adstatus is wired directly to umenu. Its native clear/append/set
+        // messages own the visible list, even before this controller is ready.
+        // Rebuilding the list here would duplicate or erase native entries.
+        drawIndex(m);
     }
     function drawIndex(m) {
         var previous = updating;
         updating = true;
-        try { objectMessage(m.ui, ["set", validIndex(m, m.index) ? m.index : (m.items.length ? -1 : 0)]); }
+        try { objectMessage(m.ui, ["set", validIndex(m, m.index) ? m.index : -1]); }
         finally { updating = previous; }
         locks();
     }
@@ -1840,23 +1832,69 @@ function notifydeleted() { shutdown(); }
             if (!objectMessage(name, [selector])) refreshFault = true;
         } catch (e) { refreshFault = true; }
     }
-    function refreshAll() {
-        if (disposed) return;
-        var name, m;
-        refreshing = true; refreshFault = false;
-        try {
-            for (name in menus) if (menus.hasOwnProperty(name)) {
-                m = menus[name]; m.items = []; m.index = -1; drawMenu(m);
+    function cancelRefresh() {
+        refreshGeneration++;
+        cancelTask(refreshTask); refreshTask = null;
+        refreshRequest = null; refreshing = false;
+    }
+    function freshMenu(kind, snapshot, enumerate, allowEmpty) {
+        var m = menus[kind];
+        if (m.catalogVersion > snapshot.catalogVersion) {
+            // Only the left outlet's closing set completes a nonempty native
+            // enumeration. A delayed value from an earlier poll is not proof
+            // that the requested clear/append/set cycle has finished.
+            return m.completedCatalog === m.catalogVersion ||
+                (allowEmpty && !m.items.length && new Date().getTime() - m.changedAt >= 25);
+        }
+        return !enumerate && m.version > snapshot.version;
+    }
+    function finishRefresh(token) {
+        var request = refreshRequest;
+        if (disposed || !request || token !== refreshGeneration) return;
+        refreshTask = null;
+        var ready = switchVersion > request.switchVersion, name, snapshot;
+        if (request.kind !== "switch") {
+            ready = ready && freshMenu("driver", request.menus.driver, request.enumerate);
+            for (name in menus) if (menus.hasOwnProperty(name) && name !== "driver") {
+                snapshot = request.menus[name];
+                // A previously populated option or an enumeration already in
+                // progress must settle before controls are unlocked. Unused
+                // driver options are allowed to remain silent and empty.
+                if (request.kind === name || snapshot.count > 0 || menus[name].catalogVersion > snapshot.catalogVersion)
+                    ready = ready && freshMenu(name, snapshot, request.enumerate, name !== request.kind);
             }
-            labels = ["Driver option 1", "Driver option 2"];
-            ui("audio_option1_label", labels[0]); ui("audio_option2_label", labels[1]);
+        }
+        if (!ready && request.attempts++ < 20) {
+            refreshTask = new Task(function () { finishRefresh(token); }, host);
+            refreshTask.schedule(25);
+            return;
+        }
+        refreshRequest = null; refreshing = false;
+        if (refreshFault) notice = "Audio controls unavailable · AUDIO SETUP";
+        locks(); display();
+        if (request.done) request.done(ready);
+    }
+    function refreshAll(done, kind, enumerate) {
+        if (disposed) return;
+        cancelRefresh();
+        var token = refreshGeneration, name, m, snapshots = {};
+        refreshing = true; refreshFault = false;
+        for (name in menus) if (menus.hasOwnProperty(name)) {
+            m = menus[name]; snapshots[name] = {version: m.version, catalogVersion: m.catalogVersion, count: m.items.length};
+        }
+        refreshRequest = {done: done, kind: kind, enumerate: !!enumerate, menus: snapshots,
+            switchVersion: switchVersion, attempts: 0};
+        locks();
+        // A read request is not a response. Preserve the last native list
+        // until adstatus actually sends clear, and wait for fresh set/value
+        // feedback before validating a pending hardware change.
+        if (kind !== "switch") {
             read("audio_ad_driver", "loadbang");
             read("audio_name_option1", "loadbang"); read("audio_name_option2", "loadbang");
             read("audio_ad_option1", "loadbang"); read("audio_ad_option2", "loadbang");
-            read("audio_ad_switch", "bang");
-        } finally { refreshing = false; }
-        if (refreshFault) notice = "Audio controls unavailable · AUDIO SETUP";
-        locks(); display();
+        }
+        read("audio_ad_switch", "bang");
+        finishRefresh(token);
     }
     function queryCurrent() {
         if (disposed || changing || refreshing) return;
@@ -1890,12 +1928,14 @@ function notifydeleted() { shutdown(); }
         var m = currentMenu(kind), previous, oldName, newName, n = Number(value);
         if (disposed || !m || !finite(n) || Math.floor(n) !== n) return;
         previous = m.seen; oldName = m.seenName; newName = validIndex(m, n) ? m.items[n] : "";
+        m.version++;
         m.index = n; m.seen = n; m.seenName = newName;
         drawIndex(m);
         if (previous >= 0 && (n !== previous || (oldName && newName && oldName !== newName)) && !refreshing && !changing) externalChange();
     }
     function clearPending() {
         generation++;
+        cancelRefresh();
         cancelTask(changeTask); cancelTask(settleTask); cancelTask(externalTask);
         changeTask = null; settleTask = null; externalTask = null;
         changing = false; pending = null;
@@ -1906,15 +1946,9 @@ function notifydeleted() { shutdown(); }
             (request.kind === "driver" || (validIndex(driver, driver.index) && driver.index === request.driverIndex &&
                 driver.items[driver.index] === request.driverLabel));
     }
-    function finishChange(token) {
+    function reportChange(token, confirmed) {
         if (disposed || token !== generation || !pending) return;
-        settleTask = null;
-        var request = pending, confirmed;
-        refreshAll();
-        if (disposed || token !== generation || !pending) return;
-        if (request.kind === "on") confirmed = switchKnown && audioOn;
-        else if (request.kind === "off" || request.kind === "setup") confirmed = switchKnown && !audioOn;
-        else confirmed = sameChoice(request) && menus[request.kind].index === request.index && switchKnown && !audioOn;
+        var request = pending;
         changing = false; pending = null;
         notice = confirmed ? "" : "Audio setting unconfirmed · use AUDIO SETUP";
         g.lockUI(!mutable()); display();
@@ -1923,8 +1957,57 @@ function notifydeleted() { shutdown(); }
         else if (request.kind === "setup") mainStatus("Audio Setup opened with playback stopped. Choose your interface, then press PLAY / START or turn audio on.");
         else mainStatus("Audio off. Press PLAY / START or turn audio on when ready.");
     }
+    function finishChange(token) {
+        if (disposed || token !== generation || !pending) return;
+        settleTask = null;
+        var request = pending;
+        refreshAll(function (fresh) {
+            if (disposed || token !== generation || pending !== request) return;
+            var confirmed = false, identityChanged = fresh && currentMenu(request.kind) && !sameChoice(request);
+            if (fresh) {
+                if (request.kind === "on") confirmed = switchKnown && audioOn;
+                else if (request.kind === "off" || request.kind === "setup") confirmed = switchKnown && !audioOn;
+                else confirmed = !identityChanged && menus[request.kind].index === request.index && switchKnown && !audioOn;
+            }
+            if (confirmed || identityChanged || new Date().getTime() >= request.deadline) {
+                reportChange(token, confirmed); return;
+            }
+            settleTask = new Task(function () { finishChange(token); }, host);
+            settleTask.schedule(50);
+        }, currentMenu(request.kind) ? request.kind : "switch", !!currentMenu(request.kind));
+    }
+    function awaitConfirmation(token) {
+        if (disposed || token !== generation || !pending) return;
+        pending.phase = "readback";
+        pending.deadline = new Date().getTime() + 1000;
+        settleTask = new Task(function () { finishChange(token); }, host);
+        settleTask.schedule(150);
+    }
+    function rejectChoice(token) {
+        if (disposed || token !== generation || !pending) return;
+        clearPending(); notice = "Audio choices changed · press REFRESH";
+        g.lockUI(!mutable()); display();
+        mainStatus("Audio choices changed or Max did not confirm audio off. Press REFRESH, then choose the interface again, or open AUDIO SETUP.");
+    }
+    function applyChoice(token) {
+        if (disposed || token !== generation || !pending) return;
+        var request = pending;
+        refreshAll(function (fresh) {
+            if (disposed || token !== generation || pending !== request) return;
+            if (fresh && !sameChoice(request)) { rejectChoice(token); return; }
+            if (!fresh || !switchKnown || audioOn) {
+                if (new Date().getTime() >= request.deadline) { rejectChoice(token); return; }
+                settleTask = new Task(function () { applyChoice(token); }, host);
+                settleTask.schedule(25); return;
+            }
+            try {
+                if (!objectMessage(menus[request.kind].native, ["int", request.index])) throw new Error("Audio option unavailable");
+                awaitConfirmation(token);
+            } catch (e) { reportChange(token, false); }
+        }, request.kind, true);
+    }
     function beginChange(kind, index) {
-        if (disposed || updating || refreshing) return;
+        if (disposed || updating) return;
         if (changing) { mainStatus("Please wait for the current audio setting change."); return; }
         if (savePending && kind !== "off") { mainStatus("Wait for the WAV save to finish before changing audio settings."); return; }
         clearPending();
@@ -1961,21 +2044,13 @@ function notifydeleted() { shutdown(); }
                     if (!opened && !objectMessage("audio_driver", ["open"])) throw new Error("Audio Setup unavailable");
                 } else if (currentMenu(kind)) {
                     // Devices can disappear or be reordered during the fade.
-                    // Re-enumerate and compare identities before using an index.
-                    refreshAll();
-                    if (disposed || token !== generation || !pending) return;
-                    if (!sameChoice(pending) || !switchKnown || audioOn) {
-                        clearPending(); notice = "Audio choices changed · press REFRESH";
-                        g.lockUI(!mutable()); display();
-                        mainStatus("Audio choices changed or Max did not confirm audio off. Press REFRESH, then choose the interface again, or open AUDIO SETUP.");
-                        return;
-                    }
-                    if (!objectMessage(menus[kind].native, ["int", index])) throw new Error("Audio option unavailable");
+                    // Re-enumerate and await fresh feedback before using an
+                    // index. A delayed native response is not a failed choice.
+                    pending.phase = "validate";
+                    pending.deadline = new Date().getTime() + 1000;
+                    applyChoice(token); return;
                 }
-                if (disposed || token !== generation || !pending) return;
-                pending.phase = "readback";
-                settleTask = new Task(function () { finishChange(token); }, host);
-                settleTask.schedule(150);
+                awaitConfirmation(token);
             } catch (e) {
                 if (disposed || token !== generation) return;
                 changing = false; pending = null;
@@ -1990,11 +2065,17 @@ function notifydeleted() { shutdown(); }
     g.audiomenu = function (kind, selector) {
         var m = currentMenu(String(kind)), args = arrayfromargs(arguments), text;
         if (disposed || !m) return;
-        if (selector === "clear") { m.items = []; m.index = -1; drawMenu(m); }
+        if (selector === "clear") {
+            m.items = []; m.index = -1; m.catalogVersion++; m.completedCatalog = 0;
+            m.changedAt = new Date().getTime(); locks();
+        }
         else if (selector === "append") {
             text = args.slice(2).join(" ");
-            if (text) { m.items.push(text); drawMenu(m); }
-        } else if (selector === "set") readIndex(String(kind), args[2]);
+            if (text) { m.items.push(text); m.completedCatalog = 0; m.changedAt = new Date().getTime(); locks(); }
+        } else if (selector === "set") {
+            m.completedCatalog = m.catalogVersion;
+            readIndex(String(kind), args[2]);
+        }
     };
     g.audiovalue = function (kind, value) { readIndex(String(kind), value); };
     g.audioname = function (number, selector) {
@@ -2016,7 +2097,7 @@ function notifydeleted() { shutdown(); }
         kind = String(kind); value = Number(value);
         var m = currentMenu(kind);
         if (disposed || updating || refreshing || changing || externalTask || !m) return;
-        if (!validIndex(m, value) || !validIndex(m, m.index) ||
+        if (!validIndex(m, value) ||
             (kind !== "driver" && !validIndex(menus.driver, menus.driver.index))) {
             mainStatus("No current device choices were reported. Press REFRESH or open AUDIO SETUP.");
             drawMenu(m); return;
@@ -2037,10 +2118,12 @@ function notifydeleted() { shutdown(); }
     g.audiosetup = function () { beginChange("setup", -1); };
     g.audiorefresh = function () {
         if (disposed || changing) return;
-        notice = ""; refreshAll();
-        mainStatus(refreshFault || !menus.driver.items.length ?
-            "Audio choices were not reported. Open AUDIO SETUP to choose your interface." :
-            "Audio choices refreshed from Max. Driver option names and devices depend on your audio driver.");
+        notice = "";
+        refreshAll(function (fresh) {
+            mainStatus(!fresh || refreshFault || !menus.driver.items.length ?
+                "Audio choices were not reported. Open AUDIO SETUP to choose your interface." :
+                "Audio choices refreshed from Max. Driver option names and devices depend on your audio driver.");
+        });
     };
     g.loadbang = function () {
         base.loadbang();
@@ -2076,6 +2159,7 @@ function notifydeleted() { shutdown(); }
         value = Number(value);
         if (disposed || (value !== 0 && value !== 1)) return;
         var stopped = switchKnown && audioOn && value === 0;
+        switchVersion++;
         switchKnown = true;
         if (stopped && !changing) quiet();
         base.dspstate(value);
@@ -2100,7 +2184,7 @@ function notifydeleted() { shutdown(); }
             generation: generation, pending: pending ? {kind: pending.kind, index: pending.index, phase: pending.phase,
                 label: pending.label, driverIndex: pending.driverIndex, driverLabel: pending.driverLabel} : null,
             labels: labels.slice(0), menus: {}, notice: notice,
-            tasks: {boot: !!bootTask, change: !!changeTask, settle: !!settleTask, poll: !!pollTask, external: !!externalTask}};
+            tasks: {boot: !!bootTask, change: !!changeTask, settle: !!settleTask, poll: !!pollTask, external: !!externalTask, refresh: !!refreshTask}};
         var name, m;
         for (name in menus) if (menus.hasOwnProperty(name)) {
             m = menus[name]; result.menus[name] = {items: m.items.slice(0), index: m.index};
@@ -2126,12 +2210,14 @@ function notifydeleted() { shutdown(); }
             parseInt(hex.substr(3, 2), 16) / 255,
             parseInt(hex.substr(5, 2), 16) / 255, 1];
     }
-    var white = rgba("#FFFDFC"), ink = rgba("#242832"), muted = rgba("#5E626D");
-    var inactive = rgba("#E8E5E0"), disabled = rgba("#E9E6E1"), disabledInk = rgba("#696765");
-    var accents = [rgba("#176A65"), rgba("#67428C"), rgba("#8B4A30"), rgba("#62651D"), rgba("#325952")];
-    var tints = [rgba("#E0F1EC"), rgba("#EEE4F6"), rgba("#F5E7DF"), rgba("#F1F1D8"), rgba("#E2EBE5")];
-    var amber = rgba("#865A16"), amberTint = rgba("#FFF0CE");
-    var red = rgba("#9C3343"), redTint = rgba("#F8E2E4");
+    var white = rgba("#FFFFFF"), ink = rgba("#17202B"), muted = rgba("#465365");
+    var inactive = rgba("#E0E5EB"), disabled = rgba("#D9DFE7"), disabledInk = rgba("#525C69");
+    var blue = rgba("#174FCB"), charcoal = rgba("#263140"), pressed = rgba("#CDD4DD");
+    var hover = rgba("#BFDBFE"), bluePressed = rgba("#103A9A");
+    var accents = [blue, blue, blue, blue, blue];
+    var tints = [white, white, white, white, white];
+    var amber = ink, amberTint = inactive;
+    var red = rgba("#A82132"), redTint = rgba("#FFF1F2");
 
     function object(name) { return g.named(name); }
     function send(name, selector, values) {
@@ -2150,17 +2236,31 @@ function notifydeleted() { shutdown(); }
         // active=0 makes native textbutton substitute an illegible gray. Keep
         // its presentation active; the original lockUI owns click permissions.
         send(name, "active", [1]);
+        send(name, "usebgoncolor", [1]);
+        send(name, "usetextovercolor", [1]);
         var bg = enabled || emphasized ? (emphasized ? accent : tint) : disabled;
         var fg = enabled || emphasized ? (emphasized ? white : accent) : disabledInk;
-        color(name, "bgcolor", bg); color(name, "bgoncolor", bg);
+        color(name, "bgcolor", bg);
+        color(name, "bgoncolor", enabled || emphasized ? (emphasized ? ink : pressed) : disabled);
         color(name, "textcolor", fg); color(name, "textoncolor", fg); color(name, "textovercolor", fg);
     }
     function styleControl(name, enabled, accent, tint) {
-        color(name, "bgcolor", enabled ? (tint || white) : disabled);
-        color(name, "textcolor", enabled ? (accent || ink) : disabledInk);
-        if (/^(?:load[123]|demo_button|save_button|clear_button)$/.test(name)) {
-            color(name, "textoncolor", enabled ? (accent || ink) : disabledInk);
-            color(name, "textovercolor", enabled ? (accent || ink) : disabledInk);
+        var load = /^load[123]$/.test(name);
+        var button = load || /^(?:demo_button|save_button|clear_button)$/.test(name);
+        var bg = enabled ? (load ? charcoal : (tint || white)) : disabled;
+        var fg = enabled ? (load ? white : (accent || ink)) : disabledInk;
+        color(name, name === "mode_menu" ? "bgfillcolor" : "bgcolor", bg);
+        color(name, "textcolor", fg);
+        if (name === "mode_menu") send(name, "applycolors", [1]);
+        if (button) {
+            // Preserve readable custom disabled colors without changing the
+            // controller's ignoreclick lock or enabling a source during reads.
+            send(name, "active", [1]);
+            send(name, "usebgoncolor", [1]);
+            send(name, "usetextovercolor", [1]);
+            color(name, "bgoncolor", enabled ? (load ? bluePressed : pressed) : disabled);
+            color(name, "textoncolor", fg);
+            color(name, "textovercolor", enabled && load ? hover : fg);
         }
     }
     function diagnostic(text) {
@@ -2189,10 +2289,10 @@ function notifydeleted() { shutdown(); }
                 hide("source_state" + (i + 1), i >= required);
                 set("source_state" + (i + 1), sourceState);
                 color("source_state" + (i + 1), "textcolor", sourceState === "WAITING" ? red :
-                    (sourceState === "LOADING" ? amber : (available ? accents[i] : muted)));
-                color("source_card" + (i + 1), "bgcolor", i >= required ? white : (sourceState === "WAITING" ? redTint :
-                    (sourceState === "LOADING" ? amberTint : (available ? tints[i] : inactive))));
-                color("source_accent" + (i + 1), "bgcolor", i >= required ? accent : accents[i]);
+                    (sourceState === "LOADING" ? amber : (available ? ink : muted)));
+                color("source_card" + (i + 1), "bgfillcolor", i >= required ? white : (sourceState === "WAITING" ? redTint :
+                    (sourceState === "LOADING" ? amberTint : white)));
+                color("source_accent" + (i + 1), "bgfillcolor", charcoal);
                 if (i < required) {
                     loading = loading || nativeBusy || reading;
                     stalled = stalled || (nativeBusy && !reading);
@@ -2209,7 +2309,7 @@ function notifydeleted() { shutdown(); }
                 hide("group_label" + i, !grouped); hide("group_help" + i, !grouped);
                 if (grouped) {
                     set("group_label" + i, groupLabels[i - 1]); set("group_help" + i, groupHelp[i - 1]);
-                    color("group_label" + i, "textcolor", accent); color("group_help" + i, "textcolor", muted);
+                    color("group_label" + i, "textcolor", ink); color("group_help" + i, "textcolor", muted);
                 }
             }
             var label, heading, badgeColor = accent, panelColor = tint, fraction = 0;
@@ -2288,7 +2388,7 @@ function notifydeleted() { shutdown(); }
             send("state_badge", "text", [label]);
             color("state_badge", "bgcolor", badgeColor); color("state_badge", "bgoncolor", badgeColor);
             color("state_badge", "textcolor", white); color("state_badge", "textoncolor", white); color("state_badge", "textovercolor", white);
-            color("feedback_panel", "bgcolor", panelColor);
+            color("feedback_panel", "bgfillcolor", panelColor);
             set("activity_heading", heading); color("activity_heading", "textcolor", ink);
             color("status", "textcolor", heldNotice ? red : ink);
             color("progress", "knobcolor", badgeColor);
@@ -2300,11 +2400,11 @@ function notifydeleted() { shutdown(); }
             send("wave_l", "vzoom", [waveZoom]); send("wave_r", "vzoom", [waveZoom]);
 
             for (i = 0; i < 5; i++) {
-                color("mode" + i, "bgcolor", i === mode ? accents[i] : tints[i]);
-                color("mode" + i, "bgoncolor", i === mode ? accents[i] : tints[i]);
-                color("mode" + i, "textcolor", i === mode ? white : accents[i]);
-                color("mode" + i, "textoncolor", i === mode ? white : accents[i]);
-                color("mode" + i, "textovercolor", i === mode ? white : accents[i]);
+                color("mode" + i, "bgcolor", i === mode ? blue : inactive);
+                color("mode" + i, "bgoncolor", i === mode ? bluePressed : pressed);
+                color("mode" + i, "textcolor", i === mode ? white : ink);
+                color("mode" + i, "textoncolor", i === mode ? white : ink);
+                color("mode" + i, "textovercolor", i === mode ? white : ink);
             }
             var readySources = !missing && !loading && !(bootPending && required > 0);
             var playLabel = busy ? "PREPARING..." : (state === "playing" ? "PLAYING" :
@@ -2313,12 +2413,12 @@ function notifydeleted() { shutdown(); }
             transport("play_button", playLabel, canEdit && !busy && readySources, accent, tint,
                 state === "playing" || state === "live" || (canEdit && readySources && !busy));
             transport("new_button", rendered ? "NEW TAKE" : (mode === 3 ? "RANDOMIZE" : "RESET"),
-                canEdit && !busy && !g.savePending && (rendered ? readySources : true), accent, tint, false);
+                canEdit && !busy && !g.savePending && (rendered ? readySources : true), ink, inactive, false);
             transport("stop_button", state === "rendering" || state === "waiting" ? "CANCEL" : "STOP",
                 state !== "idle" || loading || audio.changing || cmpe.recordArmed || cmpe.recording, red, redTint, false);
             transport("record_button", cmpe.recording ? "STOP REC" : (cmpe.recordArmed ? "ARMED" : "RECORD WAV"),
                 !rendered && state !== "waiting" && !audio.changing, red, redTint, cmpe.recording);
-            for (i = 1; i <= 3; i++) styleControl("load" + i, canEdit && !busy && !(cmpe.nativeBusy && cmpe.nativeBusy[i - 1]), accents[i - 1], tints[i - 1]);
+            for (i = 1; i <= 3; i++) styleControl("load" + i, canEdit && !busy && !(cmpe.nativeBusy && cmpe.nativeBusy[i - 1]));
             var paramsEditable = canEdit || (state === "live" && (mode === 1 || mode === 2));
             for (i = 0; i < 6; i++) {
                 var activeParam = paramsEditable && !audio.changing;
@@ -2327,9 +2427,9 @@ function notifydeleted() { shutdown(); }
             }
             for (i = 1; i <= 3; i++) styleControl("repeat" + i, canEdit && !busy);
             styleControl("pitch", canEdit && !busy); styleControl("mode_menu", paramsEditable && !audio.changing);
-            styleControl("demo_button", canEdit && !busy && required > 0, accent, tint);
-            styleControl("save_button", !busy && !!g.outputReady, accent, tint);
-            styleControl("clear_button", !busy && !!g.outputReady, accent, tint);
+            styleControl("demo_button", canEdit && !busy && required > 0, ink, inactive);
+            styleControl("save_button", !busy && !!g.outputReady, ink, inactive);
+            styleControl("clear_button", !busy && !!g.outputReady, ink, inactive);
             lastView = {mode: mode, state: state, badge: label, heading: heading,
                 phase: state === "rendering" ? (checkingSilence && mode === 0 ? "scan" : "render") : state,
                 progress: fraction, notice: heldNotice, sourceLoading: loading, sourceStalled: stalled,

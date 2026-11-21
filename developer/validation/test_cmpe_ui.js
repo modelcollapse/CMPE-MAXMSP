@@ -21,6 +21,75 @@ function loadedLong(h) {
   for (let slot = 0; slot < 3; slot++) h.source(slot, {frames: 40000 + slot * 1000, sr: 2000});
   h.c.samplerate(2000); h.c.dspstate(1);
 }
+function contrast(a, b) {
+  const luminance = rgb => rgb.slice(0, 3).map(c => c <= .04045 ? c / 12.92 : Math.pow((c + .055) / 1.055, 2.4))
+    .reduce((sum, c, i) => sum + c * [.2126, .7152, .0722][i], 0);
+  const first = luminance(a), second = luminance(b);
+  return (Math.max(first, second) + .05) / (Math.min(first, second) + .05);
+}
+
+test("menus and panels use native solid fills and buttons do not invent borders", () => {
+  const styles = new Map((patch.styles || []).map(style => [style.name, style.default]));
+  for (const {box} of patch.boxes.filter(({box}) => box.presentation)) {
+    if (["panel", "umenu"].includes(box.maxclass)) {
+      const fill = styles.get(box.style)?.bgfillcolor;
+      check(fill && fill.type === "color" && fill.color.length === 4 && fill.autogradient === 0,
+        box.id + " has a native solid-fill style");
+      check(!Object.hasOwn(box, "bgcolor"), box.id + " does not rely on an unsupported background attribute");
+      if (box.maxclass === "umenu") check(box.applycolors === 1, box.id + " uses its fill in the dropdown");
+    } else if (box.maxclass === "textbutton") {
+      check(!Object.hasOwn(box, "border") && !Object.hasOwn(box, "bordercolor"),
+        box.id + " does not rely on unsupported outline attributes");
+    }
+  }
+  const h = makeHost(), c = h.c;
+  const classes = new Map(patch.boxes.map(({box}) => [box.varname, box.maxclass]));
+  h.onMessage((name, selector) => {
+    if (["panel", "umenu"].includes(classes.get(name)))
+      check(selector !== "bgcolor", "runtime preserves native fill attributes for " + name);
+  });
+  h.ready(); c.mode(2); c.play(); h.until(() => c.state === "live"); c.stop(); c.shutdown();
+});
+
+test("LOAD remains distinct and readable through loading, playback, and mode changes", () => {
+  const h = makeHost(), c = h.c; h.ready();
+  const color = (name, selector) => lastMessage(h, name, selector).args;
+  for (let mode = 0; mode < 5; mode++) {
+    c.mode(mode); c.feedbackrefresh();
+    check(contrast(color("mode" + mode, "textcolor"), color("mode" + mode, "bgcolor")) >= 4.5,
+      "selected mode retains readable text");
+    const required = mode === 3 ? 0 : (mode === 2 || mode === 4 ? 1 : 3);
+    for (let slot = 1; slot <= required; slot++) {
+      const name = "load" + slot;
+      check(contrast(color(name, "textcolor"), color(name, "bgcolor")) >= 7,
+        "LOAD text is high contrast when available");
+      check(contrast(color(name, "bgcolor"), color("source_card" + slot, "bgfillcolor")) >= 3,
+        "LOAD has a distinct control boundary against its source card");
+      check(contrast(color(name, "textoncolor"), color(name, "bgoncolor")) >= 4.5,
+        "pressed LOAD label remains readable");
+      check(contrast(color(name, "textovercolor"), color(name, "bgcolor")) >= 4.5,
+        "hover LOAD label remains readable");
+      equal(color(name, "active"), [1], "native automatic graying cannot replace the deliberate colors");
+      equal(color(name, "usebgoncolor"), [1], "native pressed color is enabled");
+      equal(color(name, "usetextovercolor"), [1], "native hover color is enabled");
+    }
+  }
+  c.mode(0); c.play(); h.until(() => c.state === "playing");
+  equal(color("load1", "ignoreclick"), [1], "presentation styling preserves the playback lock");
+  check(contrast(color("load1", "textcolor"), color("load1", "bgcolor")) >= 4.5,
+    "unavailable LOAD remains readable");
+  c.stop(); h.advance(20);
+  equal(color("load1", "ignoreclick"), [0], "LOAD becomes clickable when playback stops");
+  check(contrast(color("load1", "textcolor"), color("load1", "bgcolor")) >= 7,
+    "stopping restores the solid high-contrast LOAD style");
+  c.loadfile(0, "/tmp/replacement.wav");
+  check(contrast(color("load1", "textcolor"), color("load1", "bgcolor")) >= 4.5,
+    "source-loading state does not wash out the label");
+  h.source(0);
+  check(contrast(color("load1", "textcolor"), color("load1", "bgcolor")) >= 7,
+    "completed source read restores the available style");
+  c.shutdown();
+});
 
 test("boot, native source loading, and readiness are visibly distinct", () => {
   const h = makeHost(), c = h.c; c.loadbang();

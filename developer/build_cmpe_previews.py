@@ -64,7 +64,7 @@ for(let mode=0;mode<5;mode++){
                 if(this.maxclass==='comment')this.text=String(args[0]);else this.value=args[0];
                 if(this.maxclass==='jsui')this.xy=args.slice(0,2);
             }else if(selector==='text')this.text=String(args[0]);
-            else if(['bgcolor','bgoncolor','bgovercolor','textcolor','textoncolor','textovercolor','bordercolor','waveformcolor','gridcolor','selectioncolor','knobcolor','elementcolor','fgcolor','ignoreclick','active','vzoom','line','fontsize','fontface'].includes(selector))this[selector]=args.length>1?args:args[0];
+            else if(['bgcolor','bgfillcolor','bgoncolor','bgovercolor','textcolor','textoncolor','textovercolor','bordercolor','waveformcolor','gridcolor','selectioncolor','knobcolor','elementcolor','fgcolor','ignoreclick','active','usebgoncolor','usetextovercolor','applycolors','vzoom','line','fontsize','fontface'].includes(selector))this[selector]=args.length>1?args:args[0];
             else if(selector==='clear'&&this.maxclass==='umenu')this.items=[];
             else if(selector==='append'&&this.maxclass==='umenu')this.items.push(args[0]);
             else if(selector==='name'){names.set(this.varname,args[0]);buffers.set(args[0],fresh());}
@@ -244,6 +244,7 @@ def wrap(text, draw, typeface, width):
 
 
 issues, outputs, rendered = [], [], {}
+styles = {style["name"]: style.get("default", {}) for style in PATCH.get("styles", [])}
 
 
 def render_state(state):
@@ -258,7 +259,13 @@ def render_state(state):
         f = font(fs, box.get("fontface") == 1)
         is_on = kind == "textbutton" and box.get("mode") == 1 and box.get("value", 0)
         fg = rgba(box.get("textoncolor" if is_on else "textcolor", [.04, .04, .04, 1]))
-        bg = rgba(box.get("bgoncolor" if is_on else "bgcolor", [1, 1, 1, 1]))
+        fill_name = "bgfillcolor" if kind in ("panel", "umenu") else ("bgoncolor" if is_on else "bgcolor")
+        fill = box.get(fill_name, styles.get(box.get("style"), {}).get(fill_name, [1, 1, 1, 1]))
+        if isinstance(fill, dict):
+            if fill.get("type") != "color":
+                raise ValueError("The preview only supports explicit solid fill styles")
+            fill = fill["color"]
+        bg = rgba(fill)
         border = rgba(box.get("bordercolor", [.796, .835, .867, 1]))
         # textbutton's documented active=0 state is visibly grayed out. The
         # runtime supplies explicit colors for other ignored/locked widgets.
@@ -267,7 +274,10 @@ def render_state(state):
             bg = tuple(round(.5 * channel + .5 * 235) for channel in bg[:3]) + (bg[3],)
         if kind in ["textbutton", "number", "flonum", "umenu", "toggle"]:
             radius = round(box.get("rounded", 0) * SCALE)
-            draw.rounded_rectangle((x, y, x + w - 1, y + h - 1), radius=radius, fill=bg, outline=border, width=SCALE)
+            # textbutton has no documented border/bordercolor attributes. Its
+            # visible control boundary comes from the actual solid fill.
+            draw.rounded_rectangle((x, y, x + w - 1, y + h - 1), radius=radius, fill=bg,
+                                   outline=None if kind == "textbutton" else border, width=SCALE)
         if kind == "textbutton":
             label = box.get("texton" if is_on else "text", "")
             if draw.textlength(label, font=f) > w - 12 * SCALE:
