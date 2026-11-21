@@ -44,37 +44,25 @@ ISJS and Many continue until stopped. RMHS finishes automatically after its plan
 
 These images are rendered from the shipped Max patch layout and its controller state. APG and SIOE show output generated from the included demo sounds by the production renderer. They are **interface previews, not native Max screenshots**; live instruments are shown stopped. Device menus show fallback placeholders because no physical audio hardware was queried for these images.
 
-### APG
+### APG: audio palindrome
 
 ![APG interface preview showing its rendered stereo palindrome waveform](docs/images/apg-interface-preview.png)
 
-<details>
-<summary>ISJS: position and density pad</summary>
+### ISJS: position and density pad
 
 ![ISJS interface preview with three sample rates, levels, and position-density pad](docs/images/isjs-interface-preview.png)
 
-</details>
-
-<details>
-<summary>Many: ambient sample layers</summary>
+### Many: ambient sample layers
 
 ![Many interface preview showing layer level, maximum delay, interval, and pitch set](docs/images/many-interface-preview.png)
 
-</details>
-
-<details>
-<summary>RMHS: harmonic drone</summary>
+### RMHS: harmonic drone
 
 ![RMHS interface preview showing harmonic drone controls and live output scopes](docs/images/rmhs-interface-preview.png)
 
-</details>
-
-<details>
-<summary>SIOE: rendered audio supercut</summary>
+### SIOE: rendered audio supercut
 
 ![SIOE interface preview showing its rendered stereo supercut waveform](docs/images/sioe-interface-preview.png)
-
-</details>
 
 ## Common controls
 
