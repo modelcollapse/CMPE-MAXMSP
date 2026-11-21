@@ -1,5 +1,9 @@
 # Changes
 
+## Documentation update — November 21, 2026
+
+Named the README **CMPE Variety Pack for Max** and added five reproducible interface previews. The APG and SIOE images show output generated from the included demo audio; live instruments are shown stopped. Each image is explicitly labelled as a preview rather than a native Max screenshot.
+
 ## CMPE Variety Pack 1.0.0 — November 21, 2026
 
 Added `CMPE_Variety_Pack.maxpat`, extending the project to all five instruments in Joo Won Park's supplied Variety Pack: APG, ISJS, Many, RMHS, and SIOE. The standalone APG Wave version 5 remains unchanged.

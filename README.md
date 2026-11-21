@@ -1,4 +1,4 @@
-# APG Wave + CMPE Variety Pack
+# CMPE Variety Pack for Max
 
 **Max/MSP adaptations of [Joo Won Park’s Computer Music Practice Examples](https://joowonpark.net/cmpe/).** The original musical ideas and SuperCollider algorithms are his. This project brings APG, ISJS, Many, RMHS, and SIOE into one simple interface, extending the existing APG Wave patch.
 
@@ -28,6 +28,42 @@ The collection is designed for **Max 8 or Max 9**, using stock Max/MSP objects a
 Only the source controls needed by the selected instrument are shown. Use **LOAD** to choose mono or stereo WAV/AIFF files while stopped. **DEMO** reloads the included synthetic samples.
 
 ISJS and Many continue until stopped. RMHS finishes automatically after its planned voices fade out. Its displayed duration includes the slow attacks and releases, so it can exceed the duration setting. Many and RMHS identify their fade-ins in the status area.
+
+## Interface previews
+
+These images are rendered from the shipped Max patch layout and its controller state. APG and SIOE show output generated from the included demo sounds by the production renderer. They are **interface previews, not native Max screenshots**; live instruments are shown stopped.
+
+### APG
+
+![APG interface preview showing its rendered stereo palindrome waveform](docs/images/apg-interface-preview.png)
+
+<details>
+<summary>ISJS: position and density pad</summary>
+
+![ISJS interface preview with three sample rates, levels, and position-density pad](docs/images/isjs-interface-preview.png)
+
+</details>
+
+<details>
+<summary>Many: ambient sample layers</summary>
+
+![Many interface preview showing layer level, maximum delay, interval, and pitch set](docs/images/many-interface-preview.png)
+
+</details>
+
+<details>
+<summary>RMHS: harmonic drone</summary>
+
+![RMHS interface preview showing harmonic drone controls and live output scopes](docs/images/rmhs-interface-preview.png)
+
+</details>
+
+<details>
+<summary>SIOE: rendered audio supercut</summary>
+
+![SIOE interface preview showing its rendered stereo supercut waveform](docs/images/sioe-interface-preview.png)
+
+</details>
 
 ## Common controls
 
@@ -103,6 +139,8 @@ node developer/validation/test_cmpe_controller.js --bundle
 ```
 
 Edit the separate modules in `developer/`, then rebuild and reopen the patch. Editing only a generated runtime will lose the change on the next build. The controller tests simulate Max buffers, tasks, files, UI objects, and messages; they do not run the native audio engine.
+
+To regenerate the interface previews, run `python3 developer/build_cmpe_previews.py`. This documentation step requires Python's Pillow package and Node.js. It renders the current patch layout and production controller state, including demo-audio output for APG and SIOE.
 
 See [CMPE implementation and validation](developer/CMPE_VALIDATION.md) for the source mappings, intentional DSP differences, resource limits, completed checks, and remaining native acceptance work. The [APG validation record](developer/VALIDATION.md) covers the retained palindrome engine.
 
