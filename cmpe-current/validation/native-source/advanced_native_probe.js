@@ -1,0 +1,1 @@
+autowatch=1;var t;function loadbang(){t=new Task(run,this);t.schedule(1500);}function run(){var c=this.patcher.getnamed("controller");c.message("apgadv","length",8);c.message("apgadv","level1",65);c.message("apgadv","lock",1);this.patcher.getnamed("advanced_panel").message("front");c.message("tmprobe","/tmp/cmpe-advanced-native.json","inspect");}

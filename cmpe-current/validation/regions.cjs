@@ -1,0 +1,11 @@
+const fs=require('fs'),vm=require('vm'),assert=require('assert'),path=require('path');const root=path.resolve(__dirname,'..'),s=fs.readFileSync(path.join(root,'cmpe_current_controller_20261122.js'),'utf8');const c={};vm.createContext(c);vm.runInContext(s.slice(0,s.indexOf('/* APG advanced settings')),c);let tests=[];function test(n,f){f();tests.push(n)}
+test('Old settings use full source regions',()=>assert.equal(JSON.stringify(c.SourceRegionModel.restore()),'[[0,1],[0,1],[0,1]]'));
+test('Regions round to valid sample boundaries',()=>assert.equal(JSON.stringify(c.SourceRegionModel.frames(8820,35280,52920)),'[8820,35280]'));
+test('Invalid and empty source regions are rejected',()=>{for(let v of [[],[[0,0],[0,1],[0,1]],[[0,2],[0,1],[0,1]],[[NaN,1],[0,1],[0,1]]])assert.throws(()=>c.SourceRegionModel.validate(v))});
+const p=JSON.parse(fs.readFileSync(path.join(root,'CMPE_CURRENT.maxpat'))).patcher;const boxes=p.boxes.map(x=>x.box),has=(a,b)=>p.lines.some(x=>x.patchline.source[0]===a&&x.patchline.destination[0]===b);
+test('All source editors have numeric and waveform selection plus preview and apply',()=>{for(let i=0;i<3;i++){const q=boxes.find(b=>b.id==='source_editor'+i).patcher;for(let id of ['editor_wave','editor_start','editor_end','editor_preview','editor_stop','editor_apply','editor_link'])assert(q.boxes.some(x=>x.box.id===id));assert(q.lines.some(x=>x.patchline.source[0]==='editor_link'&&x.patchline.destination[0]==='editor_wave'&&x.patchline.destination[1]===4));}});
+test('Preview is mixed downstream of processed recording',()=>{assert(has('source_preview','preview_mix_L'));assert(has('preview_mix_L','monitor_L'));assert(!has('source_preview','fx_bus'));assert(has('monitor_ceiling_L','audio_driver'));});
+test('Monitor exposes minus 72 through plus 18 dB',()=>{let b=boxes.find(b=>b.id==='monitor_level');assert.equal(b.minimum,-72);assert.equal(b.maximum,18);assert(s.includes('monitorDb = clamp(value, -72, 18)'));});
+test('Waveform magnification uses the inverse amplitude scale',()=>assert(s.includes('"vzoom", [1 / waveZoom]')));
+test('Programmatic waveform updates cannot overwrite a saved source region',()=>{assert(s.includes('regionUpdating=true;try{'));assert(s.includes('if(regionUpdating)return;'));assert(s.includes('finally{regionUpdating=false;}'));});
+console.log(JSON.stringify({passed:tests.length,tests},null,2));

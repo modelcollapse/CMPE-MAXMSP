@@ -1,0 +1,20 @@
+{
+  "passed": 14,
+  "tests": [
+    "Auto retains twice the longest source duration",
+    "Manual length is exact at the output sample rate",
+    "Short compositions retain valid mirrored pairs",
+    "Same seed reproduces the entire arrangement",
+    "Changing levels retains event count, pitch, timing and direction",
+    "Older sets restore default Advanced settings",
+    "Saved settings preserve independent level values and seed",
+    "Malformed settings are rejected",
+    "Panel messages set length, sample balance and lock",
+    "Auto toggle remembers manual length",
+    "New Variation changes seed even while locked",
+    "Playing disables Advanced edits",
+    "Advanced panel is embedded and connected to the controller",
+    "Advanced window-control connection has a real subpatch inlet"
+  ],
+  "nativeMax": false
+}

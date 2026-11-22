@@ -1,0 +1,12 @@
+{
+  "passed": 6,
+  "tests": [
+    "Advanced FX and source regions are inline bpatchers",
+    "Header controls toggle sections instead of opening windows",
+    "Output uses blue waveforms and a restrained blue selection",
+    "Expanded sections push output down and collapse back to its original position",
+    "Chosen paths with spaces and non-WAV extensions reach the native importer",
+    "Picker filter is removed and stalled reads can be retried"
+  ],
+  "nativeVerified": false
+}
