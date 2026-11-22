@@ -1,0 +1,44 @@
+# Attribution
+
+## Original CMPE instruments
+
+**Computer Music Practice Examples (CMPE)** and its Variety Pack are projects by **Joo Won Park**.
+
+Original collection: **https://joowonpark.net/cmpe/**
+
+The supplied `CMPE_VarietyPack_ForSC.scd` identifies Park as its author and contains APG, ISJS, Many, RMHS, and SIOE. This Max collection follows those five musical designs: an audio palindrome, mouse-controlled sample granulation, reverb-based ambient layers, additive drones, and audio supercuts. The original CMPE page links the individual instruments, educational material, SuperCollider code, and the all-in-one Variety Pack.
+
+`CMPE_Variety_Pack.maxpat` and the runtime source include this credit. Its visible project link opens Park's CMPE page. The adaptation uses native Max voices for the live instruments and the APG Wave buffer-rendering interface for APG and SIOE. Precise mappings and intentional implementation differences are documented in [CMPE validation](https://github.com/modelcollapse/CMPE-MAXMSP/blob/main/developer/CMPE_VALIDATION.md).
+
+## Original APG idea and algorithm
+
+**Audio Palindrome Generator (APG)** is a project by **Joo Won Park**.
+
+Original project: **https://joowonpark.net/apg/**
+
+The project page describes a generator that combines three audio files into a sonic palindrome, links to the original app and SuperCollider patch, and requests proper credit when APG is used in another project. The page is dated July 28, 2020. The SuperCollider source supplied as the starting point for this adaptation carries a July 16, 2020 update date and identifies APG as part of Park’s [CMPE project](https://joowonpark.net/cmpe/).
+
+APG Wave credits Park for the musical construction: mirrored pairs of sample events with matching amplitude and playback rate, opposite directions, and a symmetric envelope. The initial timeline is twice the duration of the longest source. Automatic trimming can shorten the final result by removing an equal number of samples from both ends.
+
+## This Max adaptation
+
+This repository contains Max/MSP implementations developed for Bryan Collins. APG Wave adds a rendered stereo output, visible generation and playback status, loop selection, automatic silence trimming, and 24-bit WAV export. The CMPE extension adds the other four instruments, live scopes, a local position/density pad, live recording, and JSON settings files. These are adaptations of Park's work; the original musical ideas and algorithms are his.
+
+The original SuperCollider patches, standalone applications, and bundled SuperCollider sound recordings are not included in this repository. The three `apgw_test*.wav` files are synthetic diagnostic sounds generated for this Max implementation.
+
+## Max for Live edition
+
+The `max-for-live/` folder adapts the same five musical engines into individual Max Instrument devices. It adds Live track routing, MIDI triggering, fixed parameter identities, stored device state, and deterministic reconstruction of finite results from their saved seeds and original samples. Its compact interfaces retain Park's name and a link to the original CMPE project. These host-integration changes do not transfer authorship of the original musical designs.
+
+The AMXD container implementation was checked against Ableton's public [maxdevtools parser](https://github.com/Ableton/maxdevtools/blob/5b39dec9a203d2747ff1d08e10c849742a4e654a/maxdiff/amxd_textconv.py) and official example files. Those example device files are not redistributed. Native Live/Max operation remains to be verified for this preview release.
+
+## Terms and source material
+
+Credit is separate from licensing. The original APG page’s request for credit is recorded here without assigning a new license to Park’s work or inventing additional permissions. Refer to the original project and its supplied files for any applicable terms.
+
+The original APG page was checked on November 20, 2026; the CMPE page was checked on November 21, 2026. The non-`www` addresses above were used.
+
+
+## Tape + Drifting Memory edition
+
+This separate edition adapts Tape DSP from the supplied FX Patcher source and Drifting Memory DSP from the supplied Field Kit source. The musical instrument remains derived from Joo Won Park’s CMPE. The new effects interface borrows the colored-strip and XY-performance organization of those supplied projects. Original project/source notices are retained in their scripts and patches.

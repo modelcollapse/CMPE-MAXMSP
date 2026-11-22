@@ -1,0 +1,120 @@
+{
+  "runtime": "Max 9.2.1 / 48 kHz",
+  "passed": 14,
+  "checks": {
+    "Max 9.2.1 completed native test": true,
+    "Locked 32-bit renders sample-identical": true,
+    "Manual durations exact": true,
+    "All dry renders exact palindromes": true,
+    "Sample level changes alter audio": true,
+    "All muted samples produce silence": true,
+    "Locked edits retain seed": true,
+    "New Variation changes seed": true,
+    "Unlocked takes differ": true,
+    "Set restores length levels lock seed": true,
+    "Dry and FX record stereo int24 audio": true,
+    "Processed recording differs from bypass": true,
+    "Stop recording leaves playback running": true,
+    "Processed recording below full scale": true
+  },
+  "audio": {
+    "locked_a": {
+      "seconds": 2.0,
+      "channels": 2,
+      "sampleRate": 48000,
+      "bits": 32,
+      "frames": 96000,
+      "peak": 0.08182384818792343,
+      "rms": 0.019585460068805845,
+      "pcmHash": "9e1775c3657c3bd8817bea72bd97f06f665b07d12defe5fe082563546d05be72",
+      "palindrome": true
+    },
+    "locked_b": {
+      "seconds": 2.0,
+      "channels": 2,
+      "sampleRate": 48000,
+      "bits": 32,
+      "frames": 96000,
+      "peak": 0.08182384818792343,
+      "rms": 0.019585460068805845,
+      "pcmHash": "9e1775c3657c3bd8817bea72bd97f06f665b07d12defe5fe082563546d05be72",
+      "palindrome": true
+    },
+    "level2_muted": {
+      "seconds": 2.0,
+      "channels": 2,
+      "sampleRate": 48000,
+      "bits": 32,
+      "frames": 96000,
+      "peak": 0.07850749045610428,
+      "rms": 0.023784555525675523,
+      "pcmHash": "0a273b0f14796ce74818e700d24651b8c0089b97b6fae9a90a04011bde7f18c1",
+      "palindrome": true
+    },
+    "all_muted": {
+      "seconds": 2.0,
+      "channels": 2,
+      "sampleRate": 48000,
+      "bits": 32,
+      "frames": 96000,
+      "peak": 0.0,
+      "rms": 0.0,
+      "pcmHash": "351a8054b23144894668c6a51d5dbba82f56523ef43cc45b6f4d7060a969c31a",
+      "palindrome": true
+    },
+    "new_variation": {
+      "seconds": 3.0,
+      "channels": 2,
+      "sampleRate": 48000,
+      "bits": 32,
+      "frames": 144000,
+      "peak": 0.09178604930639267,
+      "rms": 0.021975318705421708,
+      "pcmHash": "d10ba9dc0ab9f48091d628528304d2a012ee56f3fe2ee3872c7c00d4ea13bef2",
+      "palindrome": true
+    },
+    "unlocked_a": {
+      "seconds": 3.0,
+      "channels": 2,
+      "sampleRate": 48000,
+      "bits": 32,
+      "frames": 144000,
+      "peak": 0.0705764889717102,
+      "rms": 0.017850347935881375,
+      "pcmHash": "5e5514e76baa1c21a46de98e5d600bad75d161a285776eca9d294d6c4166292d",
+      "palindrome": true
+    },
+    "unlocked_b": {
+      "seconds": 3.0,
+      "channels": 2,
+      "sampleRate": 48000,
+      "bits": 32,
+      "frames": 144000,
+      "peak": 0.090571328997612,
+      "rms": 0.023237642405664956,
+      "pcmHash": "e42bbb4da8ce668fcaa1f3771334ef9f94bc7d87fa6e28bd9f831c2999d2068a",
+      "palindrome": true
+    },
+    "record_dry": {
+      "seconds": 2.6026666666666665,
+      "channels": 2,
+      "sampleRate": 48000,
+      "bits": 24,
+      "frames": 124928,
+      "peak": 0.09057128429412842,
+      "rms": 0.02344608437936145,
+      "pcmHash": "3b1d9fd72c288eab992a5cf992f36393872a67812f4ad2f7fc9554fd9cb07ede"
+    },
+    "record_fx": {
+      "seconds": 3.8506666666666667,
+      "channels": 2,
+      "sampleRate": 48000,
+      "bits": 24,
+      "frames": 184832,
+      "peak": 0.2451314926147461,
+      "rms": 0.05692131413155552,
+      "pcmHash": "01f4d1f1ad61566807b74f61f117bdc32b71b67c968f8359036140a6e8cd036f"
+    }
+  },
+  "scope": "Native UI message routing, APG offline render using Max buffers, live DSP playback, processed recording, Set restore. Demo sources only."
+}

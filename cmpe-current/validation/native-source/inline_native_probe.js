@@ -1,0 +1,1 @@
+autowatch=0;var t,h=this,c,started=false;function loadbang(){if(started)return;started=true;t=new Task(function(){c=h.patcher.getnamed("controller");h.patcher.getnamed("advanced_button").message("bang");c.message("inlineprobe","/tmp/cmpe_inline_open.json");h.patcher.getnamed("load1").message("bang");},h);t.schedule(1800);}function notifydeleted(){if(t)t.cancel();}

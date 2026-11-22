@@ -1,0 +1,1 @@
+autowatch=0;var t,host=this;function loadbang(){t=new Task(function(){host.patcher.getnamed("advanced_button").message("bang");},host);t.schedule(1800);}function notifydeleted(){if(t)t.cancel();}

@@ -1,0 +1,32 @@
+{
+  "passed": 27,
+  "tests": [
+    "Defaults reproduce the original fixed values exactly",
+    "ISJS grain attack and curve ranges are used",
+    "Many fade, decay and delay spread ranges are used",
+    "RMHS attack, spread, drift rate and depth are used",
+    "SIOE attack, release and spread are used",
+    "Ranges stay ordered and inside their bounds",
+    "Restore ignores invalid saved values and keeps defaults",
+    "Locked variation reuses its seed; unlocked picks a new one; NEW VARIATION is used once",
+    "Same seed gives the same SIOE take",
+    "Panel edits update the selected instrument and SAVE SET includes them",
+    "Patch has the instrument ADVANCED panel wired to the controller",
+    "RMHS just tuning uses the exact ratio; equal tuning is unchanged",
+    "RMHS series shapes pick odd and 3-limit harmonics",
+    "RMHS spectral tilt scales partial amplitude by 1/n^tilt",
+    "Note names, cents and snapping use A4 = 440 Hz",
+    "Guidance explains coincident partials in just tuning and beating in equal tuning",
+    "RMHS presets set root, interval and harmony; edits switch back to Custom; snap rounds to notes",
+    "Monitor volume now defaults to 0 dB (the FX ceiling protects the output)",
+    "Instrument gain is per instrument, clamped, sent to the pre-FX gain stage, and RMHS starts at +6 dB",
+    "ISJS presets set just-ratio rates, density and texture; editing a rate returns to Custom",
+    "Many presets set pitch set, space and timing; changing the pitch set returns to Custom",
+    "Rate intervals below the root and detunes read correctly",
+    "Patch routes instruments through the gain stage into the FX bus and has the preset and gain controls",
+    "Match levels normalizes a loaded sample to -8 dBFS peak and reports the gain",
+    "Match levels caps boost at +30 dB, skips silence, and does nothing when off",
+    "Turning Match levels off reloads loaded samples and keeps their regions",
+    "Patch has the MATCH LEVELS toggle wired to the controller"
+  ]
+}

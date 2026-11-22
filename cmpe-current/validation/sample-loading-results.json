@@ -1,0 +1,11 @@
+{
+  "runtime": "Max 8.6.5",
+  "filePickerOpenedFromLOAD": true,
+  "replacementWavImported": false,
+  "originalClickLockConfirmed": true,
+  "sourceFramesAfterImport": 1920512,
+  "sourceDurationMsAfterImport": 40010.666666666664,
+  "finalClickUnlockSetter": "offline regression passed",
+  "finalNativeRecheck": "Blocked by Max UI timeout after the app window changed.",
+  "fix": "LOAD sets ignoreclick=0 when available, stops the performance, then opens its source picker. Cancel preserves the current source."
+}

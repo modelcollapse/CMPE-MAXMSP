@@ -1,0 +1,2 @@
+autowatch=0;inlets=1;outlets=1;var host=this,t,started=false;
+function loadbang(){if(started)return;started=true;t=new Task(function(){host.patcher.getnamed("controller").message("tmprobe","/tmp/cmpe_host_start.json","start");t=new Task(function(){host.patcher.getnamed("controller").message("tmprobe","/tmp/cmpe_host_end.json","inspect");host.patcher.getnamed("fx_bus").subpatcher().getnamed("fx_control").message("probe","/tmp/cmpe_host_fx.json");},host);t.schedule(6500);},host);t.schedule(1800);}

@@ -18,6 +18,22 @@ The collection is designed for **Max 8 or Max 9**, using stock Max/MSP objects a
 
 **Native Max was unavailable during development.** The models, rendered samples, controller behavior, and patch connections have automated checks; actual Max object loading, audible output, mouse interaction, and disk recording still require verification in Max. See [validation details](developer/CMPE_VALIDATION.md).
 
+## CMPE Current edition (Tape + Memory)
+
+**[`cmpe-current/`](cmpe-current/)** is the latest standalone edition, tested live in Max 9. Open **`cmpe-current/CMPE_CURRENT.maxpat`** and keep that folder together.
+
+It adds to the five instruments:
+
+- **Tape + Memory:** a shared effects chain with processed WAV recording.
+- **Sample loading:** drag and drop, more reliable loading, and Match levels.
+- **Theory presets and guidance:** for ISJS, Many and RMHS, including just intonation, harmonic series and live interval readouts.
+- **ADVANCED panels:** for every instrument, with variation lock.
+- **Looping sample preview.**
+- **Per-instrument gain:** about 12–18 dB louder than before by default.
+- **An accessible light theme** that meets WCAG AA contrast.
+
+See [cmpe-current/README.md](cmpe-current/README.md) for the full change log and [cmpe-current/docs/CMPE_USAGE.md](cmpe-current/docs/CMPE_USAGE.md) for usage.
+
 ## Max for Live edition
 
 The **[Max for Live 0.1.0 preview](max-for-live/README.md)** contains five separate `.amxd` instruments for Ableton Live: APG, ISJS, Many, RMHS, and SIOE. Each has a compact horizontal interface, MIDI triggering, Live parameter integration, and stereo output through its track. APG and SIOE separate generation from playback and preserve the generation seed for reconstructing saved results.

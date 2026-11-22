@@ -1,0 +1,20 @@
+{
+  "passed": 14,
+  "tests": [
+    "Full controller initializes source names and default control values",
+    "WAV loading uses native replace after an empty sentinel",
+    "Missing completion bang is recovered by valid buffer metadata",
+    "Old empty sentinel is never accepted as decoded audio",
+    "Non-audio files are rejected immediately with a message on the card",
+    "Decode timeout clears Loading and unlocks retry",
+    "Invalid multichannel buffers fail clearly instead of staying Loading",
+    "Optional editor errors cannot discard successfully loaded audio",
+    "Patch explicitly defers controller initialization and uses a unique script",
+    "LOAD while playback is stopping is queued, not dropped",
+    "Dropping a file on an active card loads it; non-audio drops are refused",
+    "Phase messages are ignored unless playing",
+    "Patch has a drop target for each sample card",
+    "Preview LOOP restarts the current region and STOP ends it"
+  ],
+  "nativeVerified": false
+}

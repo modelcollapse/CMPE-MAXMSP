@@ -1,0 +1,48 @@
+{
+  "runtime": "Max 9.2.1 / 48 kHz DSP; 44.1 kHz source 1",
+  "passed": 12,
+  "checks": {
+    "Native Max 9 completed": true,
+    "Region contains the exact original samples": true,
+    "Region length exactly 600 ms": true,
+    "Original buffer metadata retains full sample": true,
+    "Region restores without sample shift": true,
+    "Preview contains stereo audio": true,
+    "Mono preview reaches both channels": true,
+    "Output from cropped sources renders exact 2 seconds": true,
+    "Precise output range enables looping": true,
+    "Positive monitor gain restores": true,
+    "Waveform auto-fit uses reciprocal scale": true,
+    "Rendered audio remains an exact palindrome": true
+  },
+  "audio": {
+    "crop": {
+      "channels": 1,
+      "sampleRate": 44100,
+      "bits": 32,
+      "frames": 26460,
+      "seconds": 0.6,
+      "peak": 0.283477783203125,
+      "rms": 0.11255104636245654
+    },
+    "preview": {
+      "channels": 2,
+      "sampleRate": 48000,
+      "bits": 24,
+      "frames": 89088,
+      "seconds": 1.856,
+      "peak": 0.28349053859710693,
+      "rms": 0.06398763660141815
+    },
+    "render": {
+      "channels": 2,
+      "sampleRate": 48000,
+      "bits": 16,
+      "frames": 96000,
+      "seconds": 2.0,
+      "peak": 0.0853271484375,
+      "rms": 0.020612477659532443
+    }
+  },
+  "scope": "Native source editor message handlers, non-destructive crop, preview audio, APG rendering, range state, Set restore, and visible waveform auto-fit. Other instrument modes inherit the same working source buffers; not individually auditioned in this run."
+}

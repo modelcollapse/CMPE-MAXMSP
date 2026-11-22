@@ -1,0 +1,25 @@
+{
+  "passed": 19,
+  "tests": [
+    "Startup bypasses both effects and keeps processed output silent",
+    "Enabling effects maps normalized values into borrowed processor units",
+    "Memory feedback is bounded below unity and invalid values are ignored",
+    "Destination cancellation allows opening the recorder again",
+    "A stopped performance arms capture, and resume starts the recorder",
+    "Elapsed time updates and STOP REC leaves the performance running",
+    "STOP gates the output, releases hold and schedules memory clearing",
+    "Saved effects restore with fresh audio memory and valid bounds",
+    "Quick restart cancels pending memory clearing and restores capture",
+    "Both rendered and live CMPE outputs enter the same effects bus",
+    "Processed recorder captures both channels after the stereo peak ceiling",
+    "Test tone enters downstream of FX and cannot reach the processed recorder",
+    "Every serialized patch connection has valid source and destination IDs",
+    "Host supports all-mode processed recording and embeds FX settings in SAVE SET",
+    "Audio-menu tags preserve Max set messages instead of changing their prefix",
+    "A transient dspstate zero is checked against the real driver switch",
+    "The output ceiling uses embedded Gen DSP rather than a nonexistent expr~ object",
+    "Sample LOAD explicitly clears its native click lock while enabled",
+    "All three LOAD buttons use the guarded stop-and-choose path"
+  ],
+  "nativeMax": false
+}
