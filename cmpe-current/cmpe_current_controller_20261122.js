@@ -103,7 +103,7 @@ var ModeAdvancedModel=(function(){
  function fin(x){return typeof x==="number"&&isFinite(x);}
  function cl(v,a,b){return Math.max(a,Math.min(b,v));}
  function defaults(){var o={},i,j;for(i=0;i<MODES.length;i++){var m=MODES[i],r={values:{},locked:false,seed:1234567};for(j=0;j<SPECS[m].length;j++){var sp=SPECS[m][j];r.values[sp.key]=sp.range?sp.def.slice(0):sp.def;}o[m]=r;}
-  o.rmhs.harmony={preset:0,tuning:0,series:0,snap:0,tilt:1};o.isjs.preset=0;o.many.preset=0;return o;}
+  o.rmhs.harmony={preset:0,tuning:0,series:0,snap:0,tilt:1};o.isjs.preset=0;o.many.preset=0;o.many.sources=1;return o;}
  function copy(v){return JSON.parse(JSON.stringify(v));}
  function restore(v){var o=defaults(),i,j;if(!v||typeof v!=="object")return o;
   for(i=0;i<MODES.length;i++){var m=MODES[i],src=v[m];if(!src||typeof src!=="object")continue;
@@ -112,7 +112,7 @@ var ModeAdvancedModel=(function(){
    for(j=0;j<SPECS[m].length;j++){var sp=SPECS[m][j],x=src.values&&src.values[sp.key];
     if(sp.range&&x&&x.length===2&&fin(x[0])&&fin(x[1])){var a=cl(x[0],sp.lo,sp.hi),b=cl(x[1],sp.lo,sp.hi);o[m].values[sp.key]=a<=b?[a,b]:[b,a];}
     else if(!sp.range&&fin(x))o[m].values[sp.key]=cl(x,sp.lo,sp.hi);}}
-  if(v.isjs&&fin(v.isjs.preset))o.isjs.preset=cl(Math.round(v.isjs.preset),0,LivePresets.ISJS.length-1);if(v.many&&fin(v.many.preset))o.many.preset=cl(Math.round(v.many.preset),0,LivePresets.MANY.length-1);
+  if(v.isjs&&fin(v.isjs.preset))o.isjs.preset=cl(Math.round(v.isjs.preset),0,LivePresets.ISJS.length-1);if(v.many&&fin(v.many.sources))o.many.sources=cl(Math.round(v.many.sources),1,3);if(v.many&&fin(v.many.preset))o.many.preset=cl(Math.round(v.many.preset),0,LivePresets.MANY.length-1);
   var hm=v.rmhs&&v.rmhs.harmony;if(hm&&typeof hm==="object"){var H=o.rmhs.harmony;
    if(fin(hm.preset))H.preset=cl(Math.round(hm.preset),0,RMHSTheory.PRESETS.length-1);if(fin(hm.tuning))H.tuning=cl(Math.round(hm.tuning),0,1);
    if(fin(hm.series))H.series=cl(Math.round(hm.series),0,2);if(fin(hm.snap))H.snap=cl(Math.round(hm.snap),0,1);if(fin(hm.tilt))H.tilt=cl(hm.tilt,0.3,3);}
@@ -128,6 +128,8 @@ var ModeAdvancedModel=(function(){
 }());
 var modeAdvanced=ModeAdvancedModel.defaults(),modeVarPrepared={isjs:false,many:false,rmhs:false,sioe:false},liveRng=Math.random;
 var MODE_KEYS=["apg","isjs","many","rmhs","sioe"];
+/* Sample slots an instrument shows: Many can draw layers from 1-3 samples. */
+function sourceCountFor(mode){return mode===3?0:(mode===2?modeAdvanced.many.sources:(mode===4?1:3));}
 /* Pre-FX gain per instrument (dB), from Max 9 measurements at gain 0 (post-limiter peaks with the demo
  * samples): APG -20.6, ISJS -15, Many -16 to -29, RMHS -14 (level 0.22), SIOE -12.4 dBFS.
  * The demo samples peak near -8 dBFS, the Match levels target, so these gains also hold with matching on. */
@@ -1285,7 +1287,7 @@ function notifydeleted() { shutdown(); }
     var descriptions = [
         "APG: make an audio palindrome from three samples.",
         "ISJS: move in the pad for position and grain density.",
-        "Many: turn sample 1 into overlapping ambient layers.",
+        "Many: turn your samples into overlapping ambient layers.",
         "RMHS: a slowly evolving drone of sine-wave harmonics.",
         "SIOE: slices of sample 1 as a short or gradual supercut."
     ];
@@ -1395,7 +1397,7 @@ function notifydeleted() { shutdown(); }
         try {
         presetMenu();
         var j, apg = modeIndex === 0, rendered = apg || modeIndex === 4;
-        var sourceCount = modeIndex === 3 ? 0 : ((modeIndex === 2 || modeIndex === 4) ? 1 : 3);
+        var sourceCount = sourceCountFor(modeIndex);
         for (j = 0; j < 5; j++) {
             objectMessage("mode" + j, ["bgcolor"].concat(j === modeIndex ? [23 / 255, 79 / 255, 203 / 255, 1] : [224 / 255, 229 / 255, 235 / 255, 1]));
             objectMessage("mode" + j, ["bgoncolor"].concat(j === modeIndex ? [16 / 255, 58 / 255, 154 / 255, 1] : [205 / 255, 212 / 255, 221 / 255, 1]));
@@ -1409,10 +1411,13 @@ function notifydeleted() { shutdown(); }
         hidden("mode_menu", true); hidden("menu_label", true);
         for (j = 1; j <= 3; j++) {
             hidden("repeat" + j, !apg); hidden("repeat_label" + j, !apg);
-            hidden("source_label" + j, j > sourceCount);
-            hidden("load" + j, j > sourceCount); hidden("file" + j, j > sourceCount);
+            // Many's cards 2-3 keep their SPACE / TIMING controls; extra samples add only LOAD.
+            hidden("source_label" + j, j > sourceCount || (modeIndex === 2 && j > 1));
+            hidden("load" + j, j > sourceCount); hidden("file" + j, j > sourceCount || (modeIndex === 2 && j > 1));
         }
         hidden("pitch", !apg); hidden("pitch_label", !apg);
+        hidden("layer_source_menu", modeIndex !== 2); hidden("layer_source_label", modeIndex !== 2);
+        if (modeIndex === 2) objectMessage("layer_source_menu", ["set", modeAdvanced.many.sources - 1]);
         hidden("no_samples", modeIndex !== 3);
         hidden("wave_l", !rendered); hidden("wave_r", !rendered);
         hidden("scope_l", rendered || modeIndex === 1); hidden("scope_r", rendered || modeIndex === 1);
@@ -1452,7 +1457,7 @@ function notifydeleted() { shutdown(); }
         if (liveMode() && state !== "live") {
             ui("duration", modeIndex === 3 ? "Slow fade-in" : "Continuous");
             ui("time", "0.0 s");
-            ui("selection_info", modeIndex === 1 ? LivePresets.isjsGuide(grain.rates) : "Record a performance with RECORD WAV.");
+            ui("selection_info", modeIndex === 1 ? LivePresets.isjsGuide(grain.rates) : (modeIndex === 2 && sourceCountFor(2) > 1 ? manySourceList() : "Record a performance with RECORD WAV."));
         }
         g.lockUI(state !== "idle" && state !== "ready");
         } finally { updatingControls = false; }
@@ -1477,7 +1482,7 @@ function notifydeleted() { shutdown(); }
     g.lockUI = function (flag) {
         base.lockUI(flag);
         var editable = mutable() || (state === "live" && (modeIndex === 1 || modeIndex === 2));
-        var j, required = modeIndex === 3 ? 0 : ((modeIndex === 2 || modeIndex === 4) ? 1 : 3);
+        var j, required = sourceCountFor(modeIndex);
         for (j = 0; j < 6; j++) clickable("param" + j, editable && !(modeIndex === 4 && cut.form === "short" && j === 1));
         clickable("mode_menu", editable);
         clickable("xy_pad", modeIndex === 1 && (mutable() || state === "live"));
@@ -1535,7 +1540,7 @@ function notifydeleted() { shutdown(); }
         if (modeIndex !== 0) {
             showMode();
             if (modeIndex === 4 && mutable()) ui("duration", "Length: --");
-            var required = modeIndex === 3 ? 0 : (modeIndex === 1 ? 3 : 1), ready = true;
+            var required = modeIndex === 2 ? 1 : sourceCountFor(modeIndex), ready = true;
             for (var j = 0; j < required; j++) if (!sources[j] || nativeBusy[j]) ready = false;
             if (ready && mutable()) g.markDirty();
         }
@@ -1664,7 +1669,7 @@ function notifydeleted() { shutdown(); }
         if (pendingPreset) { status("Waiting for the current source load before restoring settings..."); return; }
         if (modeIndex === 0) { base.requestAudio(action); return; }
         if (savePending) { status("Wait for the WAV save to finish."); return; }
-        var required = modeIndex === 3 ? 0 : (modeIndex === 1 ? 3 : 1), j;
+        var required = modeIndex === 2 ? 1 : sourceCountFor(modeIndex), j;
         for (j = 0; j < required; j++) {
             if (loading[j]) { status("Please wait for the source to finish loading."); return; }
             if (!sources[j]) { status("Load " + (required === 1 ? "sample 1" : "three samples") + " or choose DEMO."); return; }
@@ -1734,14 +1739,41 @@ function notifydeleted() { shutdown(); }
         ]);
         scheduleGrain(slot, e.periodMs);
     }
+    /* Random loaded source, never the same twice in a row; with one source no
+     * random number is drawn, so single-sample Many is unchanged. */
+    var lastManySource = -1;
+    function pickManySource() {
+        var n = sourceCountFor(2), avail = [], k;
+        for (k = 0; k < n; k++) if (sources[k]) avail.push(k);
+        if (avail.length <= 1) { lastManySource = avail.length ? avail[0] : 0; return lastManySource; }
+        var choices = avail.filter(function (x) { return x !== lastManySource; });
+        lastManySource = choices[Math.min(choices.length - 1, Math.floor(liveRng() * choices.length))];
+        return lastManySource;
+    }
+    g.pickManySource = pickManySource;
+    function manySourceList() {
+        var parts = [], k, n = sourceCountFor(2);
+        for (k = 0; k < n; k++) parts.push("S" + (k + 1) + " " + (sources[k] && paths[k] ? shortName(paths[k]) : (loading[k] ? "loading\u2026" : "empty")));
+        return "Layers pick at random from: " + parts.join("  \u00b7  ");
+    }
+    g.layersources = function (value) {
+        value = Math.round(Number(value));
+        if (!finite(value) || value < 0 || value > 2) return;
+        if (!(mutable() || state === "live")) { showMode(); return; }
+        modeAdvanced.many.sources = value + 1; lastManySource = -1;
+        showMode(); g.lockUI(!mutable() && state !== "live");
+        status(value === 0 ? "Many layers use Sample 1." : "Many layers now draw on samples 1\u2013" + (value + 1) + " at random" + (state === "live" ? ", starting with the next layer." : ". Load them on the cards to the right."));
+        if (g.feedbackrefresh) g.feedbackrefresh();
+    };
     function addLayer() {
         var e = CMPEModel.manyEvent(withAdv(many, "many"), liveRng), index = (manyCursor++ % 32) + 1;
+        var src = sources[pickManySource()];
         var reuse = manyUse[index] !== undefined, generation = (manyUse[index] || 0) + 1;
         manyUse[index] = generation;
         if (reuse) voice("many_engine", index, [["stop"]]);
         function launch() {
-            var commands = [["set", sources[0].name], ["rate", e.rate], ["amp", e.level],
-                ["sumgain", sources[0].channels === 1 ? 1 : Math.SQRT1_2], ["feed", e.feed]];
+            var commands = [["set", src.name], ["rate", e.rate], ["amp", e.level],
+                ["sumgain", src.channels === 1 ? 1 : Math.SQRT1_2], ["feed", e.feed]];
             for (var k = 0; k < e.stages.length; k++) {
                 var s = e.stages[k];
                 commands.push(["stage", k + 1, s.leftMs, s.leftK, s.rightMs, s.rightK]);
@@ -1771,7 +1803,7 @@ function notifydeleted() { shutdown(); }
             if (g.fxsend) g.fxsend("resume");
             cancelLiveTasks();
             state = "live"; outputReady = false; dirty = true; liveStarted = now();
-            liveEnd = 0; layerCount = 0; manyCursor = 0; manyUse = [];
+            liveEnd = 0; layerCount = 0; manyCursor = 0; manyUse = []; lastManySource = -1;
             outlet(2, 0); outlet(1, 0); outlet(0, "stop"); outlet(3, "stop");
             objectMessage("live_gate", ["list", 1, 15]);
             ui("progress", 0); ui("time", "0.0 s");
@@ -2539,7 +2571,7 @@ function notifydeleted() { shutdown(); }
         try {
             var cmpe = info(), mode = cmpe.mode, rendered = mode === 0 || mode === 4;
             var audio = typeof g.CMPEAudioState === "function" ? g.CMPEAudioState() : {};
-            var state = g.state, required = mode === 3 ? 0 : (mode === 2 || mode === 4 ? 1 : 3);
+            var state = g.state, required = sourceCountFor(mode);
             var loading = false, stalled = false, missing = false, i, sourceState;
             var accent = accents[mode] || accents[0], tint = tints[mode] || tints[0];
             for (i = 0; i < 3; i++) {
@@ -2548,7 +2580,8 @@ function notifydeleted() { shutdown(); }
                 var available = !!(g.sources && g.sources[i]);
                 sourceState = nativeBusy && !reading ? "WAITING" :
                     (nativeBusy || reading ? "LOADING" : (available ? "READY" : "EMPTY"));
-                hide("source_state" + (i + 1), i >= required);
+                hide("source_state" + (i + 1), i >= required || (mode === 2 && i > 0));
+                send("load" + (i + 1), "text", [mode === 2 && i > 0 ? "LOAD S" + (i + 1) : "LOAD"]);
                 set("source_state" + (i + 1), sourceState);
                 color("source_state" + (i + 1), "textcolor", sourceState === "WAITING" ? red :
                     (sourceState === "LOADING" ? amber : (available ? ink : muted)));
@@ -2558,7 +2591,7 @@ function notifydeleted() { shutdown(); }
                 if (i < required) {
                     loading = loading || nativeBusy || reading;
                     stalled = stalled || (nativeBusy && !reading);
-                    missing = missing || !available;
+                    if (!(mode === 2 && i > 0)) missing = missing || !available; // extra Many sources are optional
                 }
             }
             var groupLabels = mode === 3 ? ["DRONE", "HARMONICS", "INTERVAL"] :
@@ -2990,7 +3023,7 @@ function regionprobe(path){var d={regions:sourceRegions,drafts:regionDrafts,full
 
 /* Collapsible presentation sections; no panel creates a separate window. */
 var inlineSections={advanced:false,fx:false,source:-1};
-var inlineBase={"title":[20,10,252,36],"demo_button":[620,12,90,32],"test_audio":[718,12,126,32],"credit_rule":[20,834,1060,1],"source_label1":[32,208,112,22],"load1":[260,206,92,30],"file1":[32,240,320,36],"repeat_label1":[32,280,152,20],"repeat1":[32,302,152,28],"source_label2":[390,208,112,22],"load2":[618,206,92,30],"file2":[390,240,320,36],"repeat_label2":[390,280,152,20],"repeat2":[390,302,152,28],"source_label3":[748,208,112,22],"load3":[976,206,92,30],"file3":[748,240,320,36],"repeat_label3":[748,280,152,20],"repeat3":[748,302,152,28],"pitch_label":[200,280,152,20],"pitch":[200,302,152,28],"monitor_label":[716,393,106,24],"monitor_level":[824,390,76,28],"meter_L":[916,391,152,12],"meter_R":[916,406,152,12],"output_label":[32,392,172,24],"duration":[206,393,134,24],"time":[856,638,212,22],"channel_l":[32,464,20,24],"wave_l":[56,428,1012,96],"channel_r":[32,570,20,24],"wave_r":[56,534,1012,96],"selection_info":[32,638,580,22],"loop_toggle":[632,638,22,22],"loop_label":[664,636,180,28],"clear_button":[608,708,130,44],"save_button":[750,708,144,44],"play_button":[20,708,270,44],"stop_button":[302,708,132,44],"new_button":[446,708,150,44],"progress":[32,814,228,10],"render_info":[276,762,792,22],"status":[276,788,792,38],"original_credit":[24,840,680,20],"original_link":[812,838,268,22],"save_preset":[852,12,110,32],"load_preset":[970,12,110,32],"audio_status":[736,54,332,20],"audio_setup":[736,78,124,28],"audio_refresh":[868,78,92,28],"audio_power":[968,78,100,28],"audio_panel":[20,52,1060,64],"audio_driver_label":[32,54,182,20],"audio_driver_menu":[32,78,182,28],"audio_option1_label":[226,54,242,20],"audio_option1_menu":[226,78,242,28],"audio_option2_label":[480,54,242,20],"audio_option2_menu":[480,78,242,28],"mode0":[20,124,200,36],"mode1":[235,124,200,36],"mode2":[450,124,200,36],"mode3":[665,124,200,36],"mode4":[880,124,200,36],"mode_info":[24,168,398,22],"param_label0":[32,280,152,20],"param0":[32,302,152,28],"param_label1":[390,280,152,20],"param1":[390,302,152,28],"param_label2":[748,280,152,20],"param2":[748,302,152,28],"param_label3":[200,280,152,20],"param3":[200,302,152,28],"param_label4":[558,280,152,20],"param4":[558,302,152,28],"param_label5":[916,280,152,20],"param5":[916,302,152,28],"menu_label":[916,280,152,20],"mode_menu":[916,302,152,28],"scope_l":[56,428,1012,96],"scope_r":[56,534,1012,96],"xy_pad":[56,428,684,202],"scope_xy":[756,428,312,202],"record_button":[906,708,174,44],"source_card1":[20,198,344,176],"source_accent1":[21,199,342,4],"source_state1":[150,210,100,20],"group_label1":[32,208,320,22],"group_help1":[32,240,320,36],"source_card2":[378,198,344,176],"source_accent2":[379,199,342,4],"source_state2":[508,210,100,20],"group_label2":[390,208,320,22],"group_help2":[390,240,320,36],"source_card3":[736,198,344,176],"source_accent3":[737,199,342,4],"source_state3":[866,210,100,20],"group_label3":[748,208,320,22],"group_help3":[748,240,320,36],"output_panel":[20,382,1060,318],"feedback_panel":[20,758,1060,72],"state_badge":[32,772,228,28],"wave_scale":[342,396,176,20],"fxopen":[398,12,208,32],"advanced_button":[278,12,112,32],"wave_magnify":[522,392,62,25],"wave_mag_label":[590,394,64,21],"range_start_label":[34,665,80,24],"range_start":[116,663,112,26],"range_end_label":[252,665,80,24],"range_end":[330,663,112,26],"range_help":[472,665,590,26],"source_edit_button0":[32,338,320,28],"source_edit_button1":[390,338,320,28],"source_edit_button2":[748,338,320,28],"drop1":[20,198,344,176],"drop2":[378,198,344,176],"drop3":[736,198,344,176],"preset_label":[560,167,62,22],"preset_menu":[624,164,220,28],"gain_label":[860,167,84,22],"gain_field":[946,164,76,28],"match_levels":[426,164,130,28]};
+var inlineBase={"title":[20,10,252,36],"demo_button":[620,12,90,32],"test_audio":[718,12,126,32],"credit_rule":[20,834,1060,1],"source_label1":[32,208,112,22],"load1":[260,206,92,30],"file1":[32,240,320,36],"repeat_label1":[32,280,152,20],"repeat1":[32,302,152,28],"source_label2":[390,208,112,22],"load2":[618,206,92,30],"file2":[390,240,320,36],"repeat_label2":[390,280,152,20],"repeat2":[390,302,152,28],"source_label3":[748,208,112,22],"load3":[976,206,92,30],"file3":[748,240,320,36],"repeat_label3":[748,280,152,20],"repeat3":[748,302,152,28],"pitch_label":[200,280,152,20],"pitch":[200,302,152,28],"monitor_label":[716,393,106,24],"monitor_level":[824,390,76,28],"meter_L":[916,391,152,12],"meter_R":[916,406,152,12],"output_label":[32,392,172,24],"duration":[206,393,134,24],"time":[856,638,212,22],"channel_l":[32,464,20,24],"wave_l":[56,428,1012,96],"channel_r":[32,570,20,24],"wave_r":[56,534,1012,96],"selection_info":[32,638,580,22],"loop_toggle":[632,638,22,22],"loop_label":[664,636,180,28],"clear_button":[608,708,130,44],"save_button":[750,708,144,44],"play_button":[20,708,270,44],"stop_button":[302,708,132,44],"new_button":[446,708,150,44],"progress":[32,814,228,10],"render_info":[276,762,792,22],"status":[276,788,792,38],"original_credit":[24,840,680,20],"original_link":[812,838,268,22],"save_preset":[852,12,110,32],"load_preset":[970,12,110,32],"audio_status":[736,54,332,20],"audio_setup":[736,78,124,28],"audio_refresh":[868,78,92,28],"audio_power":[968,78,100,28],"audio_panel":[20,52,1060,64],"audio_driver_label":[32,54,182,20],"audio_driver_menu":[32,78,182,28],"audio_option1_label":[226,54,242,20],"audio_option1_menu":[226,78,242,28],"audio_option2_label":[480,54,242,20],"audio_option2_menu":[480,78,242,28],"mode0":[20,124,200,36],"mode1":[235,124,200,36],"mode2":[450,124,200,36],"mode3":[665,124,200,36],"mode4":[880,124,200,36],"mode_info":[24,168,398,22],"param_label0":[32,280,152,20],"param0":[32,302,152,28],"param_label1":[390,280,152,20],"param1":[390,302,152,28],"param_label2":[748,280,152,20],"param2":[748,302,152,28],"param_label3":[200,280,152,20],"param3":[200,302,152,28],"param_label4":[558,280,152,20],"param4":[558,302,152,28],"param_label5":[916,280,152,20],"param5":[916,302,152,28],"menu_label":[916,280,152,20],"mode_menu":[916,302,152,28],"scope_l":[56,428,1012,96],"scope_r":[56,534,1012,96],"xy_pad":[56,428,684,202],"scope_xy":[756,428,312,202],"record_button":[906,708,174,44],"source_card1":[20,198,344,176],"source_accent1":[21,199,342,4],"source_state1":[150,210,100,20],"group_label1":[32,208,320,22],"group_help1":[32,240,320,36],"source_card2":[378,198,344,176],"source_accent2":[379,199,342,4],"source_state2":[508,210,100,20],"group_label2":[390,208,320,22],"group_help2":[390,240,320,36],"source_card3":[736,198,344,176],"source_accent3":[737,199,342,4],"source_state3":[866,210,100,20],"group_label3":[748,208,320,22],"group_help3":[748,240,320,36],"output_panel":[20,382,1060,318],"feedback_panel":[20,758,1060,72],"state_badge":[32,772,228,28],"wave_scale":[342,396,176,20],"fxopen":[398,12,208,32],"advanced_button":[278,12,112,32],"wave_magnify":[522,392,62,25],"wave_mag_label":[590,394,64,21],"range_start_label":[34,665,80,24],"range_start":[116,663,112,26],"range_end_label":[252,665,80,24],"range_end":[330,663,112,26],"range_help":[472,665,590,26],"source_edit_button0":[32,338,320,28],"source_edit_button1":[390,338,320,28],"source_edit_button2":[748,338,320,28],"drop1":[20,198,344,176],"drop2":[378,198,344,176],"drop3":[736,198,344,176],"preset_label":[560,167,62,22],"preset_menu":[624,164,220,28],"gain_label":[860,167,84,22],"gain_field":[946,164,76,28],"match_levels":[426,164,130,28],"layer_source_label":[200,280,152,20],"layer_source_menu":[200,302,152,28]};
 function inlineLayout(){
  var advH=(this.CMPEState&&this.CMPEState().mode===3)?390:340;
  var top=(inlineSections.advanced?advH:0)+(inlineSections.fx?742:0), source=inlineSections.source>=0?410:0;
@@ -3081,8 +3114,8 @@ function dropsample(slot){
  var a=arrayfromargs(arguments);slot=Number(a[0]);var path=a.slice(1).join(" ");
  if(!slotOK(slot)||!path)return;
  if(!AUDIO_FILE.test(path)){status("\u201c"+fileName(path)+"\u201d is not an audio file Max can load. Use WAV, AIFF, MP3, M4A, FLAC or CAF.");return;}
- var info=this.CMPEState?this.CMPEState():{},need=info.mode===3?0:((info.mode===2||info.mode===4)?1:3);
- if(slot>=need){status(need===0?"RMHS uses no samples. Switch to APG, ISJS, Many or SIOE to load audio.":"This instrument uses Sample 1 only. Drop the file on Sample 1.");return;}
+ var info=this.CMPEState?this.CMPEState():{},need=sourceCountFor(info.mode);
+ if(slot>=need){status(need===0?"RMHS uses no samples. Switch to APG, ISJS, Many or SIOE to load audio.":"This instrument uses Sample 1 only. Drop the file on Sample 1, or choose more Layer sources in Many.");return;}
  this.loadfile(slot,path);
 }
 
