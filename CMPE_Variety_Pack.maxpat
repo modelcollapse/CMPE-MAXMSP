@@ -13,7 +13,7 @@
       80,
       80,
       1100,
-      836
+      900
     ],
     "openinpresentation": 1,
     "default_fontsize": 17.0,
@@ -31,7 +31,7 @@
       0.9568627450980393,
       1.0
     ],
-    "title": "CMPE Variety Pack 1.2.5 / APG \u00b7 ISJS \u00b7 Many \u00b7 RMHS \u00b7 SIOE",
+    "title": "CMPE Variety Pack 1.3.0 / APG \u00b7 ISJS \u00b7 Many \u00b7 RMHS \u00b7 SIOE",
     "boxes": [
       {
         "box": {
@@ -42,7 +42,7 @@
           "patching_rect": [
             20,
             10,
-            384,
+            580,
             36
           ],
           "fontname": "Arial",
@@ -58,7 +58,7 @@
           "presentation_rect": [
             20,
             10,
-            384,
+            580,
             36
           ],
           "bgcolor": [
@@ -145,7 +145,7 @@
           "mode": 0,
           "outputmode": 1,
           "usegradient": 0,
-          "rounded": 6,
+          "rounded": 10,
           "bgcolor": [
             0.8784313725490196,
             0.8980392156862745,
@@ -214,7 +214,7 @@
           "mode": 0,
           "outputmode": 1,
           "usegradient": 0,
-          "rounded": 6,
+          "rounded": 10,
           "bgcolor": [
             0.8784313725490196,
             0.8980392156862745,
@@ -332,7 +332,7 @@
           "numoutlets": 0,
           "patching_rect": [
             20,
-            760,
+            874,
             1060,
             1
           ],
@@ -344,24 +344,18 @@
             0.16862745098039217,
             1.0
           ],
-          "presentation": 0,
+          "presentation": 1,
           "presentation_rect": [
             20,
-            760,
+            874,
             1060,
             1
-          ],
-          "bgcolor": [
-            0.4823529411764706,
-            0.5254901960784314,
-            0.5803921568627451,
-            1.0
           ],
           "border": 0,
           "rounded": 0,
           "ignoreclick": 1,
           "varname": "credit_rule",
-          "hidden": 1
+          "style": "CMPE_Solid_123_134_148_255"
         }
       },
       {
@@ -372,7 +366,7 @@
           "numoutlets": 0,
           "patching_rect": [
             32,
-            190,
+            178,
             112,
             22
           ],
@@ -388,7 +382,7 @@
           "presentation": 1,
           "presentation_rect": [
             32,
-            190,
+            178,
             112,
             22
           ],
@@ -410,9 +404,9 @@
           "numinlets": 1,
           "numoutlets": 3,
           "patching_rect": [
-            260,
-            188,
-            92,
+            32,
+            242,
+            104,
             30
           ],
           "fontname": "Arial",
@@ -431,16 +425,16 @@
           ],
           "presentation": 1,
           "presentation_rect": [
-            260,
-            188,
-            92,
+            32,
+            242,
+            104,
             30
           ],
           "varname": "load1",
           "mode": 0,
           "outputmode": 1,
           "usegradient": 0,
-          "rounded": 6,
+          "rounded": 10,
           "bgcolor": [
             0.14901960784313725,
             0.19215686274509805,
@@ -482,7 +476,7 @@
           "numoutlets": 0,
           "patching_rect": [
             32,
-            222,
+            202,
             320,
             36
           ],
@@ -498,7 +492,7 @@
           "presentation": 1,
           "presentation_rect": [
             32,
-            222,
+            202,
             320,
             36
           ],
@@ -521,7 +515,7 @@
           "numoutlets": 0,
           "patching_rect": [
             32,
-            262,
+            308,
             152,
             20
           ],
@@ -537,7 +531,7 @@
           "presentation": 1,
           "presentation_rect": [
             32,
-            262,
+            308,
             152,
             20
           ],
@@ -558,13 +552,13 @@
           "numinlets": 1,
           "numoutlets": 2,
           "patching_rect": [
-            32,
-            284,
-            152,
-            28
+            72,
+            332,
+            72,
+            34
           ],
           "fontname": "Arial",
-          "fontsize": 20.0,
+          "fontsize": 24.0,
           "textcolor": [
             0.09019607843137255,
             0.12549019607843137,
@@ -577,10 +571,10 @@
           ],
           "presentation": 1,
           "presentation_rect": [
-            32,
-            284,
-            152,
-            28
+            72,
+            332,
+            72,
+            34
           ],
           "varname": "repeat1",
           "bgcolor": [
@@ -634,7 +628,7 @@
           "numoutlets": 0,
           "patching_rect": [
             390,
-            190,
+            178,
             112,
             22
           ],
@@ -650,7 +644,7 @@
           "presentation": 1,
           "presentation_rect": [
             390,
-            190,
+            178,
             112,
             22
           ],
@@ -672,9 +666,9 @@
           "numinlets": 1,
           "numoutlets": 3,
           "patching_rect": [
-            618,
-            188,
-            92,
+            390,
+            242,
+            104,
             30
           ],
           "fontname": "Arial",
@@ -693,16 +687,16 @@
           ],
           "presentation": 1,
           "presentation_rect": [
-            618,
-            188,
-            92,
+            390,
+            242,
+            104,
             30
           ],
           "varname": "load2",
           "mode": 0,
           "outputmode": 1,
           "usegradient": 0,
-          "rounded": 6,
+          "rounded": 10,
           "bgcolor": [
             0.14901960784313725,
             0.19215686274509805,
@@ -744,7 +738,7 @@
           "numoutlets": 0,
           "patching_rect": [
             390,
-            222,
+            202,
             320,
             36
           ],
@@ -760,7 +754,7 @@
           "presentation": 1,
           "presentation_rect": [
             390,
-            222,
+            202,
             320,
             36
           ],
@@ -783,7 +777,7 @@
           "numoutlets": 0,
           "patching_rect": [
             390,
-            262,
+            308,
             152,
             20
           ],
@@ -799,7 +793,7 @@
           "presentation": 1,
           "presentation_rect": [
             390,
-            262,
+            308,
             152,
             20
           ],
@@ -820,13 +814,13 @@
           "numinlets": 1,
           "numoutlets": 2,
           "patching_rect": [
-            390,
-            284,
-            152,
-            28
+            430,
+            332,
+            72,
+            34
           ],
           "fontname": "Arial",
-          "fontsize": 20.0,
+          "fontsize": 24.0,
           "textcolor": [
             0.09019607843137255,
             0.12549019607843137,
@@ -839,10 +833,10 @@
           ],
           "presentation": 1,
           "presentation_rect": [
-            390,
-            284,
-            152,
-            28
+            430,
+            332,
+            72,
+            34
           ],
           "varname": "repeat2",
           "bgcolor": [
@@ -896,7 +890,7 @@
           "numoutlets": 0,
           "patching_rect": [
             748,
-            190,
+            178,
             112,
             22
           ],
@@ -912,7 +906,7 @@
           "presentation": 1,
           "presentation_rect": [
             748,
-            190,
+            178,
             112,
             22
           ],
@@ -934,9 +928,9 @@
           "numinlets": 1,
           "numoutlets": 3,
           "patching_rect": [
-            976,
-            188,
-            92,
+            748,
+            242,
+            104,
             30
           ],
           "fontname": "Arial",
@@ -955,16 +949,16 @@
           ],
           "presentation": 1,
           "presentation_rect": [
-            976,
-            188,
-            92,
+            748,
+            242,
+            104,
             30
           ],
           "varname": "load3",
           "mode": 0,
           "outputmode": 1,
           "usegradient": 0,
-          "rounded": 6,
+          "rounded": 10,
           "bgcolor": [
             0.14901960784313725,
             0.19215686274509805,
@@ -1006,7 +1000,7 @@
           "numoutlets": 0,
           "patching_rect": [
             748,
-            222,
+            202,
             320,
             36
           ],
@@ -1022,7 +1016,7 @@
           "presentation": 1,
           "presentation_rect": [
             748,
-            222,
+            202,
             320,
             36
           ],
@@ -1045,7 +1039,7 @@
           "numoutlets": 0,
           "patching_rect": [
             748,
-            262,
+            308,
             152,
             20
           ],
@@ -1061,7 +1055,7 @@
           "presentation": 1,
           "presentation_rect": [
             748,
-            262,
+            308,
             152,
             20
           ],
@@ -1082,13 +1076,13 @@
           "numinlets": 1,
           "numoutlets": 2,
           "patching_rect": [
-            748,
-            284,
-            152,
-            28
+            788,
+            332,
+            72,
+            34
           ],
           "fontname": "Arial",
-          "fontsize": 20.0,
+          "fontsize": 24.0,
           "textcolor": [
             0.09019607843137255,
             0.12549019607843137,
@@ -1101,10 +1095,10 @@
           ],
           "presentation": 1,
           "presentation_rect": [
-            748,
-            284,
-            152,
-            28
+            788,
+            332,
+            72,
+            34
           ],
           "varname": "repeat3",
           "bgcolor": [
@@ -1158,7 +1152,7 @@
           "numoutlets": 0,
           "patching_rect": [
             200,
-            262,
+            308,
             152,
             20
           ],
@@ -1174,7 +1168,7 @@
           "presentation": 1,
           "presentation_rect": [
             200,
-            262,
+            308,
             152,
             20
           ],
@@ -1195,13 +1189,13 @@
           "numinlets": 1,
           "numoutlets": 2,
           "patching_rect": [
-            200,
-            284,
-            152,
-            28
+            240,
+            332,
+            72,
+            34
           ],
           "fontname": "Arial",
-          "fontsize": 20.0,
+          "fontsize": 24.0,
           "textcolor": [
             0.09019607843137255,
             0.12549019607843137,
@@ -1214,10 +1208,10 @@
           ],
           "presentation": 1,
           "presentation_rect": [
-            200,
-            284,
-            152,
-            28
+            240,
+            332,
+            72,
+            34
           ],
           "varname": "pitch",
           "bgcolor": [
@@ -1272,7 +1266,7 @@
           "numoutlets": 0,
           "patching_rect": [
             752,
-            334,
+            386,
             116,
             24
           ],
@@ -1288,7 +1282,7 @@
           "presentation": 1,
           "presentation_rect": [
             752,
-            334,
+            386,
             116,
             24
           ],
@@ -1309,7 +1303,7 @@
           "numoutlets": 2,
           "patching_rect": [
             872,
-            332,
+            384,
             80,
             28
           ],
@@ -1328,7 +1322,7 @@
           "presentation": 1,
           "presentation_rect": [
             872,
-            332,
+            384,
             80,
             28
           ],
@@ -1421,7 +1415,7 @@
           "numoutlets": 1,
           "patching_rect": [
             980,
-            334,
+            386,
             88,
             11
           ],
@@ -1439,7 +1433,7 @@
           "presentation": 1,
           "presentation_rect": [
             980,
-            334,
+            386,
             88,
             11
           ],
@@ -1474,7 +1468,7 @@
           "numoutlets": 1,
           "patching_rect": [
             980,
-            349,
+            401,
             88,
             11
           ],
@@ -1492,7 +1486,7 @@
           "presentation": 1,
           "presentation_rect": [
             980,
-            349,
+            401,
             88,
             11
           ],
@@ -1527,7 +1521,7 @@
           "numoutlets": 0,
           "patching_rect": [
             32,
-            334,
+            386,
             204,
             24
           ],
@@ -1543,7 +1537,7 @@
           "presentation": 1,
           "presentation_rect": [
             32,
-            334,
+            386,
             204,
             24
           ],
@@ -1565,7 +1559,7 @@
           "numoutlets": 0,
           "patching_rect": [
             244,
-            334,
+            386,
             210,
             24
           ],
@@ -1581,7 +1575,7 @@
           "presentation": 1,
           "presentation_rect": [
             244,
-            334,
+            386,
             210,
             24
           ],
@@ -1602,7 +1596,7 @@
           "numoutlets": 0,
           "patching_rect": [
             856,
-            676,
+            726,
             212,
             22
           ],
@@ -1618,7 +1612,7 @@
           "presentation": 1,
           "presentation_rect": [
             856,
-            676,
+            726,
             212,
             22
           ],
@@ -1640,7 +1634,7 @@
           "numoutlets": 0,
           "patching_rect": [
             32,
-            430,
+            480,
             20,
             24
           ],
@@ -1656,7 +1650,7 @@
           "presentation": 1,
           "presentation_rect": [
             32,
-            430,
+            480,
             20,
             24
           ],
@@ -1679,7 +1673,7 @@
           "numoutlets": 6,
           "patching_rect": [
             56,
-            370,
+            420,
             1012,
             144
           ],
@@ -1702,7 +1696,7 @@
           "presentation": 1,
           "presentation_rect": [
             56,
-            370,
+            420,
             1012,
             144
           ],
@@ -1765,7 +1759,7 @@
           "numoutlets": 0,
           "patching_rect": [
             32,
-            584,
+            634,
             20,
             24
           ],
@@ -1781,7 +1775,7 @@
           "presentation": 1,
           "presentation_rect": [
             32,
-            584,
+            634,
             20,
             24
           ],
@@ -1804,7 +1798,7 @@
           "numoutlets": 6,
           "patching_rect": [
             56,
-            524,
+            574,
             1012,
             144
           ],
@@ -1827,7 +1821,7 @@
           "presentation": 1,
           "presentation_rect": [
             56,
-            524,
+            574,
             1012,
             144
           ],
@@ -1890,7 +1884,7 @@
           "numoutlets": 0,
           "patching_rect": [
             32,
-            676,
+            726,
             580,
             22
           ],
@@ -1906,7 +1900,7 @@
           "presentation": 1,
           "presentation_rect": [
             32,
-            676,
+            726,
             580,
             22
           ],
@@ -1927,7 +1921,7 @@
           "numoutlets": 1,
           "patching_rect": [
             632,
-            676,
+            726,
             22,
             22
           ],
@@ -1945,7 +1939,7 @@
           "presentation": 1,
           "presentation_rect": [
             632,
-            676,
+            726,
             22,
             22
           ],
@@ -1981,7 +1975,7 @@
           "numoutlets": 0,
           "patching_rect": [
             664,
-            674,
+            724,
             180,
             28
           ],
@@ -1997,7 +1991,7 @@
           "presentation": 1,
           "presentation_rect": [
             664,
-            674,
+            724,
             180,
             28
           ],
@@ -2019,9 +2013,9 @@
           "numoutlets": 3,
           "patching_rect": [
             720,
-            710,
+            760,
             172,
-            44
+            42
           ],
           "fontname": "Arial",
           "fontsize": 18.0,
@@ -2040,15 +2034,15 @@
           "presentation": 1,
           "presentation_rect": [
             720,
-            710,
+            760,
             172,
-            44
+            42
           ],
           "varname": "clear_button",
           "mode": 0,
           "outputmode": 1,
           "usegradient": 0,
-          "rounded": 6,
+          "rounded": 10,
           "bgcolor": [
             0.8784313725490196,
             0.8980392156862745,
@@ -2089,9 +2083,9 @@
           "numoutlets": 3,
           "patching_rect": [
             904,
-            710,
+            760,
             176,
-            44
+            42
           ],
           "fontname": "Arial",
           "fontsize": 18.0,
@@ -2110,15 +2104,15 @@
           "presentation": 1,
           "presentation_rect": [
             904,
-            710,
+            760,
             176,
-            44
+            42
           ],
           "varname": "save_button",
           "mode": 0,
           "outputmode": 1,
           "usegradient": 0,
-          "rounded": 6,
+          "rounded": 10,
           "bgcolor": [
             0.8784313725490196,
             0.8980392156862745,
@@ -2159,9 +2153,9 @@
           "numoutlets": 3,
           "patching_rect": [
             20,
-            710,
+            760,
             328,
-            44
+            42
           ],
           "fontname": "Arial",
           "fontsize": 22.0,
@@ -2180,15 +2174,15 @@
           "presentation": 1,
           "presentation_rect": [
             20,
-            710,
+            760,
             328,
-            44
+            42
           ],
           "varname": "play_button",
           "mode": 0,
           "outputmode": 1,
           "usegradient": 0,
-          "rounded": 6,
+          "rounded": 10,
           "bgcolor": [
             0.09019607843137255,
             0.30980392156862746,
@@ -2228,9 +2222,9 @@
           "numoutlets": 3,
           "patching_rect": [
             360,
-            710,
+            760,
             148,
-            44
+            42
           ],
           "fontname": "Arial",
           "fontsize": 20.0,
@@ -2249,15 +2243,15 @@
           "presentation": 1,
           "presentation_rect": [
             360,
-            710,
+            760,
             148,
-            44
+            42
           ],
           "varname": "stop_button",
           "mode": 0,
           "outputmode": 1,
           "usegradient": 0,
-          "rounded": 6,
+          "rounded": 10,
           "bgcolor": [
             1.0,
             0.9450980392156862,
@@ -2298,9 +2292,9 @@
           "numoutlets": 3,
           "patching_rect": [
             520,
-            710,
+            760,
             188,
-            44
+            42
           ],
           "fontname": "Arial",
           "fontsize": 20.0,
@@ -2319,15 +2313,15 @@
           "presentation": 1,
           "presentation_rect": [
             520,
-            710,
+            760,
             188,
-            44
+            42
           ],
           "varname": "new_button",
           "mode": 0,
           "outputmode": 1,
           "usegradient": 0,
-          "rounded": 6,
+          "rounded": 10,
           "bgcolor": [
             0.8784313725490196,
             0.8980392156862745,
@@ -2367,7 +2361,7 @@
           "numoutlets": 1,
           "patching_rect": [
             32,
-            816,
+            852,
             228,
             10
           ],
@@ -2385,7 +2379,7 @@
           "presentation": 1,
           "presentation_rect": [
             32,
-            816,
+            852,
             228,
             10
           ],
@@ -2427,9 +2421,9 @@
           "numoutlets": 0,
           "patching_rect": [
             276,
-            764,
+            812,
             792,
-            22
+            20
           ],
           "fontname": "Arial",
           "fontsize": 16.0,
@@ -2443,9 +2437,9 @@
           "presentation": 1,
           "presentation_rect": [
             276,
-            764,
+            812,
             792,
-            22
+            20
           ],
           "varname": "render_info",
           "bgcolor": [
@@ -2464,9 +2458,9 @@
           "numoutlets": 0,
           "patching_rect": [
             276,
-            790,
+            834,
             792,
-            38
+            36
           ],
           "fontname": "Arial",
           "fontsize": 16.0,
@@ -2480,9 +2474,9 @@
           "presentation": 1,
           "presentation_rect": [
             276,
-            790,
+            834,
             792,
-            38
+            36
           ],
           "varname": "status",
           "bgcolor": [
@@ -2501,9 +2495,9 @@
           "numinlets": 1,
           "numoutlets": 0,
           "patching_rect": [
-            420,
-            6,
-            190,
+            24,
+            876,
+            680,
             20
           ],
           "fontname": "Arial",
@@ -2514,12 +2508,12 @@
             0.396078431372549,
             1.0
           ],
-          "text": "Original: Joo Won Park",
+          "text": "Original CMPE by Joo Won Park",
           "presentation": 1,
           "presentation_rect": [
-            420,
-            6,
-            190,
+            24,
+            876,
+            680,
             20
           ],
           "bgcolor": [
@@ -2538,9 +2532,9 @@
           "numinlets": 1,
           "numoutlets": 3,
           "patching_rect": [
-            420,
-            26,
-            190,
+            812,
+            876,
+            268,
             20
           ],
           "fontname": "Arial",
@@ -2559,16 +2553,16 @@
           ],
           "presentation": 1,
           "presentation_rect": [
-            420,
-            26,
-            190,
+            812,
+            876,
+            268,
             20
           ],
           "varname": "original_link",
           "mode": 0,
           "outputmode": 1,
           "usegradient": 0,
-          "rounded": 6,
+          "rounded": 10,
           "bgcolor": [
             0.9372549019607843,
             0.9450980392156862,
@@ -3302,7 +3296,7 @@
           "id": "save_dialog",
           "maxclass": "newobj",
           "numinlets": 1,
-          "numoutlets": 2,
+          "numoutlets": 3,
           "patching_rect": [
             24,
             1230,
@@ -3319,6 +3313,7 @@
           ],
           "text": "savedialog WAVE",
           "outlettype": [
+            "",
             "",
             "bang"
           ]
@@ -4966,7 +4961,7 @@
           "mode": 0,
           "outputmode": 1,
           "usegradient": 0,
-          "rounded": 6,
+          "rounded": 10,
           "bgcolor": [
             0.8784313725490196,
             0.8980392156862745,
@@ -5035,7 +5030,7 @@
           "mode": 0,
           "outputmode": 1,
           "usegradient": 0,
-          "rounded": 6,
+          "rounded": 10,
           "bgcolor": [
             0.8784313725490196,
             0.8980392156862745,
@@ -5074,7 +5069,7 @@
           "numoutlets": 0,
           "patching_rect": [
             736,
-            52,
+            50,
             332,
             20
           ],
@@ -5091,7 +5086,7 @@
           "presentation": 1,
           "presentation_rect": [
             736,
-            52,
+            50,
             332,
             20
           ],
@@ -5112,7 +5107,7 @@
           "numoutlets": 3,
           "patching_rect": [
             736,
-            74,
+            72,
             124,
             28
           ],
@@ -5134,7 +5129,7 @@
           "presentation": 1,
           "presentation_rect": [
             736,
-            74,
+            72,
             124,
             28
           ],
@@ -5142,7 +5137,7 @@
           "mode": 0,
           "outputmode": 1,
           "usegradient": 0,
-          "rounded": 6,
+          "rounded": 10,
           "bgcolor": [
             0.14901960784313725,
             0.19215686274509805,
@@ -5182,7 +5177,7 @@
           "numoutlets": 3,
           "patching_rect": [
             868,
-            74,
+            72,
             92,
             28
           ],
@@ -5204,7 +5199,7 @@
           "presentation": 1,
           "presentation_rect": [
             868,
-            74,
+            72,
             92,
             28
           ],
@@ -5212,7 +5207,7 @@
           "mode": 0,
           "outputmode": 1,
           "usegradient": 0,
-          "rounded": 6,
+          "rounded": 10,
           "bgcolor": [
             0.14901960784313725,
             0.19215686274509805,
@@ -5252,7 +5247,7 @@
           "numoutlets": 3,
           "patching_rect": [
             968,
-            74,
+            72,
             100,
             28
           ],
@@ -5274,7 +5269,7 @@
           "presentation": 1,
           "presentation_rect": [
             968,
-            74,
+            72,
             100,
             28
           ],
@@ -5282,7 +5277,7 @@
           "mode": 0,
           "outputmode": 1,
           "usegradient": 0,
-          "rounded": 6,
+          "rounded": 10,
           "bgcolor": [
             0.14901960784313725,
             0.19215686274509805,
@@ -5322,9 +5317,9 @@
           "numoutlets": 0,
           "patching_rect": [
             20,
-            50,
+            48,
             1060,
-            60
+            58
           ],
           "fontname": "Arial",
           "fontsize": 17.0,
@@ -5338,9 +5333,9 @@
           "presentation": 1,
           "presentation_rect": [
             20,
-            50,
+            48,
             1060,
-            60
+            58
           ],
           "hidden": 0,
           "border": 0,
@@ -5358,7 +5353,7 @@
           "numoutlets": 0,
           "patching_rect": [
             32,
-            52,
+            50,
             182,
             20
           ],
@@ -5375,7 +5370,7 @@
           "presentation": 1,
           "presentation_rect": [
             32,
-            52,
+            50,
             182,
             20
           ],
@@ -5396,7 +5391,7 @@
           "numoutlets": 3,
           "patching_rect": [
             32,
-            74,
+            72,
             182,
             28
           ],
@@ -5417,7 +5412,7 @@
           "presentation": 1,
           "presentation_rect": [
             32,
-            74,
+            72,
             182,
             28
           ],
@@ -5438,7 +5433,7 @@
           "numoutlets": 0,
           "patching_rect": [
             226,
-            52,
+            50,
             242,
             20
           ],
@@ -5455,7 +5450,7 @@
           "presentation": 1,
           "presentation_rect": [
             226,
-            52,
+            50,
             242,
             20
           ],
@@ -5476,7 +5471,7 @@
           "numoutlets": 3,
           "patching_rect": [
             226,
-            74,
+            72,
             242,
             28
           ],
@@ -5497,7 +5492,7 @@
           "presentation": 1,
           "presentation_rect": [
             226,
-            74,
+            72,
             242,
             28
           ],
@@ -5518,7 +5513,7 @@
           "numoutlets": 0,
           "patching_rect": [
             480,
-            52,
+            50,
             242,
             20
           ],
@@ -5535,7 +5530,7 @@
           "presentation": 1,
           "presentation_rect": [
             480,
-            52,
+            50,
             242,
             20
           ],
@@ -5556,7 +5551,7 @@
           "numoutlets": 3,
           "patching_rect": [
             480,
-            74,
+            72,
             242,
             28
           ],
@@ -5577,7 +5572,7 @@
           "presentation": 1,
           "presentation_rect": [
             480,
-            74,
+            72,
             242,
             28
           ],
@@ -5598,9 +5593,9 @@
           "numoutlets": 3,
           "patching_rect": [
             20,
-            116,
+            112,
             200,
-            34
+            32
           ],
           "fontname": "Arial",
           "fontsize": 20.0,
@@ -5620,15 +5615,15 @@
           "presentation": 1,
           "presentation_rect": [
             20,
-            116,
+            112,
             200,
-            34
+            32
           ],
           "hidden": 0,
           "mode": 0,
           "outputmode": 1,
           "usegradient": 0,
-          "rounded": 6,
+          "rounded": 10,
           "bgcolor": [
             0.09019607843137255,
             0.30980392156862746,
@@ -5701,9 +5696,9 @@
           "numoutlets": 3,
           "patching_rect": [
             235,
-            116,
+            112,
             200,
-            34
+            32
           ],
           "fontname": "Arial",
           "fontsize": 20.0,
@@ -5723,15 +5718,15 @@
           "presentation": 1,
           "presentation_rect": [
             235,
-            116,
+            112,
             200,
-            34
+            32
           ],
           "hidden": 0,
           "mode": 0,
           "outputmode": 1,
           "usegradient": 0,
-          "rounded": 6,
+          "rounded": 10,
           "bgcolor": [
             0.8784313725490196,
             0.8980392156862745,
@@ -5804,9 +5799,9 @@
           "numoutlets": 3,
           "patching_rect": [
             450,
-            116,
+            112,
             200,
-            34
+            32
           ],
           "fontname": "Arial",
           "fontsize": 20.0,
@@ -5826,15 +5821,15 @@
           "presentation": 1,
           "presentation_rect": [
             450,
-            116,
+            112,
             200,
-            34
+            32
           ],
           "hidden": 0,
           "mode": 0,
           "outputmode": 1,
           "usegradient": 0,
-          "rounded": 6,
+          "rounded": 10,
           "bgcolor": [
             0.8784313725490196,
             0.8980392156862745,
@@ -5907,9 +5902,9 @@
           "numoutlets": 3,
           "patching_rect": [
             665,
-            116,
+            112,
             200,
-            34
+            32
           ],
           "fontname": "Arial",
           "fontsize": 20.0,
@@ -5929,15 +5924,15 @@
           "presentation": 1,
           "presentation_rect": [
             665,
-            116,
+            112,
             200,
-            34
+            32
           ],
           "hidden": 0,
           "mode": 0,
           "outputmode": 1,
           "usegradient": 0,
-          "rounded": 6,
+          "rounded": 10,
           "bgcolor": [
             0.8784313725490196,
             0.8980392156862745,
@@ -6010,9 +6005,9 @@
           "numoutlets": 3,
           "patching_rect": [
             880,
-            116,
+            112,
             200,
-            34
+            32
           ],
           "fontname": "Arial",
           "fontsize": 20.0,
@@ -6032,15 +6027,15 @@
           "presentation": 1,
           "presentation_rect": [
             880,
-            116,
+            112,
             200,
-            34
+            32
           ],
           "hidden": 0,
           "mode": 0,
           "outputmode": 1,
           "usegradient": 0,
-          "rounded": 6,
+          "rounded": 10,
           "bgcolor": [
             0.8784313725490196,
             0.8980392156862745,
@@ -6113,9 +6108,9 @@
           "numoutlets": 0,
           "patching_rect": [
             24,
-            154,
+            146,
             1052,
-            22
+            20
           ],
           "fontname": "Arial",
           "fontsize": 17.0,
@@ -6130,9 +6125,9 @@
           "presentation": 1,
           "presentation_rect": [
             24,
-            154,
+            146,
             1052,
-            22
+            20
           ],
           "hidden": 0,
           "bgcolor": [
@@ -6190,7 +6185,7 @@
           "numoutlets": 0,
           "patching_rect": [
             32,
-            262,
+            308,
             152,
             20
           ],
@@ -6207,7 +6202,7 @@
           "presentation": 1,
           "presentation_rect": [
             32,
-            262,
+            308,
             152,
             20
           ],
@@ -6228,9 +6223,9 @@
           "numoutlets": 2,
           "patching_rect": [
             32,
-            284,
+            332,
             152,
-            28
+            34
           ],
           "fontname": "Arial",
           "fontsize": 20.0,
@@ -6248,9 +6243,9 @@
           "presentation": 1,
           "presentation_rect": [
             32,
-            284,
+            332,
             152,
-            28
+            34
           ],
           "hidden": 1,
           "bgcolor": [
@@ -6326,7 +6321,7 @@
           "numoutlets": 0,
           "patching_rect": [
             390,
-            262,
+            308,
             152,
             20
           ],
@@ -6343,7 +6338,7 @@
           "presentation": 1,
           "presentation_rect": [
             390,
-            262,
+            308,
             152,
             20
           ],
@@ -6364,9 +6359,9 @@
           "numoutlets": 2,
           "patching_rect": [
             390,
-            284,
+            332,
             152,
-            28
+            34
           ],
           "fontname": "Arial",
           "fontsize": 20.0,
@@ -6384,9 +6379,9 @@
           "presentation": 1,
           "presentation_rect": [
             390,
-            284,
+            332,
             152,
-            28
+            34
           ],
           "hidden": 1,
           "bgcolor": [
@@ -6462,7 +6457,7 @@
           "numoutlets": 0,
           "patching_rect": [
             748,
-            262,
+            308,
             152,
             20
           ],
@@ -6479,7 +6474,7 @@
           "presentation": 1,
           "presentation_rect": [
             748,
-            262,
+            308,
             152,
             20
           ],
@@ -6500,9 +6495,9 @@
           "numoutlets": 2,
           "patching_rect": [
             748,
-            284,
+            332,
             152,
-            28
+            34
           ],
           "fontname": "Arial",
           "fontsize": 20.0,
@@ -6520,9 +6515,9 @@
           "presentation": 1,
           "presentation_rect": [
             748,
-            284,
+            332,
             152,
-            28
+            34
           ],
           "hidden": 1,
           "bgcolor": [
@@ -6598,7 +6593,7 @@
           "numoutlets": 0,
           "patching_rect": [
             200,
-            262,
+            308,
             152,
             20
           ],
@@ -6615,7 +6610,7 @@
           "presentation": 1,
           "presentation_rect": [
             200,
-            262,
+            308,
             152,
             20
           ],
@@ -6636,9 +6631,9 @@
           "numoutlets": 2,
           "patching_rect": [
             200,
-            284,
+            332,
             152,
-            28
+            34
           ],
           "fontname": "Arial",
           "fontsize": 20.0,
@@ -6656,9 +6651,9 @@
           "presentation": 1,
           "presentation_rect": [
             200,
-            284,
+            332,
             152,
-            28
+            34
           ],
           "hidden": 1,
           "bgcolor": [
@@ -6734,7 +6729,7 @@
           "numoutlets": 0,
           "patching_rect": [
             558,
-            262,
+            308,
             152,
             20
           ],
@@ -6751,7 +6746,7 @@
           "presentation": 1,
           "presentation_rect": [
             558,
-            262,
+            308,
             152,
             20
           ],
@@ -6772,9 +6767,9 @@
           "numoutlets": 2,
           "patching_rect": [
             558,
-            284,
+            332,
             152,
-            28
+            34
           ],
           "fontname": "Arial",
           "fontsize": 20.0,
@@ -6792,9 +6787,9 @@
           "presentation": 1,
           "presentation_rect": [
             558,
-            284,
+            332,
             152,
-            28
+            34
           ],
           "hidden": 1,
           "bgcolor": [
@@ -6870,7 +6865,7 @@
           "numoutlets": 0,
           "patching_rect": [
             916,
-            262,
+            308,
             152,
             20
           ],
@@ -6887,7 +6882,7 @@
           "presentation": 1,
           "presentation_rect": [
             916,
-            262,
+            308,
             152,
             20
           ],
@@ -6908,9 +6903,9 @@
           "numoutlets": 2,
           "patching_rect": [
             916,
-            284,
+            332,
             152,
-            28
+            34
           ],
           "fontname": "Arial",
           "fontsize": 20.0,
@@ -6928,9 +6923,9 @@
           "presentation": 1,
           "presentation_rect": [
             916,
-            284,
+            332,
             152,
-            28
+            34
           ],
           "hidden": 1,
           "bgcolor": [
@@ -7006,7 +7001,7 @@
           "numoutlets": 0,
           "patching_rect": [
             916,
-            262,
+            308,
             152,
             20
           ],
@@ -7023,7 +7018,7 @@
           "presentation": 1,
           "presentation_rect": [
             916,
-            262,
+            308,
             152,
             20
           ],
@@ -7044,9 +7039,9 @@
           "numoutlets": 3,
           "patching_rect": [
             916,
-            284,
+            332,
             152,
-            28
+            34
           ],
           "fontname": "Arial",
           "fontsize": 16.0,
@@ -7065,9 +7060,9 @@
           "presentation": 1,
           "presentation_rect": [
             916,
-            284,
+            332,
             152,
-            28
+            34
           ],
           "hidden": 1,
           "items": [
@@ -7118,7 +7113,7 @@
           "numoutlets": 0,
           "patching_rect": [
             56,
-            370,
+            420,
             1012,
             144
           ],
@@ -7134,7 +7129,7 @@
           "presentation": 1,
           "presentation_rect": [
             56,
-            370,
+            420,
             1012,
             144
           ],
@@ -7175,7 +7170,7 @@
           "numoutlets": 0,
           "patching_rect": [
             56,
-            524,
+            574,
             1012,
             144
           ],
@@ -7191,7 +7186,7 @@
           "presentation": 1,
           "presentation_rect": [
             56,
-            524,
+            574,
             1012,
             144
           ],
@@ -7232,7 +7227,7 @@
           "numoutlets": 1,
           "patching_rect": [
             56,
-            370,
+            420,
             684,
             298
           ],
@@ -7251,7 +7246,7 @@
           "presentation": 1,
           "presentation_rect": [
             56,
-            370,
+            420,
             684,
             298
           ],
@@ -7276,7 +7271,7 @@
           "numoutlets": 0,
           "patching_rect": [
             756,
-            370,
+            420,
             312,
             298
           ],
@@ -7292,7 +7287,7 @@
           "presentation": 1,
           "presentation_rect": [
             756,
-            370,
+            420,
             312,
             298
           ],
@@ -7333,9 +7328,9 @@
           "numoutlets": 3,
           "patching_rect": [
             720,
-            710,
+            760,
             360,
-            44
+            42
           ],
           "fontname": "Arial",
           "fontsize": 17.0,
@@ -7355,15 +7350,15 @@
           "presentation": 1,
           "presentation_rect": [
             720,
-            710,
+            760,
             360,
-            44
+            42
           ],
           "hidden": 1,
           "mode": 0,
           "outputmode": 1,
           "usegradient": 0,
-          "rounded": 6,
+          "rounded": 10,
           "bgcolor": [
             1.0,
             0.9450980392156862,
@@ -7436,9 +7431,9 @@
           "numoutlets": 0,
           "patching_rect": [
             20,
-            180,
+            170,
             344,
-            136
+            200
           ],
           "fontname": "Arial",
           "fontsize": 17.0,
@@ -7452,9 +7447,9 @@
           "presentation": 1,
           "presentation_rect": [
             20,
-            180,
+            170,
             344,
-            136
+            200
           ],
           "hidden": 0,
           "border": 1,
@@ -7478,7 +7473,7 @@
           "numoutlets": 0,
           "patching_rect": [
             21,
-            181,
+            171,
             342,
             4
           ],
@@ -7494,7 +7489,7 @@
           "presentation": 1,
           "presentation_rect": [
             21,
-            181,
+            171,
             342,
             4
           ],
@@ -7503,7 +7498,7 @@
           "rounded": 0,
           "background": 1,
           "ignoreclick": 1,
-          "style": "CMPE_Solid_38_49_64_255"
+          "style": "CMPE_Solid_23_79_203_255"
         }
       },
       {
@@ -7514,7 +7509,7 @@
           "numoutlets": 0,
           "patching_rect": [
             150,
-            192,
+            180,
             100,
             20
           ],
@@ -7531,7 +7526,7 @@
           "presentation": 1,
           "presentation_rect": [
             150,
-            192,
+            180,
             100,
             20
           ],
@@ -7546,13 +7541,404 @@
       },
       {
         "box": {
+          "id": "input_state1",
+          "maxclass": "comment",
+          "numinlets": 1,
+          "numoutlets": 0,
+          "patching_rect": [
+            260,
+            180,
+            92,
+            20
+          ],
+          "fontname": "Arial",
+          "fontsize": 16.0,
+          "textcolor": [
+            0.6588235294117647,
+            0.12941176470588237,
+            0.19607843137254902,
+            1.0
+          ],
+          "text": "",
+          "varname": "input_state1",
+          "presentation": 1,
+          "presentation_rect": [
+            260,
+            180,
+            92,
+            20
+          ],
+          "hidden": 0,
+          "bgcolor": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "box": {
+          "id": "source_record1",
+          "maxclass": "textbutton",
+          "numinlets": 1,
+          "numoutlets": 3,
+          "patching_rect": [
+            144,
+            242,
+            104,
+            30
+          ],
+          "fontname": "Arial",
+          "fontsize": 16.0,
+          "textcolor": [
+            0.6588235294117647,
+            0.12941176470588237,
+            0.19607843137254902,
+            1.0
+          ],
+          "text": "REC IN",
+          "outlettype": [
+            "",
+            "",
+            "int"
+          ],
+          "varname": "source_record1",
+          "presentation": 1,
+          "presentation_rect": [
+            144,
+            242,
+            104,
+            30
+          ],
+          "hidden": 0,
+          "mode": 0,
+          "outputmode": 1,
+          "usegradient": 0,
+          "rounded": 10,
+          "bgcolor": [
+            1.0,
+            0.9450980392156862,
+            0.9490196078431372,
+            1.0
+          ],
+          "bgoncolor": [
+            0.9568627450980393,
+            0.7764705882352941,
+            0.8,
+            1.0
+          ],
+          "textoncolor": [
+            0.6588235294117647,
+            0.12941176470588237,
+            0.19607843137254902,
+            1.0
+          ],
+          "textovercolor": [
+            0.6588235294117647,
+            0.12941176470588237,
+            0.19607843137254902,
+            1.0
+          ],
+          "parameter_enable": 0,
+          "fontface": 1,
+          "hint": "Record the selected audio input into sample 1. Click again or press STOP to finish.",
+          "usebgoncolor": 1,
+          "usetextovercolor": 1
+        }
+      },
+      {
+        "box": {
+          "id": "source_save1",
+          "maxclass": "textbutton",
+          "numinlets": 1,
+          "numoutlets": 3,
+          "patching_rect": [
+            256,
+            242,
+            96,
+            30
+          ],
+          "fontname": "Arial",
+          "fontsize": 16.0,
+          "textcolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "text": "SAVE",
+          "outlettype": [
+            "",
+            "",
+            "int"
+          ],
+          "varname": "source_save1",
+          "presentation": 1,
+          "presentation_rect": [
+            256,
+            242,
+            96,
+            30
+          ],
+          "hidden": 0,
+          "mode": 0,
+          "outputmode": 1,
+          "usegradient": 0,
+          "rounded": 10,
+          "bgcolor": [
+            0.8784313725490196,
+            0.8980392156862745,
+            0.9215686274509803,
+            1.0
+          ],
+          "bgoncolor": [
+            0.4823529411764706,
+            0.5254901960784314,
+            0.5803921568627451,
+            1.0
+          ],
+          "textoncolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "textovercolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "parameter_enable": 0,
+          "hint": "Save recorded input from sample 1 to a WAV file. Available after recording.",
+          "usebgoncolor": 1,
+          "usetextovercolor": 1,
+          "fontface": 0
+        }
+      },
+      {
+        "box": {
+          "id": "source_wave1",
+          "maxclass": "waveform~",
+          "numinlets": 5,
+          "numoutlets": 6,
+          "patching_rect": [
+            32,
+            276,
+            320,
+            28
+          ],
+          "fontname": "Arial",
+          "fontsize": 17.0,
+          "textcolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "outlettype": [
+            "float",
+            "float",
+            "float",
+            "float",
+            "list",
+            "list"
+          ],
+          "varname": "source_wave1",
+          "presentation": 1,
+          "presentation_rect": [
+            32,
+            276,
+            320,
+            28
+          ],
+          "hidden": 0,
+          "buffername": "apgw_source_init1",
+          "chanoffset": 1,
+          "allowdrag": 0,
+          "setmode": 0,
+          "labels": 0,
+          "quiet": 1,
+          "ignoreclick": 1,
+          "bgcolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "waveformcolor": [
+            0.47058823529411764,
+            0.7176470588235294,
+            1.0,
+            1.0
+          ],
+          "gridcolor": [
+            0.27450980392156865,
+            0.3254901960784314,
+            0.396078431372549,
+            1.0
+          ],
+          "bordercolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "vzoom": 1.0,
+          "voffset": 0.0,
+          "hint": "Preview of sample 1. Recorded input appears here after recording finishes."
+        }
+      },
+      {
+        "box": {
+          "id": "repeat_down1",
+          "maxclass": "textbutton",
+          "numinlets": 1,
+          "numoutlets": 3,
+          "patching_rect": [
+            32,
+            332,
+            34,
+            34
+          ],
+          "fontname": "Arial",
+          "fontsize": 22.0,
+          "textcolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "text": "\u2212",
+          "outlettype": [
+            "",
+            "",
+            "int"
+          ],
+          "varname": "repeat_down1",
+          "presentation": 1,
+          "presentation_rect": [
+            32,
+            332,
+            34,
+            34
+          ],
+          "hidden": 0,
+          "mode": 0,
+          "outputmode": 1,
+          "usegradient": 0,
+          "rounded": 10,
+          "bgcolor": [
+            0.8784313725490196,
+            0.8980392156862745,
+            0.9215686274509803,
+            1.0
+          ],
+          "bgoncolor": [
+            0.4823529411764706,
+            0.5254901960784314,
+            0.5803921568627451,
+            1.0
+          ],
+          "textoncolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "textovercolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "parameter_enable": 0,
+          "hint": "Decrease sample 1 repeats by one.",
+          "usebgoncolor": 1,
+          "usetextovercolor": 1,
+          "fontface": 0
+        }
+      },
+      {
+        "box": {
+          "id": "repeat_up1",
+          "maxclass": "textbutton",
+          "numinlets": 1,
+          "numoutlets": 3,
+          "patching_rect": [
+            150,
+            332,
+            34,
+            34
+          ],
+          "fontname": "Arial",
+          "fontsize": 22.0,
+          "textcolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "text": "+",
+          "outlettype": [
+            "",
+            "",
+            "int"
+          ],
+          "varname": "repeat_up1",
+          "presentation": 1,
+          "presentation_rect": [
+            150,
+            332,
+            34,
+            34
+          ],
+          "hidden": 0,
+          "mode": 0,
+          "outputmode": 1,
+          "usegradient": 0,
+          "rounded": 10,
+          "bgcolor": [
+            0.8784313725490196,
+            0.8980392156862745,
+            0.9215686274509803,
+            1.0
+          ],
+          "bgoncolor": [
+            0.4823529411764706,
+            0.5254901960784314,
+            0.5803921568627451,
+            1.0
+          ],
+          "textoncolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "textovercolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "parameter_enable": 0,
+          "hint": "Increase sample 1 repeats by one.",
+          "usebgoncolor": 1,
+          "usetextovercolor": 1,
+          "fontface": 0
+        }
+      },
+      {
+        "box": {
           "id": "group_label1",
           "maxclass": "comment",
           "numinlets": 1,
           "numoutlets": 0,
           "patching_rect": [
             32,
-            190,
+            178,
             320,
             22
           ],
@@ -7569,7 +7955,7 @@
           "presentation": 1,
           "presentation_rect": [
             32,
-            190,
+            178,
             320,
             22
           ],
@@ -7591,7 +7977,7 @@
           "numoutlets": 0,
           "patching_rect": [
             32,
-            222,
+            202,
             320,
             36
           ],
@@ -7608,7 +7994,7 @@
           "presentation": 1,
           "presentation_rect": [
             32,
-            222,
+            202,
             320,
             36
           ],
@@ -7629,9 +8015,9 @@
           "numoutlets": 0,
           "patching_rect": [
             378,
-            180,
+            170,
             344,
-            136
+            200
           ],
           "fontname": "Arial",
           "fontsize": 17.0,
@@ -7645,9 +8031,9 @@
           "presentation": 1,
           "presentation_rect": [
             378,
-            180,
+            170,
             344,
-            136
+            200
           ],
           "hidden": 0,
           "border": 1,
@@ -7671,7 +8057,7 @@
           "numoutlets": 0,
           "patching_rect": [
             379,
-            181,
+            171,
             342,
             4
           ],
@@ -7687,7 +8073,7 @@
           "presentation": 1,
           "presentation_rect": [
             379,
-            181,
+            171,
             342,
             4
           ],
@@ -7696,7 +8082,7 @@
           "rounded": 0,
           "background": 1,
           "ignoreclick": 1,
-          "style": "CMPE_Solid_38_49_64_255"
+          "style": "CMPE_Solid_23_79_203_255"
         }
       },
       {
@@ -7707,7 +8093,7 @@
           "numoutlets": 0,
           "patching_rect": [
             508,
-            192,
+            180,
             100,
             20
           ],
@@ -7724,7 +8110,7 @@
           "presentation": 1,
           "presentation_rect": [
             508,
-            192,
+            180,
             100,
             20
           ],
@@ -7739,13 +8125,404 @@
       },
       {
         "box": {
+          "id": "input_state2",
+          "maxclass": "comment",
+          "numinlets": 1,
+          "numoutlets": 0,
+          "patching_rect": [
+            618,
+            180,
+            92,
+            20
+          ],
+          "fontname": "Arial",
+          "fontsize": 16.0,
+          "textcolor": [
+            0.6588235294117647,
+            0.12941176470588237,
+            0.19607843137254902,
+            1.0
+          ],
+          "text": "",
+          "varname": "input_state2",
+          "presentation": 1,
+          "presentation_rect": [
+            618,
+            180,
+            92,
+            20
+          ],
+          "hidden": 0,
+          "bgcolor": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "box": {
+          "id": "source_record2",
+          "maxclass": "textbutton",
+          "numinlets": 1,
+          "numoutlets": 3,
+          "patching_rect": [
+            502,
+            242,
+            104,
+            30
+          ],
+          "fontname": "Arial",
+          "fontsize": 16.0,
+          "textcolor": [
+            0.6588235294117647,
+            0.12941176470588237,
+            0.19607843137254902,
+            1.0
+          ],
+          "text": "REC IN",
+          "outlettype": [
+            "",
+            "",
+            "int"
+          ],
+          "varname": "source_record2",
+          "presentation": 1,
+          "presentation_rect": [
+            502,
+            242,
+            104,
+            30
+          ],
+          "hidden": 0,
+          "mode": 0,
+          "outputmode": 1,
+          "usegradient": 0,
+          "rounded": 10,
+          "bgcolor": [
+            1.0,
+            0.9450980392156862,
+            0.9490196078431372,
+            1.0
+          ],
+          "bgoncolor": [
+            0.9568627450980393,
+            0.7764705882352941,
+            0.8,
+            1.0
+          ],
+          "textoncolor": [
+            0.6588235294117647,
+            0.12941176470588237,
+            0.19607843137254902,
+            1.0
+          ],
+          "textovercolor": [
+            0.6588235294117647,
+            0.12941176470588237,
+            0.19607843137254902,
+            1.0
+          ],
+          "parameter_enable": 0,
+          "fontface": 1,
+          "hint": "Record the selected audio input into sample 2. Click again or press STOP to finish.",
+          "usebgoncolor": 1,
+          "usetextovercolor": 1
+        }
+      },
+      {
+        "box": {
+          "id": "source_save2",
+          "maxclass": "textbutton",
+          "numinlets": 1,
+          "numoutlets": 3,
+          "patching_rect": [
+            614,
+            242,
+            96,
+            30
+          ],
+          "fontname": "Arial",
+          "fontsize": 16.0,
+          "textcolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "text": "SAVE",
+          "outlettype": [
+            "",
+            "",
+            "int"
+          ],
+          "varname": "source_save2",
+          "presentation": 1,
+          "presentation_rect": [
+            614,
+            242,
+            96,
+            30
+          ],
+          "hidden": 0,
+          "mode": 0,
+          "outputmode": 1,
+          "usegradient": 0,
+          "rounded": 10,
+          "bgcolor": [
+            0.8784313725490196,
+            0.8980392156862745,
+            0.9215686274509803,
+            1.0
+          ],
+          "bgoncolor": [
+            0.4823529411764706,
+            0.5254901960784314,
+            0.5803921568627451,
+            1.0
+          ],
+          "textoncolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "textovercolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "parameter_enable": 0,
+          "hint": "Save recorded input from sample 2 to a WAV file. Available after recording.",
+          "usebgoncolor": 1,
+          "usetextovercolor": 1,
+          "fontface": 0
+        }
+      },
+      {
+        "box": {
+          "id": "source_wave2",
+          "maxclass": "waveform~",
+          "numinlets": 5,
+          "numoutlets": 6,
+          "patching_rect": [
+            390,
+            276,
+            320,
+            28
+          ],
+          "fontname": "Arial",
+          "fontsize": 17.0,
+          "textcolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "outlettype": [
+            "float",
+            "float",
+            "float",
+            "float",
+            "list",
+            "list"
+          ],
+          "varname": "source_wave2",
+          "presentation": 1,
+          "presentation_rect": [
+            390,
+            276,
+            320,
+            28
+          ],
+          "hidden": 0,
+          "buffername": "apgw_source_init2",
+          "chanoffset": 1,
+          "allowdrag": 0,
+          "setmode": 0,
+          "labels": 0,
+          "quiet": 1,
+          "ignoreclick": 1,
+          "bgcolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "waveformcolor": [
+            0.47058823529411764,
+            0.7176470588235294,
+            1.0,
+            1.0
+          ],
+          "gridcolor": [
+            0.27450980392156865,
+            0.3254901960784314,
+            0.396078431372549,
+            1.0
+          ],
+          "bordercolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "vzoom": 1.0,
+          "voffset": 0.0,
+          "hint": "Preview of sample 2. Recorded input appears here after recording finishes."
+        }
+      },
+      {
+        "box": {
+          "id": "repeat_down2",
+          "maxclass": "textbutton",
+          "numinlets": 1,
+          "numoutlets": 3,
+          "patching_rect": [
+            390,
+            332,
+            34,
+            34
+          ],
+          "fontname": "Arial",
+          "fontsize": 22.0,
+          "textcolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "text": "\u2212",
+          "outlettype": [
+            "",
+            "",
+            "int"
+          ],
+          "varname": "repeat_down2",
+          "presentation": 1,
+          "presentation_rect": [
+            390,
+            332,
+            34,
+            34
+          ],
+          "hidden": 0,
+          "mode": 0,
+          "outputmode": 1,
+          "usegradient": 0,
+          "rounded": 10,
+          "bgcolor": [
+            0.8784313725490196,
+            0.8980392156862745,
+            0.9215686274509803,
+            1.0
+          ],
+          "bgoncolor": [
+            0.4823529411764706,
+            0.5254901960784314,
+            0.5803921568627451,
+            1.0
+          ],
+          "textoncolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "textovercolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "parameter_enable": 0,
+          "hint": "Decrease sample 2 repeats by one.",
+          "usebgoncolor": 1,
+          "usetextovercolor": 1,
+          "fontface": 0
+        }
+      },
+      {
+        "box": {
+          "id": "repeat_up2",
+          "maxclass": "textbutton",
+          "numinlets": 1,
+          "numoutlets": 3,
+          "patching_rect": [
+            508,
+            332,
+            34,
+            34
+          ],
+          "fontname": "Arial",
+          "fontsize": 22.0,
+          "textcolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "text": "+",
+          "outlettype": [
+            "",
+            "",
+            "int"
+          ],
+          "varname": "repeat_up2",
+          "presentation": 1,
+          "presentation_rect": [
+            508,
+            332,
+            34,
+            34
+          ],
+          "hidden": 0,
+          "mode": 0,
+          "outputmode": 1,
+          "usegradient": 0,
+          "rounded": 10,
+          "bgcolor": [
+            0.8784313725490196,
+            0.8980392156862745,
+            0.9215686274509803,
+            1.0
+          ],
+          "bgoncolor": [
+            0.4823529411764706,
+            0.5254901960784314,
+            0.5803921568627451,
+            1.0
+          ],
+          "textoncolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "textovercolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "parameter_enable": 0,
+          "hint": "Increase sample 2 repeats by one.",
+          "usebgoncolor": 1,
+          "usetextovercolor": 1,
+          "fontface": 0
+        }
+      },
+      {
+        "box": {
           "id": "group_label2",
           "maxclass": "comment",
           "numinlets": 1,
           "numoutlets": 0,
           "patching_rect": [
             390,
-            190,
+            178,
             320,
             22
           ],
@@ -7762,7 +8539,7 @@
           "presentation": 1,
           "presentation_rect": [
             390,
-            190,
+            178,
             320,
             22
           ],
@@ -7784,7 +8561,7 @@
           "numoutlets": 0,
           "patching_rect": [
             390,
-            222,
+            202,
             320,
             36
           ],
@@ -7801,7 +8578,7 @@
           "presentation": 1,
           "presentation_rect": [
             390,
-            222,
+            202,
             320,
             36
           ],
@@ -7822,9 +8599,9 @@
           "numoutlets": 0,
           "patching_rect": [
             736,
-            180,
+            170,
             344,
-            136
+            200
           ],
           "fontname": "Arial",
           "fontsize": 17.0,
@@ -7838,9 +8615,9 @@
           "presentation": 1,
           "presentation_rect": [
             736,
-            180,
+            170,
             344,
-            136
+            200
           ],
           "hidden": 0,
           "border": 1,
@@ -7864,7 +8641,7 @@
           "numoutlets": 0,
           "patching_rect": [
             737,
-            181,
+            171,
             342,
             4
           ],
@@ -7880,7 +8657,7 @@
           "presentation": 1,
           "presentation_rect": [
             737,
-            181,
+            171,
             342,
             4
           ],
@@ -7889,7 +8666,7 @@
           "rounded": 0,
           "background": 1,
           "ignoreclick": 1,
-          "style": "CMPE_Solid_38_49_64_255"
+          "style": "CMPE_Solid_23_79_203_255"
         }
       },
       {
@@ -7900,7 +8677,7 @@
           "numoutlets": 0,
           "patching_rect": [
             866,
-            192,
+            180,
             100,
             20
           ],
@@ -7917,7 +8694,7 @@
           "presentation": 1,
           "presentation_rect": [
             866,
-            192,
+            180,
             100,
             20
           ],
@@ -7932,13 +8709,404 @@
       },
       {
         "box": {
+          "id": "input_state3",
+          "maxclass": "comment",
+          "numinlets": 1,
+          "numoutlets": 0,
+          "patching_rect": [
+            976,
+            180,
+            92,
+            20
+          ],
+          "fontname": "Arial",
+          "fontsize": 16.0,
+          "textcolor": [
+            0.6588235294117647,
+            0.12941176470588237,
+            0.19607843137254902,
+            1.0
+          ],
+          "text": "",
+          "varname": "input_state3",
+          "presentation": 1,
+          "presentation_rect": [
+            976,
+            180,
+            92,
+            20
+          ],
+          "hidden": 0,
+          "bgcolor": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "box": {
+          "id": "source_record3",
+          "maxclass": "textbutton",
+          "numinlets": 1,
+          "numoutlets": 3,
+          "patching_rect": [
+            860,
+            242,
+            104,
+            30
+          ],
+          "fontname": "Arial",
+          "fontsize": 16.0,
+          "textcolor": [
+            0.6588235294117647,
+            0.12941176470588237,
+            0.19607843137254902,
+            1.0
+          ],
+          "text": "REC IN",
+          "outlettype": [
+            "",
+            "",
+            "int"
+          ],
+          "varname": "source_record3",
+          "presentation": 1,
+          "presentation_rect": [
+            860,
+            242,
+            104,
+            30
+          ],
+          "hidden": 0,
+          "mode": 0,
+          "outputmode": 1,
+          "usegradient": 0,
+          "rounded": 10,
+          "bgcolor": [
+            1.0,
+            0.9450980392156862,
+            0.9490196078431372,
+            1.0
+          ],
+          "bgoncolor": [
+            0.9568627450980393,
+            0.7764705882352941,
+            0.8,
+            1.0
+          ],
+          "textoncolor": [
+            0.6588235294117647,
+            0.12941176470588237,
+            0.19607843137254902,
+            1.0
+          ],
+          "textovercolor": [
+            0.6588235294117647,
+            0.12941176470588237,
+            0.19607843137254902,
+            1.0
+          ],
+          "parameter_enable": 0,
+          "fontface": 1,
+          "hint": "Record the selected audio input into sample 3. Click again or press STOP to finish.",
+          "usebgoncolor": 1,
+          "usetextovercolor": 1
+        }
+      },
+      {
+        "box": {
+          "id": "source_save3",
+          "maxclass": "textbutton",
+          "numinlets": 1,
+          "numoutlets": 3,
+          "patching_rect": [
+            972,
+            242,
+            96,
+            30
+          ],
+          "fontname": "Arial",
+          "fontsize": 16.0,
+          "textcolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "text": "SAVE",
+          "outlettype": [
+            "",
+            "",
+            "int"
+          ],
+          "varname": "source_save3",
+          "presentation": 1,
+          "presentation_rect": [
+            972,
+            242,
+            96,
+            30
+          ],
+          "hidden": 0,
+          "mode": 0,
+          "outputmode": 1,
+          "usegradient": 0,
+          "rounded": 10,
+          "bgcolor": [
+            0.8784313725490196,
+            0.8980392156862745,
+            0.9215686274509803,
+            1.0
+          ],
+          "bgoncolor": [
+            0.4823529411764706,
+            0.5254901960784314,
+            0.5803921568627451,
+            1.0
+          ],
+          "textoncolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "textovercolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "parameter_enable": 0,
+          "hint": "Save recorded input from sample 3 to a WAV file. Available after recording.",
+          "usebgoncolor": 1,
+          "usetextovercolor": 1,
+          "fontface": 0
+        }
+      },
+      {
+        "box": {
+          "id": "source_wave3",
+          "maxclass": "waveform~",
+          "numinlets": 5,
+          "numoutlets": 6,
+          "patching_rect": [
+            748,
+            276,
+            320,
+            28
+          ],
+          "fontname": "Arial",
+          "fontsize": 17.0,
+          "textcolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "outlettype": [
+            "float",
+            "float",
+            "float",
+            "float",
+            "list",
+            "list"
+          ],
+          "varname": "source_wave3",
+          "presentation": 1,
+          "presentation_rect": [
+            748,
+            276,
+            320,
+            28
+          ],
+          "hidden": 0,
+          "buffername": "apgw_source_init3",
+          "chanoffset": 1,
+          "allowdrag": 0,
+          "setmode": 0,
+          "labels": 0,
+          "quiet": 1,
+          "ignoreclick": 1,
+          "bgcolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "waveformcolor": [
+            0.47058823529411764,
+            0.7176470588235294,
+            1.0,
+            1.0
+          ],
+          "gridcolor": [
+            0.27450980392156865,
+            0.3254901960784314,
+            0.396078431372549,
+            1.0
+          ],
+          "bordercolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "vzoom": 1.0,
+          "voffset": 0.0,
+          "hint": "Preview of sample 3. Recorded input appears here after recording finishes."
+        }
+      },
+      {
+        "box": {
+          "id": "repeat_down3",
+          "maxclass": "textbutton",
+          "numinlets": 1,
+          "numoutlets": 3,
+          "patching_rect": [
+            748,
+            332,
+            34,
+            34
+          ],
+          "fontname": "Arial",
+          "fontsize": 22.0,
+          "textcolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "text": "\u2212",
+          "outlettype": [
+            "",
+            "",
+            "int"
+          ],
+          "varname": "repeat_down3",
+          "presentation": 1,
+          "presentation_rect": [
+            748,
+            332,
+            34,
+            34
+          ],
+          "hidden": 0,
+          "mode": 0,
+          "outputmode": 1,
+          "usegradient": 0,
+          "rounded": 10,
+          "bgcolor": [
+            0.8784313725490196,
+            0.8980392156862745,
+            0.9215686274509803,
+            1.0
+          ],
+          "bgoncolor": [
+            0.4823529411764706,
+            0.5254901960784314,
+            0.5803921568627451,
+            1.0
+          ],
+          "textoncolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "textovercolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "parameter_enable": 0,
+          "hint": "Decrease sample 3 repeats by one.",
+          "usebgoncolor": 1,
+          "usetextovercolor": 1,
+          "fontface": 0
+        }
+      },
+      {
+        "box": {
+          "id": "repeat_up3",
+          "maxclass": "textbutton",
+          "numinlets": 1,
+          "numoutlets": 3,
+          "patching_rect": [
+            866,
+            332,
+            34,
+            34
+          ],
+          "fontname": "Arial",
+          "fontsize": 22.0,
+          "textcolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "text": "+",
+          "outlettype": [
+            "",
+            "",
+            "int"
+          ],
+          "varname": "repeat_up3",
+          "presentation": 1,
+          "presentation_rect": [
+            866,
+            332,
+            34,
+            34
+          ],
+          "hidden": 0,
+          "mode": 0,
+          "outputmode": 1,
+          "usegradient": 0,
+          "rounded": 10,
+          "bgcolor": [
+            0.8784313725490196,
+            0.8980392156862745,
+            0.9215686274509803,
+            1.0
+          ],
+          "bgoncolor": [
+            0.4823529411764706,
+            0.5254901960784314,
+            0.5803921568627451,
+            1.0
+          ],
+          "textoncolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "textovercolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "parameter_enable": 0,
+          "hint": "Increase sample 3 repeats by one.",
+          "usebgoncolor": 1,
+          "usetextovercolor": 1,
+          "fontface": 0
+        }
+      },
+      {
+        "box": {
           "id": "group_label3",
           "maxclass": "comment",
           "numinlets": 1,
           "numoutlets": 0,
           "patching_rect": [
             748,
-            190,
+            178,
             320,
             22
           ],
@@ -7955,7 +9123,7 @@
           "presentation": 1,
           "presentation_rect": [
             748,
-            190,
+            178,
             320,
             22
           ],
@@ -7977,7 +9145,7 @@
           "numoutlets": 0,
           "patching_rect": [
             748,
-            222,
+            202,
             320,
             36
           ],
@@ -7994,7 +9162,7 @@
           "presentation": 1,
           "presentation_rect": [
             748,
-            222,
+            202,
             320,
             36
           ],
@@ -8009,15 +9177,155 @@
       },
       {
         "box": {
+          "id": "pitch_down",
+          "maxclass": "textbutton",
+          "numinlets": 1,
+          "numoutlets": 3,
+          "patching_rect": [
+            200,
+            332,
+            34,
+            34
+          ],
+          "fontname": "Arial",
+          "fontsize": 22.0,
+          "textcolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "text": "\u2212",
+          "outlettype": [
+            "",
+            "",
+            "int"
+          ],
+          "varname": "pitch_down",
+          "presentation": 1,
+          "presentation_rect": [
+            200,
+            332,
+            34,
+            34
+          ],
+          "hidden": 0,
+          "mode": 0,
+          "outputmode": 1,
+          "usegradient": 0,
+          "rounded": 10,
+          "bgcolor": [
+            0.8784313725490196,
+            0.8980392156862745,
+            0.9215686274509803,
+            1.0
+          ],
+          "bgoncolor": [
+            0.4823529411764706,
+            0.5254901960784314,
+            0.5803921568627451,
+            1.0
+          ],
+          "textoncolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "textovercolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "parameter_enable": 0,
+          "hint": "Decrease the pitch range for all samples by 0.1.",
+          "usebgoncolor": 1,
+          "usetextovercolor": 1,
+          "fontface": 0
+        }
+      },
+      {
+        "box": {
+          "id": "pitch_up",
+          "maxclass": "textbutton",
+          "numinlets": 1,
+          "numoutlets": 3,
+          "patching_rect": [
+            318,
+            332,
+            34,
+            34
+          ],
+          "fontname": "Arial",
+          "fontsize": 22.0,
+          "textcolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "text": "+",
+          "outlettype": [
+            "",
+            "",
+            "int"
+          ],
+          "varname": "pitch_up",
+          "presentation": 1,
+          "presentation_rect": [
+            318,
+            332,
+            34,
+            34
+          ],
+          "hidden": 0,
+          "mode": 0,
+          "outputmode": 1,
+          "usegradient": 0,
+          "rounded": 10,
+          "bgcolor": [
+            0.8784313725490196,
+            0.8980392156862745,
+            0.9215686274509803,
+            1.0
+          ],
+          "bgoncolor": [
+            0.4823529411764706,
+            0.5254901960784314,
+            0.5803921568627451,
+            1.0
+          ],
+          "textoncolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "textovercolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "parameter_enable": 0,
+          "hint": "Increase the pitch range for all samples by 0.1.",
+          "usebgoncolor": 1,
+          "usetextovercolor": 1,
+          "fontface": 0
+        }
+      },
+      {
+        "box": {
           "id": "output_panel",
           "maxclass": "panel",
           "numinlets": 1,
           "numoutlets": 0,
           "patching_rect": [
             20,
-            324,
+            378,
             1060,
-            378
+            374
           ],
           "fontname": "Arial",
           "fontsize": 17.0,
@@ -8031,9 +9339,9 @@
           "presentation": 1,
           "presentation_rect": [
             20,
-            324,
+            378,
             1060,
-            378
+            374
           ],
           "hidden": 0,
           "border": 1,
@@ -8057,9 +9365,9 @@
           "numoutlets": 0,
           "patching_rect": [
             20,
-            760,
+            808,
             1060,
-            72
+            64
           ],
           "fontname": "Arial",
           "fontsize": 17.0,
@@ -8073,9 +9381,9 @@
           "presentation": 1,
           "presentation_rect": [
             20,
-            760,
+            808,
             1060,
-            72
+            64
           ],
           "hidden": 0,
           "border": 1,
@@ -8099,7 +9407,7 @@
           "numoutlets": 3,
           "patching_rect": [
             32,
-            774,
+            816,
             228,
             28
           ],
@@ -8121,7 +9429,7 @@
           "presentation": 1,
           "presentation_rect": [
             32,
-            774,
+            816,
             228,
             28
           ],
@@ -8129,7 +9437,7 @@
           "mode": 0,
           "outputmode": 1,
           "usegradient": 0,
-          "rounded": 6,
+          "rounded": 10,
           "bgcolor": [
             0.8784313725490196,
             0.8980392156862745,
@@ -8169,7 +9477,7 @@
           "numoutlets": 0,
           "patching_rect": [
             468,
-            334,
+            386,
             272,
             24
           ],
@@ -8186,7 +9494,7 @@
           "presentation": 1,
           "presentation_rect": [
             468,
-            334,
+            386,
             272,
             24
           ],
@@ -8790,10 +10098,837 @@
       },
       {
         "box": {
-          "id": "record_dialog",
+          "id": "input_adc",
           "maxclass": "newobj",
           "numinlets": 1,
           "numoutlets": 2,
+          "patching_rect": [
+            1460,
+            2740,
+            180,
+            24
+          ],
+          "fontname": "Arial",
+          "fontsize": 17.0,
+          "textcolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "text": "adc~ 1 2",
+          "outlettype": [
+            "signal",
+            "signal"
+          ],
+          "varname": "input_adc"
+        }
+      },
+      {
+        "box": {
+          "id": "input_recorder",
+          "maxclass": "newobj",
+          "numinlets": 4,
+          "numoutlets": 1,
+          "patching_rect": [
+            1460,
+            2790,
+            440,
+            24
+          ],
+          "fontname": "Arial",
+          "fontsize": 17.0,
+          "textcolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "text": "record~ #0_input_bank0 2 @loop 0 @append 0",
+          "outlettype": [
+            "signal"
+          ],
+          "varname": "input_recorder"
+        }
+      },
+      {
+        "box": {
+          "id": "input_position_peak",
+          "maxclass": "newobj",
+          "numinlets": 2,
+          "numoutlets": 1,
+          "patching_rect": [
+            1460,
+            2840,
+            180,
+            24
+          ],
+          "fontname": "Arial",
+          "fontsize": 17.0,
+          "textcolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "text": "peakamp~ 0",
+          "outlettype": [
+            "float"
+          ],
+          "varname": "input_position_peak"
+        }
+      },
+      {
+        "box": {
+          "id": "input_position_tag",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 1,
+          "patching_rect": [
+            1460,
+            2880,
+            270,
+            24
+          ],
+          "fontname": "Arial",
+          "fontsize": 17.0,
+          "textcolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "text": "prepend inputposition 0 0",
+          "varname": "input_position_tag"
+        }
+      },
+      {
+        "box": {
+          "id": "input_progress",
+          "maxclass": "newobj",
+          "numinlets": 2,
+          "numoutlets": 1,
+          "patching_rect": [
+            1760,
+            2840,
+            180,
+            24
+          ],
+          "fontname": "Arial",
+          "fontsize": 17.0,
+          "textcolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "text": "snapshot~ 50",
+          "outlettype": [
+            "float"
+          ],
+          "varname": "input_progress"
+        }
+      },
+      {
+        "box": {
+          "id": "input_progress_tag",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 1,
+          "patching_rect": [
+            1760,
+            2880,
+            270,
+            24
+          ],
+          "fontname": "Arial",
+          "fontsize": 17.0,
+          "textcolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "text": "prepend inputprogress 0",
+          "varname": "input_progress_tag"
+        }
+      },
+      {
+        "box": {
+          "id": "input_bank0",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 2,
+          "patching_rect": [
+            1460,
+            2940,
+            265,
+            24
+          ],
+          "fontname": "Arial",
+          "fontsize": 17.0,
+          "textcolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "text": "buffer~ #0_input_bank0 1 2",
+          "outlettype": [
+            "float",
+            "bang"
+          ],
+          "varname": "input_bank0"
+        }
+      },
+      {
+        "box": {
+          "id": "input_bank_done0",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 1,
+          "patching_rect": [
+            1460,
+            2980,
+            265,
+            24
+          ],
+          "fontname": "Arial",
+          "fontsize": 17.0,
+          "textcolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "text": "prepend inputbankdone 0",
+          "varname": "input_bank_done0"
+        }
+      },
+      {
+        "box": {
+          "id": "input_bank1",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 2,
+          "patching_rect": [
+            1740,
+            2940,
+            265,
+            24
+          ],
+          "fontname": "Arial",
+          "fontsize": 17.0,
+          "textcolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "text": "buffer~ #0_input_bank1 1 2",
+          "outlettype": [
+            "float",
+            "bang"
+          ],
+          "varname": "input_bank1"
+        }
+      },
+      {
+        "box": {
+          "id": "input_bank_done1",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 1,
+          "patching_rect": [
+            1740,
+            2980,
+            265,
+            24
+          ],
+          "fontname": "Arial",
+          "fontsize": 17.0,
+          "textcolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "text": "prepend inputbankdone 1",
+          "varname": "input_bank_done1"
+        }
+      },
+      {
+        "box": {
+          "id": "input_bank2",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 2,
+          "patching_rect": [
+            2020,
+            2940,
+            265,
+            24
+          ],
+          "fontname": "Arial",
+          "fontsize": 17.0,
+          "textcolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "text": "buffer~ #0_input_bank2 1 2",
+          "outlettype": [
+            "float",
+            "bang"
+          ],
+          "varname": "input_bank2"
+        }
+      },
+      {
+        "box": {
+          "id": "input_bank_done2",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 1,
+          "patching_rect": [
+            2020,
+            2980,
+            265,
+            24
+          ],
+          "fontname": "Arial",
+          "fontsize": 17.0,
+          "textcolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "text": "prepend inputbankdone 2",
+          "varname": "input_bank_done2"
+        }
+      },
+      {
+        "box": {
+          "id": "input_bank3",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 2,
+          "patching_rect": [
+            2300,
+            2940,
+            265,
+            24
+          ],
+          "fontname": "Arial",
+          "fontsize": 17.0,
+          "textcolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "text": "buffer~ #0_input_bank3 1 2",
+          "outlettype": [
+            "float",
+            "bang"
+          ],
+          "varname": "input_bank3"
+        }
+      },
+      {
+        "box": {
+          "id": "input_bank_done3",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 1,
+          "patching_rect": [
+            2300,
+            2980,
+            265,
+            24
+          ],
+          "fontname": "Arial",
+          "fontsize": 17.0,
+          "textcolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "text": "prepend inputbankdone 3",
+          "varname": "input_bank_done3"
+        }
+      },
+      {
+        "box": {
+          "id": "source_record1_msg",
+          "maxclass": "message",
+          "numinlets": 2,
+          "numoutlets": 1,
+          "patching_rect": [
+            1460,
+            3040,
+            265,
+            24
+          ],
+          "fontname": "Arial",
+          "fontsize": 17.0,
+          "textcolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "text": "inputrecord 0",
+          "outlettype": [
+            ""
+          ],
+          "varname": "source_record1_msg",
+          "bgcolor": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      },
+      {
+        "box": {
+          "id": "source_save1_msg",
+          "maxclass": "message",
+          "numinlets": 2,
+          "numoutlets": 1,
+          "patching_rect": [
+            1460,
+            3080,
+            265,
+            24
+          ],
+          "fontname": "Arial",
+          "fontsize": 17.0,
+          "textcolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "text": "inputsave 0",
+          "outlettype": [
+            ""
+          ],
+          "varname": "source_save1_msg",
+          "bgcolor": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      },
+      {
+        "box": {
+          "id": "repeat_down1_msg",
+          "maxclass": "message",
+          "numinlets": 2,
+          "numoutlets": 1,
+          "patching_rect": [
+            1460,
+            3140,
+            265,
+            24
+          ],
+          "fontname": "Arial",
+          "fontsize": 17.0,
+          "textcolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "text": "repeatstep 0 -1",
+          "outlettype": [
+            ""
+          ],
+          "varname": "repeat_down1_msg",
+          "bgcolor": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      },
+      {
+        "box": {
+          "id": "repeat_up1_msg",
+          "maxclass": "message",
+          "numinlets": 2,
+          "numoutlets": 1,
+          "patching_rect": [
+            1460,
+            3180,
+            265,
+            24
+          ],
+          "fontname": "Arial",
+          "fontsize": 17.0,
+          "textcolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "text": "repeatstep 0 1",
+          "outlettype": [
+            ""
+          ],
+          "varname": "repeat_up1_msg",
+          "bgcolor": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      },
+      {
+        "box": {
+          "id": "source_record2_msg",
+          "maxclass": "message",
+          "numinlets": 2,
+          "numoutlets": 1,
+          "patching_rect": [
+            1740,
+            3040,
+            265,
+            24
+          ],
+          "fontname": "Arial",
+          "fontsize": 17.0,
+          "textcolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "text": "inputrecord 1",
+          "outlettype": [
+            ""
+          ],
+          "varname": "source_record2_msg",
+          "bgcolor": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      },
+      {
+        "box": {
+          "id": "source_save2_msg",
+          "maxclass": "message",
+          "numinlets": 2,
+          "numoutlets": 1,
+          "patching_rect": [
+            1740,
+            3080,
+            265,
+            24
+          ],
+          "fontname": "Arial",
+          "fontsize": 17.0,
+          "textcolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "text": "inputsave 1",
+          "outlettype": [
+            ""
+          ],
+          "varname": "source_save2_msg",
+          "bgcolor": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      },
+      {
+        "box": {
+          "id": "repeat_down2_msg",
+          "maxclass": "message",
+          "numinlets": 2,
+          "numoutlets": 1,
+          "patching_rect": [
+            1740,
+            3140,
+            265,
+            24
+          ],
+          "fontname": "Arial",
+          "fontsize": 17.0,
+          "textcolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "text": "repeatstep 1 -1",
+          "outlettype": [
+            ""
+          ],
+          "varname": "repeat_down2_msg",
+          "bgcolor": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      },
+      {
+        "box": {
+          "id": "repeat_up2_msg",
+          "maxclass": "message",
+          "numinlets": 2,
+          "numoutlets": 1,
+          "patching_rect": [
+            1740,
+            3180,
+            265,
+            24
+          ],
+          "fontname": "Arial",
+          "fontsize": 17.0,
+          "textcolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "text": "repeatstep 1 1",
+          "outlettype": [
+            ""
+          ],
+          "varname": "repeat_up2_msg",
+          "bgcolor": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      },
+      {
+        "box": {
+          "id": "source_record3_msg",
+          "maxclass": "message",
+          "numinlets": 2,
+          "numoutlets": 1,
+          "patching_rect": [
+            2020,
+            3040,
+            265,
+            24
+          ],
+          "fontname": "Arial",
+          "fontsize": 17.0,
+          "textcolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "text": "inputrecord 2",
+          "outlettype": [
+            ""
+          ],
+          "varname": "source_record3_msg",
+          "bgcolor": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      },
+      {
+        "box": {
+          "id": "source_save3_msg",
+          "maxclass": "message",
+          "numinlets": 2,
+          "numoutlets": 1,
+          "patching_rect": [
+            2020,
+            3080,
+            265,
+            24
+          ],
+          "fontname": "Arial",
+          "fontsize": 17.0,
+          "textcolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "text": "inputsave 2",
+          "outlettype": [
+            ""
+          ],
+          "varname": "source_save3_msg",
+          "bgcolor": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      },
+      {
+        "box": {
+          "id": "repeat_down3_msg",
+          "maxclass": "message",
+          "numinlets": 2,
+          "numoutlets": 1,
+          "patching_rect": [
+            2020,
+            3140,
+            265,
+            24
+          ],
+          "fontname": "Arial",
+          "fontsize": 17.0,
+          "textcolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "text": "repeatstep 2 -1",
+          "outlettype": [
+            ""
+          ],
+          "varname": "repeat_down3_msg",
+          "bgcolor": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      },
+      {
+        "box": {
+          "id": "repeat_up3_msg",
+          "maxclass": "message",
+          "numinlets": 2,
+          "numoutlets": 1,
+          "patching_rect": [
+            2020,
+            3180,
+            265,
+            24
+          ],
+          "fontname": "Arial",
+          "fontsize": 17.0,
+          "textcolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "text": "repeatstep 2 1",
+          "outlettype": [
+            ""
+          ],
+          "varname": "repeat_up3_msg",
+          "bgcolor": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      },
+      {
+        "box": {
+          "id": "pitch_down_msg",
+          "maxclass": "message",
+          "numinlets": 2,
+          "numoutlets": 1,
+          "patching_rect": [
+            1460,
+            3240,
+            265,
+            24
+          ],
+          "fontname": "Arial",
+          "fontsize": 17.0,
+          "textcolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "text": "pitchstep -0.1",
+          "outlettype": [
+            ""
+          ],
+          "varname": "pitch_down_msg",
+          "bgcolor": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      },
+      {
+        "box": {
+          "id": "pitch_up_msg",
+          "maxclass": "message",
+          "numinlets": 2,
+          "numoutlets": 1,
+          "patching_rect": [
+            1460,
+            3280,
+            265,
+            24
+          ],
+          "fontname": "Arial",
+          "fontsize": 17.0,
+          "textcolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "text": "pitchstep 0.1",
+          "outlettype": [
+            ""
+          ],
+          "varname": "pitch_up_msg",
+          "bgcolor": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      },
+      {
+        "box": {
+          "id": "record_dialog",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 3,
           "patching_rect": [
             1460,
             1660,
@@ -8810,6 +10945,7 @@
           ],
           "text": "savedialog WAVE",
           "outlettype": [
+            "",
             "",
             "bang"
           ],
@@ -8845,7 +10981,7 @@
           "id": "preset_save_dialog",
           "maxclass": "newobj",
           "numinlets": 1,
-          "numoutlets": 2,
+          "numoutlets": 3,
           "patching_rect": [
             1740,
             1660,
@@ -8862,6 +10998,7 @@
           ],
           "text": "savedialog JSON",
           "outlettype": [
+            "",
             "",
             "bang"
           ],
@@ -8942,6 +11079,92 @@
           ],
           "text": "prepend presetread",
           "varname": "preset_load_dialog_path"
+        }
+      },
+      {
+        "box": {
+          "id": "input_save_dialog",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 3,
+          "patching_rect": [
+            2300,
+            1660,
+            235,
+            24
+          ],
+          "fontname": "Arial",
+          "fontsize": 17.0,
+          "textcolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "text": "savedialog WAVE",
+          "outlettype": [
+            "",
+            "",
+            "bang"
+          ],
+          "varname": "input_save_dialog"
+        }
+      },
+      {
+        "box": {
+          "id": "input_save_dialog_path",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 1,
+          "patching_rect": [
+            2300,
+            1700,
+            235,
+            24
+          ],
+          "fontname": "Arial",
+          "fontsize": 17.0,
+          "textcolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "text": "prepend inputsavepath",
+          "varname": "input_save_dialog_path"
+        }
+      },
+      {
+        "box": {
+          "id": "input_save_cancel",
+          "maxclass": "message",
+          "numinlets": 2,
+          "numoutlets": 1,
+          "patching_rect": [
+            2300,
+            1740,
+            235,
+            24
+          ],
+          "fontname": "Arial",
+          "fontsize": 17.0,
+          "textcolor": [
+            0.09019607843137255,
+            0.12549019607843137,
+            0.16862745098039217,
+            1.0
+          ],
+          "text": "inputsavecancel",
+          "outlettype": [
+            ""
+          ],
+          "varname": "input_save_cancel",
+          "bgcolor": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
         }
       },
       {
@@ -11670,6 +13893,536 @@
       {
         "patchline": {
           "source": [
+            "input_adc",
+            0
+          ],
+          "destination": [
+            "input_recorder",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "input_adc",
+            1
+          ],
+          "destination": [
+            "input_recorder",
+            1
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "input_recorder",
+            0
+          ],
+          "destination": [
+            "input_position_peak",
+            0
+          ],
+          "order": 0
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "input_recorder",
+            0
+          ],
+          "destination": [
+            "input_progress",
+            0
+          ],
+          "order": 1
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "input_position_peak",
+            0
+          ],
+          "destination": [
+            "input_position_tag",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "input_position_tag",
+            0
+          ],
+          "destination": [
+            "controller",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "input_progress",
+            0
+          ],
+          "destination": [
+            "input_progress_tag",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "input_progress_tag",
+            0
+          ],
+          "destination": [
+            "controller",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "input_bank0",
+            1
+          ],
+          "destination": [
+            "input_bank_done0",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "input_bank_done0",
+            0
+          ],
+          "destination": [
+            "controller",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "input_bank1",
+            1
+          ],
+          "destination": [
+            "input_bank_done1",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "input_bank_done1",
+            0
+          ],
+          "destination": [
+            "controller",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "input_bank2",
+            1
+          ],
+          "destination": [
+            "input_bank_done2",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "input_bank_done2",
+            0
+          ],
+          "destination": [
+            "controller",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "input_bank3",
+            1
+          ],
+          "destination": [
+            "input_bank_done3",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "input_bank_done3",
+            0
+          ],
+          "destination": [
+            "controller",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "source_record1",
+            0
+          ],
+          "destination": [
+            "source_record1_msg",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "source_record1_msg",
+            0
+          ],
+          "destination": [
+            "controller",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "source_save1",
+            0
+          ],
+          "destination": [
+            "source_save1_msg",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "source_save1_msg",
+            0
+          ],
+          "destination": [
+            "controller",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "repeat_down1",
+            0
+          ],
+          "destination": [
+            "repeat_down1_msg",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "repeat_down1_msg",
+            0
+          ],
+          "destination": [
+            "controller",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "repeat_up1",
+            0
+          ],
+          "destination": [
+            "repeat_up1_msg",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "repeat_up1_msg",
+            0
+          ],
+          "destination": [
+            "controller",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "source_record2",
+            0
+          ],
+          "destination": [
+            "source_record2_msg",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "source_record2_msg",
+            0
+          ],
+          "destination": [
+            "controller",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "source_save2",
+            0
+          ],
+          "destination": [
+            "source_save2_msg",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "source_save2_msg",
+            0
+          ],
+          "destination": [
+            "controller",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "repeat_down2",
+            0
+          ],
+          "destination": [
+            "repeat_down2_msg",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "repeat_down2_msg",
+            0
+          ],
+          "destination": [
+            "controller",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "repeat_up2",
+            0
+          ],
+          "destination": [
+            "repeat_up2_msg",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "repeat_up2_msg",
+            0
+          ],
+          "destination": [
+            "controller",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "source_record3",
+            0
+          ],
+          "destination": [
+            "source_record3_msg",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "source_record3_msg",
+            0
+          ],
+          "destination": [
+            "controller",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "source_save3",
+            0
+          ],
+          "destination": [
+            "source_save3_msg",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "source_save3_msg",
+            0
+          ],
+          "destination": [
+            "controller",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "repeat_down3",
+            0
+          ],
+          "destination": [
+            "repeat_down3_msg",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "repeat_down3_msg",
+            0
+          ],
+          "destination": [
+            "controller",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "repeat_up3",
+            0
+          ],
+          "destination": [
+            "repeat_up3_msg",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "repeat_up3_msg",
+            0
+          ],
+          "destination": [
+            "controller",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "pitch_down",
+            0
+          ],
+          "destination": [
+            "pitch_down_msg",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "pitch_down_msg",
+            0
+          ],
+          "destination": [
+            "controller",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "pitch_up",
+            0
+          ],
+          "destination": [
+            "pitch_up_msg",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "pitch_up_msg",
+            0
+          ],
+          "destination": [
+            "controller",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
             "record_dialog",
             0
           ],
@@ -11731,6 +14484,54 @@
         "patchline": {
           "source": [
             "preset_load_dialog_path",
+            0
+          ],
+          "destination": [
+            "controller",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "input_save_dialog",
+            0
+          ],
+          "destination": [
+            "input_save_dialog_path",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "input_save_dialog_path",
+            0
+          ],
+          "destination": [
+            "controller",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "input_save_dialog",
+            2
+          ],
+          "destination": [
+            "input_save_cancel",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "input_save_cancel",
             0
           ],
           "destination": [
@@ -12165,6 +14966,37 @@
     ],
     "styles": [
       {
+        "name": "CMPE_Solid_123_134_148_255",
+        "default": {
+          "bgfillcolor": {
+            "type": "color",
+            "color": [
+              0.4823529411764706,
+              0.5254901960784314,
+              0.5803921568627451,
+              1.0
+            ],
+            "color1": [
+              0.4823529411764706,
+              0.5254901960784314,
+              0.5803921568627451,
+              1.0
+            ],
+            "color2": [
+              0.4823529411764706,
+              0.5254901960784314,
+              0.5803921568627451,
+              1.0
+            ],
+            "angle": 270.0,
+            "proportion": 0.5,
+            "autogradient": 0.0
+          }
+        },
+        "parentstyle": "",
+        "multi": 0
+      },
+      {
         "name": "CMPE_Solid_224_229_235_255",
         "default": {
           "bgfillcolor": {
@@ -12227,26 +15059,26 @@
         "multi": 0
       },
       {
-        "name": "CMPE_Solid_38_49_64_255",
+        "name": "CMPE_Solid_23_79_203_255",
         "default": {
           "bgfillcolor": {
             "type": "color",
             "color": [
-              0.14901960784313725,
-              0.19215686274509805,
-              0.25098039215686274,
+              0.09019607843137255,
+              0.30980392156862746,
+              0.796078431372549,
               1.0
             ],
             "color1": [
-              0.14901960784313725,
-              0.19215686274509805,
-              0.25098039215686274,
+              0.09019607843137255,
+              0.30980392156862746,
+              0.796078431372549,
               1.0
             ],
             "color2": [
-              0.14901960784313725,
-              0.19215686274509805,
-              0.25098039215686274,
+              0.09019607843137255,
+              0.30980392156862746,
+              0.796078431372549,
               1.0
             ],
             "angle": 270.0,

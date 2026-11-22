@@ -1,5 +1,15 @@
 # Changes
 
+## CMPE Variety Pack 1.3.0 — November 21, 2026
+
+- Corrected native `waveform~` display zoom: the labelled visual magnification now sends its reciprocal as Max's amplitude range. Quiet audio becomes taller without changing PCM, playback gain, or exports. The preview renderer follows the same native semantics.
+- Added input recording into the shared sample buffers: three slots for APG/ISJS and sample 1 for Many/SIOE. Explicit REC IN captures stereo input for up to 60 seconds. STOP finishes a take; mode, preset, device, or DSP changes cancel it. A separate buffer bank preserves the previous source until a stopped take passes verification.
+- Added per-sample waveforms and SAVE buttons for recorded source WAVs. SAVE SET requires newly recorded sources to have saved paths.
+- Enlarged APG repeat/pitch number fields and added minus/plus steps. Buttons use a visible 10-pixel corner radius. Selected controls and traces change accent with the instrument mode.
+- Restored the original-author credit to the bottom. The window is 1100 × 900; output waveform/scope channels remain 144 pixels high.
+
+Native input recording and waveform painting still require checking in Max. Automated checks use the production JavaScript with simulated native boundaries and inspect the generated object graph.
+
 ## CMPE Variety Pack 1.2.5 — November 21, 2026
 
 - Increased both stereo waveform and live-scope channels from 96 to 144 pixels high, a 50% increase, at the existing 1012-pixel width.

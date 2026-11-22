@@ -4,7 +4,7 @@
 
 ## Download and open
 
-1. **[Download CMPE for Max](https://github.com/modelcollapse/CMPE-MAXMSP/raw/refs/heads/main/dist/CMPE_Max.zip)**. This is the complete playable **1.2.5** package.
+1. **[Download CMPE for Max](https://github.com/modelcollapse/CMPE-MAXMSP/raw/refs/heads/main/dist/CMPE_Max.zip)**. This is the complete playable **1.3.0** package.
 2. Extract the ZIP. Keep the resulting **`CMPE_Max`** folder together.
 3. Open **`CMPE_Variety_Pack.maxpat`** in Max.
 4. Choose your audio interface in the top audio controls, or open **AUDIO SETUP**. Use **TEST SOUND** to check the output.
@@ -36,7 +36,7 @@ The top row contains **Driver** and two option menus supplied by the selected Ma
 
 Changing a driver or device, or opening AUDIO SETUP, stops this patch's playback and recording first and turns Max audio off. Press PLAY/START or use the audio power button when the new interface is ready. Audio settings apply to Max and are not stored in the musical **SAVE SET** files.
 
-The interface uses a neutral light background, white source cards, dark text, and a blue selected instrument and primary action. **LOAD** buttons have solid charcoal backgrounds and bold white labels. Dark waveform panels separate the audio display from the controls. Text labels carry the state information alongside color.
+The interface uses a neutral light background, white source cards, and dark text. The selected instrument and primary action change color with the mode: APG blue, ISJS teal, Many purple, RMHS copper, and SIOE rose. **LOAD** buttons have solid charcoal backgrounds and bold white labels. Rounded buttons and dark waveform panels separate the controls from the audio displays. State labels remain explicit alongside color.
 
 ## Five instruments
 
@@ -50,13 +50,21 @@ The interface uses a neutral light background, white source cards, dark text, an
 
 Only the source controls needed by the selected instrument are shown. Use **LOAD** to choose mono or stereo WAV/AIFF files while stopped. **DEMO** reloads the included synthetic samples.
 
+### Record into a sample buffer
+
+Choose your input device in the top audio controls or **AUDIO SETUP**, then press **REC IN** on the sample slot you want to replace. It records the selected device's input channels 1 and 2 into a stereo buffer, for up to 60 seconds. Press the same button again or **STOP** to finish the take. The old sample remains available until the stopped recording has been checked and adopted.
+
+The recorded sample can be used immediately in APG or ISJS, or in sample 1 for Many and SIOE. Each source card has a small waveform independent of the large generated-output display. Recording starts only when you press REC IN. The raw input is not routed to the listening output.
+
+Use the sample card's **SAVE** button to write its new recording as a 24-bit WAV. **SAVE SET** requires these recordings to be saved first, because settings files store sample paths. Changing modes, loading settings, changing audio devices, or losing the audio engine cancels an unfinished input take and preserves the previous source.
+
 ISJS and Many continue until stopped. RMHS finishes automatically after its planned voices fade out. Its displayed duration includes the slow attacks and releases, so it can exceed the duration setting. Many and RMHS identify their fade-ins in the status area.
 
 ## Interface previews
 
-Version **1.2.3** replaces the previous pastel palette with a restrained neutral and blue palette. White source cards and dark text keep parameters readable; solid charcoal **LOAD** buttons remain distinct from their cards. Blue identifies the selected instrument and primary action. Stereo waveform channels use bright traces on charcoal, with explicit L/R labels. Recording, stopped controls, waiting, and error states retain text labels and distinct emphasis.
+Version **1.3.0** corrects the native waveform zoom direction: quiet output now receives a smaller native amplitude range, making the trace taller. This changes the display only. Small source waveforms show loaded or recorded samples before a composition is generated. APG repeat maxima and pitch range have larger number fields and adjacent minus/plus buttons. Attribution to Joo Won Park is visible at the bottom.
 
-The stereo waveform and live-scope areas are now **144 pixels high per channel**, **50% taller than 1.2.4**. The complete interface is **1100 × 836**, only 48 pixels taller overall after tightening the surrounding spacing. ISJS's position/density pad and adjacent scope are 298 pixels high. Loop selection stays below the waveform; playback, FULL RANGE, and SAVE WAV share the transport row.
+The stereo waveform and live-scope areas remain **144 pixels high per channel**. The complete interface is **1100 × 900**. ISJS's position/density pad and adjacent scope remain 298 pixels high. Loop selection stays below the waveform; playback, FULL RANGE, and SAVE WAV share the transport row.
 
 These images are rendered from the shipped Max patch layout and its controller state. APG and SIOE show output generated from the included demo sounds by the production renderer. They are **interface previews, not native Max screenshots**; live instruments are shown stopped. Device menus show fallback placeholders because no physical audio hardware was queried for these images.
 
@@ -89,6 +97,9 @@ These images are rendered from the shipped Max patch layout and its controller s
 | **Driver / device options** | Select an available Max audio driver and the options it exposes. |
 | **AUDIO SETUP / REFRESH** | Open Max's complete audio settings, or read the current device lists and state again. |
 | **Audio on/off** | Enable or disable Max audio; switching off also stops this patch's playback and recording. |
+| **REC IN / sample SAVE** | Capture audio input into a sample slot, then save the captured source as a WAV. Press REC IN again or STOP to finish. |
+| **Repeat − / +** | Change an APG sample's repeat maximum by one, within 1–20. The large number field also accepts direct entry. |
+| **Pitch − / +** | Change APG's random pitch range by 0.1, within 0–1. Direct entry remains available. |
 | **GENERATE + PLAY / PLAY / START** | Explains whether APG/SIOE needs generation, replays a prepared result, or starts a live instrument. The button shows PREPARING, PLAYING, or LIVE while active. |
 | **STOP / CANCEL** | Stops playback, cancels generation, clears live tails and scheduled events, and ends recording. |
 | **NEW TAKE** | Generates another APG/SIOE result and leaves it ready to play. |
@@ -169,6 +180,7 @@ node developer/validation/test_cmpe_model.js
 node developer/validation/test_cmpe_controller.js
 node developer/validation/test_cmpe_controller.js --bundle
 node developer/validation/test_cmpe_ui.js
+node developer/validation/test_cmpe_input_recording.js
 python3 developer/build_cmpe_previews.py
 python3 developer/package_cmpe.py
 ```

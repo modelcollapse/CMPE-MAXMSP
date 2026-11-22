@@ -14,7 +14,7 @@ The controller owns tasks, voice lifetimes, mode changes, and recording state. S
 
 ### Native audio settings
 
-The audio-settings module, `developer/cmpe_audio_settings.js`, manages the audio controls. The native graph uses `adstatus driver`, `adstatus option 1/2`, and `adstatus optionname 1/2` to obtain the available choices and their labels. Its menu outlets connect directly to the visible `umenu` objects before the controller receives the same telemetry. Option indices are driver-specific; they are not assumed to mean input or output device. `adstatus output` describes channel mapping rather than hardware selection, so the patch leaves full channel mapping to Max's Audio Status window. See the official [adstatus reference](https://docs.cycling74.com/reference/adstatus/).
+The audio-settings module, `developer/cmpe_audio_settings.js`, manages the audio controls. The native graph uses `adstatus driver`, `adstatus option 0/1`, and `adstatus optionname 0/1` to obtain the available choices and their labels. Its menu outlets connect directly to the visible `umenu` objects before the controller receives the same telemetry. Option meanings are driver-specific; they are not assumed to mean input or output device. `adstatus output` describes channel mapping rather than hardware selection, so the patch leaves full channel mapping to Max's Audio Status window. See the official [adstatus reference](https://docs.cycling74.com/reference/adstatus/) and the zero-based help-patch evidence in the 1.2.4 record below.
 
 Menu population and current-value feedback are read-only. Only a deliberate user selection issues a setting command. A change first stops the instrument and recorder, cancels a pending test tone, and waits 30 ms for the stop fade before turning DSP off and applying the choice. The available choices are read again before the device write; a changed or missing selection is rejected rather than reusing an obsolete index. The resulting device identity and DSP state are read back. Audio remains off until the user enables it or starts an instrument. AUDIO SETUP follows the same stop path and opens the native window with `; dsp open`, as documented in [Controlling Max with Messages](https://docs.cycling74.com/userguide/controlling_max_with_messages/).
 
@@ -36,6 +36,8 @@ node developer/validation/test_cmpe_model.js
 node developer/validation/test_cmpe_controller.js
 node developer/validation/test_cmpe_controller.js --bundle
 node developer/validation/test_cmpe_ui.js
+node developer/validation/test_cmpe_input_recording.js
+node developer/validation/test_cmpe_input_recording.js --bundle
 python3 developer/build_cmpe_previews.py
 python3 developer/package_cmpe.py
 ```
@@ -43,6 +45,31 @@ python3 developer/package_cmpe.py
 The first builder preserves the standalone APG patch/runtime. The voice builder writes the native instrument subpatches. The collection builder assembles the shared UI, audio connections, and combined legacy-JavaScript runtime. Edit the separate developer modules and rebuild rather than editing only a generated runtime file.
 
 The retained APG checks and their scope are documented in [VALIDATION.md](VALIDATION.md). New collection-controller verification is separate from the pure-model results below; no native execution is implied by controller mocks.
+
+## Version 1.3.0: waveform correction and sample input recording
+
+The displayed magnification now sends `1 / magnification` to native `waveform~ vzoom`. The native setting is an amplitude range: reducing it enlarges the trace. The previous controller sent the magnification directly, while its preview incorrectly multiplied amplitude by that native value. This disagreement could make quiet output nearly invisible in Max even though the preview looked correct. Cycling '74's actual [index~ help patch](https://github.com/Cycling74/max-sdk/blob/15b6fe17eedc7c8a8b4ee249706d3aaf21e192fa/help/index~.maxhelp) and [vcomb~ help patch](https://github.com/Cycling74/percolate/blob/639a344916e01a90a88337f671584b9fce6baf43/help/vcomb~.maxhelp) use `vzoom 0.5` with an offset to display a 0–1 control range. The [waveform~ reference](https://docs.cycling74.com/reference/waveform~/) confirms buffer binding, one-based channel selection, the centered zero offset, and display-only scaling. Regressions assert the reciprocal native message, both channel bindings, quiet-PCM projection, and unchanged audio samples.
+
+`developer/cmpe_input_recording.js` is appended last in the standalone runtime. Native `adc~ 1 2` feeds a two-channel `record~`; it has four inlets because its final two set the start/end points. Capture uses one of four private native buffer banks, allocated only after REC IN. Three banks can hold the three adopted source recordings while the remaining bank stages the next take. The prior sample's references remain intact until stopped capture is trimmed and read back successfully. Unused banks are reduced again after pending native work completes.
+
+Native `record~` sync drives `snapshot~` for elapsed display and `peakamp~ 0` for stopped-position confirmation. The recorder is bounded by its 60-second allocation with looping disabled. Max 8's documented millisecond `buffer~ crop` message is used rather than relying on the newer `crop_samples` reference. A sample WAV save requires the native write-completion bang and a matching RIFF/WAVE PCM24 header/data length before its path becomes part of saved settings. These native contracts are documented in [record~](https://docs.cycling74.com/legacy/max8/refpages/record~), [peakamp~](https://docs.cycling74.com/legacy/max8/refpages/peakamp~), and [buffer~](https://docs.cycling74.com/legacy/max8/refpages/buffer~).
+
+The new graph declares `savedialog` with three outlets: path, selected file type, and cancel. Cancel is routed from outlet 2. `opendialog` retains two outlets. The distinction follows the [Max 8 savedialog reference](https://docs.cycling74.com/legacy/max8/refpages/savedialog), and is checked against the generated patch rather than inferred from a mock.
+
+Small source waveforms follow their actual buffer/channel bindings independently of output generation. APG repeat and pitch edits retain the existing numeric validation and add step buttons. Five distinct high-contrast mode accents, 10-pixel native button rounding, and bottom attribution fit in 1100 × 900. The output channel height remains 144 pixels. The builder validates 303 objects and 271 connections, including native endpoints and presentation bounds. Previews remain labelled generated simulations; they do not establish native drawing, input permissions, driver operation, or audible recording on the user's machine.
+
+Final 1.3.0 checks:
+
+| Check | Result |
+| --- | --- |
+| Controller, separate modules and shipped bundle | 55 scenarios, 7,438 checks, 5,182 rendered-frame comparisons; no failures |
+| Source input recording, separate modules and shipped bundle | 22 scenarios, 156 checks; no failures |
+| Presentation feedback | 14 scenarios, 464 checks; no failures |
+| Generated native graph | 303 objects, 271 connections; valid ports, names, and native dialog routing |
+| All five mode previews and seven APG feedback states | Text fit, bounds, and visible overlap pass; images visually reviewed |
+| Both distributed JavaScript files | ECMAScript 5 parsing passes |
+
+Recording regressions include actual fixture PCM, STOP versus cancellation, the native capacity limit, source-read conflicts, delayed allocation/crop/position feedback, stale callbacks, saved-WAV verification, unsaved-set guards, and write timeout handling. An independent review reproduced two failures before their fixes: display-only snapshots could authorize an empty take, and a deferred cleanup resize could truncate a later capture. Separate stopped-position evidence and reserved cleanup banks now prevent those failures while preserving previous source data.
 
 ## Version 1.2.5: larger waveform display
 

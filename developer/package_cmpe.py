@@ -22,7 +22,7 @@ import zipfile
 
 
 ROOT = Path(__file__).resolve().parent.parent
-VERSION = "1.2.5"
+VERSION = "1.3.0"
 FOLDER = "CMPE_Max"
 MAIN = "CMPE_Variety_Pack.maxpat"
 REPOSITORY = "https://github.com/modelcollapse/CMPE-MAXMSP"
@@ -47,7 +47,7 @@ OPTIONAL = [
     "docs/images/apg-feedback-states.png",
 ]
 
-PLAYABLE_README = """# CMPE Variety Pack for Max — 1.2.5
+PLAYABLE_README = """# CMPE Variety Pack for Max — 1.3.0
 
 **Open `CMPE_Variety_Pack.maxpat` in Max.** It contains all five instruments.
 
@@ -78,8 +78,19 @@ No third-party externals, Python, or Node.js are needed to play this folder.
 
 ## Controls and feedback
 
-LOAD buttons have solid charcoal backgrounds with bold white labels. The
-neutral interface uses blue for the selected instrument and primary action.
+LOAD buttons have solid charcoal backgrounds with bold white labels. Rounded
+buttons use a distinct accent for each selected instrument: APG blue, ISJS teal,
+Many purple, RMHS copper, and SIOE rose. Original-author credit is at the bottom.
+
+Each sample card has a waveform and REC IN button. Select your input device,
+then REC IN captures input channels 1 and 2 into that slot for up to 60 seconds.
+Press the same button again or STOP to finish. A failed or cancelled take keeps
+the previous sample. APG/ISJS share three slots; Many/SIOE use sample 1.
+The sample card's SAVE button writes a new recording as a 24-bit WAV. Save new
+samples before SAVE SET, which stores their file paths.
+
+APG repeat and pitch fields are larger and have minus/plus step buttons.
+Repeat steps are one; pitch-range steps are 0.1. Direct number entry still works.
 
 GENERATE + PLAY builds the finite result and plays it. PLAY reuses the prepared
 result. NEW TAKE generates another randomized result and leaves it ready.
@@ -89,7 +100,8 @@ silence checking, rendering, ready, playback, and changes pending.
 Drag over either APG/SIOE waveform to select a range. Loop selected range repeats
 it; FULL RANGE restores the complete piece. Automatic waveform view scaling only
 changes the display, not playback or export level. Live scopes display the
-current signal, not a stored recording.
+current signal, not a stored recording. The small source waveforms appear as
+samples load; the large output waveform appears after generation.
 
 SAVE WAV exports the complete APG/SIOE result as 24-bit stereo WAV. RECORD WAV
 captures a live instrument; while stopped it arms capture for START. STOP REC
@@ -165,6 +177,7 @@ def payloads() -> tuple[dict[str, bytes], dict]:
     main = json.loads(contents[MAIN])["patcher"]
     assert VERSION in main.get("title", ""), "The generated main patch has a different version"
     assert b"CMPEUIFeedback" in contents["cmpe_variety.js"], "Rebuild the runtime with its feedback adapter"
+    assert b"CMPEInputState" in contents["cmpe_variety.js"], "Rebuild the runtime with sample input recording"
     for name, data in contents.items():
         if name.endswith(".maxpat"):
             patch = json.loads(data)["patcher"]

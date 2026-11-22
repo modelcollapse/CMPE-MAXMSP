@@ -40,6 +40,7 @@ test("menus and panels use native solid fills and buttons do not invent borders"
     } else if (box.maxclass === "textbutton") {
       check(!Object.hasOwn(box, "border") && !Object.hasOwn(box, "bordercolor"),
         box.id + " does not rely on unsupported outline attributes");
+      equal(box.rounded, 10, box.id + " uses the documented native 10-pixel corner radius");
     }
   }
   const h = makeHost(), c = h.c;
@@ -54,10 +55,23 @@ test("menus and panels use native solid fills and buttons do not invent borders"
 test("LOAD remains distinct and readable through loading, playback, and mode changes", () => {
   const h = makeHost(), c = h.c; h.ready();
   const color = (name, selector) => lastMessage(h, name, selector).args;
+  const modeAccents = new Set();
+  const waveformBackground = patch.boxes.find(({box}) => box.varname === "wave_l").box.bgcolor;
   for (let mode = 0; mode < 5; mode++) {
     c.mode(mode); c.feedbackrefresh();
+    const accent = color("mode" + mode, "bgcolor");
+    modeAccents.add(JSON.stringify(accent));
     check(contrast(color("mode" + mode, "textcolor"), color("mode" + mode, "bgcolor")) >= 4.5,
       "selected mode retains readable text");
+    equal(color("source_accent1", "bgfillcolor"), accent,
+      "source accent follows the current instrument");
+    check(contrast(color("wave_l", "waveformcolor"), waveformBackground) >= 4.5,
+      "the current instrument trace stays visible on the waveform background");
+    if (mode > 0) {
+      c.param(0, mode === 4 ? 10 : .5);
+      equal(color("mode" + mode, "bgcolor"), accent,
+        "parameter edits preserve the current instrument accent");
+    }
     const required = mode === 3 ? 0 : (mode === 2 || mode === 4 ? 1 : 3);
     for (let slot = 1; slot <= required; slot++) {
       const name = "load" + slot;
@@ -74,6 +88,7 @@ test("LOAD remains distinct and readable through loading, playback, and mode cha
       equal(color(name, "usetextovercolor"), [1], "native hover color is enabled");
     }
   }
+  equal(modeAccents.size, 5, "each instrument uses a distinct selected color");
   c.mode(0); c.play(); h.until(() => c.state === "playing");
   equal(color("load1", "ignoreclick"), [1], "presentation styling preserves the playback lock");
   check(contrast(color("load1", "textcolor"), color("load1", "bgcolor")) >= 4.5,
@@ -88,6 +103,49 @@ test("LOAD remains distinct and readable through loading, playback, and mode cha
   h.source(0);
   check(contrast(color("load1", "textcolor"), color("load1", "bgcolor")) >= 7,
     "completed source read restores the available style");
+  c.shutdown();
+});
+
+test("sample controls follow instrument slots and APG steps stay in APG", () => {
+  const h = makeHost(), c = h.c; h.ready();
+  const steps = ["repeat_down1", "repeat_up1", "repeat_down2", "repeat_up2",
+    "repeat_down3", "repeat_up3", "pitch_down", "pitch_up"];
+  for (let mode = 0; mode < 5; mode++) {
+    c.mode(mode);
+    const required = mode === 3 ? 0 : (mode === 2 || mode === 4 ? 1 : 3);
+    for (const name of steps)
+      equal(h.objects.get(name).hidden, mode === 0 ? 0 : 1, name + " follows APG visibility");
+    for (let slot = 1; slot <= 3; slot++) {
+      for (const prefix of ["source_record", "source_save", "source_wave", "input_state"])
+        equal(h.objects.get(prefix + slot).hidden, slot <= required ? 0 : 1,
+          prefix + slot + " follows the instrument's actual sample slots");
+    }
+  }
+  c.shutdown();
+});
+
+test("input capture feedback distinguishes recording, preparation, and sample saving", () => {
+  const h = makeHost(), c = h.c; h.ready();
+  const inputState = c.CMPEInputState;
+  const priorRenderInfo = h.values.get("render_info");
+  let capture = {phase: "recording", busy: true, slot: 0, elapsedMs: 15000, limitMs: 60000};
+  c.CMPEInputState = () => capture;
+  c.feedbackrefresh();
+  equal(view(h).badge, "RECORDING INPUT", "input capture is distinct from output-file recording");
+  check(/^Recording sample 1/.test(h.values.get("render_info")), "capture replaces the old generation hint in the visible feedback row");
+  near(view(h).progress, .25, 1e-12, "recording progress reflects the actual elapsed fraction of its limit");
+  check(contrast(lastMessage(h, "state_badge", "textcolor").args,
+    lastMessage(h, "state_badge", "bgcolor").args) >= 4.5, "recording badge remains readable");
+  equal(lastMessage(h, "load1", "bgcolor").args, lastMessage(h, "repeat1", "bgcolor").args,
+    "source loading and repeat editing share the unavailable style during capture");
+  capture = {phase: "trimming", busy: true, slot: 0, elapsedMs: 15000, limitMs: 60000};
+  c.feedbackrefresh(); equal(view(h).badge, "FINISHING INPUT", "committing recorded audio is explicit");
+  capture = {phase: "saving", busy: false, slot: -1, sources: [{saving: true}, {}, {}]};
+  c.feedbackrefresh(); equal(view(h).badge, "SAVING SAMPLE", "saving a sample is distinct from a rendered take");
+  check(/^Writing sample 1/.test(h.values.get("render_info")), "the writing source is identified without globally blocking playback");
+  c.CMPEInputState = inputState;
+  c.feedbackrefresh();
+  equal(h.values.get("render_info"), priorRenderInfo, "the normal instrument hint returns after input activity");
   c.shutdown();
 });
 
@@ -179,14 +237,42 @@ test("display zoom is bounded, stereo-consistent, and never changes audio sample
   const before = h.output().data.map(ch => Array.from(ch));
   const expected = c.renderPeak > c.silenceThreshold ? Math.max(1, Math.min(64, .82 / c.renderPeak)) : 1;
   near(view(h).waveZoom, expected, 1e-12, "completed APG peak determines display scale");
-  equal(lastMessage(h, "wave_l", "vzoom").args, [expected], "left waveform receives display scale");
-  equal(lastMessage(h, "wave_r", "vzoom").args, [expected], "right waveform receives identical display scale");
+  equal(lastMessage(h, "wave_l", "vzoom").args, [1 / expected], "left waveform receives the reciprocal native amplitude range");
+  equal(lastMessage(h, "wave_r", "vzoom").args, [1 / expected], "right waveform receives identical native amplitude range");
   c.feedbackwavezoom(4);
+  equal(lastMessage(h, "wave_l", "vzoom").args, [.25], "4x visual gain means a native +/-0.25 range");
+  equal(lastMessage(h, "wave_r", "vzoom").args, [.25], "both channels expand at the same gain");
   equal(h.output().data.map(ch => Array.from(ch)), before, "visual scaling leaves every PCM sample unchanged");
   check(/visual only/.test(h.values.get("wave_scale")), "display-only amplification is labelled");
   const count = h.events.length; c.feedbackrefresh(); c.feedbackrefresh();
   equal(h.events.length, count, "unchanged feedback does not emit redundant native messages");
   c.mode(4); equal(view(h).waveZoom, 1, "mode changes discard previous output display scale");
+  c.shutdown();
+});
+
+test("quiet rendered audio expands within centered full-buffer native waveform views", () => {
+  const h = makeHost(), c = h.c;
+  c.loadbang(); h.advance(50);
+  for (let slot = 0; slot < 3; slot++) h.source(slot, {sample: (channel, i) => .04 * Math.sin(i * .07 + channel * .2)});
+  c.samplerate(2000); c.dspstate(1); h.renderOnly();
+  const actualPeak = h.output().data.reduce((peak, channel) =>
+    channel.reduce((maximum, sample) => Math.max(maximum, Math.abs(sample)), peak), 0);
+  check(actualPeak > c.silenceThreshold && actualPeak < .1, "fixture contains quiet audible PCM");
+  // Cycling74's index~ help uses vzoom .5 and voffset 1 for a 0..1
+  // spectral-gain editor. vzoom specifies range, so projected amplitude divides
+  // by it. This asserts the native contract, not execution of Max's painter.
+  // https://github.com/Cycling74/max-sdk/blob/15b6fe17eedc7c8a8b4ee249706d3aaf21e192fa/help/index~.maxhelp
+  for (const [name, channel] of [["wave_l", 1], ["wave_r", 2]]) {
+    const box = patch.boxes.find(entry => entry.box.varname === name).box;
+    equal(box.voffset, 0, name + " centers the bipolar waveform");
+    equal(box.chanoffset, channel, name + " uses native 1-based channel numbering");
+    equal(lastMessage(h, name, "set").args, [c.outputName, channel], name + " is bound to the rendered stereo buffer");
+    const range = lastMessage(h, name, "vzoom").args[0];
+    check(range >= 1 / 64 && range < 1, name + " narrows the range to enlarge quiet data");
+    near(actualPeak / range, .82, 1e-6, name + " projects the real quiet peak to 82% of the half-height");
+  }
+  equal(lastMessage(h, "wave_link", "list").args,
+    [0, c.outputDurationMs, 0, c.outputDurationMs], "both displays cover the complete output buffer");
   c.shutdown();
 });
 

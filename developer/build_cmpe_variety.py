@@ -13,7 +13,7 @@ import json
 ROOT = Path(__file__).resolve().parent.parent
 SOURCE = ROOT / "APG_Wave.maxpat"
 TARGET = ROOT / "CMPE_Variety_Pack.maxpat"
-WIDTH, HEIGHT = 1100, 836
+WIDTH, HEIGHT = 1100, 900
 
 
 def rgba(hex_color, alpha=1.0):
@@ -32,12 +32,13 @@ BLUE = rgba("#174FCB")
 CHARCOAL = rgba("#263140")
 ROSE = rgba("#A82132")
 ROSE_TINT = rgba("#FFF1F2")
-MODE_COLORS = [BLUE] * 5
+MODE_COLORS = [BLUE, rgba("#006B64"), rgba("#6C3BAA"),
+               rgba("#8A4B14"), rgba("#A32E58")]
 ALL_MODES = set(range(5))
 
 patch = copy.deepcopy(json.loads(SOURCE.read_text())["patcher"])
 patch["rect"] = [80, 80, WIDTH, HEIGHT]
-patch["title"] = "CMPE Variety Pack 1.2.5 / APG · ISJS · Many · RMHS · SIOE"
+patch["title"] = "CMPE Variety Pack 1.3.0 / APG · ISJS · Many · RMHS · SIOE"
 patch["openinpresentation"] = 1
 patch["bgcolor"] = CANVAS
 patch["bglockedcolor"] = CANVAS
@@ -118,7 +119,7 @@ def comment(id, text, rect, modes=None, size=17, **attrs):
 def button(id, text, rect, modes=None, selected=False, size=17, **attrs):
     return add(id, "textbutton", rect, text, 1, 3, ["", "", "int"],
                present=True, modes=modes, fontsize=float(size), mode=0,
-               outputmode=1, usegradient=0, rounded=6,
+               outputmode=1, usegradient=0, rounded=10,
                bgcolor=BLUE if selected else LIGHT,
                bgoncolor=BLUE if selected else BORDER,
                textcolor=WHITE if selected else BLACK,
@@ -316,101 +317,127 @@ boxes["controller"]["text"] = "js cmpe_variety.js"
 # Keep the full collection visible in one window, with sources, the output,
 # transport, and actual engine feedback in distinct visual groups.
 layout = {
-    "title": [20, 10, 384, 36],
+    "title": [20, 10, 580, 36],
     "demo_button": [620, 12, 90, 32],
     "test_audio": [718, 12, 126, 32],
     "save_preset": [852, 12, 110, 32],
     "load_preset": [970, 12, 110, 32],
-    "audio_panel": [20, 50, 1060, 60],
-    "audio_driver_label": [32, 52, 182, 20],
-    "audio_driver_menu": [32, 74, 182, 28],
-    "audio_option1_label": [226, 52, 242, 20],
-    "audio_option1_menu": [226, 74, 242, 28],
-    "audio_option2_label": [480, 52, 242, 20],
-    "audio_option2_menu": [480, 74, 242, 28],
-    "audio_status": [736, 52, 332, 20],
-    "audio_setup": [736, 74, 124, 28],
-    "audio_refresh": [868, 74, 92, 28],
-    "audio_power": [968, 74, 100, 28],
-    "mode_info": [24, 154, 1052, 22],
+    "audio_panel": [20, 48, 1060, 58],
+    "audio_driver_label": [32, 50, 182, 20],
+    "audio_driver_menu": [32, 72, 182, 28],
+    "audio_option1_label": [226, 50, 242, 20],
+    "audio_option1_menu": [226, 72, 242, 28],
+    "audio_option2_label": [480, 50, 242, 20],
+    "audio_option2_menu": [480, 72, 242, 28],
+    "audio_status": [736, 50, 332, 20],
+    "audio_setup": [736, 72, 124, 28],
+    "audio_refresh": [868, 72, 92, 28],
+    "audio_power": [968, 72, 100, 28],
+    "mode_info": [24, 146, 1052, 20],
     "no_samples": [32, 254, 1036, 40],
-    "output_label": [32, 334, 204, 24],
-    "duration": [244, 334, 210, 24],
-    "monitor_label": [752, 334, 116, 24],
-    "monitor_level": [872, 332, 80, 28],
-    "meter_L": [980, 334, 88, 11],
-    "meter_R": [980, 349, 88, 11],
-    "channel_l": [32, 430, 20, 24],
-    "channel_r": [32, 584, 20, 24],
-    "wave_l": [56, 370, 1012, 144],
-    "wave_r": [56, 524, 1012, 144],
-    "scope_l": [56, 370, 1012, 144],
-    "scope_r": [56, 524, 1012, 144],
-    "xy_pad": [56, 370, 684, 298],
-    "scope_xy": [756, 370, 312, 298],
-    "selection_info": [32, 676, 580, 22],
-    "time": [856, 676, 212, 22],
-    "loop_toggle": [632, 676, 22, 22],
-    "loop_label": [664, 674, 180, 28],
-    "clear_button": [720, 710, 172, 44],
-    "save_button": [904, 710, 176, 44],
-    "record_button": [720, 710, 360, 44],
-    "play_button": [20, 710, 328, 44],
-    "stop_button": [360, 710, 148, 44],
-    "new_button": [520, 710, 188, 44],
-    "render_info": [276, 764, 792, 22],
-    "status": [276, 790, 792, 38],
-    "progress": [32, 816, 228, 10],
-    "credit_rule": [20, 760, 1060, 1],
-    "original_credit": [420, 6, 190, 20],
-    "original_link": [420, 26, 190, 20],
+    "output_label": [32, 386, 204, 24],
+    "duration": [244, 386, 210, 24],
+    "monitor_label": [752, 386, 116, 24],
+    "monitor_level": [872, 384, 80, 28],
+    "meter_L": [980, 386, 88, 11],
+    "meter_R": [980, 401, 88, 11],
+    "channel_l": [32, 480, 20, 24],
+    "channel_r": [32, 634, 20, 24],
+    "wave_l": [56, 420, 1012, 144],
+    "wave_r": [56, 574, 1012, 144],
+    "scope_l": [56, 420, 1012, 144],
+    "scope_r": [56, 574, 1012, 144],
+    "xy_pad": [56, 420, 684, 298],
+    "scope_xy": [756, 420, 312, 298],
+    "selection_info": [32, 726, 580, 22],
+    "time": [856, 726, 212, 22],
+    "loop_toggle": [632, 726, 22, 22],
+    "loop_label": [664, 724, 180, 28],
+    "clear_button": [720, 760, 172, 42],
+    "save_button": [904, 760, 176, 42],
+    "record_button": [720, 760, 360, 42],
+    "play_button": [20, 760, 328, 42],
+    "stop_button": [360, 760, 148, 42],
+    "new_button": [520, 760, 188, 42],
+    "render_info": [276, 812, 792, 20],
+    "status": [276, 834, 792, 36],
+    "progress": [32, 852, 228, 10],
+    "credit_rule": [20, 874, 1060, 1],
+    "original_credit": [24, 876, 680, 20],
+    "original_link": [812, 876, 268, 20],
 }
 for id, rect in layout.items():
     position(id, rect)
 position("title", layout["title"], text="CMPE / Variety Pack", fontsize=30.0, fontface=1)
 for i in range(5):
-    position("mode" + str(i), [20 + i * 215, 116, 200, 34], fontsize=20.0)
+    position("mode" + str(i), [20 + i * 215, 112, 200, 32], fontsize=20.0)
 
 for i, x in enumerate([20, 378, 736], 1):
-    add("source_card" + str(i), "panel", [x, 180, 344, 136],
+    source_modes = {0, 1, 2, 4} if i == 1 else {0, 1}
+    add("source_card" + str(i), "panel", [x, 170, 344, 200],
         ins=1, outs=0, present=True, bgcolor=WHITE,
         border=1, bordercolor=BORDER, rounded=10, background=1, ignoreclick=1)
-    add("source_accent" + str(i), "panel", [x + 1, 181, 342, 4],
-        ins=1, outs=0, present=True, bgcolor=CHARCOAL,
+    add("source_accent" + str(i), "panel", [x + 1, 171, 342, 4],
+        ins=1, outs=0, present=True, bgcolor=BLUE,
         border=0, rounded=0, background=1, ignoreclick=1)
-    position("source_label" + str(i), [x + 12, 190, 112, 22],
+    position("source_label" + str(i), [x + 12, 178, 112, 22],
              fontsize=16.0, fontface=1)
-    comment("source_state" + str(i), "EMPTY", [x + 130, 192, 100, 20],
-            size=16, textcolor=MUTED, modes=({0, 1, 2, 4} if i == 1 else {0, 1}))
-    position("load" + str(i), [x + 240, 188, 92, 30], fontsize=16.0)
-    position("file" + str(i), [x + 12, 222, 320, 36], fontsize=16.0)
-    position("repeat_label" + str(i), [x + 12, 262, 152, 20], fontsize=16.0)
-    position("repeat" + str(i), [x + 12, 284, 152, 28], fontsize=20.0)
+    comment("source_state" + str(i), "EMPTY", [x + 130, 180, 100, 20],
+            size=16, textcolor=MUTED, modes=source_modes)
+    comment("input_state" + str(i), "", [x + 240, 180, 92, 20],
+            size=16, textcolor=ROSE, modes=source_modes)
+    position("file" + str(i), [x + 12, 202, 320, 36], fontsize=16.0)
+    position("load" + str(i), [x + 12, 242, 104, 30], fontsize=16.0)
+    button("source_record" + str(i), "REC IN", [x + 124, 242, 104, 30],
+           modes=source_modes, size=16, fontface=1,
+           hint="Record the selected audio input into sample " + str(i) + ". Click again or press STOP to finish.")
+    position("source_record" + str(i), [x + 124, 242, 104, 30],
+             bgcolor=ROSE_TINT, bgoncolor=rgba("#F4C6CC"),
+             textcolor=ROSE, textoncolor=ROSE, textovercolor=ROSE)
+    button("source_save" + str(i), "SAVE", [x + 236, 242, 96, 30],
+           modes=source_modes, size=16,
+           hint="Save recorded input from sample " + str(i) + " to a WAV file. Available after recording.")
+    add("source_wave" + str(i), "waveform~", [x + 12, 276, 320, 28],
+        ins=5, outs=6, types=["float", "float", "float", "float", "list", "list"],
+        present=True, modes=source_modes, buffername="apgw_source_init" + str(i),
+        chanoffset=1, allowdrag=0, setmode=0, labels=0, quiet=1, ignoreclick=1,
+        bgcolor=BLACK, waveformcolor=rgba("#78B7FF"), gridcolor=MUTED,
+        bordercolor=BLACK, vzoom=1.0, voffset=0.0,
+        hint="Preview of sample " + str(i) + ". Recorded input appears here after recording finishes.")
+    position("repeat_label" + str(i), [x + 12, 308, 152, 20], fontsize=16.0)
+    position("repeat" + str(i), [x + 52, 332, 72, 34], fontsize=24.0)
+    button("repeat_down" + str(i), "−", [x + 12, 332, 34, 34],
+           modes={0}, size=22, hint="Decrease sample " + str(i) + " repeats by one.")
+    button("repeat_up" + str(i), "+", [x + 130, 332, 34, 34],
+           modes={0}, size=22, hint="Increase sample " + str(i) + " repeats by one.")
     group_modes = {3} if i == 1 else {2, 3, 4}
-    comment("group_label" + str(i), "", [x + 12, 190, 320, 22],
+    comment("group_label" + str(i), "", [x + 12, 178, 320, 22],
             modes=group_modes, size=16, fontface=1, textcolor=MUTED)
-    comment("group_help" + str(i), "", [x + 12, 222, 320, 36],
+    comment("group_help" + str(i), "", [x + 12, 202, 320, 36],
             modes=group_modes, size=16, textcolor=MUTED)
 hide_original("no_samples")
-hide_original("credit_rule")
 for i in range(6):
     x = [32, 390, 748][i % 3] + (168 if i >= 3 else 0)
-    position("param_label" + str(i), [x, 262, 152, 20], fontsize=16.0)
-    position("param" + str(i), [x, 284, 152, 28], fontsize=20.0)
-position("pitch_label", [200, 262, 152, 20], fontsize=16.0)
-position("pitch", [200, 284, 152, 28], fontsize=20.0)
-position("menu_label", [916, 262, 152, 20], fontsize=16.0)
-position("mode_menu", [916, 284, 152, 28], fontsize=16.0)
+    position("param_label" + str(i), [x, 308, 152, 20], fontsize=16.0)
+    position("param" + str(i), [x, 332, 152, 34], fontsize=20.0)
+position("pitch_label", [200, 308, 152, 20], fontsize=16.0)
+position("pitch", [240, 332, 72, 34], fontsize=24.0)
+button("pitch_down", "−", [200, 332, 34, 34], modes={0}, size=22,
+       hint="Decrease the pitch range for all samples by 0.1.")
+button("pitch_up", "+", [318, 332, 34, 34], modes={0}, size=22,
+       hint="Increase the pitch range for all samples by 0.1.")
+position("menu_label", [916, 308, 152, 20], fontsize=16.0)
+position("mode_menu", [916, 332, 152, 34], fontsize=16.0)
 
-add("output_panel", "panel", [20, 324, 1060, 378], ins=1, outs=0,
+add("output_panel", "panel", [20, 378, 1060, 374], ins=1, outs=0,
     present=True, bgcolor=WHITE, border=1, bordercolor=BORDER,
     rounded=10, background=1, ignoreclick=1)
-add("feedback_panel", "panel", [20, 760, 1060, 72], ins=1, outs=0,
+add("feedback_panel", "panel", [20, 808, 1060, 64], ins=1, outs=0,
     present=True, bgcolor=WHITE, border=1, bordercolor=BORDER, rounded=10,
     background=1, ignoreclick=1)
-button("state_badge", "LOADING", [32, 774, 228, 28], size=16,
+button("state_badge", "LOADING", [32, 816, 228, 28], size=16,
        ignoreclick=1, fontface=1)
-comment("wave_scale", "Wave view 1x", [468, 334, 272, 24], size=16,
+comment("wave_scale", "Wave view 1x", [468, 386, 272, 24], size=16,
         textcolor=MUTED, hint="The waveform is enlarged for visibility only. Audio playback and export levels do not change.")
 
 # Display chrome is intentionally quieter than the current action. Native
@@ -421,7 +448,7 @@ for b in boxes.values():
     if b["maxclass"] == "comment":
         b["bgcolor"] = [0, 0, 0, 0]
     if b["maxclass"] == "textbutton":
-        b.update(rounded=6, usegradient=0,
+        b.update(rounded=10, usegradient=0,
                  usebgoncolor=1, usetextovercolor=1)
         b.pop("border", None)
         b.pop("bordercolor", None)
@@ -432,7 +459,7 @@ position("play_button", layout["play_button"], fontsize=22.0, fontface=1)
 position("stop_button", layout["stop_button"], fontsize=20.0)
 position("new_button", layout["new_button"], fontsize=20.0)
 position("original_credit", layout["original_credit"],
-         text="Original: Joo Won Park", fontsize=16.0)
+         text="Original CMPE by Joo Won Park", fontsize=16.0)
 position("original_link", layout["original_link"], bgcolor=CANVAS,
          bgoncolor=LIGHT, fontsize=16.0)
 for id in ("audio_setup", "audio_refresh", "audio_power"):
@@ -518,17 +545,80 @@ for key, selector, x in [("setup", "audiosetup", 1460),
     wire("audio_" + key, 0, "audio_" + key + "_msg")
     wire("audio_" + key + "_msg", 0, "controller")
 
+# Direct input capture is separate from recording a live instrument to disk.
+# Four small initial banks allow one staging take while all three source slots
+# retain their current recordings. The controller allocates only on REC IN and
+# adopts a verified, stopped bank; an interrupted take never overwrites a source.
+# record~'s two rightmost inlets are start/end, after its two signal inlets.
+# https://docs.cycling74.com/reference/record~/
+obj("input_adc", "adc~ 1 2", 1460, 2740, 180,
+    ins=1, outs=2, types=["signal", "signal"])
+obj("input_recorder", "record~ #0_input_bank0 2 @loop 0 @append 0", 1460, 2790, 440,
+    ins=4, outs=1, types=["signal"])
+wire("input_adc", 0, "input_recorder", 0)
+wire("input_adc", 1, "input_recorder", 1)
+obj("input_position_peak", "peakamp~ 0", 1460, 2840, 180,
+    ins=2, outs=1, types=["float"])
+obj("input_position_tag", "prepend inputposition 0 0", 1460, 2880, 270)
+obj("input_progress", "snapshot~ 50", 1760, 2840, 180,
+    ins=2, outs=1, types=["float"])
+obj("input_progress_tag", "prepend inputprogress 0", 1760, 2880, 270)
+wire("input_recorder", 0, "input_position_peak")
+wire("input_recorder", 0, "input_progress")
+wire("input_position_peak", 0, "input_position_tag")
+wire("input_position_tag", 0, "controller")
+wire("input_progress", 0, "input_progress_tag")
+wire("input_progress_tag", 0, "controller")
+for bank in range(4):
+    x = 1460 + bank * 280
+    obj("input_bank" + str(bank), "buffer~ #0_input_bank" + str(bank) + " 1 2",
+        x, 2940, 265, ins=1, outs=2, types=["float", "bang"])
+    obj("input_bank_done" + str(bank), "prepend inputbankdone " + str(bank),
+        x, 2980, 265)
+    wire("input_bank" + str(bank), 1, "input_bank_done" + str(bank))
+    wire("input_bank_done" + str(bank), 0, "controller")
+for slot in range(3):
+    x = 1460 + slot * 280
+    for action, selector, y in [("record", "inputrecord", 3040),
+                                ("save", "inputsave", 3080)]:
+        name = "source_" + action + str(slot + 1)
+        msg(name + "_msg", selector + " " + str(slot), x, y, 265)
+        wire(name, 0, name + "_msg")
+        wire(name + "_msg", 0, "controller")
+    for direction, value, y in [("down", -1, 3140), ("up", 1, 3180)]:
+        name = "repeat_" + direction + str(slot + 1)
+        msg(name + "_msg", "repeatstep " + str(slot) + " " + str(value), x, y, 265)
+        wire(name, 0, name + "_msg")
+        wire(name + "_msg", 0, "controller")
+for direction, value, y in [("down", "-0.1", 3240), ("up", "0.1", 3280)]:
+    name = "pitch_" + direction
+    msg(name + "_msg", "pitchstep " + value, 1460, y, 265)
+    wire(name, 0, name + "_msg")
+    wire(name + "_msg", 0, "controller")
+
 # File operations are requested by the controller so record/preset state can be
 # checked before a dialog opens. Only the resulting path returns through a cord.
 for id, command, selector, x, y in [
     ("record_dialog", "savedialog WAVE", "recordpath", 1460, 1660),
     ("preset_save_dialog", "savedialog JSON", "presetwrite", 1740, 1660),
     ("preset_load_dialog", "opendialog JSON", "presetread", 2020, 1660),
+    ("input_save_dialog", "savedialog WAVE", "inputsavepath", 2300, 1660),
 ]:
-    obj(id, command, x, y, 235, outs=2, types=["", "bang"])
+    save_dialog = command.startswith("savedialog ")
+    obj(id, command, x, y, 235, outs=3 if save_dialog else 2,
+        types=["", "", "bang"] if save_dialog else ["", "bang"])
     obj(id + "_path", "prepend " + selector, x, y + 40, 235)
     wire(id, 0, id + "_path")
     wire(id + "_path", 0, "controller")
+msg("input_save_cancel", "inputsavecancel", 2300, 1740, 235)
+wire("input_save_dialog", 2, "input_save_cancel")
+wire("input_save_cancel", 0, "controller")
+# savedialog has path, file type, and cancel outlets; opendialog has only path
+# and cancel. Correct the inherited finite-export dialog metadata as well.
+# https://docs.cycling74.com/legacy/max8/refpages/savedialog
+for b in boxes.values():
+    if b.get("maxclass") == "newobj" and b.get("text", "").startswith("savedialog "):
+        b.update(numinlets=1, numoutlets=3, outlettype=["", "", "bang"])
 for source, selector, x in [("save_preset", "presetsave", 1740),
                             ("load_preset", "presetload", 2020)]:
     msg(source + "_msg", selector, x, 1600, 180)
@@ -628,11 +718,11 @@ print(f"Built {TARGET.name}: {len(boxes)} objects, {len(patch['lines'])} connect
 
 SOURCES = ["apg_wave_plan.js", "apg_render.js", "cmpe_model.js",
            "apg_wave_controller.js", "cmpe_extension.js", "cmpe_audio_settings.js",
-           "cmpe_ui_feedback.js"]
+           "cmpe_ui_feedback.js", "cmpe_input_recording.js"]
 source_paths = [ROOT / "developer" / name for name in SOURCES]
 if all(path.is_file() for path in source_paths):
     (ROOT / "cmpe_variety.js").write_text("\n\n".join(path.read_text().rstrip() for path in source_paths) + "\n")
-    print("Bundled cmpe_variety.js from the seven source modules.")
+    print("Bundled cmpe_variety.js from the eight source modules.")
 else:
     missing = [path.name for path in source_paths if not path.is_file()]
     print("Runtime sources not all present; bundling deferred: " + ", ".join(missing))

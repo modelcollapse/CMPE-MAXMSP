@@ -21,9 +21,9 @@ function paint() {
     mgraphics.set_source_rgba(123 / 255, 134 / 255, 148 / 255, 1);
     mgraphics.move_to(x, 1); mgraphics.line_to(x, h - 1); mgraphics.stroke();
     mgraphics.move_to(1, y); mgraphics.line_to(w - 1, y); mgraphics.stroke();
-    mgraphics.set_source_rgba(23 / 255, 79 / 255, 203 / 255, 0.14);
+    mgraphics.set_source_rgba(0, 107 / 255, 100 / 255, 0.14);
     mgraphics.ellipse(x - 13, y - 13, 26, 26); mgraphics.fill();
-    mgraphics.set_source_rgba(23 / 255, 79 / 255, 203 / 255, 1);
+    mgraphics.set_source_rgba(0, 107 / 255, 100 / 255, 1);
     mgraphics.ellipse(x - 7, y - 7, 14, 14); mgraphics.fill();
     mgraphics.set_source_rgba(23 / 255, 32 / 255, 43 / 255, 1);
     mgraphics.select_font_face("Arial"); mgraphics.set_font_size(17);

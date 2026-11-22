@@ -12,7 +12,7 @@ The patch is designed for Max 8 or Max 9, using stock Max/MSP objects. Python an
 
 The three included synthetic demo sounds load automatically. **DEMO** reloads them. **TEST SOUND** produces a short independent tone to check the current Max audio output. Choose an instrument using the five buttons across the top.
 
-**LOAD** uses a solid charcoal button with bold white text on each white source card. The selected instrument and main action are blue. Temporarily unavailable controls remain readable in gray; wait until the source finishes loading or stop the performance before replacing a sample.
+**LOAD** uses a solid charcoal button with bold white text on each white source card. The selected instrument and main action use that mode's accent: APG blue, ISJS teal, Many purple, RMHS copper, and SIOE rose. Buttons have rounded corners. Temporarily unavailable controls remain readable in gray; wait until the source finishes loading or stop the performance before replacing a sample. The original-author credit is at the bottom.
 
 ## Choose an audio interface
 
@@ -42,6 +42,20 @@ Use the relevant **LOAD** button to select a mono or stereo WAV/AIFF file. Stop 
 
 ISJS, Many, and RMHS start their audio engines immediately after Max audio becomes available. They do not render a whole performance before playing. Many deliberately fades its layers in over 2–4 seconds. RMHS deliberately introduces its partials over 3–20 seconds. Their status messages identify those fades.
 
+## Record directly into the sample slots
+
+1. Select your input interface using the driver's input-device option or **AUDIO SETUP**. Input channels 1 and 2 feed the stereo sample recorder.
+2. Press **REC IN** on the desired sample card. The patch stops its current performance, starts Max audio if needed, and captures up to 60 seconds into a separate buffer.
+3. Press the same button again or **STOP** to finish. The elapsed capture time is shown while recording. The source changes only after the stopped recording's length and format have been checked.
+4. Use the recorded source immediately: APG and ISJS share all three slots; Many and SIOE use sample 1. RMHS has no sample buffers because it synthesizes its own sound.
+5. Press that sample card's **SAVE** button and choose a WAV destination to keep the take. Save each new source before **SAVE SET**.
+
+Each required source has its own small waveform, visible before generating any APG/SIOE result. The large stereo display shows the generated composition; it remains empty until **GENERATE + PLAY** or **NEW TAKE** has produced output.
+
+Input recording is separate from **RECORD WAV**, which captures a live instrument's output. REC IN does not monitor the raw input through the output. Opening the patch never begins input recording. A mode change, settings restore, device change, DSP shutdown, or sample-rate change cancels an unfinished input take and retains the earlier source. STOP finishes and adopts a valid take. A failed or empty take leaves the previous sample intact.
+
+Recorded samples initially exist in memory. Their SAVE action writes 24-bit stereo WAV and clears the unsaved state only after the write completes and the file is checked. SAVE SET is blocked while recorded sources still need saving. Loading a different sample or closing Max discards an unsaved source.
+
 ## Transport and feedback
 
 **GENERATE + PLAY** appears for APG and SIOE when a result is needed. It generates the audio, then plays the selected range. Once prepared, the button reads **PLAY** and reuses the cached result. **NEW TAKE** generates a fresh randomized result and leaves it ready to play. Source or generation-setting changes return the button to GENERATE + PLAY.
@@ -60,7 +74,7 @@ Finite waveforms are automatically enlarged vertically according to the complete
 
 ## APG: audio palindrome generator
 
-Set each sample's repeat maximum from 1–20 and the random pitch range from 0–1. PLAY creates mirrored pairs of events from all three sources. The stored stereo result is sample-symmetric.
+Set each sample's repeat maximum from 1–20 and the random pitch range from 0–1. The large number fields accept direct entry. Adjacent **− / +** buttons change repeat maxima by one and pitch range by 0.1. PLAY creates mirrored pairs of events from all three sources. The stored stereo result is sample-symmetric.
 
 Automatic trimming removes long quiet edges equally from both ends, preserving that symmetry. Openings of at least 250 ms are shortened to approximately 25 ms before the first sample above −100 dBFS in either channel. Pauses inside the composition remain. An entirely silent or subthreshold result retains its length and receives a status message.
 
@@ -134,6 +148,8 @@ Live recordings are 24-bit stereo WAV files taken **before the listening-volume 
 If a source is already loading, the settings wait for that read to finish before loading the saved files. The status shows that wait. STOP or choosing another instrument cancels the queued settings change. Empty source slots in a saved set clear the corresponding current samples.
 
 The file stores the selected instrument, instrument controls, listening volume, loop-enabled state, and source-file paths. It does **not** embed the sample audio, a rendered composition, a performance, random seeds, or audio-interface settings. Keep the referenced audio files available at their saved locations; use LOAD to relink a moved file. Regenerating a composition or restarting a performance can produce a different randomized result.
+
+If a source came from REC IN, use the sample card's SAVE button first. This creates the audio file and its path before the settings file is written.
 
 ## If you hear nothing
 

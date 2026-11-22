@@ -63,6 +63,10 @@ for(let mode=0;mode<5;mode++){
             if(selector==='set'){
                 if(this.maxclass==='comment')this.text=String(args[0]);else this.value=args[0];
                 if(this.maxclass==='jsui')this.xy=args.slice(0,2);
+                if(this.maxclass==='waveform~'){
+                    this.buffername=String(args[0]);
+                    if(args.length>1)this.chanoffset=Number(args[1]);
+                }
             }else if(selector==='text')this.text=String(args[0]);
             else if(['bgcolor','bgfillcolor','bgoncolor','bgovercolor','textcolor','textoncolor','textovercolor','bordercolor','waveformcolor','gridcolor','selectioncolor','knobcolor','elementcolor','fgcolor','ignoreclick','active','usebgoncolor','usetextovercolor','applycolors','vzoom','line','fontsize','fontface'].includes(selector))this[selector]=args.length>1?args:args[0];
             else if(selector==='clear'&&this.maxclass==='umenu')this.items=[];
@@ -76,7 +80,7 @@ for(let mode=0;mode<5;mode++){
                 const slot=Number(this.varname.slice(-1))-1,target=names.get(this.varname),file=args[0];
                 const task=new Task(()=>{buffers.set(target,wav(file));context.loaded(slot);},null);task.schedule(1);
             }
-            if(this.varname==='output_buffer'){
+            if(names.has(this.varname)){
                 const b=buffers.get(names.get(this.varname));
                 if(selector==='sr')b.sr=Number(args[0]);
                 if(selector==='sizeinsamps'){b.frames=Number(args[0]);b.channels=args.length>1?Number(args[1]):b.channels;b.data=Array.from({length:b.channels},()=>new Float32Array(b.frames));}
@@ -105,16 +109,23 @@ for(let mode=0;mode<5;mode++){
         now=Math.max(clock(),t.due);cpu=0;t.active=false;t.fn.call(t.self);now+=cpu;cpu=0;
     }}
     function snapshot(label, detail){
-        const b=buffers.get(context.outputName),bins=760;
-        const waveform=(mode===0||mode===4)&&b&&b.frames>1?b.data.map(ch=>Array.from({length:bins},(_,i)=>{
-            const first=Math.floor(i*ch.length/bins),last=Math.floor((i+1)*ch.length/bins);let min=0,max=0;
-            for(let n=first;n<last;n++){min=Math.min(min,ch[n]);max=Math.max(max,ch[n]);}
-            return[min,max];
-        })):null;
+        const bins=760;
         // A snapshot is immutable: later controller updates must not change an
         // earlier progress/state image or its waveform samples.
         const visible=JSON.parse(JSON.stringify(boxes.filter(b=>b.presentation&&!b.hidden)
             .sort((a,b)=>(b.background||0)-(a.background||0))));
+        for(const box of visible.filter(b=>b.maxclass==='waveform~')){
+            // Follow the actual native binding for both source and output views.
+            // A missing/unloaded buffer remains blank; it gets no invented trace.
+            const buffer=buffers.get(box.buffername),channel=Math.max(0,Number(box.chanoffset||1)-1);
+            const ch=buffer&&buffer.frames>1&&buffer.data[channel];
+            box.waveSamples=ch?Array.from({length:bins},(_,i)=>{
+                const first=Math.floor(i*ch.length/bins),last=Math.max(first+1,Math.floor((i+1)*ch.length/bins));let min=0,max=0;
+                for(let n=first;n<Math.min(ch.length,last);n++){min=Math.min(min,ch[n]);max=Math.max(max,ch[n]);}
+                return[min,max];
+            }):null;
+            box.waveDurationMs=buffer?1000*buffer.frames/buffer.sr:0;
+        }
         for(const box of visible.filter(b=>b.maxclass==='jsui'&&b.filename==='cmpe_xy.js')){
             const calls=[],graphics={init(){},redraw(){}};
             for(const method of ['set_source_rgba','set_line_width','rectangle','rounded_rectangle','ellipse','fill','stroke','move_to','line_to','select_font_face','set_font_size','show_text'])
@@ -123,7 +134,7 @@ for(let mode=0;mode<5;mode++){
             vm.runInContext(fs.readFileSync(path.join(root,'cmpe_xy.js'),'utf8'),xy,{filename:'cmpe_xy.js'});
             if(box.xy)xy.set(...box.xy);xy.paint();box.paintCalls=calls;
         }
-        return{mode,label,boxes:visible,waveform,durationMs:b?1000*b.frames/b.sr:0,
+        return{mode,label,boxes:visible,
             provenance:(mode===0||mode===4?'Production finite renderer, included demo WAVs, 48000 Hz, seeded random 91':'Stopped live mode; no native DSP executed')+'; no audio hardware queried'+(detail?'; '+detail:'')};
     }
     context.loadbang();
@@ -310,16 +321,17 @@ def render_state(state):
             for i in range(1, 4):
                 draw.line((x + i * w / 4, y, x + i * w / 4, y + h - 1), fill=grid, width=SCALE)
             draw.line((x, y + h / 2, x + w - 1, y + h / 2), fill=grid, width=SCALE)
-            if kind == "waveform~" and state["waveform"]:
-                channel = 1 if box.get("varname") == "wave_r" else 0
-                bins = state["waveform"][channel]
-                zoom = float(box.get("vzoom", 1))
+            if kind == "waveform~" and box.get("waveSamples"):
+                bins = box["waveSamples"]
+                # Native waveform~ vzoom is an amplitude half-range: reducing
+                # it makes the trace taller without changing the buffer data.
+                vertical_range = max(1e-12, float(box.get("vzoom", 1)))
                 for i, (low, high) in enumerate(bins):
                     xpos = x + 2 * SCALE + i * (w - 4 * SCALE) / len(bins)
-                    top = y + h / 2 - min(1, max(-1, high * zoom)) * (h / 2 - 3 * SCALE)
-                    bottom = y + h / 2 - min(1, max(-1, low * zoom)) * (h / 2 - 3 * SCALE)
+                    top = y + h / 2 - min(1, max(-1, high / vertical_range)) * (h / 2 - 3 * SCALE)
+                    bottom = y + h / 2 - min(1, max(-1, low / vertical_range)) * (h / 2 - 3 * SCALE)
                     draw.line((xpos, top, xpos, bottom), fill=rgba(box.get("waveformcolor", box.get("fgcolor", box.get("textcolor", [0,0,0,1])))), width=SCALE)
-                duration = state.get("durationMs", 0)
+                duration = box.get("waveDurationMs", 0)
                 line = box.get("line", -1)
                 if isinstance(line, (int, float)) and duration > 0 and 0 <= line <= duration:
                     xpos = x + min(w - SCALE, max(SCALE, line / duration * w))

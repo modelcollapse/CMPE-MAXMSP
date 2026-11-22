@@ -319,6 +319,20 @@
         showMode();
         if (mutable()) g.markDirty();
     };
+    // The visible APG step buttons use the same validated edits as number entry.
+    // Rounding the pitch step avoids accumulating binary floating-point drift.
+    g.repeatstep = function (slot, delta) {
+        slot = Number(slot); delta = Number(delta);
+        if (modeIndex !== 0 || !mutable() || !slotOK(slot) ||
+                !finite(delta) || (delta !== -1 && delta !== 1)) return;
+        g.repeats(slot, repetitions[slot] + delta);
+    };
+    g.pitchstep = function (delta) {
+        delta = Number(delta);
+        if (modeIndex !== 0 || !mutable() || !finite(delta) ||
+                Math.abs(Math.abs(delta) - 0.1) > 0.000001) return;
+        g.pitch(Math.round((pitchRange + delta) * 10) / 10);
+    };
     g.choice = function (value) {
         if (updatingControls) return;
         value = Math.round(Number(value));

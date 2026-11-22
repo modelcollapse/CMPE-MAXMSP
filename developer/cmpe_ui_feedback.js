@@ -19,8 +19,11 @@
     var inactive = rgba("#E0E5EB"), disabled = rgba("#D9DFE7"), disabledInk = rgba("#525C69");
     var blue = rgba("#174FCB"), charcoal = rgba("#263140"), pressed = rgba("#CDD4DD");
     var hover = rgba("#BFDBFE"), bluePressed = rgba("#103A9A");
-    var accents = [blue, blue, blue, blue, blue];
-    var tints = [white, white, white, white, white];
+    var accents = [blue, rgba("#006B64"), rgba("#6C3BAA"), rgba("#8A4B14"), rgba("#A32E58")];
+    var pressedAccents = [bluePressed, rgba("#004E49"), rgba("#4E287D"), rgba("#63350D"), rgba("#77203F")];
+    var tints = [rgba("#EDF3FF"), rgba("#EAF7F4"), rgba("#F4EEFC"), rgba("#FAF2E8"), rgba("#FBEFF3")];
+    var traces = [rgba("#78B7FF"), rgba("#5FD6C8"), rgba("#C5A0F5"), rgba("#EFBA80"), rgba("#F49CBC")];
+    var paleTraces = [rgba("#D6E6FA"), rgba("#C5EFE7"), rgba("#E8D9FB"), rgba("#F6E2CB"), rgba("#F8D8E4")];
     var amber = ink, amberTint = inactive;
     var red = rgba("#A82132"), redTint = rgba("#FFF1F2");
 
@@ -49,9 +52,10 @@
         color(name, "bgoncolor", enabled || emphasized ? (emphasized ? ink : pressed) : disabled);
         color(name, "textcolor", fg); color(name, "textoncolor", fg); color(name, "textovercolor", fg);
     }
-    function styleControl(name, enabled, accent, tint) {
+    function styleControl(name, enabled, accent, tint, pressedAccent) {
         var load = /^load[123]$/.test(name);
-        var button = load || /^(?:demo_button|save_button|clear_button)$/.test(name);
+        var step = /^(?:repeat_(?:down|up)[123]|pitch_(?:down|up))$/.test(name);
+        var button = load || step || /^(?:demo_button|save_button|clear_button)$/.test(name);
         var bg = enabled ? (load ? charcoal : (tint || white)) : disabled;
         var fg = enabled ? (load ? white : (accent || ink)) : disabledInk;
         color(name, name === "mode_menu" ? "bgfillcolor" : "bgcolor", bg);
@@ -63,9 +67,9 @@
             send(name, "active", [1]);
             send(name, "usebgoncolor", [1]);
             send(name, "usetextovercolor", [1]);
-            color(name, "bgoncolor", enabled ? (load ? bluePressed : pressed) : disabled);
+            color(name, "bgoncolor", enabled ? (load ? (pressedAccent || bluePressed) : pressed) : disabled);
             color(name, "textoncolor", fg);
-            color(name, "textovercolor", enabled && load ? hover : fg);
+            color(name, "textovercolor", enabled && load ? (tint || hover) : fg);
         }
     }
     function diagnostic(text) {
@@ -82,9 +86,13 @@
         try {
             var cmpe = info(), mode = cmpe.mode, rendered = mode === 0 || mode === 4;
             var audio = typeof g.CMPEAudioState === "function" ? g.CMPEAudioState() : {};
+            var input = typeof g.CMPEInputState === "function" ? g.CMPEInputState() : {busy: false};
+            var inputSaving = input.phase === "saving";
             var state = g.state, required = mode === 3 ? 0 : (mode === 2 || mode === 4 ? 1 : 3);
             var loading = false, stalled = false, missing = false, i, sourceState;
             var accent = accents[mode] || accents[0], tint = tints[mode] || tints[0];
+            var accentPressed = pressedAccents[mode] || pressedAccents[0];
+            var trace = traces[mode] || traces[0], paleTrace = paleTraces[mode] || paleTraces[0];
             for (i = 0; i < 3; i++) {
                 var nativeBusy = !!(cmpe.nativeBusy && cmpe.nativeBusy[i]);
                 var reading = !!(g.loading && g.loading[i]);
@@ -97,7 +105,8 @@
                     (sourceState === "LOADING" ? amber : (available ? ink : muted)));
                 color("source_card" + (i + 1), "bgfillcolor", i >= required ? white : (sourceState === "WAITING" ? redTint :
                     (sourceState === "LOADING" ? amberTint : white)));
-                color("source_accent" + (i + 1), "bgfillcolor", charcoal);
+                color("source_accent" + (i + 1), "bgfillcolor", accent);
+                color("source_wave" + (i + 1), "waveformcolor", trace);
                 if (i < required) {
                     loading = loading || nativeBusy || reading;
                     stalled = stalled || (nativeBusy && !reading);
@@ -114,13 +123,33 @@
                 hide("group_label" + i, !grouped); hide("group_help" + i, !grouped);
                 if (grouped) {
                     set("group_label" + i, groupLabels[i - 1]); set("group_help" + i, groupHelp[i - 1]);
-                    color("group_label" + i, "textcolor", ink); color("group_help" + i, "textcolor", muted);
+                    color("group_label" + i, "textcolor", accent); color("group_help" + i, "textcolor", muted);
                 }
             }
             var label, heading, badgeColor = accent, panelColor = tint, fraction = 0;
             var canEdit = state === "idle" || state === "ready";
-            var busy = state === "waiting" || state === "rendering" || state === "stopping" || state === "restoring" || audio.changing;
-            if (audio.changing) {
+            var busy = state === "waiting" || state === "rendering" || state === "stopping" || state === "restoring" || audio.changing || input.busy;
+            var inputHeading = input.busy || (inputSaving && canEdit);
+            if (inputHeading) {
+                var inputSlot = input.slot;
+                if (inputSaving && input.sources) {
+                    for (i = 0; i < input.sources.length; i++) if (input.sources[i].saving) inputSlot = i;
+                }
+                var sampleName = inputSlot >= 0 ? "sample " + (inputSlot + 1) : "the sample";
+                if (input.phase === "recording") {
+                    label = "RECORDING INPUT";
+                    heading = "Recording " + sampleName + " · press REC IN or STOP to finish";
+                    badgeColor = red; panelColor = redTint;
+                    fraction = unit(input.limitMs > 0 ? input.elapsedMs / input.limitMs : 0);
+                } else if (input.phase === "saving") {
+                    label = "SAVING SAMPLE"; heading = "Writing " + sampleName + " to a WAV file";
+                } else {
+                    var finishing = input.phase === "stopping" || input.phase === "trimming";
+                    label = finishing ? "FINISHING INPUT" : "STARTING INPUT";
+                    heading = finishing ? "Preparing " + sampleName + " from the recorded input" : "Waiting for Max audio input";
+                    badgeColor = amber; panelColor = amberTint;
+                }
+            } else if (audio.changing) {
                 label = audio.pending && audio.pending.kind === "on" ? "STARTING AUDIO" : "AUDIO SETTINGS";
                 heading = audio.pending && audio.pending.kind === "on" ? "Waiting for Max audio" : "Applying audio settings";
                 badgeColor = amber; panelColor = amberTint;
@@ -195,6 +224,8 @@
             color("state_badge", "textcolor", white); color("state_badge", "textoncolor", white); color("state_badge", "textovercolor", white);
             color("feedback_panel", "bgfillcolor", panelColor);
             set("activity_heading", heading); color("activity_heading", "textcolor", ink);
+            if (inputHeading) set("render_info", heading);
+            else if (lastView && lastView.inputHeading) set("render_info", renderInfo);
             color("status", "textcolor", heldNotice ? red : ink);
             color("progress", "knobcolor", badgeColor);
             if (fraction !== null) set("progress", fraction);
@@ -202,15 +233,25 @@
             var waveHelp = zoomForResult ? "View x" + waveZoom.toFixed(1) + " \u00b7 visual only" :
                 (fault ? "Incomplete waveform" : (state === "rendering" ? "Preparing waveform" : "Generate to see waveform"));
             set("wave_scale", waveHelp);
-            send("wave_l", "vzoom", [waveZoom]); send("wave_r", "vzoom", [waveZoom]);
+            // Native waveform~ vzoom is the amplitude half-range, not a gain.
+            // A smaller range expands quiet audio; keep the label as a gain.
+            send("wave_l", "vzoom", [1 / waveZoom]); send("wave_r", "vzoom", [1 / waveZoom]);
 
             for (i = 0; i < 5; i++) {
-                color("mode" + i, "bgcolor", i === mode ? blue : inactive);
-                color("mode" + i, "bgoncolor", i === mode ? bluePressed : pressed);
+                color("mode" + i, "bgcolor", i === mode ? accent : inactive);
+                color("mode" + i, "bgoncolor", i === mode ? accentPressed : pressed);
                 color("mode" + i, "textcolor", i === mode ? white : ink);
                 color("mode" + i, "textoncolor", i === mode ? white : ink);
                 color("mode" + i, "textovercolor", i === mode ? white : ink);
             }
+            color("mode_info", "textcolor", accent); color("output_label", "textcolor", accent);
+            color("wave_scale", "textcolor", muted);
+            color("wave_l", "waveformcolor", trace); color("wave_r", "waveformcolor", paleTrace);
+            color("scope_l", "fgcolor", trace); color("scope_r", "fgcolor", paleTrace);
+            color("scope_xy", "fgcolor", trace);
+            color("monitor_level", "hbgcolor", accent);
+            color("original_link", "textcolor", accent); color("original_link", "textoncolor", accent);
+            color("original_link", "textovercolor", accent);
             var readySources = !missing && !loading && !(bootPending && required > 0);
             var playLabel = busy ? "PREPARING..." : (state === "playing" ? "PLAYING" :
                 (state === "live" ? "LIVE" : (rendered ? (g.dirty || !g.outputReady ? "GENERATE + PLAY" : "PLAY") : "START")));
@@ -220,29 +261,50 @@
             transport("new_button", rendered ? "NEW TAKE" : (mode === 3 ? "RANDOMIZE" : "RESET"),
                 canEdit && !busy && !g.savePending && (rendered ? readySources : true), ink, inactive, false);
             transport("stop_button", state === "rendering" || state === "waiting" ? "CANCEL" : "STOP",
-                state !== "idle" || loading || audio.changing || cmpe.recordArmed || cmpe.recording, red, redTint, false);
+                state !== "idle" || loading || audio.changing || input.busy || cmpe.recordArmed || cmpe.recording, red, redTint, false);
             transport("record_button", cmpe.recording ? "STOP REC" : (cmpe.recordArmed ? "ARMED" : "RECORD WAV"),
-                !rendered && state !== "waiting" && !audio.changing, red, redTint, cmpe.recording);
-            for (i = 1; i <= 3; i++) styleControl("load" + i, canEdit && !busy && !(cmpe.nativeBusy && cmpe.nativeBusy[i - 1]));
+                !rendered && state !== "waiting" && !audio.changing && !input.busy, red, redTint, cmpe.recording);
+            for (i = 1; i <= 3; i++) styleControl("load" + i, canEdit && !busy && !inputSaving && !(cmpe.nativeBusy && cmpe.nativeBusy[i - 1]), accent, tint, accentPressed);
             var paramsEditable = canEdit || (state === "live" && (mode === 1 || mode === 2));
             for (i = 0; i < 6; i++) {
-                var activeParam = paramsEditable && !audio.changing;
+                var activeParam = paramsEditable && !audio.changing && !input.busy;
                 if (mode === 4 && i === 1 && cmpe.settings && cmpe.settings.sioe && cmpe.settings.sioe.form === "short") activeParam = false;
                 styleControl("param" + i, activeParam);
+                color("param" + i, "hbgcolor", accent);
             }
-            for (i = 1; i <= 3; i++) styleControl("repeat" + i, canEdit && !busy);
-            styleControl("pitch", canEdit && !busy); styleControl("mode_menu", paramsEditable && !audio.changing);
+            for (i = 1; i <= 3; i++) {
+                styleControl("repeat" + i, canEdit && !busy); color("repeat" + i, "hbgcolor", accent);
+                hide("repeat_down" + i, mode !== 0); hide("repeat_up" + i, mode !== 0);
+                styleControl("repeat_down" + i, canEdit && !busy, accent, tint);
+                styleControl("repeat_up" + i, canEdit && !busy, accent, tint);
+            }
+            styleControl("pitch", canEdit && !busy); color("pitch", "hbgcolor", accent);
+            hide("pitch_down", mode !== 0); hide("pitch_up", mode !== 0);
+            styleControl("pitch_down", canEdit && !busy, accent, tint);
+            styleControl("pitch_up", canEdit && !busy, accent, tint);
+            styleControl("mode_menu", paramsEditable && !audio.changing && !input.busy);
             styleControl("demo_button", canEdit && !busy && required > 0, ink, inactive);
             styleControl("save_button", !busy && !!g.outputReady, ink, inactive);
             styleControl("clear_button", !busy && !!g.outputReady, ink, inactive);
             lastView = {mode: mode, state: state, badge: label, heading: heading,
                 phase: state === "rendering" ? (checkingSilence && mode === 0 ? "scan" : "render") : state,
                 progress: fraction, notice: heldNotice, sourceLoading: loading, sourceStalled: stalled,
-                outputReady: !!g.outputReady, dirty: !!g.dirty, waveZoom: waveZoom};
+                outputReady: !!g.outputReady, dirty: !!g.dirty, waveZoom: waveZoom, inputHeading: !!inputHeading};
         } finally { drawing = false; }
     }
 
     g.ui = function (name, value) {
+        if (name === "mode_info") {
+            // showMode writes the original tab colors before this label on
+            // parameter edits and preset restores as well as mode changes.
+            // Reapply only those overwritten style attributes after it runs.
+            var selectors = ["bgcolor", "bgoncolor", "textcolor", "textoncolor", "textovercolor"];
+            for (var mode = 0; mode < 5; mode++) {
+                for (var selector = 0; selector < selectors.length; selector++) {
+                    delete cache["mode" + mode + ":" + selectors[selector]];
+                }
+            }
+        }
         if (name === "status") {
             currentStatus = String(value);
             if (diagnostic(currentStatus)) heldNotice = currentStatus;

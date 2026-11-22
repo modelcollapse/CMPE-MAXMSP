@@ -10,7 +10,7 @@ const bundle = process.argv.includes("--bundle");
 const root = path.resolve(process.argv.slice(2).find(arg => arg !== "--bundle") || path.join(__dirname, "../.."));
 const patch = JSON.parse(fs.readFileSync(path.join(root, "CMPE_Variety_Pack.maxpat"), "utf8")).patcher;
 const names = new Set(patch.boxes.map(x => x.box.varname).filter(Boolean));
-const modules = ["apg_wave_plan.js", "apg_render.js", "cmpe_model.js", "apg_wave_controller.js", "cmpe_extension.js", "cmpe_audio_settings.js", "cmpe_ui_feedback.js"];
+const modules = ["apg_wave_plan.js", "apg_render.js", "cmpe_model.js", "apg_wave_controller.js", "cmpe_extension.js", "cmpe_audio_settings.js", "cmpe_ui_feedback.js", "cmpe_input_recording.js"];
 const runtime = (bundle ? ["cmpe_variety.js"] : modules.map(file => "developer/" + file))
   .map(file => ({file, code: fs.readFileSync(path.join(root, file), "utf8")}));
 let scenarios = 0, checks = 0, framesChecked = 0;
@@ -297,6 +297,28 @@ test("native audio controls route feedback and requests through the guarded cont
     "audio changes can cancel a native test-tone start still waiting in delay");
   check(fade && fade.text === "0. 10" && ["test_envelope", "run_gate", "live_gate"].every(id => edge(fade.id, 0, id)),
     "audio changes can fade test tone, finite playback, and live mix before touching hardware");
+});
+
+test("APG step controls use bounded edits without starting audio", () => {
+  const h = makeHost(), c = h.c; h.ready(); h.renderOnly();
+  const rendered = h.output().data.map(ch => ch.slice()), audioBefore = audioWrites(h).length;
+  c.repeatstep(0, 1);
+  check(c.repetitions[0] === 4 && c.dirty && c.outputReady && c.state === "ready",
+    "repeat step changes the setting and preserves the cached take for review");
+  c.repeats(0, 20); c.repeatstep(0, 1); check(c.repetitions[0] === 20, "repeat upper bound");
+  c.repeats(0, 1); c.repeatstep(0, -1); check(c.repetitions[0] === 1, "repeat lower bound");
+  c.pitch(0); for (let i = 0; i < 12; i++) c.pitchstep(.1);
+  check(c.pitchRange === 1, "pitch reaches its exact upper bound");
+  for (let i = 0; i < 12; i++) c.pitchstep(-.1);
+  check(c.pitchRange === 0, "pitch reaches its exact lower bound");
+  equal(h.output().data.map(ch => Array.from(ch)), rendered.map(ch => Array.from(ch)), "steps do not modify rendered PCM");
+  check(audioWrites(h).length === audioBefore, "steps do not turn audio on or change hardware");
+  c.newpiece(); h.until(() => c.state === "rendering");
+  const before = c.CMPEState().settings.apg;
+  c.repeatstep(0, 1); c.pitchstep(.1);
+  equal(c.CMPEState().settings.apg, before, "generation locks step edits");
+  c.stop(); c.mode(1); c.repeatstep(0, 1); c.pitchstep(.1);
+  equal(c.CMPEState().settings.apg, before, "other instruments do not change hidden APG settings through steps");
 });
 
 test("initialization and all five mode views use the built patch names", () => {
