@@ -1,8 +1,8 @@
 {
   "edition": "CMPE Current / Waveforms + Sample Regions",
-  "revision": "match-levels",
+  "revision": "many-multi-sample",
   "validation": {
-    "offlineChecks": 88,
+    "offlineChecks": 93,
     "inlinePanelsNativeVerified": false,
     "updatedImporterNativeVerified": false,
     "previousRegionReport": "validation/regions-native-results.json",
@@ -14,14 +14,14 @@
   },
   "files": {
     "ATTRIBUTION.md": "f789a5f90f487354b67872eb871ec971530493bc10690a4c0f8afc430f7b6919",
-    "CMPE_CURRENT.maxpat": "3994d6351d91715e9e35f0f320a9a72e58b4ce8580ecefa6d9c5d6f181c96099",
-    "README.md": "965357b4415030221fc2b599fede18973a37c02d369f96852c1f16d0d2a2601b",
+    "CMPE_CURRENT.maxpat": "531637f6397b7958d3bbfdabaa56dec1a9b15de85acfe2721fbf4a7a4daca7ad",
+    "README.md": "b4d987ec1479502c315685f0f2b645f7877762cc49d038c3d12a2e0ed18a541d",
     "START_HERE.html": "630abd2fb7041e553df9713fe02d0116b0ef4a578e7894ffa3a4c70d5dffc4f8",
     "apgw_test1.wav": "c160a79c83048706e86ebd848d07d52148444cf351dd97eba199af11d9a65175",
     "apgw_test2.wav": "e2c57f0712e9e9eed43ccc38b68f0cc53e1232061760399ef7d85180d30e479f",
     "apgw_test3.wav": "786cf3f9b8ebc78026222e9c19e77fad81ef4df941850660b9938267eb1a9e23",
     "cmpe_audio_tag.js": "1f11b0f1516bc8db3f009f05541acdbbfe1c7c421f6e3f0ad75289e93026a5bd",
-    "cmpe_current_controller_20261122.js": "23ae4b1a9e1fda61ef3df75093ed5b90943b60bf2cdfd2ae0425acdab92a71fc",
+    "cmpe_current_controller_20261122.js": "cba2cb82ef70ad4b74d937847bd0fe719b37482c7bc23581f602274d58264b38",
     "cmpe_drone_voice.maxpat": "b32edf16164841da92e7064b1005b81bc651e03b2adce90413fb03df48afd401",
     "cmpe_fx_bus.maxpat": "5b23b1a67621233dc2e7509140892e03fd3fa51ec9f22942c0b65cebf03a3da8",
     "cmpe_fx_control.js": "a7cb7b9b2cc669b7e9f1c1ebb522052760f56a4d6fd929d019b79e724e177e24",
@@ -86,7 +86,7 @@
     "validation/regions.cjs": "7f265c598f63b45f2c1d015a11b19a754e502ff68745c3ffcd3b08cc235f7d10",
     "validation/results.json": "c3d39a88bcbb6fb65ae9e77bc2ffc3a7dae29097cc8d064e84017f0d563269fe",
     "validation/sample-loading-results.json": "39a48376970a39e3f714d0e73fd267c62232661c0f9063e0d4468d640b735f22",
-    "validation/modeadv.cjs": "393ef42f7aad96f00c6f00f04ec4c247eac46a75597b5330e4e4de841a8c1986"
+    "validation/modeadv.cjs": "95e99f30e4223b46a342920dfeb54b30422a556854d7d998904a378e1d4bed66"
   },
   "entryPatch": "CMPE_CURRENT.maxpat",
   "controller": "cmpe_current_controller_20261122.js",

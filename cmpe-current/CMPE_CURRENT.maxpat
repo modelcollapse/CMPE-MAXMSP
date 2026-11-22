@@ -18167,6 +18167,109 @@
       22
      ]
     }
+   },
+   {
+    "box": {
+     "id": "layer_source_label",
+     "maxclass": "comment",
+     "numinlets": 1,
+     "numoutlets": 0,
+     "patching_rect": [
+      1900,
+      1800,
+      152,
+      20
+     ],
+     "fontname": "Arial",
+     "fontsize": 16.0,
+     "textcolor": [
+      0.27450980392156865,
+      0.3254901960784314,
+      0.396078431372549,
+      1.0
+     ],
+     "text": "Layer sources",
+     "varname": "layer_source_label",
+     "presentation": 1,
+     "presentation_rect": [
+      200,
+      280,
+      152,
+      20
+     ],
+     "hidden": 1,
+     "bgcolor": [
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   },
+   {
+    "box": {
+     "id": "layer_source_menu",
+     "maxclass": "umenu",
+     "numinlets": 1,
+     "numoutlets": 3,
+     "patching_rect": [
+      1900,
+      1830,
+      152,
+      28
+     ],
+     "fontname": "Arial",
+     "fontsize": 16.0,
+     "textcolor": [
+      0.09019607843137255,
+      0.12549019607843137,
+      0.16862745098039217,
+      1.0
+     ],
+     "outlettype": [
+      "int",
+      "",
+      ""
+     ],
+     "varname": "layer_source_menu",
+     "presentation": 1,
+     "presentation_rect": [
+      200,
+      302,
+      152,
+      28
+     ],
+     "hidden": 1,
+     "items": [
+      "Sample 1",
+      ",",
+      "Samples 1 + 2",
+      ",",
+      "Samples 1\u20133"
+     ],
+     "style": "CMPE_Solid_255_255_255_255",
+     "applycolors": 1,
+     "hint": "Which loaded samples Many layers draw from"
+    }
+   },
+   {
+    "box": {
+     "id": "layer_source_msg",
+     "varname": "layer_source_msg",
+     "maxclass": "newobj",
+     "text": "prepend layersources",
+     "numinlets": 1,
+     "numoutlets": 1,
+     "outlettype": [
+      ""
+     ],
+     "patching_rect": [
+      1900,
+      1870,
+      150,
+      22
+     ]
+    }
    }
   ],
   "lines": [
@@ -21560,6 +21663,30 @@
     "patchline": {
      "source": [
       "match_msg",
+      0
+     ],
+     "destination": [
+      "controller",
+      0
+     ]
+    }
+   },
+   {
+    "patchline": {
+     "source": [
+      "layer_source_menu",
+      0
+     ],
+     "destination": [
+      "layer_source_msg",
+      0
+     ]
+    }
+   },
+   {
+    "patchline": {
+     "source": [
+      "layer_source_msg",
       0
      ],
      "destination": [

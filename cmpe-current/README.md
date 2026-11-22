@@ -1,3 +1,19 @@
+# Many: multi-sample layers
+
+Tested live in Max 9 on 2026-11-22.
+
+**Layer sources** (Many's Sample 1 card): Sample 1, Samples 1 + 2, or Samples 1–3.
+- Each new layer picks one of the chosen samples at random and never repeats the previous one. Picks follow the variation seed, so LOCK VARIATION in ADVANCED reproduces them.
+- With 2 or 3 sources, **LOAD S2** / **LOAD S3** and EDIT / PREVIEW appear on the SPACE and TIMING + PITCH cards; their settings stay where they were. You can also drag files onto those cards.
+- Below the scope, the footer lists the samples in use, e.g. "Layers pick at random from: S1 … · S2 … · S3 …".
+- START still needs only Sample 1. Empty extra slots are skipped.
+- With one source no random number is drawn, so single-sample Many is unchanged (240 seeded comparisons, bit-identical).
+- SAVE SET stores the choice.
+
+93 offline checks pass (validation/*.cjs).
+
+---
+
 # Match levels
 
 Tested live in Max 9 on 2026-11-22.
